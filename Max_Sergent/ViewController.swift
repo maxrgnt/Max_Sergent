@@ -8,12 +8,16 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
         
         print("Hello World!")
+        
+        let ref = Database.database().reference()
+        print(ref)
         
     }
     
