@@ -18,6 +18,7 @@ class ViewController: UIViewController {
         
         let ref = Database.database().reference()
         print(ref)
+        print(ref.key)
         
     }
     
