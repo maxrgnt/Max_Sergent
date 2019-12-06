@@ -10,6 +10,7 @@ target 'Max_Sergent' do
   # https://firebase.google.com/docs/ios/setup#available-pods
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'Firebase/Core'
 
   target 'Max_SergentTests' do
     inherit! :search_paths

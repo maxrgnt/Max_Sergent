@@ -47,7 +47,7 @@
 /* Begin PBXFileReference section */
 		27FE27BEA6A862D528E9EA46 /* Pods-Max_SergentTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Max_SergentTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Max_SergentTests/Pods-Max_SergentTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2F41528ABE3454D44918FFA6 /* Pods-Max_SergentTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Max_SergentTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Max_SergentTests/Pods-Max_SergentTests.release.xcconfig"; sourceTree = "<group>"; };
-		66FD8A75239AD18E00B90C69 /* Max_Sergent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Max_Sergent.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		66FD8A75239AD18E00B90C69 /* Max Sergent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Max Sergent.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FD8A78239AD18E00B90C69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		66FD8A7D239AD18E00B90C69 /* Max_Sergent.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Max_Sergent.xcdatamodel; sourceTree = "<group>"; };
@@ -131,7 +131,7 @@
 		66FD8A76239AD18E00B90C69 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				66FD8A75239AD18E00B90C69 /* Max_Sergent.app */,
+				66FD8A75239AD18E00B90C69 /* Max Sergent.app */,
 				66FD8A8E239AD19100B90C69 /* Max_SergentTests.xctest */,
 				66FD8A99239AD19100B90C69 /* Max_SergentUITests.xctest */,
 			);
@@ -220,7 +220,7 @@
 			);
 			name = Max_Sergent;
 			productName = Max_Sergent;
-			productReference = 66FD8A75239AD18E00B90C69 /* Max_Sergent.app */;
+			productReference = 66FD8A75239AD18E00B90C69 /* Max Sergent.app */;
 			productType = "com.apple.product-type.application";
 		};
 		66FD8A8D239AD19100B90C69 /* Max_SergentTests */ = {
@@ -371,6 +371,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -379,6 +380,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -617,7 +619,7 @@
 				);
 				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "llc.toggle.Max-Sergent";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Max Sergent";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -639,7 +641,7 @@
 				);
 				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "llc.toggle.Max-Sergent";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Max Sergent";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
