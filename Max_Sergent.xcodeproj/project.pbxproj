@@ -18,6 +18,8 @@
 		66FD8A9E239AD19100B90C69 /* Max_SergentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A9D239AD19100B90C69 /* Max_SergentUITests.swift */; };
 		66FD8AAD239AE80000B90C69 /* Arvo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66FD8AAB239AE80000B90C69 /* Arvo-Bold.ttf */; };
 		66FD8AAE239AE80000B90C69 /* Arvo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66FD8AAC239AE80000B90C69 /* Arvo-Regular.ttf */; };
+		66FD8AB0239AEA2800B90C69 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66FD8AAF239AEA2800B90C69 /* GoogleService-Info.plist */; };
+		66FD8AB2239AEADA00B90C69 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8AB1239AEADA00B90C69 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		66FD8A9F239AD19100B90C69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66FD8AAB239AE80000B90C69 /* Arvo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arvo-Bold.ttf"; sourceTree = "<group>"; };
 		66FD8AAC239AE80000B90C69 /* Arvo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arvo-Regular.ttf"; sourceTree = "<group>"; };
+		66FD8AAF239AEA2800B90C69 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		66FD8AB1239AEADA00B90C69 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,12 +111,13 @@
 			children = (
 				66FD8A78239AD18E00B90C69 /* AppDelegate.swift */,
 				66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */,
+				66FD8AB1239AEADA00B90C69 /* ViewController.swift */,
 				66FD8A7F239AD18E00B90C69 /* ContentView.swift */,
 				66FD8A81239AD19000B90C69 /* Assets.xcassets */,
+				66FD8AB3239AEB6C00B90C69 /* Fonts */,
 				66FD8A86239AD19000B90C69 /* LaunchScreen.storyboard */,
 				66FD8A89239AD19000B90C69 /* Info.plist */,
-				66FD8AAB239AE80000B90C69 /* Arvo-Bold.ttf */,
-				66FD8AAC239AE80000B90C69 /* Arvo-Regular.ttf */,
+				66FD8AAF239AEA2800B90C69 /* GoogleService-Info.plist */,
 				66FD8A7C239AD18E00B90C69 /* Max_Sergent.xcdatamodeld */,
 				66FD8A83239AD19000B90C69 /* Preview Content */,
 			);
@@ -143,6 +148,15 @@
 				66FD8A9F239AD19100B90C69 /* Info.plist */,
 			);
 			path = Max_SergentUITests;
+			sourceTree = "<group>";
+		};
+		66FD8AB3239AEB6C00B90C69 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				66FD8AAB239AE80000B90C69 /* Arvo-Bold.ttf */,
+				66FD8AAC239AE80000B90C69 /* Arvo-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,6 +268,7 @@
 				66FD8A85239AD19000B90C69 /* Preview Assets.xcassets in Resources */,
 				66FD8A82239AD19000B90C69 /* Assets.xcassets in Resources */,
 				66FD8AAD239AE80000B90C69 /* Arvo-Bold.ttf in Resources */,
+				66FD8AB0239AEA2800B90C69 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66FD8AB2239AEADA00B90C69 /* ViewController.swift in Sources */,
 				66FD8A79239AD18E00B90C69 /* AppDelegate.swift in Sources */,
 				66FD8A7E239AD18E00B90C69 /* Max_Sergent.xcdatamodeld in Sources */,
 				66FD8A80239AD18E00B90C69 /* ContentView.swift in Sources */,
