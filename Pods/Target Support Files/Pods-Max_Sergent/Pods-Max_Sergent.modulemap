@@ -1,0 +1,6 @@
+framework module Pods_Max_Sergent {
+  umbrella header "Pods-Max_Sergent-umbrella.h"
+
+  export *
+  module * { export * }
+}

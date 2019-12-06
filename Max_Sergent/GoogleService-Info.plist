@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>266993601724-jdmp05qtrv0rpot2640e9mlpc3acjld7.apps.googleusercontent.com</string>
+	<string>949718921668-ujv8suk4icqfhv55q64aiuc00h3uprre.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.266993601724-jdmp05qtrv0rpot2640e9mlpc3acjld7</string>
+	<string>com.googleusercontent.apps.949718921668-ujv8suk4icqfhv55q64aiuc00h3uprre</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCtyCuvgpsp8TjiZbrJySfIcYEZRoXBJDY</string>
+	<string>AIzaSyA72lHG3nzrDXCNg1oKyqRiMmDXI7zB2dg</string>
 	<key>GCM_SENDER_ID</key>
-	<string>266993601724</string>
+	<string>949718921668</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>llc.toggle.Max-Sergent</string>
 	<key>PROJECT_ID</key>
-	<string>max-sergent</string>
+	<string>max-sergent-45387</string>
 	<key>STORAGE_BUCKET</key>
-	<string>max-sergent.appspot.com</string>
+	<string>max-sergent-45387.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:266993601724:ios:6b476831d8262ff81854b9</string>
+	<string>1:949718921668:ios:1d1141f63f37315f54f491</string>
 	<key>DATABASE_URL</key>
-	<string>https://max-sergent.firebaseio.com</string>
+	<string>https://max-sergent-45387.firebaseio.com</string>
 </dict>
 </plist>
