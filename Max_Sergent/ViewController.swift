@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         print("Hello World!")
         setup()
+        retrieveData()
     }
     
     //MARK: Setup
@@ -50,6 +51,36 @@ class ViewController: UIViewController {
         let dictionary = toAnyObject(name: name, desiredCompany: desiredCompany)
         let refItem = ref.child(dataType.lowercased())
         refItem.setValue(dictionary)
+        
+        testing.displayFirebase.text = "\(dataType): \(name) - \(desiredCompany)"
+    }
+    
+    func retrieveData() {
+        //ref.observe(.value, with: { snapshot in
+        //  print(snapshot.value as Any)
+        //})
+        let background = DispatchQueue.global()
+        background.sync {print("retrieving --")}
+        ref.observe(.value, with: { snapshot in
+            for child in snapshot.children {
+                if let snapshot = child as? DataSnapshot {
+                    self.alterLabel(snapshot: snapshot)
+                }
+            }
+        })
+    }
+    
+    func alterLabel(snapshot: DataSnapshot) {
+        print("trying to alter label")
+        if let value = snapshot.value as? [String: AnyObject]
+            , let name = value["name"] as? String
+            , let desiredCompany = value["desiredCompany"] as? String
+            , let completed = value["completed"] as? Bool {
+            self.testing.displayFirebase.text = "\(snapshot.key): \(name) - \(desiredCompany) - \(completed)"
+        }
+        else {
+            print("Error: snapshot failed, check keys provided.")
+        }
     }
     
     func toAnyObject(name: String, desiredCompany: String, completed: Bool? = false) -> Any {

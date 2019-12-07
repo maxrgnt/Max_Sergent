@@ -13,6 +13,7 @@ class Testing: UIView {
     //MARK: Definitions
     // Objects
     let addToFirebase = UIButton()
+    let displayFirebase = UILabel()
     
     //MARK: Initialization
     init() {
@@ -36,6 +37,9 @@ class Testing: UIView {
         addToFirebase.backgroundColor = .lightGray
         addToFirebase.alpha = 0.7
         addToFirebase.isUserInteractionEnabled = true
+        addSubview(displayFirebase)
+        displayFirebase.textAlignment = .left
+        displayFirebase.font = UIFont(name: "Arvo", size: 14)
     }
     
     //MARK: Constraints
@@ -45,6 +49,12 @@ class Testing: UIView {
         addToFirebase.trailingAnchor.constraint(equalTo: trailingAnchor).isActive                                   = true
         addToFirebase.topAnchor.constraint(equalTo: topAnchor).isActive                                             = true
         addToFirebase.heightAnchor.constraint(equalToConstant: 300).isActive                                        = true
+        
+        displayFirebase.translatesAutoresizingMaskIntoConstraints                                                   = false
+        displayFirebase.leadingAnchor.constraint(equalTo: leadingAnchor).isActive                                   = true
+        displayFirebase.trailingAnchor.constraint(equalTo: trailingAnchor).isActive                                 = true
+        displayFirebase.topAnchor.constraint(equalTo: addToFirebase.bottomAnchor).isActive                          = true
+        displayFirebase.heightAnchor.constraint(equalToConstant: 300).isActive                                      = true
     }
     
     //MARK: Animations
