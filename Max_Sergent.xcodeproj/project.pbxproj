@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		18213500DB9B082120CA5CCD /* Pods_Max_SergentUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C23E36182F966F329B52E3B1 /* Pods_Max_SergentUITests.framework */; };
 		251690D36F279F07ABE3A194 /* Pods_Max_SergentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C277D5D3F2F86DBF0422A5 /* Pods_Max_SergentTests.framework */; };
+		663D5BD9239C2A3900352633 /* Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663D5BD8239C2A3900352633 /* Testing.swift */; };
 		66FD8A79239AD18E00B90C69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A78239AD18E00B90C69 /* AppDelegate.swift */; };
 		66FD8A7B239AD18E00B90C69 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */; };
 		66FD8A7E239AD18E00B90C69 /* Max_Sergent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A7C239AD18E00B90C69 /* Max_Sergent.xcdatamodeld */; };
@@ -47,6 +48,7 @@
 /* Begin PBXFileReference section */
 		27FE27BEA6A862D528E9EA46 /* Pods-Max_SergentTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Max_SergentTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Max_SergentTests/Pods-Max_SergentTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2F41528ABE3454D44918FFA6 /* Pods-Max_SergentTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Max_SergentTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Max_SergentTests/Pods-Max_SergentTests.release.xcconfig"; sourceTree = "<group>"; };
+		663D5BD8239C2A3900352633 /* Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testing.swift; sourceTree = "<group>"; };
 		66FD8A75239AD18E00B90C69 /* Max Sergent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Max Sergent.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FD8A78239AD18E00B90C69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				66FD8A78239AD18E00B90C69 /* AppDelegate.swift */,
 				66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */,
 				66FD8AB1239AEADA00B90C69 /* ViewController.swift */,
+				663D5BD8239C2A3900352633 /* Testing.swift */,
 				66FD8A7F239AD18E00B90C69 /* ContentView.swift */,
 				66FD8A81239AD19000B90C69 /* Assets.xcassets */,
 				66FD8AB3239AEB6C00B90C69 /* Fonts */,
@@ -438,6 +441,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				663D5BD9239C2A3900352633 /* Testing.swift in Sources */,
 				66FD8AB2239AEADA00B90C69 /* ViewController.swift in Sources */,
 				66FD8A79239AD18E00B90C69 /* AppDelegate.swift in Sources */,
 				66FD8A7E239AD18E00B90C69 /* Max_Sergent.xcdatamodeld in Sources */,
