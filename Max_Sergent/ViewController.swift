@@ -48,11 +48,12 @@ class ViewController: UIViewController {
         let dataType = "user"
         let name = "Max Sergent"
         let desiredCompany = "Capital One"
-        let dictionary = toAnyObject(name: name, desiredCompany: desiredCompany)
+        let completed = true
+        let dictionary = toAnyObject(name: name, desiredCompany: desiredCompany, completed: completed)
         let refItem = ref.child(dataType.lowercased())
         refItem.setValue(dictionary)
         
-        testing.displayFirebase.text = "\(dataType): \(name) - \(desiredCompany)"
+        testing.displayFirebase.text = "\(dataType): \(name) - \(desiredCompany) - \(completed)"
     }
     
     func retrieveData() {
