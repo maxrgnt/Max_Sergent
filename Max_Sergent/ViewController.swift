@@ -55,8 +55,9 @@ class ViewController: UIViewController {
         let dataType = "user"
         let name = "Max Sergent"
         let desiredCompany = "Capital One"
+        let imageURL = "gs://max-sergent-45387.appspot.com/linkedin.jpg"
         let completed = true
-        let dictionary = toAnyObject(name: name, desiredCompany: desiredCompany, completed: completed)
+        let dictionary = toAnyObject(name: name, desiredCompany: desiredCompany, completed: completed, imageURL: imageURL)
         let refItem = ref.child(dataType.lowercased())
         refItem.setValue(dictionary)
         
@@ -104,11 +105,12 @@ class ViewController: UIViewController {
         }
     }
     
-    func toAnyObject(name: String, desiredCompany: String, completed: Bool? = false) -> Any {
+    func toAnyObject(name: String, desiredCompany: String, completed: Bool? = false, imageURL: String) -> Any {
       return [
         "name": name,
         "desiredCompany": desiredCompany,
-        "completed": completed!
+        "completed": completed!,
+        "imageURL": imageURL
       ]
     }
     
