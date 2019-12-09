@@ -32,23 +32,6 @@ class ViewController: UIViewController {
     func setup() {
         objectSettings()
         constraints()
-        
-        // Reference to an image file in Firebase Storage
-        let reference = storageRef.child("IMG_1394.jpg")
-        
-        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-          if let error = error {
-            // Uh-oh, an error occurred!
-            print("Image NOT loaded")
-            print(error)
-          } else {
-            // Data for "images/island.jpg" is returned
-            let image = UIImage(data: data!)
-            self.testing.addToFirebase.setImage(image, for: .normal)
-            print("Image loaded")
-          }
-        }
-        
     }
     
     //MARK: Settings
@@ -100,8 +83,19 @@ class ViewController: UIViewController {
         if let value = snapshot.value as? [String: AnyObject]
             , let name = value["name"] as? String
             , let desiredCompany = value["desiredCompany"] as? String
-            , let completed = value["completed"] as? Bool {
+            , let completed = value["completed"] as? Bool
+            , let imageURL = value["imageURL"] as? String {
             self.testing.displayFirebase.text = "\(snapshot.key): \(name) - \(desiredCompany) - \(completed)"
+            
+            let reference = storage.reference(forURL: imageURL)
+            reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+              if let error = error {
+                print(error)
+              } else {
+                let image = UIImage(data: data!)
+                self.testing.addToFirebase.setImage(image, for: .normal)
+              }
+            }
         }
         else {
             print("Error: snapshot failed, check keys provided.")
