@@ -37,6 +37,7 @@ class Testing: UIView {
         addToFirebase.backgroundColor = .lightGray
         addToFirebase.alpha = 0.7
         addToFirebase.isUserInteractionEnabled = true
+        addToFirebase.setImage(UIImage(named: "placeholder.jpg"), for: .normal)
         addSubview(displayFirebase)
         displayFirebase.textAlignment = .left
         displayFirebase.font = UIFont(name: "Arvo", size: 14)
