@@ -87,6 +87,8 @@ class ViewController: UIViewController {
             , let imageURL = value["imageURL"] as? String {
             self.testing.displayFirebase.text = "\(snapshot.key): \(name) - \(desiredCompany) - \(completed)"
             
+            print(imageURL)
+            
             let reference = storage.reference(forURL: imageURL)
             reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
               if let error = error {
