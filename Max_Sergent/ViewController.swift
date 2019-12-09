@@ -9,11 +9,18 @@
 import Foundation
 import UIKit
 import Firebase
+import FirebaseStorage
 
 class ViewController: UIViewController {
     
     let testing = Testing()
     let ref = Database.database().reference()
+//    let storage = Storage.storage(url:"gs://max-sergent-45387.appspot.com")
+    
+    // Get a reference to the storage service using the default Firebase App
+    let storage = Storage.storage()
+    // Create a storage reference from our storage service
+    let storageRef = Storage.storage().reference()
     
     override func viewDidLoad() {
         print("Hello World!")
@@ -25,6 +32,23 @@ class ViewController: UIViewController {
     func setup() {
         objectSettings()
         constraints()
+        
+        // Reference to an image file in Firebase Storage
+        let reference = storageRef.child("IMG_1394.jpg")
+        
+        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+          if let error = error {
+            // Uh-oh, an error occurred!
+            print("Image NOT loaded")
+            print(error)
+          } else {
+            // Data for "images/island.jpg" is returned
+            let image = UIImage(data: data!)
+            self.testing.addToFirebase.setImage(image, for: .normal)
+            print("Image loaded")
+          }
+        }
+        
     }
     
     //MARK: Settings

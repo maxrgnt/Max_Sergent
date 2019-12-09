@@ -11,6 +11,8 @@ target 'Max_Sergent' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Core'
+  pod 'Firebase/Storage'
+  pod 'FirebaseUI/Storage'
 
   target 'Max_SergentTests' do
     inherit! :search_paths
