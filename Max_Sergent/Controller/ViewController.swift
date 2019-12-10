@@ -89,10 +89,12 @@ class ViewController: UIViewController {
         print("trying to alter label")
         if let value = snapshot.value as? [String: AnyObject]
             , let name = value["name"] as? String
-            , let desiredCompany = value["desiredCompany"] as? String
-            , let completed = value["completed"] as? Bool
+//            , let desiredCompany = value["desiredCompany"] as? String
+//            , let completed = value["completed"] as? Bool
             , let imageURL = value["imageURL"] as? String {
-//            self.testing.displayFirebase.text = "\(snapshot.key): \(name) - \(desiredCompany) - \(completed)"
+
+            let nameArray = name.split(separator: " ")
+            self.overview.name.text = "\(nameArray[0])\n\(nameArray[1])"
             
             print(imageURL)
             let reference = storage.reference(forURL: imageURL)

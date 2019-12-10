@@ -27,7 +27,6 @@ struct UI {
             static let pictureRadius = pictureDiameter/2
             static let nameHeight = height/2
             static let nameWidth = UI.Sizing.width
-            static let nameFontHeight = nameHeight/4
         }
         
     }
@@ -38,11 +37,11 @@ extension UI {
     
     struct Fonts {
         
-        static let arvo = "Arvo-Regular"
+        static let arvo = "Arvo"
         static let arvoBold = "Arvo-Bold"
         
         struct Overview {
-            static let name = UIFont(name: "Arvo-Bold", size: UI.Sizing.Overview.nameFontHeight)
+            static let name = UIFont(name: arvo, size: Sizing.Overview.nameHeight/2)
         }
         
     }
@@ -54,7 +53,7 @@ extension UI {
     struct Colors {
         
         /* Alter color scheme here  */
-        static let overviewBackground = UIColor.black
+        static let overviewBackground = UIColor.darkGray
         static let primaryFontColor = UIColor.white
         /****************************/
         

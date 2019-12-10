@@ -36,6 +36,10 @@ class Overview: UIView {
         addSubview(name)
         name.numberOfLines = 2
         name.textAlignment = .left
+        name.backgroundColor = .gray
+        name.minimumScaleFactor = 0.1
+        name.lineBreakMode = .byClipping
+        name.adjustsFontSizeToFitWidth = true
         name.font = UI.Fonts.Overview.name
         name.text = Constants.Overview.name
         name.textColor = UI.Colors.Overview.name
