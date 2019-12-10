@@ -14,6 +14,7 @@ import FirebaseStorage
 class ViewController: UIViewController {
     
     let testing = Testing()
+    let overview = Overview()
     let ref = Database.database().reference()
 //    let storage = Storage.storage(url:"gs://max-sergent-45387.appspot.com")
     
@@ -24,6 +25,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         print("Hello World!")
+        view.backgroundColor = .black
         setup()
         retrieveData()
     }
@@ -36,18 +38,22 @@ class ViewController: UIViewController {
     
     //MARK: Settings
     func objectSettings() {
-        view.addSubview(testing)
-        testing.setup()
-        testing.addToFirebase.addTarget(self, action: #selector(sendData), for: .touchUpInside)
+        //view.addSubview(testing)
+        //testing.setup()
+        //testing.addToFirebase.addTarget(self, action: #selector(sendData), for: .touchUpInside)
+        view.addSubview(overview)
+        overview.setup()
     }
     
     //MARK: Constraints
     func constraints() {
-        testing.translatesAutoresizingMaskIntoConstraints                                                           = false
-        testing.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive                                 = true
-        testing.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive                               = true
-        testing.topAnchor.constraint(equalTo: self.view.topAnchor).isActive                                         = true
-        testing.heightAnchor.constraint(equalToConstant: 600).isActive                                              = true
+//        testing.translatesAutoresizingMaskIntoConstraints                                                           = false
+//        testing.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive                                 = true
+//        testing.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive                               = true
+//        testing.topAnchor.constraint(equalTo: self.view.topAnchor).isActive                                         = true
+//        testing.heightAnchor.constraint(equalToConstant: 600).isActive                                              = true
+        
+        overviewConstraints()
     }
     
     //MARK: Functionality
@@ -86,17 +92,17 @@ class ViewController: UIViewController {
             , let desiredCompany = value["desiredCompany"] as? String
             , let completed = value["completed"] as? Bool
             , let imageURL = value["imageURL"] as? String {
-            self.testing.displayFirebase.text = "\(snapshot.key): \(name) - \(desiredCompany) - \(completed)"
+//            self.testing.displayFirebase.text = "\(snapshot.key): \(name) - \(desiredCompany) - \(completed)"
             
             print(imageURL)
-            
             let reference = storage.reference(forURL: imageURL)
             reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
               if let error = error {
                 print(error)
+                self.overview.picture.image = UIImage(named: "placeholder.jpg")
               } else {
                 let image = UIImage(data: data!)
-                self.testing.addToFirebase.setImage(image, for: .normal)
+                self.overview.picture.image = image
               }
             }
         }
