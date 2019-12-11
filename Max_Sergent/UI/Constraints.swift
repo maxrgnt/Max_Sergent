@@ -24,15 +24,17 @@ extension ViewController {
 extension Overview {
     
     func nameConstraints() {
+        let padding = UI.Sizing.Overview.padding
+        
         picture.translatesAutoresizingMaskIntoConstraints                                                           = false
         picture.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                           = true
-        picture.topAnchor.constraint(equalTo: topAnchor).isActive                                                   = true
+        picture.topAnchor.constraint(equalTo: topAnchor, constant: padding).isActive                                = true
         picture.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.pictureDiameter).isActive                = true
         picture.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.pictureDiameter).isActive               = true
         
         name.translatesAutoresizingMaskIntoConstraints                                                              = false
         name.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                              = true
-        name.topAnchor.constraint(equalTo: picture.bottomAnchor).isActive                                           = true
+        name.topAnchor.constraint(equalTo: picture.bottomAnchor, constant: padding).isActive                        = true
         name.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.nameWidth).isActive                         = true
         name.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.nameHeight).isActive                       = true
     }

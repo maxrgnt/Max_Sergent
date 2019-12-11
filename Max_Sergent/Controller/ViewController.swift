@@ -13,7 +13,6 @@ import FirebaseStorage
 
 class ViewController: UIViewController {
     
-    let testing = Testing()
     let overview = Overview()
     let ref = Database.database().reference()
 //    let storage = Storage.storage(url:"gs://max-sergent-45387.appspot.com")
@@ -38,21 +37,12 @@ class ViewController: UIViewController {
     
     //MARK: Settings
     func objectSettings() {
-        //view.addSubview(testing)
-        //testing.setup()
-        //testing.addToFirebase.addTarget(self, action: #selector(sendData), for: .touchUpInside)
         view.addSubview(overview)
         overview.setup()
     }
     
     //MARK: Constraints
     func constraints() {
-//        testing.translatesAutoresizingMaskIntoConstraints                                                           = false
-//        testing.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive                                 = true
-//        testing.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive                               = true
-//        testing.topAnchor.constraint(equalTo: self.view.topAnchor).isActive                                         = true
-//        testing.heightAnchor.constraint(equalToConstant: 600).isActive                                              = true
-        
         overviewConstraints()
     }
     
@@ -62,12 +52,9 @@ class ViewController: UIViewController {
         let name = "Max Sergent"
         let desiredCompany = "Capital One"
         let imageURL = "gs://max-sergent-45387.appspot.com/linkedin.jpg"
-        let completed = true
-        let dictionary = toAnyObject(name: name, desiredCompany: desiredCompany, completed: completed, imageURL: imageURL)
+        let dictionary = toAnyObject(name: name, desiredCompany: desiredCompany, imageURL: imageURL)
         let refItem = ref.child(dataType.lowercased())
         refItem.setValue(dictionary)
-        
-        testing.displayFirebase.text = "\(dataType): \(name) - \(desiredCompany) - \(completed)"
     }
     
     func retrieveData() {
@@ -88,24 +75,26 @@ class ViewController: UIViewController {
     func alterLabel(snapshot: DataSnapshot) {
         print("trying to alter label")
         if let value = snapshot.value as? [String: AnyObject]
+            , let reset = value["reset"] as? Bool
             , let name = value["name"] as? String
 //            , let desiredCompany = value["desiredCompany"] as? String
-//            , let completed = value["completed"] as? Bool
             , let imageURL = value["imageURL"] as? String {
-
-            let nameArray = name.split(separator: " ")
-            self.overview.name.text = "\(nameArray[0])\n\(nameArray[1])"
             
-            print(imageURL)
-            let reference = storage.reference(forURL: imageURL)
-            reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-              if let error = error {
-                print(error)
-                self.overview.picture.image = UIImage(named: "placeholder.jpg")
-              } else {
-                let image = UIImage(data: data!)
-                self.overview.picture.image = image
-              }
+            if reset {
+                let nameArray = name.split(separator: " ")
+                self.overview.name.text = "\(nameArray[0])\n\(nameArray[1])"
+                
+                print(imageURL)
+                let reference = storage.reference(forURL: imageURL)
+                reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                  if let error = error {
+                    print(error)
+                    self.overview.picture.image = UIImage(named: "placeholder.jpg")
+                  } else {
+                    let image = UIImage(data: data!)
+                    self.overview.picture.image = image
+                  }
+                }
             }
         }
         else {
@@ -113,12 +102,12 @@ class ViewController: UIViewController {
         }
     }
     
-    func toAnyObject(name: String, desiredCompany: String, completed: Bool? = false, imageURL: String) -> Any {
+    func toAnyObject(name: String, desiredCompany: String, reset: Bool? = true, imageURL: String) -> Any {
       return [
         "name": name,
         "desiredCompany": desiredCompany,
-        "completed": completed!,
-        "imageURL": imageURL
+        "imageURL": imageURL,
+        "reset": reset
       ]
     }
     

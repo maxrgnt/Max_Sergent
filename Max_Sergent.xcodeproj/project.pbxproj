@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		18213500DB9B082120CA5CCD /* Pods_Max_SergentUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C23E36182F966F329B52E3B1 /* Pods_Max_SergentUITests.framework */; };
 		251690D36F279F07ABE3A194 /* Pods_Max_SergentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C277D5D3F2F86DBF0422A5 /* Pods_Max_SergentTests.framework */; };
-		663D5BD9239C2A3900352633 /* Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663D5BD8239C2A3900352633 /* Testing.swift */; };
 		6651C6AB239F12B0003B49A1 /* Overview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6651C6AA239F12B0003B49A1 /* Overview.swift */; };
 		6651C6AD239F12C2003B49A1 /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6651C6AC239F12C2003B49A1 /* Constraints.swift */; };
 		6651C6AF239F1353003B49A1 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6651C6AE239F1353003B49A1 /* UI.swift */; };
@@ -52,7 +51,6 @@
 /* Begin PBXFileReference section */
 		27FE27BEA6A862D528E9EA46 /* Pods-Max_SergentTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Max_SergentTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Max_SergentTests/Pods-Max_SergentTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2F41528ABE3454D44918FFA6 /* Pods-Max_SergentTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Max_SergentTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Max_SergentTests/Pods-Max_SergentTests.release.xcconfig"; sourceTree = "<group>"; };
-		663D5BD8239C2A3900352633 /* Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testing.swift; sourceTree = "<group>"; };
 		6651C6AA239F12B0003B49A1 /* Overview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overview.swift; sourceTree = "<group>"; };
 		6651C6AC239F12C2003B49A1 /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
 		6651C6AE239F1353003B49A1 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 			isa = PBXGroup;
 			children = (
 				6651C6AA239F12B0003B49A1 /* Overview.swift */,
-				663D5BD8239C2A3900352633 /* Testing.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -479,7 +476,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				663D5BD9239C2A3900352633 /* Testing.swift in Sources */,
 				66FD8AB2239AEADA00B90C69 /* ViewController.swift in Sources */,
 				6651C6AF239F1353003B49A1 /* UI.swift in Sources */,
 				66FD8A79239AD18E00B90C69 /* AppDelegate.swift in Sources */,

@@ -21,12 +21,13 @@ struct UI {
         static let widthObjectPadding = width-statusBar.height
         
         struct Overview {
-            static let height = UI.Sizing.height*(2/5)
+            static let padding = objectPadding
+            static let height = UI.Sizing.height - statusBar.height
             static let width = UI.Sizing.width
-            static let pictureDiameter = height/2
+            static let pictureDiameter = height/2 - padding*2
             static let pictureRadius = pictureDiameter/2
-            static let nameHeight = height/2
-            static let nameWidth = UI.Sizing.width
+            static let nameHeight = height/2 - padding
+            static let nameWidth = width - padding
         }
         
     }
