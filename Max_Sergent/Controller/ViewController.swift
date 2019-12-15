@@ -13,7 +13,7 @@ import FirebaseStorage
 
 class ViewController: UIViewController {
     
-    let overview = Overview()
+    let header = Header()
     let ref = Database.database().reference()
 //    let storage = Storage.storage(url:"gs://max-sergent-45387.appspot.com")
     
@@ -37,30 +37,26 @@ class ViewController: UIViewController {
     
     //MARK: Settings
     func objectSettings() {
-        view.addSubview(overview)
-        overview.setup()
+        view.addSubview(header)
+        header.setup()
     }
     
     //MARK: Constraints
     func constraints() {
-        overviewConstraints()
+        headerConstraints()
     }
     
     //MARK: Functionality
     @objc func sendData() {
         let dataType = "user"
         let name = "Max Sergent"
-        let desiredCompany = "Capital One"
         let imageURL = "gs://max-sergent-45387.appspot.com/linkedin.jpg"
-        let dictionary = toAnyObject(name: name, desiredCompany: desiredCompany, imageURL: imageURL)
+        let dictionary = toAnyObject(name: name, imageURL: imageURL)
         let refItem = ref.child(dataType.lowercased())
         refItem.setValue(dictionary)
     }
     
     func retrieveData() {
-        //ref.observe(.value, with: { snapshot in
-        //  print(snapshot.value as Any)
-        //})
         let background = DispatchQueue.global()
         background.sync {print("retrieving --")}
         ref.observe(.value, with: { snapshot in
@@ -77,22 +73,18 @@ class ViewController: UIViewController {
         if let value = snapshot.value as? [String: AnyObject]
             , let reset = value["reset"] as? Bool
             , let name = value["name"] as? String
-//            , let desiredCompany = value["desiredCompany"] as? String
             , let imageURL = value["imageURL"] as? String {
-            
             if reset {
                 let nameArray = name.split(separator: " ")
-                self.overview.name.text = "\(nameArray[0])\n\(nameArray[1])"
-                
-                print(imageURL)
+                self.header.name.text = "\(nameArray[0])\n\(nameArray[1])"
                 let reference = storage.reference(forURL: imageURL)
                 reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
                   if let error = error {
                     print(error)
-                    self.overview.picture.image = UIImage(named: "placeholder.jpg")
+                    self.header.picture.image = UIImage(named: "placeholder.jpg")
                   } else {
                     let image = UIImage(data: data!)
-                    self.overview.picture.image = image
+                    self.header.picture.image = image
                   }
                 }
             }
@@ -102,12 +94,11 @@ class ViewController: UIViewController {
         }
     }
     
-    func toAnyObject(name: String, desiredCompany: String, reset: Bool? = true, imageURL: String) -> Any {
+    func toAnyObject(name: String, reset: Bool? = true, imageURL: String) -> Any {
       return [
         "name": name,
-        "desiredCompany": desiredCompany,
         "imageURL": imageURL,
-        "reset": reset
+        "reset": reset!
       ]
     }
     

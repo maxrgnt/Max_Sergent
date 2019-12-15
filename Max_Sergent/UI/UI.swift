@@ -22,7 +22,7 @@ struct UI {
         
         struct Overview {
             static let padding = objectPadding
-            static let height = UI.Sizing.height - statusBar.height
+            static let height = (UI.Sizing.height - statusBar.height) * 0.4
             static let width = UI.Sizing.width
             static let pictureDiameter = height/2 - padding*2
             static let pictureRadius = pictureDiameter/2

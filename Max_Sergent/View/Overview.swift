@@ -1,5 +1,5 @@
 //
-//  Overview.swift
+//  Header.swift
 //  Max_Sergent
 //
 //  Created by Max Sergent on 12/9/19.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Overview: UIView {
+class Header: UIView {
     
     //MARK: Definitions
     // Objects

@@ -11,17 +11,17 @@ import UIKit
 
 extension ViewController {
     
-    func overviewConstraints() {
-        overview.translatesAutoresizingMaskIntoConstraints                                                          = false
-        overview.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive                                = true
-        overview.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UI.Sizing.statusBar.height).isActive  = true
-        overview.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.width).isActive                         = true
-        overview.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.height).isActive                       = true
+    func headerConstraints() {
+        header.translatesAutoresizingMaskIntoConstraints                                                          = false
+        header.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive                                = true
+        header.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UI.Sizing.statusBar.height).isActive  = true
+        header.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.width).isActive                         = true
+        header.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.height).isActive                       = true
     }
     
 }
 
-extension Overview {
+extension Header {
     
     func nameConstraints() {
         let padding = UI.Sizing.Overview.padding
