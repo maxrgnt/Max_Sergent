@@ -19,6 +19,14 @@ extension ViewController {
         header.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.height).isActive                       = true
     }
     
+    func scrollConstraints() {
+        scroll.translatesAutoresizingMaskIntoConstraints                                                          = false
+        scroll.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive                                = true
+        scroll.topAnchor.constraint(equalTo: header.bottomAnchor).isActive                                        = true
+        scroll.widthAnchor.constraint(equalToConstant: UI.Sizing.Scroll.width).isActive                         = true
+        scroll.heightAnchor.constraint(equalToConstant: UI.Sizing.Scroll.height).isActive                       = true
+    }
+    
 }
 
 extension Header {
@@ -37,6 +45,30 @@ extension Header {
         name.topAnchor.constraint(equalTo: picture.bottomAnchor, constant: padding).isActive                        = true
         name.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.nameWidth).isActive                         = true
         name.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.nameHeight).isActive                       = true
+    }
+    
+}
+
+extension Scroll {
+    
+    func pageConstraints() {
+        page1.translatesAutoresizingMaskIntoConstraints                                                             = false
+        page1.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                             = true
+        page1.topAnchor.constraint(equalTo: topAnchor).isActive                                                     = true
+        page1.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                 = true
+        page1.heightAnchor.constraint(equalTo: heightAnchor).isActive                                               = true
+        
+        page2.translatesAutoresizingMaskIntoConstraints                                                             = false
+        page2.leadingAnchor.constraint(equalTo: page1.trailingAnchor).isActive                                      = true
+        page2.topAnchor.constraint(equalTo: topAnchor).isActive                                                     = true
+        page2.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                 = true
+        page2.heightAnchor.constraint(equalTo: heightAnchor).isActive                                               = true
+        
+        page3.translatesAutoresizingMaskIntoConstraints                                                             = false
+        page3.leadingAnchor.constraint(equalTo: page2.trailingAnchor).isActive                                      = true
+        page3.topAnchor.constraint(equalTo: topAnchor).isActive                                                     = true
+        page3.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                 = true
+        page3.heightAnchor.constraint(equalTo: heightAnchor).isActive                                               = true
     }
     
 }

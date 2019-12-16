@@ -14,6 +14,7 @@ import FirebaseStorage
 class ViewController: UIViewController {
     
     let header = Header()
+    let scroll = Scroll()
     let ref = Database.database().reference()
 //    let storage = Storage.storage(url:"gs://max-sergent-45387.appspot.com")
     
@@ -39,11 +40,14 @@ class ViewController: UIViewController {
     func objectSettings() {
         view.addSubview(header)
         header.setup()
+        view.addSubview(scroll)
+        scroll.setup()
     }
     
     //MARK: Constraints
     func constraints() {
         headerConstraints()
+        scrollConstraints()
     }
     
     //MARK: Functionality

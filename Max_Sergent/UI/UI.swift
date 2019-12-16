@@ -30,6 +30,12 @@ struct UI {
             static let nameWidth = width - padding
         }
         
+        struct Scroll {
+            static let padding = objectPadding
+            static let height = (UI.Sizing.height - statusBar.height) * 0.8
+            static let width = UI.Sizing.width
+        }
+        
     }
     
 }
