@@ -20,20 +20,29 @@ struct UI {
         static let objectPadding = statusBar.height/2
         static let widthObjectPadding = width-statusBar.height
         
+        struct Ratio {
+            static let minimizedHeaderHeight: CGFloat = 0.1
+            static let expandedHeaderHeight: CGFloat = 0.4
+            static let scrollHeight: CGFloat = 1-minimizedHeaderHeight
+        }
+        
         struct Header {
             static let padding = objectPadding
-            static let expandedHeight = (UI.Sizing.height - statusBar.height) * 0.4
-            static let minimizedHeight = (UI.Sizing.height - statusBar.height) * 0.2
+            static let expandedHeight = (UI.Sizing.height - statusBar.height) * Ratio.expandedHeaderHeight
+            static let minimizedHeight = (UI.Sizing.height - statusBar.height) * Ratio.minimizedHeaderHeight
             static let width = UI.Sizing.width
             static let pictureDiameter = (expandedHeight-padding)/2
             static let pictureRadius = pictureDiameter/2
-            static let nameHeight = (expandedHeight-padding)/2
+            static let pictureTopPadding = padding/2
+            static let expandedNameHeight = (expandedHeight-padding)/2
+            static let minimizedNameHeight = (minimizedHeight-padding)
             static let nameWidth = width - padding
+            static let nameBottomPadding = -padding/2
         }
         
         struct Scroll {
             static let padding = objectPadding
-            static let height = (UI.Sizing.height - statusBar.height) * 0.8
+            static let height = (UI.Sizing.height - statusBar.height) * Ratio.scrollHeight
             static let width = UI.Sizing.width
         }
         
@@ -49,7 +58,7 @@ extension UI {
         static let arvoBold = "Arvo-Bold"
         
         struct Overview {
-            static let name = UIFont(name: arvo, size: Sizing.Header.nameHeight/2)
+            static let name = UIFont(name: arvo, size: Sizing.Header.expandedNameHeight/2)
         }
         
     }

@@ -16,6 +16,7 @@ class Header: UIView {
     var height:        NSLayoutConstraint!
     var pictureHeight: NSLayoutConstraint!
     var pictureWidth:  NSLayoutConstraint!
+    var nameHeight:    NSLayoutConstraint!
     // Objects
     let picture = UIImageView()
     let name = UILabel()

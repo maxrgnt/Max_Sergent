@@ -25,7 +25,7 @@ class ViewController: UIViewController, ScrollDelegate {
     
     override func viewDidLoad() {
         print("Hello World!")
-        view.backgroundColor = .black
+        view.backgroundColor = UI.Colors.Overview.background
         setup()
         retrieveData()
     }
@@ -113,11 +113,25 @@ class ViewController: UIViewController, ScrollDelegate {
         var newAlpha = newDiameter / UI.Sizing.Header.pictureDiameter
         newAlpha = (newAlpha > 1) ? 1.0 : newAlpha
         newDiameter = (newDiameter > UI.Sizing.Header.pictureDiameter) ? UI.Sizing.Header.pictureDiameter : newDiameter
+        newDiameter = (newDiameter <= 0) ? 0 : newDiameter
+        var adjFontHeight = newConstant - UI.Sizing.Header.padding
+        adjFontHeight = (adjFontHeight >= UI.Sizing.Header.expandedNameHeight) ? UI.Sizing.Header.expandedNameHeight : adjFontHeight
         header.height.constant = newConstant
         header.pictureHeight.constant = newDiameter
         header.pictureWidth.constant = newDiameter
         header.picture.alpha = newAlpha
         header.picture.layer.cornerRadius = newDiameter/2
+        header.nameHeight.constant = adjFontHeight
         header.layoutIfNeeded()
+        header.name.sizeToFit()
+        let newAlignment: NSTextAlignment = (newConstant == UI.Sizing.Header.minimizedHeight) ? .center : .left
+        if header.name.textAlignment != newAlignment {
+            header.name.alpha = 0.0
+            header.name.textAlignment = newAlignment
+            UIView.animate(withDuration: 0.12, delay: 0.0, options: .curveEaseInOut
+                , animations: ({
+                    self.header.name.alpha = 1.0
+                }))
+        }
     }
 }

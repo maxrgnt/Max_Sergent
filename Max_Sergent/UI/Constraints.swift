@@ -36,18 +36,19 @@ extension Header {
         let padding = UI.Sizing.Header.padding
         pictureWidth = picture.widthAnchor.constraint(equalToConstant: UI.Sizing.Header.pictureDiameter)
         pictureHeight = picture.heightAnchor.constraint(equalToConstant: UI.Sizing.Header.pictureDiameter)
+        nameHeight = name.heightAnchor.constraint(equalToConstant: UI.Sizing.Header.expandedNameHeight)
         
         picture.translatesAutoresizingMaskIntoConstraints                                                           = false
         picture.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                           = true
-        picture.topAnchor.constraint(equalTo: topAnchor, constant: padding).isActive                                = true
+        picture.topAnchor.constraint(equalTo: topAnchor, constant: UI.Sizing.Header.pictureTopPadding).isActive     = true
         pictureWidth.isActive                                                                                       = true
         pictureHeight.isActive                                                                                      = true
         
         name.translatesAutoresizingMaskIntoConstraints                                                              = false
         name.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                              = true
-        name.bottomAnchor.constraint(equalTo: bottomAnchor).isActive                                                = true
+        name.bottomAnchor.constraint(equalTo: bottomAnchor, constant: UI.Sizing.Header.nameBottomPadding).isActive  = true
         name.widthAnchor.constraint(equalToConstant: UI.Sizing.Header.nameWidth).isActive                           = true
-        name.heightAnchor.constraint(equalToConstant: UI.Sizing.Header.nameHeight).isActive                         = true
+        nameHeight.isActive                                                                                         = true
     }
     
 }
