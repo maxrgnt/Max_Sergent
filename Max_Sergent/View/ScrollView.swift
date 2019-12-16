@@ -38,6 +38,7 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     //MARK: Setup
     func setup() {
         delegate = self
+        isPagingEnabled = true
         isUserInteractionEnabled = true
         backgroundColor = .gray
         alwaysBounceVertical = false
@@ -83,15 +84,24 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     }
 
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        print("Begin Decelerate")
+        // pass
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        print("End Drag")
+        // pass
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        print("End Decelerate")
+        // pass
     }
     
+    //MARK: Animate
+    func animateTemplate() {
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseInOut
+            , animations: ({
+                self.layoutIfNeeded()
+            }), completion: { (completed) in
+                // pass
+        })
+    }
 }

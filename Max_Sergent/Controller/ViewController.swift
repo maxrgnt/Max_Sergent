@@ -111,7 +111,7 @@ class ViewController: UIViewController, ScrollDelegate {
     func adjustHeader(toHeight newConstant: CGFloat) {
         var newDiameter = newConstant - UI.Sizing.Header.pictureDiameter - UI.Sizing.Header.padding
         var newAlpha = newDiameter / UI.Sizing.Header.pictureDiameter
-        //newAlpha = (newAlpha > 1) ? 1.0 : newAlpha
+        newAlpha = (newAlpha > 1) ? 1.0 : newAlpha
         newDiameter = (newDiameter > UI.Sizing.Header.pictureDiameter) ? UI.Sizing.Header.pictureDiameter : newDiameter
         header.height.constant = newConstant
         header.pictureHeight.constant = newDiameter
