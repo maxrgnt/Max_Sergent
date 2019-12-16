@@ -20,13 +20,14 @@ struct UI {
         static let objectPadding = statusBar.height/2
         static let widthObjectPadding = width-statusBar.height
         
-        struct Overview {
+        struct Header {
             static let padding = objectPadding
-            static let height = (UI.Sizing.height - statusBar.height) * 0.4
+            static let expandedHeight = (UI.Sizing.height - statusBar.height) * 0.4
+            static let minimizedHeight = (UI.Sizing.height - statusBar.height) * 0.2
             static let width = UI.Sizing.width
-            static let pictureDiameter = height/2 - padding*2
+            static let pictureDiameter = (expandedHeight-padding)/2
             static let pictureRadius = pictureDiameter/2
-            static let nameHeight = height/2 - padding
+            static let nameHeight = (expandedHeight-padding)/2
             static let nameWidth = width - padding
         }
         
@@ -48,7 +49,7 @@ extension UI {
         static let arvoBold = "Arvo-Bold"
         
         struct Overview {
-            static let name = UIFont(name: arvo, size: Sizing.Overview.nameHeight/2)
+            static let name = UIFont(name: arvo, size: Sizing.Header.nameHeight/2)
         }
         
     }

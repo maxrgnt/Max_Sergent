@@ -11,7 +11,7 @@ import UIKit
 import Firebase
 import FirebaseStorage
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, ScrollDelegate {
     
     let header = Header()
     let scroll = Scroll()
@@ -42,6 +42,7 @@ class ViewController: UIViewController {
         header.setup()
         view.addSubview(scroll)
         scroll.setup()
+        scroll.customDelegate = self
     }
     
     //MARK: Constraints
@@ -106,4 +107,17 @@ class ViewController: UIViewController {
       ]
     }
     
+    //MARK: Custom Delegates
+    func adjustHeader(toHeight newConstant: CGFloat) {
+        var newDiameter = newConstant - UI.Sizing.Header.pictureDiameter - UI.Sizing.Header.padding
+        var newAlpha = newDiameter / UI.Sizing.Header.pictureDiameter
+        //newAlpha = (newAlpha > 1) ? 1.0 : newAlpha
+        newDiameter = (newDiameter > UI.Sizing.Header.pictureDiameter) ? UI.Sizing.Header.pictureDiameter : newDiameter
+        header.height.constant = newConstant
+        header.pictureHeight.constant = newDiameter
+        header.pictureWidth.constant = newDiameter
+        header.picture.alpha = newAlpha
+        header.picture.layer.cornerRadius = newDiameter/2
+        header.layoutIfNeeded()
+    }
 }

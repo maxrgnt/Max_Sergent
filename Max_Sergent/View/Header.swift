@@ -12,6 +12,10 @@ import UIKit
 class Header: UIView {
     
     //MARK: Definitions
+    // Constraints
+    var height:        NSLayoutConstraint!
+    var pictureHeight: NSLayoutConstraint!
+    var pictureWidth:  NSLayoutConstraint!
     // Objects
     let picture = UIImageView()
     let name = UILabel()
@@ -47,7 +51,7 @@ class Header: UIView {
         addSubview(picture)
         //picture.contentMode = .scaleAspectFit
         picture.image = UIImage(named: "placeholder.jpg")
-        picture.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: UI.Sizing.Overview.pictureRadius)
+        picture.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: UI.Sizing.Header.pictureRadius)
     }
     
     func constraints() {

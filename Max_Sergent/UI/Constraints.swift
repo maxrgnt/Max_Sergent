@@ -12,19 +12,20 @@ import UIKit
 extension ViewController {
     
     func headerConstraints() {
-        header.translatesAutoresizingMaskIntoConstraints                                                          = false
-        header.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive                                = true
-        header.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UI.Sizing.statusBar.height).isActive  = true
-        header.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.width).isActive                         = true
-        header.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.height).isActive                       = true
+        header.height = header.heightAnchor.constraint(equalToConstant: UI.Sizing.Header.expandedHeight)
+        header.translatesAutoresizingMaskIntoConstraints                                                            = false
+        header.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive                                  = true
+        header.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UI.Sizing.statusBar.height).isActive    = true
+        header.widthAnchor.constraint(equalToConstant: UI.Sizing.Header.width).isActive                             = true
+        header.height.isActive                                                                                      = true
     }
     
     func scrollConstraints() {
-        scroll.translatesAutoresizingMaskIntoConstraints                                                          = false
-        scroll.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive                                = true
-        scroll.topAnchor.constraint(equalTo: header.bottomAnchor).isActive                                        = true
-        scroll.widthAnchor.constraint(equalToConstant: UI.Sizing.Scroll.width).isActive                         = true
-        scroll.heightAnchor.constraint(equalToConstant: UI.Sizing.Scroll.height).isActive                       = true
+        scroll.translatesAutoresizingMaskIntoConstraints                                                            = false
+        scroll.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive                                  = true
+        scroll.topAnchor.constraint(equalTo: header.bottomAnchor).isActive                                          = true
+        scroll.widthAnchor.constraint(equalToConstant: UI.Sizing.Scroll.width).isActive                             = true
+        scroll.heightAnchor.constraint(equalToConstant: UI.Sizing.Scroll.height).isActive                           = true
     }
     
 }
@@ -32,19 +33,21 @@ extension ViewController {
 extension Header {
     
     func nameConstraints() {
-        let padding = UI.Sizing.Overview.padding
+        let padding = UI.Sizing.Header.padding
+        pictureWidth = picture.widthAnchor.constraint(equalToConstant: UI.Sizing.Header.pictureDiameter)
+        pictureHeight = picture.heightAnchor.constraint(equalToConstant: UI.Sizing.Header.pictureDiameter)
         
         picture.translatesAutoresizingMaskIntoConstraints                                                           = false
         picture.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                           = true
         picture.topAnchor.constraint(equalTo: topAnchor, constant: padding).isActive                                = true
-        picture.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.pictureDiameter).isActive                = true
-        picture.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.pictureDiameter).isActive               = true
+        pictureWidth.isActive                                                                                       = true
+        pictureHeight.isActive                                                                                      = true
         
         name.translatesAutoresizingMaskIntoConstraints                                                              = false
         name.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                              = true
-        name.topAnchor.constraint(equalTo: picture.bottomAnchor, constant: padding).isActive                        = true
-        name.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.nameWidth).isActive                         = true
-        name.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.nameHeight).isActive                       = true
+        name.bottomAnchor.constraint(equalTo: bottomAnchor).isActive                                                = true
+        name.widthAnchor.constraint(equalToConstant: UI.Sizing.Header.nameWidth).isActive                           = true
+        name.heightAnchor.constraint(equalToConstant: UI.Sizing.Header.nameHeight).isActive                         = true
     }
     
 }

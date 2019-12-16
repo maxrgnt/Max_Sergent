@@ -9,9 +9,15 @@
 import Foundation
 import UIKit
 
+protocol ScrollDelegate {
+    func adjustHeader(toHeight: CGFloat)
+}
+
 class Scroll: UIScrollView, UIScrollViewDelegate {
     
     //MARK: Definitions
+    // Delegate
+    var customDelegate : ScrollDelegate!
     // Constraints
     var height:   NSLayoutConstraint!
     // Objects
@@ -33,9 +39,11 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     func setup() {
         delegate = self
         isUserInteractionEnabled = true
-        alwaysBounceHorizontal = true
-        alwaysBounceVertical = false
         backgroundColor = .gray
+        alwaysBounceVertical = false
+        showsVerticalScrollIndicator = false
+        alwaysBounceHorizontal = true
+        showsHorizontalScrollIndicator = false
         contentSize = CGSize(width: UI.Sizing.Scroll.width*3, height: CGFloat(0.0))
         objectSettings()
         constraints()
@@ -58,14 +66,20 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     
     //MARK: Scroll Delegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // LEFT
+        var ratio = 1-(contentOffset.x/UI.Sizing.Scroll.width)
+        var newConstant: CGFloat = 0.0
+        // LEFT (drag finger right)
         if scrollView.contentOffset.x <= 0 {
-            
+            ratio = (ratio >= 1) ? 1.0 : ratio
+            newConstant = ratio*UI.Sizing.Header.expandedHeight
         }
-        // RIGHT
+        // RIGHT (drag finger left)
         else if scrollView.contentOffset.x > 0 {
-            
+            ratio = (ratio <= 0) ? 0.0 : ratio
+            let diff = UI.Sizing.Header.expandedHeight-UI.Sizing.Header.minimizedHeight
+            newConstant = (ratio*diff) + UI.Sizing.Header.minimizedHeight
         }
+        self.customDelegate.adjustHeader(toHeight: newConstant)
     }
 
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
