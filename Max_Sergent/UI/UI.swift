@@ -50,11 +50,13 @@ struct UI {
             static let padding = objectPadding
             static let height = Scroll.height
             static let width = UI.Sizing.width
-            static let objectiveHeight = height/4
+            static let objectiveHeight = height*(0.3)
             static let objectiveWidth = width-padding
-            static let projectHeight = objectiveHeight/3
+            static let projectHeight = objectiveHeight/4
             static let projectWidth = width-padding
-            static let barHeight = projectHeight/4
+            static let barHeight = projectHeight/5
+            static let statHeight = barHeight*2
+            static let statWidth = width-padding
         }
         
     }
@@ -69,14 +71,16 @@ extension UI {
         static let arvoBold = "Arvo-Bold"
         static let openSans = "OpenSans-Regular"
         static let openSansBold = "OpenSans-Bold"
+        static let openSansLight = "OpenSans-Light"
         
         struct Header {
             static let name = UIFont(name: arvo, size: Sizing.Header.expandedNameHeight/2)
         }
         
         struct Overview {
-            static let objective = UIFont(name: openSans, size: Sizing.Overview.objectiveHeight/3)
+            static let objective = UIFont(name: openSans, size: Sizing.Overview.objectiveHeight/2)
             static let project = UIFont(name: openSansBold, size: Sizing.Overview.objectiveHeight/3)
+            static let stat = UIFont(name: openSans, size: Sizing.Overview.statHeight*(2/3))
         }
         
     }
@@ -91,6 +95,7 @@ extension UI {
         static let headerBackground = UIColor.black
         static let overviewBackground = UIColor.darkGray
         static let primaryFontColor = UIColor.white
+        static let secondaryFontColor = UIColor.lightGray
         /****************************/
         
         struct Header {
@@ -102,6 +107,7 @@ extension UI {
             static let background = overviewBackground
             static let objective = primaryFontColor
             static let project = primaryFontColor
+            static let stat = secondaryFontColor
         }
         
     }

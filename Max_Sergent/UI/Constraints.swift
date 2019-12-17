@@ -98,27 +98,33 @@ extension Overview {
         
         selfProject.translatesAutoresizingMaskIntoConstraints                                                        = false
         selfProject.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                        = true
-        selfProject.topAnchor.constraint(equalTo: objective.bottomAnchor).isActive                                   = true
+        selfProject.topAnchor.constraint(equalTo: objective.bottomAnchor, constant: UI.Sizing.Overview.padding/2).isActive = true
         selfProject.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth).isActive                = true
         selfProject.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectHeight).isActive              = true
         
         swiftDays.translatesAutoresizingMaskIntoConstraints                                                          = false
         swiftDays.leadingAnchor.constraint(equalTo: leadingAnchor, constant: UI.Sizing.Overview.padding/2).isActive    = true
-        swiftDays.topAnchor.constraint(equalTo: selfProject.bottomAnchor, constant: UI.Sizing.Overview.padding).isActive = true
+        swiftDays.topAnchor.constraint(equalTo: selfProject.bottomAnchor, constant: UI.Sizing.Overview.padding/2).isActive = true
         swiftDays.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth/3).isActive                  = true
         swiftDays.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive                = true
         
         pythonDays.translatesAutoresizingMaskIntoConstraints                                                          = false
         pythonDays.leadingAnchor.constraint(equalTo: swiftDays.trailingAnchor).isActive    = true
-        pythonDays.topAnchor.constraint(equalTo: selfProject.bottomAnchor, constant: UI.Sizing.Overview.padding).isActive = true
+        pythonDays.topAnchor.constraint(equalTo: selfProject.bottomAnchor, constant: UI.Sizing.Overview.padding/2).isActive = true
         pythonDays.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth/3).isActive                  = true
         pythonDays.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive                = true
         
         emptySelf.translatesAutoresizingMaskIntoConstraints                                                          = false
         emptySelf.leadingAnchor.constraint(equalTo: pythonDays.trailingAnchor).isActive    = true
-        emptySelf.topAnchor.constraint(equalTo: selfProject.bottomAnchor, constant: UI.Sizing.Overview.padding).isActive = true
+        emptySelf.topAnchor.constraint(equalTo: selfProject.bottomAnchor, constant: UI.Sizing.Overview.padding/2).isActive = true
         emptySelf.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth/3).isActive                  = true
         emptySelf.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive                = true
+        
+        selfStats.translatesAutoresizingMaskIntoConstraints                                                          = false
+        selfStats.centerXAnchor.constraint(equalTo: centerXAnchor).isActive    = true
+        selfStats.topAnchor.constraint(equalTo: swiftDays.bottomAnchor).isActive = true
+        selfStats.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.statWidth).isActive                  = true
+        selfStats.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.statHeight).isActive                = true
         
     }
     
@@ -126,21 +132,27 @@ extension Overview {
         
         workProject.translatesAutoresizingMaskIntoConstraints                                                        = false
         workProject.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                        = true
-        workProject.topAnchor.constraint(equalTo: swiftDays.bottomAnchor, constant: UI.Sizing.Overview.padding).isActive  = true
+        workProject.topAnchor.constraint(equalTo: selfStats.bottomAnchor, constant: UI.Sizing.Overview.padding/2).isActive  = true
         workProject.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth).isActive                = true
         workProject.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectHeight).isActive              = true
         
         sqlDays.translatesAutoresizingMaskIntoConstraints                                                          = false
         sqlDays.leadingAnchor.constraint(equalTo: leadingAnchor, constant: UI.Sizing.Overview.padding/2).isActive  = true
-        sqlDays.topAnchor.constraint(equalTo: workProject.bottomAnchor, constant: UI.Sizing.Overview.padding).isActive = true
+        sqlDays.topAnchor.constraint(equalTo: workProject.bottomAnchor, constant: UI.Sizing.Overview.padding/2).isActive = true
         sqlDays.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth/2).isActive                  = true
         sqlDays.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive                = true
         
         emptyWork.translatesAutoresizingMaskIntoConstraints                                                          = false
         emptyWork.leadingAnchor.constraint(equalTo: sqlDays.trailingAnchor).isActive    = true
-        emptyWork.topAnchor.constraint(equalTo: workProject.bottomAnchor, constant: UI.Sizing.Overview.padding).isActive = true
+        emptyWork.topAnchor.constraint(equalTo: workProject.bottomAnchor, constant: UI.Sizing.Overview.padding/2).isActive = true
         emptyWork.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth/2).isActive                  = true
         emptyWork.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive                = true
+
+        workStats.translatesAutoresizingMaskIntoConstraints                                                          = false
+        workStats.centerXAnchor.constraint(equalTo: centerXAnchor).isActive    = true
+        workStats.topAnchor.constraint(equalTo: sqlDays.bottomAnchor).isActive = true
+        workStats.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.statWidth).isActive                  = true
+        workStats.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.statHeight).isActive                = true
         
     }
     

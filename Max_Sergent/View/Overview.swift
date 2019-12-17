@@ -15,10 +15,12 @@ class Overview: UIView {
     // Objects
     let objective = UILabel()
     let selfProject = UILabel()
+    let selfStats = UILabel()
     let swiftDays = UIView()
     let pythonDays = UIView()
     let emptySelf = UIView()
     let workProject = UILabel()
+    let workStats = UILabel()
     let sqlDays = UIView()
     let emptyWork = UIView()
     
@@ -50,7 +52,7 @@ class Overview: UIView {
         objective.text = Constants.Overview.objective
         objective.textColor = UI.Colors.Overview.objective
         
-        let text = [Constants.Overview.selfProject, Constants.Overview.workProject]
+        var text = [Constants.Overview.selfProject, Constants.Overview.workProject]
         for (i, project) in [selfProject,workProject].enumerated() {
             addSubview(project)
             project.numberOfLines = 2
@@ -64,7 +66,21 @@ class Overview: UIView {
             project.textColor = UI.Colors.Overview.project
         }
         
-        let colors: [UIColor] = [.red, .yellow, .black, .blue, .black]
+        text = [Constants.Overview.selfStats, Constants.Overview.workStats]
+        for (i, label) in [selfStats,workStats].enumerated() {
+            addSubview(label)
+            label.numberOfLines = 1
+            label.textAlignment = .left
+            //objective.backgroundColor = .gray
+            label.minimumScaleFactor = 0.1
+            label.lineBreakMode = .byClipping
+            label.adjustsFontSizeToFitWidth = true
+            label.font = UI.Fonts.Overview.stat
+            label.text = text[i]
+            label.textColor = UI.Colors.Overview.stat
+        }
+        
+        let colors: [UIColor] = [.white, .lightGray, .black, .lightGray, .black]
         for (i, bar) in [swiftDays, pythonDays, emptySelf, sqlDays, emptyWork].enumerated() {
             addSubview(bar)
             bar.backgroundColor = colors[i]
