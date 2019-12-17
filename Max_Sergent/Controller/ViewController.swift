@@ -117,10 +117,12 @@ class ViewController: UIViewController, ScrollDelegate {
         newDiameter = (newDiameter <= 0) ? 0 : newDiameter
         var adjFontHeight = newConstant - UI.Sizing.Header.padding
         adjFontHeight = (adjFontHeight >= UI.Sizing.Header.expandedNameHeight) ? UI.Sizing.Header.expandedNameHeight : adjFontHeight
+        print("adjust ",newConstant)
         header.height.constant = newConstant
         header.pictureHeight.constant = newDiameter
         header.pictureWidth.constant = newDiameter
         header.picture.alpha = newAlpha
+        scroll.overview.alpha = newAlpha
         header.picture.layer.cornerRadius = newDiameter/2
         header.name.alpha = (newConstant == UI.Sizing.Header.minimizedHeight) ? 1.0 : newAlpha + 0.5
         header.nameHeight.constant = adjFontHeight

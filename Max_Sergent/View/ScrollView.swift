@@ -41,7 +41,7 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         delegate = self
         isPagingEnabled = true
         isUserInteractionEnabled = true
-        backgroundColor = .gray
+        backgroundColor = UI.Colors.Overview.background
         alwaysBounceVertical = false
         showsVerticalScrollIndicator = false
         alwaysBounceHorizontal = true

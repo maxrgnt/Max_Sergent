@@ -96,6 +96,7 @@ extension UI {
         static let overviewBackground = UIColor.darkGray
         static let primaryFontColor = UIColor.white
         static let secondaryFontColor = UIColor.lightGray
+        static let tertiaryFontColor = UIColor.black
         /****************************/
         
         struct Header {
@@ -105,8 +106,8 @@ extension UI {
         
         struct Overview {
             static let background = overviewBackground
-            static let objective = primaryFontColor
-            static let project = primaryFontColor
+            static let objective = secondaryFontColor
+            static let project = secondaryFontColor
             static let stat = secondaryFontColor
         }
         

@@ -122,7 +122,7 @@ extension Overview {
         
         selfStats.translatesAutoresizingMaskIntoConstraints                                                          = false
         selfStats.centerXAnchor.constraint(equalTo: centerXAnchor).isActive    = true
-        selfStats.topAnchor.constraint(equalTo: swiftDays.bottomAnchor).isActive = true
+        selfStats.topAnchor.constraint(equalTo: swiftDays.bottomAnchor, constant: UI.Sizing.Overview.padding/4).isActive = true
         selfStats.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.statWidth).isActive                  = true
         selfStats.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.statHeight).isActive                = true
         
@@ -150,7 +150,7 @@ extension Overview {
 
         workStats.translatesAutoresizingMaskIntoConstraints                                                          = false
         workStats.centerXAnchor.constraint(equalTo: centerXAnchor).isActive    = true
-        workStats.topAnchor.constraint(equalTo: sqlDays.bottomAnchor).isActive = true
+        workStats.topAnchor.constraint(equalTo: sqlDays.bottomAnchor, constant: UI.Sizing.Overview.padding/4).isActive = true
         workStats.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.statWidth).isActive                  = true
         workStats.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.statHeight).isActive                = true
         
