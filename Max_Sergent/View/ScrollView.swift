@@ -11,6 +11,7 @@ import UIKit
 
 protocol ScrollDelegate {
     func adjustHeader(toHeight: CGFloat)
+    func poop(toHeight: CGFloat)
 }
 
 class Scroll: UIScrollView, UIScrollViewDelegate {
@@ -44,9 +45,11 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         backgroundColor = UI.Colors.Overview.background
         alwaysBounceVertical = false
         showsVerticalScrollIndicator = false
-        alwaysBounceHorizontal = true
+        alwaysBounceHorizontal = false
         showsHorizontalScrollIndicator = false
-        contentSize = CGSize(width: UI.Sizing.Scroll.width*4, height: CGFloat(0.0))
+        automaticallyAdjustsScrollIndicatorInsets = false
+        contentSize = CGSize(width: UI.Sizing.Scroll.width*4, height: UI.Sizing.Scroll.height-1)
+        contentInset = UIEdgeInsets(top: 0, left: UI.Sizing.Scroll.width*(1/4), bottom: 0, right: 0)
         objectSettings()
         constraints()
     }
@@ -72,30 +75,45 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         var ratio = 1-(contentOffset.x/UI.Sizing.Scroll.width)
         var newConstant: CGFloat = 0.0
+        let diff = UI.Sizing.Header.expandedHeight-UI.Sizing.Header.minimizedHeight
         // LEFT (drag finger right)
-        if scrollView.contentOffset.x <= 0 {
-            ratio = (ratio >= 1) ? 1.0 : ratio
-            newConstant = ratio*UI.Sizing.Header.expandedHeight
+        if scrollView.contentOffset.x <= -UI.Sizing.Scroll.width*(1/4) {
+            scrollView.contentOffset.x = -UI.Sizing.Scroll.width*(1/4)
+            ratio = 1-(-UI.Sizing.Scroll.width*(1/4)/UI.Sizing.Scroll.width)
+        }
+        if scrollView.contentOffset.x < 0.0 && scrollView.contentOffset.x > -UI.Sizing.Scroll.width*(1/4) {
+            //ratio = (ratio >= 1) ? 1.0 : ratio
+        }
+        else if scrollView.contentOffset.x == 0.0 {
+            //self.customDelegate.poop(toHeight: UI.Sizing.Header.expandedHeight)
         }
         // RIGHT (drag finger left)
-        else if scrollView.contentOffset.x > 0 {
-            ratio = (ratio <= 0) ? 0.0 : ratio
-            let diff = UI.Sizing.Header.expandedHeight-UI.Sizing.Header.minimizedHeight
-            newConstant = (ratio*diff) + UI.Sizing.Header.minimizedHeight
+        else if scrollView.contentOffset.x > 0.0 {
+            //ratio = (ratio <= 0) ? 0.0 : ratio
+            //self.customDelegate.poop(toHeight: ratio*diff + UI.Sizing.Header.minimizedHeight)
         }
+        ratio = (ratio <= 0) ? 0.0 : ratio
+        newConstant = (ratio > 1) ? ratio*UI.Sizing.Header.expandedHeight : ratio*diff + UI.Sizing.Header.minimizedHeight
         self.customDelegate.adjustHeader(toHeight: newConstant)
+        
     }
 
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        // pass
+        if contentOffset.x < 0.0 {
+            setContentOffset(CGPoint(x: 0.0, y: 0.0), animated: true)
+        }
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        // pass
+        if contentOffset.x < 0.0 {
+            setContentOffset(CGPoint(x: 0.0, y: 0.0), animated: true)
+        }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        // pass
+        if contentOffset.x < 0.0 {
+            setContentOffset(CGPoint(x: 0.0, y: 0.0), animated: true)
+        }
     }
     
     //MARK: Animate

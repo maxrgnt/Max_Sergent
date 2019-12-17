@@ -113,18 +113,17 @@ class ViewController: UIViewController, ScrollDelegate {
         var newAlpha = newDiameter / UI.Sizing.Header.pictureDiameter
         newAlpha = (newAlpha > 1) ? 1.0 : newAlpha
         newAlpha = (newAlpha < 0) ? 0.0 : newAlpha
-        newDiameter = (newDiameter > UI.Sizing.Header.pictureDiameter) ? UI.Sizing.Header.pictureDiameter : newDiameter
+//        newDiameter = (newDiameter > UI.Sizing.Header.pictureDiameter) ? UI.Sizing.Header.pictureDiameter : newDiameter
         newDiameter = (newDiameter <= 0) ? 0 : newDiameter
         var adjFontHeight = newConstant - UI.Sizing.Header.padding
         adjFontHeight = (adjFontHeight >= UI.Sizing.Header.expandedNameHeight) ? UI.Sizing.Header.expandedNameHeight : adjFontHeight
-        print("adjust ",newConstant)
         header.height.constant = newConstant
         header.pictureHeight.constant = newDiameter
         header.pictureWidth.constant = newDiameter
         header.picture.alpha = newAlpha
         scroll.overview.alpha = newAlpha
         header.picture.layer.cornerRadius = newDiameter/2
-        header.name.alpha = (newConstant == UI.Sizing.Header.minimizedHeight) ? 1.0 : newAlpha + 0.5
+        header.name.alpha = (newConstant == UI.Sizing.Header.minimizedHeight) ? 1.0 : newAlpha + 0.1
         header.nameHeight.constant = adjFontHeight
         header.layoutIfNeeded()
         header.name.sizeToFit()
@@ -137,5 +136,14 @@ class ViewController: UIViewController, ScrollDelegate {
                     self.header.name.alpha = 1.0
                 }))
         }
+    }
+    
+    func poop(toHeight newConstant: CGFloat) {
+        print("-: ",header.height.constant, newConstant)
+        header.height.constant = newConstant
+        print("-: ",scroll.bounds)
+        print("-: ",scroll.contentOffset)
+//        print("------------------------")
+//        header.layoutIfNeeded()
     }
 }
