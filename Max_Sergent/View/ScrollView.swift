@@ -21,6 +21,7 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     // Constraints
     var height:   NSLayoutConstraint!
     // Objects
+    let overview = Overview()
     let page1 = UILabel()
     let page2 = UILabel()
     let page3 = UILabel()
@@ -45,13 +46,15 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         showsVerticalScrollIndicator = false
         alwaysBounceHorizontal = true
         showsHorizontalScrollIndicator = false
-        contentSize = CGSize(width: UI.Sizing.Scroll.width*3, height: CGFloat(0.0))
+        contentSize = CGSize(width: UI.Sizing.Scroll.width*4, height: CGFloat(0.0))
         objectSettings()
         constraints()
     }
     
     //MARK: Object Settings
     func objectSettings() {
+        addSubview(overview)
+        overview.setup()
         addSubview(page1)
         page1.backgroundColor = .blue
         addSubview(page2)

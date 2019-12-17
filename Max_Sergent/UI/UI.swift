@@ -46,6 +46,17 @@ struct UI {
             static let width = UI.Sizing.width
         }
         
+        struct Overview {
+            static let padding = objectPadding
+            static let height = Scroll.height
+            static let width = UI.Sizing.width
+            static let objectiveHeight = height/4
+            static let objectiveWidth = width-padding
+            static let projectHeight = objectiveHeight/3
+            static let projectWidth = width-padding
+            static let barHeight = projectHeight/4
+        }
+        
     }
     
 }
@@ -56,9 +67,16 @@ extension UI {
         
         static let arvo = "Arvo"
         static let arvoBold = "Arvo-Bold"
+        static let openSans = "OpenSans-Regular"
+        static let openSansBold = "OpenSans-Bold"
+        
+        struct Header {
+            static let name = UIFont(name: arvo, size: Sizing.Header.expandedNameHeight/2)
+        }
         
         struct Overview {
-            static let name = UIFont(name: arvo, size: Sizing.Header.expandedNameHeight/2)
+            static let objective = UIFont(name: openSans, size: Sizing.Overview.objectiveHeight/3)
+            static let project = UIFont(name: openSansBold, size: Sizing.Overview.objectiveHeight/3)
         }
         
     }
@@ -70,13 +88,20 @@ extension UI {
     struct Colors {
         
         /* Alter color scheme here  */
+        static let headerBackground = UIColor.black
         static let overviewBackground = UIColor.darkGray
         static let primaryFontColor = UIColor.white
         /****************************/
         
+        struct Header {
+            static let background = headerBackground
+            static let name = primaryFontColor
+        }
+        
         struct Overview {
             static let background = overviewBackground
-            static let name = primaryFontColor
+            static let objective = primaryFontColor
+            static let project = primaryFontColor
         }
         
     }

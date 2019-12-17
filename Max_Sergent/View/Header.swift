@@ -32,7 +32,7 @@ class Header: UIView {
     }
     
     func setup() {
-        backgroundColor = UI.Colors.Overview.background
+        backgroundColor = UI.Colors.Header.background
         objectSettings()
         constraints()
     }
@@ -45,9 +45,9 @@ class Header: UIView {
         name.minimumScaleFactor = 0.1
         name.lineBreakMode = .byClipping
         name.adjustsFontSizeToFitWidth = true
-        name.font = UI.Fonts.Overview.name
-        name.text = Constants.Overview.name
-        name.textColor = UI.Colors.Overview.name
+        name.font = UI.Fonts.Header.name
+        name.text = Constants.Header.name
+        name.textColor = UI.Colors.Header.name
         
         addSubview(picture)
         //picture.contentMode = .scaleAspectFit

@@ -33,7 +33,6 @@ extension ViewController {
 extension Header {
     
     func nameConstraints() {
-        let padding = UI.Sizing.Header.padding
         pictureWidth = picture.widthAnchor.constraint(equalToConstant: UI.Sizing.Header.pictureDiameter)
         pictureHeight = picture.heightAnchor.constraint(equalToConstant: UI.Sizing.Header.pictureDiameter)
         nameHeight = name.heightAnchor.constraint(equalToConstant: UI.Sizing.Header.expandedNameHeight)
@@ -56,8 +55,14 @@ extension Header {
 extension Scroll {
     
     func pageConstraints() {
+        overview.translatesAutoresizingMaskIntoConstraints                                                          = false
+        overview.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                          = true
+        overview.topAnchor.constraint(equalTo: topAnchor).isActive                                                  = true
+        overview.widthAnchor.constraint(equalTo: widthAnchor).isActive                                              = true
+        overview.heightAnchor.constraint(equalTo: heightAnchor).isActive                                            = true
+
         page1.translatesAutoresizingMaskIntoConstraints                                                             = false
-        page1.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                             = true
+        page1.leadingAnchor.constraint(equalTo: overview.trailingAnchor).isActive                                   = true
         page1.topAnchor.constraint(equalTo: topAnchor).isActive                                                     = true
         page1.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                 = true
         page1.heightAnchor.constraint(equalTo: heightAnchor).isActive                                               = true
@@ -73,6 +78,70 @@ extension Scroll {
         page3.topAnchor.constraint(equalTo: topAnchor).isActive                                                     = true
         page3.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                 = true
         page3.heightAnchor.constraint(equalTo: heightAnchor).isActive                                               = true
+    }
+    
+}
+
+extension Overview {
+    
+    func objectiveConstraints() {
+        
+        objective.translatesAutoresizingMaskIntoConstraints                                                        = false
+        objective.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                        = true
+        objective.topAnchor.constraint(equalTo: topAnchor).isActive                                                = true
+        objective.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.objectiveWidth).isActive              = true
+        objective.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.objectiveHeight).isActive            = true
+        
+    }
+    
+    func projectConstraints() {
+        
+        selfProject.translatesAutoresizingMaskIntoConstraints                                                        = false
+        selfProject.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                        = true
+        selfProject.topAnchor.constraint(equalTo: objective.bottomAnchor).isActive                                   = true
+        selfProject.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth).isActive                = true
+        selfProject.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectHeight).isActive              = true
+        
+        swiftDays.translatesAutoresizingMaskIntoConstraints                                                          = false
+        swiftDays.leadingAnchor.constraint(equalTo: leadingAnchor, constant: UI.Sizing.Overview.padding/2).isActive    = true
+        swiftDays.topAnchor.constraint(equalTo: selfProject.bottomAnchor, constant: UI.Sizing.Overview.padding).isActive = true
+        swiftDays.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth/3).isActive                  = true
+        swiftDays.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive                = true
+        
+        pythonDays.translatesAutoresizingMaskIntoConstraints                                                          = false
+        pythonDays.leadingAnchor.constraint(equalTo: swiftDays.trailingAnchor).isActive    = true
+        pythonDays.topAnchor.constraint(equalTo: selfProject.bottomAnchor, constant: UI.Sizing.Overview.padding).isActive = true
+        pythonDays.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth/3).isActive                  = true
+        pythonDays.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive                = true
+        
+        emptySelf.translatesAutoresizingMaskIntoConstraints                                                          = false
+        emptySelf.leadingAnchor.constraint(equalTo: pythonDays.trailingAnchor).isActive    = true
+        emptySelf.topAnchor.constraint(equalTo: selfProject.bottomAnchor, constant: UI.Sizing.Overview.padding).isActive = true
+        emptySelf.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth/3).isActive                  = true
+        emptySelf.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive                = true
+        
+    }
+    
+    func workProjectConstraints() {
+        
+        workProject.translatesAutoresizingMaskIntoConstraints                                                        = false
+        workProject.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                        = true
+        workProject.topAnchor.constraint(equalTo: swiftDays.bottomAnchor, constant: UI.Sizing.Overview.padding).isActive  = true
+        workProject.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth).isActive                = true
+        workProject.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectHeight).isActive              = true
+        
+        sqlDays.translatesAutoresizingMaskIntoConstraints                                                          = false
+        sqlDays.leadingAnchor.constraint(equalTo: leadingAnchor, constant: UI.Sizing.Overview.padding/2).isActive  = true
+        sqlDays.topAnchor.constraint(equalTo: workProject.bottomAnchor, constant: UI.Sizing.Overview.padding).isActive = true
+        sqlDays.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth/2).isActive                  = true
+        sqlDays.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive                = true
+        
+        emptyWork.translatesAutoresizingMaskIntoConstraints                                                          = false
+        emptyWork.leadingAnchor.constraint(equalTo: sqlDays.trailingAnchor).isActive    = true
+        emptyWork.topAnchor.constraint(equalTo: workProject.bottomAnchor, constant: UI.Sizing.Overview.padding).isActive = true
+        emptyWork.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth/2).isActive                  = true
+        emptyWork.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive                = true
+        
     }
     
 }
