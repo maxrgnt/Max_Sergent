@@ -26,6 +26,8 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     let page1 = UILabel()
     let page2 = UILabel()
     let page3 = UILabel()
+    var poop: [CGFloat] = []
+    
     
     //MARK: Initialization
     init() {
@@ -52,6 +54,10 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         contentInset = UIEdgeInsets(top: 0, left: UI.Sizing.Scroll.width*(1/4), bottom: 0, right: 0)
         objectSettings()
         constraints()
+        
+        print(1.0/UI.Sizing.Scroll.width*(1/4), UI.Sizing.Scroll.width*(1/4))
+        poop = Array(stride(from: -1.0, to: 0.0, by: 1.0/(UI.Sizing.Scroll.width*(1/4))))
+        print(poop.count)
     }
     
     //MARK: Object Settings
@@ -81,19 +87,26 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
             scrollView.contentOffset.x = -UI.Sizing.Scroll.width*(1/4)
             ratio = 1-(-UI.Sizing.Scroll.width*(1/4)/UI.Sizing.Scroll.width)
         }
-        if scrollView.contentOffset.x < 0.0 && scrollView.contentOffset.x > -UI.Sizing.Scroll.width*(1/4) {
-            //ratio = (ratio >= 1) ? 1.0 : ratio
-        }
-        else if scrollView.contentOffset.x == 0.0 {
-            //self.customDelegate.poop(toHeight: UI.Sizing.Header.expandedHeight)
-        }
-        // RIGHT (drag finger left)
-        else if scrollView.contentOffset.x > 0.0 {
-            //ratio = (ratio <= 0) ? 0.0 : ratio
-            //self.customDelegate.poop(toHeight: ratio*diff + UI.Sizing.Header.minimizedHeight)
-        }
+        //ratio = (ratio >= 1) ? 1.0 : ratio
         ratio = (ratio <= 0) ? 0.0 : ratio
         newConstant = (ratio > 1) ? ratio*UI.Sizing.Header.expandedHeight : ratio*diff + UI.Sizing.Header.minimizedHeight
+        if contentOffset.x < 0.0 {
+            let x = -UI.Sizing.Scroll.width*(1/4)
+            print("------------------------")
+            let y = -Int(ceil(contentOffset.x))
+            let z = Int(poop.count)-Int(ceil(poop[y]*x))+Int(y)
+            print(Int(poop.count),Int(ceil(poop[y]*x)), z)
+            print("offset:    ",y,
+                  "\narray:    ",poop[y],
+                  "\narray-x:  ",poop[y]*x,
+                  "\nnewArray: ",poop[z])
+//            contentOffset.x =  (y > 0)
+//                ? poop[y]
+//                : poop[z]
+        }
+        else if scrollView.contentOffset.x == 0.0 { /*pass */ }
+        // RIGHT (drag finger left)
+        else if scrollView.contentOffset.x > 0.0 { /*pass */ }
         self.customDelegate.adjustHeader(toHeight: newConstant)
         
     }
