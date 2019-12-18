@@ -113,7 +113,6 @@ class ViewController: UIViewController, ScrollDelegate {
         var newAlpha = newDiameter / UI.Sizing.Header.pictureDiameter
         newAlpha = (newAlpha > 1) ? 1.0 : newAlpha
         newAlpha = (newAlpha < 0) ? 0.0 : newAlpha
-//        newDiameter = (newDiameter > UI.Sizing.Header.pictureDiameter) ? UI.Sizing.Header.pictureDiameter : newDiameter
         newDiameter = (newDiameter <= 0) ? 0 : newDiameter
         var adjFontHeight = newConstant - UI.Sizing.Header.padding
         adjFontHeight = (adjFontHeight >= UI.Sizing.Header.expandedNameHeight) ? UI.Sizing.Header.expandedNameHeight : adjFontHeight
@@ -123,7 +122,12 @@ class ViewController: UIViewController, ScrollDelegate {
         header.picture.alpha = newAlpha
         scroll.overview.alpha = newAlpha
         header.picture.layer.cornerRadius = newDiameter/2
-        header.name.alpha = (newConstant == UI.Sizing.Header.minimizedHeight) ? 1.0 : newAlpha + 0.1
+        let x = UI.Sizing.Header.expandedHeight/UI.Sizing.Header.minimizedHeight
+        let y = header.height.constant/UI.Sizing.Header.minimizedHeight
+        header.name.alpha = (newConstant == UI.Sizing.Header.minimizedHeight) ? 1.0 : (y-1)/x
+        let z = header.height.constant/UI.Sizing.Header.expandedHeight
+        let zz = 1-((z-1)/(UI.Sizing.Scroll.limit/UI.Sizing.Scroll.width))
+        header.name.alpha = (newConstant > UI.Sizing.Header.expandedHeight) ? zz : header.name.alpha
         header.nameHeight.constant = adjFontHeight
         header.layoutIfNeeded()
         header.name.sizeToFit()
