@@ -27,7 +27,10 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     let page2 = UILabel()
     let page3 = UILabel()
     var poop: [CGFloat] = []
-    
+    var scrollLimit: CGFloat = 0.0
+    var inverseScrollLimit: CGFloat = 0.0
+    var desiredOffsets: [CGFloat] = []
+    var offsetSets: [CGFloat: (left: Int, self: Int, right: Int)] = [:]
     
     //MARK: Initialization
     init() {
@@ -55,9 +58,55 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         objectSettings()
         constraints()
         
-        print(1.0/UI.Sizing.Scroll.width*(1/4), UI.Sizing.Scroll.width*(1/4))
-        poop = Array(stride(from: -1.0, to: 0.0, by: 1.0/(UI.Sizing.Scroll.width*(1/4))))
-        print(poop.count)
+        // 5.0     |     3.0 | 0.60
+        // 10.0    |     5.5 | 0.55
+        // 50.0    |    25.5 | 0.51
+        // 200.0   |   100.5 | 0.50
+        // 2000.0  |  1000.7 | 0.50
+        // 50000.0 | 25000.5 | 0.50
+        scrollLimit = UI.Sizing.Scroll.width*(1/4)
+        // making numerator 1.5 makes third column ratio trend to 0.33
+        // making numerate 0.5 makes third column ratio trend to 1.0 (get across entire screen)
+        inverseScrollLimit = 1.0/(scrollLimit-1)
+        
+        desiredOffsets = Array(stride(from: -1.0, to: -scrollLimit, by: -inverseScrollLimit))
+        desiredOffsets = desiredOffsets.map {round($0*1000)/1000}
+        print("-------------")
+        print(scrollLimit, inverseScrollLimit, desiredOffsets.count)
+        print("-------------")
+        print(desiredOffsets)
+        var offsetSum: CGFloat = 0.0
+        
+        for (i, offset) in desiredOffsets.enumerated() {
+            offsetSets[offset] = (left: (i-1) < 0 ? 0 : (i-1),
+                                  self: i,
+                                  right: (i+1) > desiredOffsets.count-1 ? desiredOffsets.count-1 : (i+1))
+            offsetSum += offset
+        }
+        print("-------------")
+        for x in offsetSets {
+//            print(x)
+        }
+        //print("-------------")
+        var newOffset: CGFloat = 0.0
+        for (i,offset) in desiredOffsets.enumerated() {
+            if i == 0 {
+                newOffset = desiredOffsets[0]
+            }
+            else {
+                let found = desiredOffsets[offsetSets[newOffset]!.right]
+                newOffset = found
+//                print("i: ",i
+//                    ," | new:",newOffset
+//                    ," | need:",offset
+//                    ," | dict:",offsetSets[newOffset]!
+//                    ," | found:",found)
+            }
+        }
+        for key in Array(offsetSets.keys.sorted().reversed().prefix(upTo: 5)) {
+            print(key, " | ",offsetSets[key]!)
+        }
+        print("----------------")
     }
     
     //MARK: Object Settings
@@ -91,18 +140,24 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         ratio = (ratio <= 0) ? 0.0 : ratio
         newConstant = (ratio > 1) ? ratio*UI.Sizing.Header.expandedHeight : ratio*diff + UI.Sizing.Header.minimizedHeight
         if contentOffset.x < 0.0 {
-            let x = -UI.Sizing.Scroll.width*(1/4)
-            print("------------------------")
-            let y = -Int(ceil(contentOffset.x))
-            let z = Int(poop.count)-Int(ceil(poop[y]*x))+Int(y)
-            print(Int(poop.count),Int(ceil(poop[y]*x)), z)
-            print("offset:    ",y,
-                  "\narray:    ",poop[y],
-                  "\narray-x:  ",poop[y]*x,
-                  "\nnewArray: ",poop[z])
-//            contentOffset.x =  (y > 0)
-//                ? poop[y]
-//                : poop[z]
+            
+            // if i wanted to limit the scroll to 5, set scrollLimit to 10 (double) with inverseScrollLimit of 1
+            // i want an array of [-1, -1.9, -2.7, -3.4, -4.0, -4.5, -4.9, -5.2, -5.4, -5.5]
+            // the array is slowly moving the contentOffset further to -5 (more negative)
+            // but doing so with less magnitude each time!
+            
+//            let offsetToIndex = -Int(ceil(contentOffset.x))
+//            print("offset:",contentOffset.x,
+//                  " index:",offsetToIndex,
+//                  " abs:",abs(contentOffset.x),
+//                  " desired:",desiredOffsets[offsetToIndex])
+//            (offsetToIndex >= 0 && contentOffset.x >= -1)
+//                ? print("true  : ",desiredOffsets[offsetToIndex])
+//                : print("false : ",desiredOffsets[offsetSets[contentOffset.x]!.right])
+//            print("----------------")
+//            contentOffset.x = (offsetToIndex >= 0 && contentOffset.x >= -1)
+//                ? desiredOffsets[offsetToIndex]
+//                : desiredOffsets[offsetSets[contentOffset.x]!.right]
         }
         else if scrollView.contentOffset.x == 0.0 { /*pass */ }
         // RIGHT (drag finger left)
