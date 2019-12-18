@@ -26,10 +26,6 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     let page1 = UILabel()
     let page2 = UILabel()
     let page3 = UILabel()
-    var poop: [CGFloat] = []
-    var scrollLimit: CGFloat = 0.0
-    var inverseScrollLimit: CGFloat = 0.0
-    var lastOffset: CGFloat = 0.0
     
     //MARK: Initialization
     init() {
@@ -52,8 +48,8 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         alwaysBounceHorizontal = false
         showsHorizontalScrollIndicator = false
         automaticallyAdjustsScrollIndicatorInsets = false
-        contentSize = CGSize(width: UI.Sizing.Scroll.width*4, height: UI.Sizing.Scroll.height-1)
-        contentInset = UIEdgeInsets(top: 0, left: UI.Sizing.Scroll.width-UI.Sizing.Header.pictureDiameter, bottom: 0, right: 0)
+        contentSize = CGSize(width: UI.Sizing.Scroll.width*4, height: CGFloat(0.0))
+        contentInset = UIEdgeInsets(top: 0, left: UI.Sizing.Scroll.limit, bottom: 0, right: 0)
         objectSettings()
         constraints()
     }
@@ -77,22 +73,20 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     
     //MARK: Scroll Delegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        var ratio = 1-(contentOffset.x/UI.Sizing.Scroll.width)
-        var newConstant: CGFloat = 0.0
-        let diff = UI.Sizing.Header.expandedHeight-UI.Sizing.Header.minimizedHeight
         // LEFT (drag finger right)
-        let x = -(UI.Sizing.Scroll.width-UI.Sizing.Header.pictureDiameter)
-        contentOffset.x = (contentOffset.x < x) ? x : contentOffset.x
-        ratio = (contentOffset.x < x) ? 1-(x/UI.Sizing.Scroll.width) : ratio
-        //ratio = (ratio >= 1) ? 1.0 : ratio
-        ratio = (ratio <= 0) ? 0.0 : ratio
-        newConstant = (ratio > 1) ? ratio*UI.Sizing.Header.expandedHeight : ratio*diff + UI.Sizing.Header.minimizedHeight
         if contentOffset.x < 0.0 { /* pass */ }
-        else if scrollView.contentOffset.x == 0.0 { /*pass */ }
         // RIGHT (drag finger left)
         else if scrollView.contentOffset.x > 0.0 { /*pass */ }
-        self.customDelegate.adjustHeader(toHeight: newConstant)
         
+        contentOffset.x = (contentOffset.x < -UI.Sizing.Scroll.limit) ? -UI.Sizing.Scroll.limit : contentOffset.x
+        
+        let ratio = (1-(contentOffset.x/UI.Sizing.Scroll.width) <= 0) ? 0.0 : 1-(contentOffset.x/UI.Sizing.Scroll.width)
+        alpha = (ratio > 1) ? 1-(contentOffset.x/(-UI.Sizing.Scroll.limit)) : 1
+        
+        let diff = UI.Sizing.Header.expandedHeight-UI.Sizing.Header.minimizedHeight
+        let newConstant = (ratio > 1) ? ratio*UI.Sizing.Header.expandedHeight : ratio*diff + UI.Sizing.Header.minimizedHeight
+        
+        self.customDelegate.adjustHeader(toHeight: newConstant)
     }
 
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
