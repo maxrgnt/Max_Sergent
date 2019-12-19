@@ -27,7 +27,13 @@ class ViewController: UIViewController, ScrollDelegate {
         print("Hello World!")
         view.backgroundColor = UI.Colors.Header.background
         setup()
-        retrieveData()
+//        retrieveData()
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        let date = dateFormatter.date(from: "01/01/2019")
+        let diff = Date().interval(ofComponent: .day, fromDate: date!)
+        print(diff)
     }
     
     //MARK: Setup
