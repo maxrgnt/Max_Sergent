@@ -85,91 +85,92 @@ extension Scroll {
 extension Overview {
     
     func objectiveConstraints() {
-        
-        objective.translatesAutoresizingMaskIntoConstraints                                                        = false
-        objective.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                        = true
-        objective.topAnchor.constraint(equalTo: topAnchor).isActive                                                = true
-        objective.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.objectiveWidth).isActive              = true
-        objective.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.objectiveHeight).isActive            = true
-        
+        objective.translatesAutoresizingMaskIntoConstraints                                                         = false
+        objective.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                         = true
+        objective.topAnchor.constraint(equalTo: topAnchor).isActive                                                 = true
+        objective.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.objectiveWidth).isActive               = true
+        objective.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.objectiveHeight).isActive             = true
     }
     
     func originDateConstraints() {
-        
+        let topPadding = UI.Sizing.Overview.topPadding
         originDate.translatesAutoresizingMaskIntoConstraints                                                        = false
         originDate.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                        = true
-        originDate.topAnchor.constraint(equalTo: objective.bottomAnchor, constant: UI.Sizing.Overview.padding/2).isActive = true
-        originDate.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.originDateWidth).isActive                = true
-        originDate.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.originDateHeight).isActive              = true
-        
+        originDate.topAnchor.constraint(equalTo: objective.bottomAnchor, constant: topPadding).isActive             = true
+        originDate.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.originDateWidth).isActive             = true
+        originDate.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.originDateHeight).isActive           = true
     }
     
     func projectConstraints() {
-        let topPadding = UI.Sizing.Overview.padding/2
-        side_swiftWidth = side_swiftBar.widthAnchor.constraint(equalToConstant: 5.0)
-        side_pythonWidth = side_pythonBar.widthAnchor.constraint(equalToConstant: 0.0)
-        side_emptyWidth = side_emptyBar.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth-5)
+        let topPadding = UI.Sizing.Overview.topPadding
+        let padding = UI.Sizing.Overview.padding
         
-        selfProject.translatesAutoresizingMaskIntoConstraints                                                        = false
-        selfProject.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                        = true
-        selfProject.topAnchor.constraint(equalTo: originDate.bottomAnchor, constant: topPadding).isActive = true
-        selfProject.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth).isActive                = true
-        selfProject.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectHeight).isActive              = true
+        personal_swiftWidth = personal_swiftBar.widthAnchor.constraint(equalToConstant: 5.0)
+        personal_pythonWidth = personal_pythonBar.widthAnchor.constraint(equalToConstant: 0.0)
+        personal_emptyWidth = personal_emptyBar.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth-5)
         
-        side_swiftBar.translatesAutoresizingMaskIntoConstraints                                                          = false
-        side_swiftBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: UI.Sizing.Overview.padding).isActive    = true
-        side_swiftBar.topAnchor.constraint(equalTo: selfProject.bottomAnchor, constant: topPadding).isActive = true
-        side_swiftWidth.isActive                = true
-        side_swiftBar.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive                = true
+        personalProject.translatesAutoresizingMaskIntoConstraints                                                       = false
+        personalProject.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                       = true
+        personalProject.topAnchor.constraint(equalTo: originDate.bottomAnchor, constant: topPadding).isActive           = true
+        personalProject.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth).isActive               = true
+        personalProject.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectHeight).isActive             = true
         
-        side_pythonBar.translatesAutoresizingMaskIntoConstraints                                                          = false
-        side_pythonBar.leadingAnchor.constraint(equalTo: side_swiftBar.trailingAnchor).isActive    = true
-        side_pythonBar.topAnchor.constraint(equalTo: selfProject.bottomAnchor, constant: topPadding).isActive = true
-        side_pythonWidth.isActive                  = true
-        side_pythonBar.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive                = true
+        personal_swiftBar.translatesAutoresizingMaskIntoConstraints                                                     = false
+        personal_swiftBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding).isActive                  = true
+        personal_swiftBar.topAnchor.constraint(equalTo: personalProject.bottomAnchor, constant: topPadding).isActive        = true
+        personal_swiftWidth.isActive                                                                                    = true
+        personal_swiftBar.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive               = true
         
-        side_emptyBar.translatesAutoresizingMaskIntoConstraints                                                          = false
-        side_emptyBar.leadingAnchor.constraint(equalTo: side_pythonBar.trailingAnchor).isActive    = true
-        side_emptyBar.topAnchor.constraint(equalTo: selfProject.bottomAnchor, constant: topPadding).isActive = true
-        side_emptyWidth.isActive                  = true
-        side_emptyBar.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive                = true
+        personal_pythonBar.translatesAutoresizingMaskIntoConstraints                                                    = false
+        personal_pythonBar.leadingAnchor.constraint(equalTo: personal_swiftBar.trailingAnchor).isActive                     = true
+        personal_pythonBar.topAnchor.constraint(equalTo: personalProject.bottomAnchor, constant: topPadding).isActive       = true
+        personal_pythonWidth.isActive                                                                                   = true
+        personal_pythonBar.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive              = true
         
-        selfStats.translatesAutoresizingMaskIntoConstraints                                                          = false
-        selfStats.centerXAnchor.constraint(equalTo: centerXAnchor).isActive    = true
-        selfStats.topAnchor.constraint(equalTo: side_swiftBar.bottomAnchor, constant: topPadding/2).isActive = true
-        selfStats.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.statWidth).isActive                  = true
-        selfStats.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.statHeight).isActive                = true
+        personal_emptyBar.translatesAutoresizingMaskIntoConstraints                                                     = false
+        personal_emptyBar.leadingAnchor.constraint(equalTo: personal_pythonBar.trailingAnchor).isActive                     = true
+        personal_emptyBar.topAnchor.constraint(equalTo: personalProject.bottomAnchor, constant: topPadding).isActive        = true
+        personal_emptyWidth.isActive                                                                                    = true
+        personal_emptyBar.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive               = true
+        
+        personalStats.translatesAutoresizingMaskIntoConstraints                                                         = false
+        personalStats.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                         = true
+        personalStats.topAnchor.constraint(equalTo: personal_swiftBar.bottomAnchor, constant: topPadding/2).isActive        = true
+        personalStats.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.statWidth).isActive                    = true
+        personalStats.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.statHeight).isActive                  = true
         
     }
     
     func workProjectConstraints() {
-        let topPadding = UI.Sizing.Overview.padding/2
+        let topPadding = UI.Sizing.Overview.topPadding
+        let padding = UI.Sizing.Overview.padding
+        
         work_sqlWidth = work_sqlBar.widthAnchor.constraint(equalToConstant: 5.0)
         work_emptyWidth = work_emptyBar.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth-5)
         
-        workProject.translatesAutoresizingMaskIntoConstraints                                                        = false
-        workProject.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                        = true
-        workProject.topAnchor.constraint(equalTo: selfStats.bottomAnchor, constant: topPadding).isActive  = true
-        workProject.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth).isActive                = true
-        workProject.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectHeight).isActive              = true
+        workProject.translatesAutoresizingMaskIntoConstraints                                                       = false
+        workProject.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                       = true
+        workProject.topAnchor.constraint(equalTo: personalStats.bottomAnchor, constant: topPadding).isActive            = true
+        workProject.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectWidth).isActive               = true
+        workProject.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.projectHeight).isActive             = true
         
-        work_sqlBar.translatesAutoresizingMaskIntoConstraints                                                          = false
-        work_sqlBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: UI.Sizing.Overview.padding).isActive  = true
-        work_sqlBar.topAnchor.constraint(equalTo: workProject.bottomAnchor, constant: topPadding).isActive = true
-        work_sqlWidth.isActive                  = true
-        work_sqlBar.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive                = true
+        work_sqlBar.translatesAutoresizingMaskIntoConstraints                                                       = false
+        work_sqlBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding).isActive                    = true
+        work_sqlBar.topAnchor.constraint(equalTo: workProject.bottomAnchor, constant: topPadding).isActive          = true
+        work_sqlWidth.isActive                                                                                      = true
+        work_sqlBar.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive                 = true
         
-        work_emptyBar.translatesAutoresizingMaskIntoConstraints                                                          = false
-        work_emptyBar.leadingAnchor.constraint(equalTo: work_sqlBar.trailingAnchor).isActive    = true
-        work_emptyBar.topAnchor.constraint(equalTo: workProject.bottomAnchor, constant: topPadding).isActive = true
-        work_emptyWidth.isActive                  = true
-        work_emptyBar.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive                = true
+        work_emptyBar.translatesAutoresizingMaskIntoConstraints                                                     = false
+        work_emptyBar.leadingAnchor.constraint(equalTo: work_sqlBar.trailingAnchor).isActive                        = true
+        work_emptyBar.topAnchor.constraint(equalTo: workProject.bottomAnchor, constant: topPadding).isActive        = true
+        work_emptyWidth.isActive                                                                                    = true
+        work_emptyBar.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.barHeight).isActive               = true
 
-        workStats.translatesAutoresizingMaskIntoConstraints                                                          = false
-        workStats.centerXAnchor.constraint(equalTo: centerXAnchor).isActive    = true
-        workStats.topAnchor.constraint(equalTo: work_sqlBar.bottomAnchor, constant: topPadding/2).isActive = true
-        workStats.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.statWidth).isActive                  = true
-        workStats.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.statHeight).isActive                = true
+        workStats.translatesAutoresizingMaskIntoConstraints                                                         = false
+        workStats.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                         = true
+        workStats.topAnchor.constraint(equalTo: work_sqlBar.bottomAnchor, constant: topPadding/2).isActive          = true
+        workStats.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.statWidth).isActive                    = true
+        workStats.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.statHeight).isActive                  = true
         
     }
     

@@ -41,7 +41,7 @@ class Header: UIView {
         addSubview(name)
         name.numberOfLines = 2
         name.textAlignment = .left
-        //name.backgroundColor = .gray
+        name.backgroundColor = .clear
         name.minimumScaleFactor = 0.1
         name.lineBreakMode = .byClipping
         name.adjustsFontSizeToFitWidth = true

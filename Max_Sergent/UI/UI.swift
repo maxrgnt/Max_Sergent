@@ -51,16 +51,23 @@ struct UI {
             static let padding = objectPadding
             static let height = Scroll.height
             static let width = UI.Sizing.width
+            static let topPadding = padding/2
+
             static let objectiveHeight = height*(0.28)
-            static let objectiveWidth = width-padding*2
             static let originDateHeight = height*(0.04)
-            static let originDateWidth = width-padding*2
             static let projectHeight = height*(0.04)
-            static let projectWidth = width-padding*2
-            static let barHeight = height/60
-            static let barWidth = width-padding*2
+            static let barHeight = height*(0.016)
             static let statHeight = barHeight*2
-            static let statWidth = width-padding*2
+
+            static let paddedWidth = width-(padding*2)
+            static var objectiveWidth = paddedWidth
+            static var originDateWidth = paddedWidth
+            static var projectWidth = paddedWidth
+            static var barWidth = paddedWidth
+            static var statWidth = paddedWidth
+            
+            static let barRadius = barHeight/2
+            
         }
         
     }
@@ -84,7 +91,7 @@ extension UI {
         struct Overview {
             static let objective = UIFont(name: openSans, size: Sizing.Overview.objectiveHeight/2)
             static let originDateMain = UIFont(name: openSansBold, size: Sizing.Overview.originDateHeight*(3/4))
-            static let originDateSuper = UIFont(name: openSansBold, size: Sizing.Overview.originDateHeight*((3/4)*(1/2)))
+            static let originDateSuper = UIFont(name: openSansBold, size: Sizing.Overview.originDateHeight*(3/4)/2)
             static let project = UIFont(name: openSans, size: Sizing.Overview.projectHeight*(3/4))
             static let stat = UIFont(name: openSans, size: Sizing.Overview.statHeight*(2/3))
         }

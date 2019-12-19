@@ -20,9 +20,9 @@ struct Constants {
                                 Having spent the past two years designing and developing iOS applications in my spare time, I am determined to join an organization that understands the value of continued learning, intentional design, and selfless collaboration.
                                 """
         static let originDate = "Since Jan 1st, 2019"
-        static let selfProject = "Time on my own projects:"
+        static let selfProject = "Personal projects:"
         static let selfStats = "Swift: 0 days | Python: 0 days"
-        static let workProject = "Time on work projects:"
+        static let workProject = "Work projects:"
         static let workStats = "SQL: 0 days"
     }
     

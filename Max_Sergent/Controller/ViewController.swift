@@ -134,16 +134,16 @@ class ViewController: UIViewController, ScrollDelegate {
         let side_empty = bars["side"]![2]
         let totalDays = side_swift+side_python+side_empty
         let w = UI.Sizing.Overview.barWidth
-        scroll.overview.side_swiftWidth.constant = w*(side_swift/totalDays)
-        scroll.overview.side_pythonWidth.constant = w*(side_python/totalDays)
-        scroll.overview.side_emptyWidth.constant = w*(side_empty/totalDays)
+        scroll.overview.personal_swiftWidth.constant = w*(side_swift/totalDays)
+        scroll.overview.personal_pythonWidth.constant = w*(side_python/totalDays)
+        scroll.overview.personal_emptyWidth.constant = w*(side_empty/totalDays)
         let work_sql = bars["work"]![0]
         let work_empty = bars["work"]![1]
         scroll.overview.work_sqlWidth.constant = w*(work_sql/totalDays)
         scroll.overview.work_emptyWidth.constant = w*(work_empty/totalDays)
         UIView.animate(withDuration: 0.3, delay: 0.3, options: .curveEaseInOut
         , animations: ({
-            self.scroll.overview.selfStats.text = "Swift: \(Int(side_swift)) days | Python: \(Int(side_python)) days"
+            self.scroll.overview.personalStats.text = "Swift: \(Int(side_swift)) days | Python: \(Int(side_python)) days"
             self.scroll.overview.workStats.text = "SQL: \(Int(work_sql)) days"
             self.scroll.overview.layoutIfNeeded()
         }))

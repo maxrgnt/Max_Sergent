@@ -13,19 +13,19 @@ class Overview: UIView {
     
     //MARK: Definitions
     // Constraints
-    var side_swiftWidth:   NSLayoutConstraint!
-    var side_pythonWidth:   NSLayoutConstraint!
-    var side_emptyWidth:   NSLayoutConstraint!
+    var personal_swiftWidth:   NSLayoutConstraint!
+    var personal_pythonWidth:   NSLayoutConstraint!
+    var personal_emptyWidth:   NSLayoutConstraint!
     var work_sqlWidth:   NSLayoutConstraint!
     var work_emptyWidth:   NSLayoutConstraint!
     // Objects
     let objective = UILabel()
     let originDate = UILabel()
-    let selfProject = UILabel()
-    let selfStats = UILabel()
-    let side_swiftBar = UIView()
-    let side_pythonBar = UIView()
-    let side_emptyBar = UIView()
+    let personalProject = UILabel()
+    let personalStats = UILabel()
+    let personal_swiftBar = UIView()
+    let personal_pythonBar = UIView()
+    let personal_emptyBar = UIView()
     let workProject = UILabel()
     let workStats = UILabel()
     let work_sqlBar = UIView()
@@ -75,7 +75,7 @@ class Overview: UIView {
         originDate.attributedText = attrString
         
         var text = [Constants.Overview.selfProject, Constants.Overview.workProject]
-        for (i, project) in [selfProject,workProject].enumerated() {
+        for (i, project) in [personalProject,workProject].enumerated() {
             addSubview(project)
             project.numberOfLines = 1
             project.textAlignment = .left
@@ -89,11 +89,11 @@ class Overview: UIView {
         }
         
         text = [Constants.Overview.selfStats, Constants.Overview.workStats]
-        for (i, label) in [selfStats,workStats].enumerated() {
+        for (i, label) in [personalStats,workStats].enumerated() {
             addSubview(label)
             label.numberOfLines = 1
             label.textAlignment = .left
-            //objective.backgroundColor = .gray
+            label.backgroundColor = .clear
             label.minimumScaleFactor = 0.1
             label.lineBreakMode = .byClipping
             label.adjustsFontSizeToFitWidth = true
@@ -103,14 +103,14 @@ class Overview: UIView {
         }
         
         let colors: [UIColor] = [.lightGray, .white, .black, .lightGray, .black]
-        for (i, bar) in [side_swiftBar, side_pythonBar, side_emptyBar, work_sqlBar, work_emptyBar].enumerated() {
+        for (i, bar) in [personal_swiftBar, personal_pythonBar, personal_emptyBar, work_sqlBar, work_emptyBar].enumerated() {
             addSubview(bar)
             bar.backgroundColor = colors[i]
         }
-        side_swiftBar.roundCorners(corners: [.topLeft,.bottomLeft], radius: UI.Sizing.Overview.barHeight/2)
-        side_emptyBar.roundCorners(corners: [.topRight,.bottomRight], radius: UI.Sizing.Overview.barHeight/2)
-        work_sqlBar.roundCorners(corners: [.topLeft,.bottomLeft], radius: UI.Sizing.Overview.barHeight/2)
-        work_emptyBar.roundCorners(corners: [.topRight,.bottomRight], radius: UI.Sizing.Overview.barHeight/2)
+        personal_swiftBar.roundCorners(corners: [.topLeft,.bottomLeft], radius: UI.Sizing.Overview.barRadius)
+        personal_emptyBar.roundCorners(corners: [.topRight,.bottomRight], radius: UI.Sizing.Overview.barRadius)
+        work_sqlBar.roundCorners(corners: [.topLeft,.bottomLeft], radius: UI.Sizing.Overview.barRadius)
+        work_emptyBar.roundCorners(corners: [.topRight,.bottomRight], radius: UI.Sizing.Overview.barRadius)
     }
     
     func constraints() {
