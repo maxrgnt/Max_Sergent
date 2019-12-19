@@ -27,7 +27,7 @@ class ViewController: UIViewController, ScrollDelegate {
         print("Hello World!")
         view.backgroundColor = UI.Colors.Header.background
         setup()
-        //retrieveData()
+        retrieveData()
     }
     
     //MARK: Setup
@@ -48,7 +48,9 @@ class ViewController: UIViewController, ScrollDelegate {
     //MARK: Constraints
     func constraints() {
         headerConstraints()
+        header.layoutIfNeeded()
         scrollConstraints()
+        scroll.layoutIfNeeded()
     }
     
     //MARK: Functionality
@@ -68,6 +70,15 @@ class ViewController: UIViewController, ScrollDelegate {
             for child in snapshot.children {
                 if let snapshot = child as? DataSnapshot {
                     self.alterLabel(snapshot: snapshot)
+                    if let value = snapshot.value as? [String: AnyObject],
+                        let days = value["days"] as? CGFloat,
+                        let side_swift = value["side_swift"] as? CGFloat,
+                        let side_python = value["side_python"] as? CGFloat,
+                        let work_sql = value["work_sql"] as? CGFloat {
+                            let side_empty = days-side_swift-side_python
+                            let work_empty = days-work_sql
+                            self.getDays(forBars: ["side":[side_swift,side_python, side_empty], "work":[work_sql, work_empty]])
+                    }
                 }
             }
         })
@@ -107,6 +118,37 @@ class ViewController: UIViewController, ScrollDelegate {
       ]
     }
     
+    func testGetDays() {
+        let days: CGFloat = 365.0
+        let side_swift: CGFloat = 100.0
+        let side_python: CGFloat = 100.0
+        let side_empty: CGFloat = days-side_swift-side_python
+        let work_sql: CGFloat = 100.0
+        let work_empty: CGFloat = days-work_sql
+        getDays(forBars: ["side": [side_swift, side_python, side_empty], "work": [work_sql, work_empty]])
+    }
+    
+    func getDays(forBars bars: [String:[CGFloat]]) {
+        let side_swift = bars["side"]![0]
+        let side_python = bars["side"]![1]
+        let side_empty = bars["side"]![2]
+        let totalDays = side_swift+side_python+side_empty
+        let w = UI.Sizing.Overview.barWidth
+        scroll.overview.side_swiftWidth.constant = w*(side_swift/totalDays)
+        scroll.overview.side_pythonWidth.constant = w*(side_python/totalDays)
+        scroll.overview.side_emptyWidth.constant = w*(side_empty/totalDays)
+        let work_sql = bars["work"]![0]
+        let work_empty = bars["work"]![1]
+        scroll.overview.work_sqlWidth.constant = w*(work_sql/totalDays)
+        scroll.overview.work_emptyWidth.constant = w*(work_empty/totalDays)
+        UIView.animate(withDuration: 0.3, delay: 0.3, options: .curveEaseInOut
+        , animations: ({
+            self.scroll.overview.selfStats.text = "Swift: \(Int(side_swift)) days | Python: \(Int(side_python)) days"
+            self.scroll.overview.workStats.text = "SQL: \(Int(work_sql)) days"
+            self.scroll.overview.layoutIfNeeded()
+        }))
+    }
+    
     //MARK: Custom Delegates
     func adjustHeader(toHeight newConstant: CGFloat) {
         var newDiameter = newConstant - UI.Sizing.Header.pictureDiameter - UI.Sizing.Header.padding
@@ -142,12 +184,4 @@ class ViewController: UIViewController, ScrollDelegate {
         }
     }
     
-    func poop(toHeight newConstant: CGFloat) {
-        print("-: ",header.height.constant, newConstant)
-        header.height.constant = newConstant
-        print("-: ",scroll.bounds)
-        print("-: ",scroll.contentOffset)
-//        print("------------------------")
-//        header.layoutIfNeeded()
-    }
 }

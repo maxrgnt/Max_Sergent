@@ -11,7 +11,6 @@ import UIKit
 
 protocol ScrollDelegate {
     func adjustHeader(toHeight: CGFloat)
-    func poop(toHeight: CGFloat)
 }
 
 class Scroll: UIScrollView, UIScrollViewDelegate {
@@ -73,35 +72,30 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     
     //MARK: Scroll Delegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // LEFT (drag finger right)
-        if contentOffset.x < 0.0 { /* pass */ }
-        // RIGHT (drag finger left)
-        else if scrollView.contentOffset.x > 0.0 { /*pass */ }
-        
         contentOffset.x = (contentOffset.x < -UI.Sizing.Scroll.limit) ? -UI.Sizing.Scroll.limit : contentOffset.x
         
         let ratio = (1-(contentOffset.x/UI.Sizing.Scroll.width) <= 0) ? 0.0 : 1-(contentOffset.x/UI.Sizing.Scroll.width)
-        alpha = (ratio > 1) ? 1-(contentOffset.x/(-UI.Sizing.Scroll.limit)) : 1
-        
         let diff = UI.Sizing.Header.expandedHeight-UI.Sizing.Header.minimizedHeight
         let newConstant = (ratio > 1) ? ratio*UI.Sizing.Header.expandedHeight : ratio*diff + UI.Sizing.Header.minimizedHeight
+        
+        alpha = (ratio > 1) ? 1-(contentOffset.x/(-UI.Sizing.Scroll.limit)) : 1
         
         self.customDelegate.adjustHeader(toHeight: newConstant)
     }
 
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        if contentOffset.x < 0.0 {
-            setContentOffset(CGPoint(x: 0.0, y: 0.0), animated: true)
-        }
+        resetLeftInset()
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if contentOffset.x < 0.0 {
-            setContentOffset(CGPoint(x: 0.0, y: 0.0), animated: true)
-        }
+        resetLeftInset()
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        resetLeftInset()
+    }
+    
+    func resetLeftInset() {
         if contentOffset.x < 0.0 {
             setContentOffset(CGPoint(x: 0.0, y: 0.0), animated: true)
         }
