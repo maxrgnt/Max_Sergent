@@ -44,6 +44,7 @@ struct UI {
             static let padding = objectPadding
             static let height = (UI.Sizing.height - statusBar.height) * Ratio.scrollHeight
             static let width = UI.Sizing.width
+            static let contentWidth = width * 4
             static let limit = width-Header.pictureDiameter
         }
         
@@ -67,9 +68,18 @@ struct UI {
             static var statWidth = paddedWidth
             
             static let barRadius = barHeight/2
-            
         }
         
+        struct Experience {
+            static let padding = objectPadding
+            static let height = Scroll.height
+            static let width = UI.Sizing.width
+            static let topPadding = padding/2
+
+            static let headerHeight = height*(0.04)
+            
+            static let paddedWidth = width-(padding*2)
+        }
     }
     
 }
@@ -94,6 +104,10 @@ extension UI {
             static let originDateSuper = UIFont(name: openSansBold, size: Sizing.Overview.originDateHeight*(3/4)/2)
             static let project = UIFont(name: openSans, size: Sizing.Overview.projectHeight*(3/4))
             static let stat = UIFont(name: openSans, size: Sizing.Overview.statHeight*(2/3))
+        }
+        
+        struct Experience {
+            static let header = UIFont(name: openSansBold, size: Sizing.Overview.originDateHeight*(3/4))
         }
         
     }
@@ -123,6 +137,10 @@ extension UI {
             static let originDate = secondaryFontColor
             static let project = secondaryFontColor
             static let stat = secondaryFontColor
+        }
+     
+        struct Experience {
+            static let header = secondaryFontColor
         }
         
     }

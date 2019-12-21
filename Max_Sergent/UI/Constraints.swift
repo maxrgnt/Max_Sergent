@@ -61,8 +61,14 @@ extension Scroll {
         overview.widthAnchor.constraint(equalTo: widthAnchor).isActive                                              = true
         overview.heightAnchor.constraint(equalTo: heightAnchor).isActive                                            = true
 
+        experience.translatesAutoresizingMaskIntoConstraints                                                        = false
+        experience.leadingAnchor.constraint(equalTo: overview.trailingAnchor).isActive                              = true
+        experience.topAnchor.constraint(equalTo: topAnchor).isActive                                                = true
+        experience.widthAnchor.constraint(equalTo: widthAnchor).isActive                                            = true
+        experience.heightAnchor.constraint(equalTo: heightAnchor).isActive                                          = true
+        
         page1.translatesAutoresizingMaskIntoConstraints                                                             = false
-        page1.leadingAnchor.constraint(equalTo: overview.trailingAnchor).isActive                                   = true
+        page1.leadingAnchor.constraint(equalTo: experience.trailingAnchor).isActive                                   = true
         page1.topAnchor.constraint(equalTo: topAnchor).isActive                                                     = true
         page1.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                 = true
         page1.heightAnchor.constraint(equalTo: heightAnchor).isActive                                               = true
@@ -73,11 +79,6 @@ extension Scroll {
         page2.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                 = true
         page2.heightAnchor.constraint(equalTo: heightAnchor).isActive                                               = true
         
-        page3.translatesAutoresizingMaskIntoConstraints                                                             = false
-        page3.leadingAnchor.constraint(equalTo: page2.trailingAnchor).isActive                                      = true
-        page3.topAnchor.constraint(equalTo: topAnchor).isActive                                                     = true
-        page3.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                 = true
-        page3.heightAnchor.constraint(equalTo: heightAnchor).isActive                                               = true
     }
     
 }
@@ -172,6 +173,20 @@ extension Overview {
         workStats.widthAnchor.constraint(equalToConstant: UI.Sizing.Overview.statWidth).isActive                    = true
         workStats.heightAnchor.constraint(equalToConstant: UI.Sizing.Overview.statHeight).isActive                  = true
         
+    }
+    
+}
+
+extension Experience {
+    
+    func headerConstraints() {
+        let topPadding = UI.Sizing.Overview.topPadding
+        
+        header.translatesAutoresizingMaskIntoConstraints                                                            = false
+        header.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                            = true
+        header.topAnchor.constraint(equalTo: topAnchor, constant: topPadding/2).isActive                         = true
+        header.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.paddedWidth).isActive                   = true
+        header.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.headerHeight).isActive                 = true
     }
     
 }

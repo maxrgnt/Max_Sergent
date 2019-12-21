@@ -26,4 +26,8 @@ struct Constants {
         static let workStats = "SQL: 0 days"
     }
     
+    struct Experience {
+        static let header = "Experience"
+    }
+    
 }

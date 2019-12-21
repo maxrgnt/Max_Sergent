@@ -22,9 +22,9 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     var height:   NSLayoutConstraint!
     // Objects
     let overview = Overview()
+    let experience = Experience()
     let page1 = UILabel()
     let page2 = UILabel()
-    let page3 = UILabel()
     
     //MARK: Initialization
     init() {
@@ -47,7 +47,7 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         alwaysBounceHorizontal = false
         showsHorizontalScrollIndicator = false
         automaticallyAdjustsScrollIndicatorInsets = false
-        contentSize = CGSize(width: UI.Sizing.Scroll.width*4, height: CGFloat(0.0))
+        contentSize = CGSize(width: UI.Sizing.Scroll.contentWidth, height: CGFloat(0.0))
         contentInset = UIEdgeInsets(top: 0, left: UI.Sizing.Scroll.limit, bottom: 0, right: 0)
         objectSettings()
         constraints()
@@ -55,14 +55,15 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     
     //MARK: Object Settings
     func objectSettings() {
+        
         addSubview(overview)
         overview.setup()
+        addSubview(experience)
+        experience.setup()
         addSubview(page1)
         page1.backgroundColor = .blue
         addSubview(page2)
         page2.backgroundColor = .yellow
-        addSubview(page3)
-        page3.backgroundColor = .red
     }
     
     //MARK: Constraints() {

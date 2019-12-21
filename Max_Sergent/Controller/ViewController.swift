@@ -27,13 +27,7 @@ class ViewController: UIViewController, ScrollDelegate {
         print("Hello World!")
         view.backgroundColor = UI.Colors.Header.background
         setup()
-//        retrieveData()
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-        let date = dateFormatter.date(from: "01/01/2019")
-        let diff = Date().interval(ofComponent: .day, fromDate: date!)
-        print(diff)
+        retrieveData()
     }
     
     //MARK: Setup
@@ -77,13 +71,16 @@ class ViewController: UIViewController, ScrollDelegate {
                 if let snapshot = child as? DataSnapshot {
                     self.alterLabel(snapshot: snapshot)
                     if let value = snapshot.value as? [String: AnyObject],
-                        let days = value["days"] as? CGFloat,
-                        let side_swift = value["side_swift"] as? CGFloat,
-                        let side_python = value["side_python"] as? CGFloat,
-                        let work_sql = value["work_sql"] as? CGFloat {
-                            let side_empty = days-side_swift-side_python
-                            let work_empty = days-work_sql
-                            self.getDays(forBars: ["side":[side_swift,side_python, side_empty], "work":[work_sql, work_empty]])
+                        let tracker = value["overviewTracker"] as? [String: AnyObject],
+                        let origin = tracker["originDate"] as? String,
+                        let personal_swift = tracker["personal"]!["swift"] as? CGFloat,
+                        let personal_python = tracker["personal"]!["python"] as? CGFloat,
+                        let work_sql = tracker["work"]!["sql"] as? CGFloat {
+                            let daysFromOrigin = self.numberOfDays(since: origin)
+                            let personalEmpty = daysFromOrigin-personal_swift-personal_python
+                            let work_empty = daysFromOrigin-work_sql
+                            self.getDays(forBars: ["side":[personal_swift,personal_python, personalEmpty],
+                                                   "work":[work_sql, work_empty]])
                     }
                 }
             }
@@ -124,14 +121,12 @@ class ViewController: UIViewController, ScrollDelegate {
       ]
     }
     
-    func testGetDays() {
-        let days: CGFloat = 365.0
-        let side_swift: CGFloat = 100.0
-        let side_python: CGFloat = 100.0
-        let side_empty: CGFloat = days-side_swift-side_python
-        let work_sql: CGFloat = 100.0
-        let work_empty: CGFloat = days-work_sql
-        getDays(forBars: ["side": [side_swift, side_python, side_empty], "work": [work_sql, work_empty]])
+    func numberOfDays(since origin: String) -> CGFloat {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        let date = dateFormatter.date(from: origin) // "01/01/2019"
+        let diff = Date().interval(ofComponent: .day, fromDate: date!)
+        return CGFloat(diff)
     }
     
     func getDays(forBars bars: [String:[CGFloat]]) {
