@@ -27,7 +27,7 @@ class ViewController: UIViewController, ScrollDelegate {
         print("Hello World!")
         view.backgroundColor = UI.Colors.Header.background
         setup()
-        retrieveData()
+        //retrieveData()
     }
     
     //MARK: Setup

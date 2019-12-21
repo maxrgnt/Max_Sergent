@@ -25,6 +25,7 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     let experience = Experience()
     let page1 = UILabel()
     let page2 = UILabel()
+    lazy var pages = [overview,experience,page1,page2]
     
     //MARK: Initialization
     init() {
@@ -47,7 +48,8 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         alwaysBounceHorizontal = false
         showsHorizontalScrollIndicator = false
         automaticallyAdjustsScrollIndicatorInsets = false
-        contentSize = CGSize(width: UI.Sizing.Scroll.contentWidth, height: CGFloat(0.0))
+        let pageCount = CGFloat(pages.count)
+        contentSize = CGSize(width: UI.Sizing.Scroll.width*pageCount, height: CGFloat(0.0))
         contentInset = UIEdgeInsets(top: 0, left: UI.Sizing.Scroll.limit, bottom: 0, right: 0)
         objectSettings()
         constraints()

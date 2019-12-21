@@ -44,7 +44,6 @@ struct UI {
             static let padding = objectPadding
             static let height = (UI.Sizing.height - statusBar.height) * Ratio.scrollHeight
             static let width = UI.Sizing.width
-            static let contentWidth = width * 4
             static let limit = width-Header.pictureDiameter
         }
         
