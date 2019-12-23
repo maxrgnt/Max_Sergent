@@ -41,12 +41,19 @@ class ExperienceCell: UITableViewCell {
         position.textAlignment        = .left
         position.font                 = UI.Fonts.Experience.cellBody
         position.alpha                = 1.0
+        position.minimumScaleFactor = 0.1
+        position.numberOfLines = 1
+        position.lineBreakMode = .byClipping
+        position.adjustsFontSizeToFitWidth = true
         addSubview(accomplishments)
         accomplishments.textColor     = UI.Colors.Experience.cellText
         accomplishments.textAlignment = .left
         accomplishments.font          = UI.Fonts.Experience.cellBody
         accomplishments.alpha         = 1.0
-        
+        accomplishments.minimumScaleFactor = 0.1
+        accomplishments.numberOfLines = 1
+        accomplishments.lineBreakMode = .byClipping
+        accomplishments.adjustsFontSizeToFitWidth = true
     }
     
     //MARK: Constraints

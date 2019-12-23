@@ -28,6 +28,7 @@ class ViewController: UIViewController, ScrollDelegate {
         view.backgroundColor = UI.Colors.Header.background
         setup()
         //retrieveData()
+        populateExperience()
     }
     
     //MARK: Setup
@@ -85,6 +86,12 @@ class ViewController: UIViewController, ScrollDelegate {
                 }
             }
         })
+    }
+    
+    func populateExperience() {
+        for key in Data.experience.keys {
+            print(key, Data.experience[key]!)
+        }
     }
     
     func alterLabel(snapshot: DataSnapshot) {

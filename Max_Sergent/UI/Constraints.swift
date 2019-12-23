@@ -201,10 +201,26 @@ extension Experience {
     
 }
 
+extension ExperienceSection {
+    
+    func companyConstraints() {
+        company.translatesAutoresizingMaskIntoConstraints                                                          = false
+        company.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                          = true
+        company.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                              = true
+        company.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.paddedWidth).isActive                 = true
+        company.heightAnchor.constraint(equalTo: heightAnchor).isActive                                            = true
+    }
+    
+}
+
 extension ExperienceCell {
     
     func iconConstraints() {
-        
+        position.translatesAutoresizingMaskIntoConstraints                                                          = false
+        position.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                          = true
+        position.topAnchor.constraint(equalTo: topAnchor).isActive                                                  = true
+        position.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.paddedWidth).isActive                 = true
+        position.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.positionHeight).isActive             = true
     }
     
     func positionConstraints() {

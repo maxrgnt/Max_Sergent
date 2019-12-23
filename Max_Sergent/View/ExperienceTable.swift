@@ -48,6 +48,9 @@ class ExperienceTable: UITableView, UITableViewDelegate, UITableViewDataSource, 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let id = Constants.Experience.cellReuseId
         let cell: ExperienceCell = tableView.dequeueReusableCell(withIdentifier: id) as! ExperienceCell
+        let keys = Array(Data.experience.keys)
+        cell.position.text = Data.experience[keys[indexPath.section]]![indexPath.row].position
+        cell.accomplishments.text = Data.experience[keys[indexPath.section]]![indexPath.row].work
         return cell
     }
         
@@ -57,24 +60,28 @@ class ExperienceTable: UITableView, UITableViewDelegate, UITableViewDataSource, 
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionHeader = UIView()
-        return sectionHeader
+        let sectionVar = ExperienceSection()
+        sectionVar.setup()
+        let keys = Array(Data.experience.keys)
+        sectionVar.company.text = keys[section]
+        return sectionVar
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10.0
+        return UI.Sizing.Experience.sectionHeight
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2 //Data.headers.count
+        return Data.experience.keys.count
     }
  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3 //Data.matrix[Data.headers[section]]!.count
+        let keys = Array(Data.experience.keys)
+        return Data.experience[keys[section]]!.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 20.0 //UI.Sizing.DrinkLibrary.Row.height
+        return UI.Sizing.Experience.cellHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

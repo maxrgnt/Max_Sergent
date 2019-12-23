@@ -77,8 +77,9 @@ struct UI {
 
             static let headerHeight = height*(0.04)
             static let tableHeight = height-headerHeight
-            static let cellHeight = height*(0.25)
-            static let positionHeight = height*(0.1)
+            static let sectionHeight = height*(0.07)
+            static let cellHeight = height*(0.22)
+            static let positionHeight = height*(0.07)
             static let accomplishmentsHeight = height*(0.15)
             
             static let paddedWidth = width-(padding*2)
@@ -111,7 +112,8 @@ extension UI {
         
         struct Experience {
             static let header = UIFont(name: openSansBold, size: Sizing.Overview.originDateHeight*(3/4))
-            static let cellBody = UIFont(name: openSans, size: Sizing.Overview.objectiveHeight/2)
+            static let company = UIFont(name: openSans, size: Sizing.Experience.sectionHeight*(2/4))
+            static let cellBody = UIFont(name: openSans, size: Sizing.Experience.sectionHeight*(2/4))
         }
         
     }
@@ -146,6 +148,7 @@ extension UI {
         struct Experience {
             static let header = secondaryFontColor
             static let tableSeparator = UIColor.lightGray
+            static let company = secondaryFontColor
             static let cellText = secondaryFontColor
         }
         
