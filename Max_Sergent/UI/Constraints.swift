@@ -184,9 +184,43 @@ extension Experience {
         
         header.translatesAutoresizingMaskIntoConstraints                                                            = false
         header.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                            = true
-        header.topAnchor.constraint(equalTo: topAnchor, constant: topPadding/2).isActive                         = true
+        header.topAnchor.constraint(equalTo: topAnchor, constant: topPadding/2).isActive                            = true
         header.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.paddedWidth).isActive                   = true
         header.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.headerHeight).isActive                 = true
+    }
+    
+    func tableConstraints() {
+        let topPadding = UI.Sizing.Overview.topPadding
+        
+        table.translatesAutoresizingMaskIntoConstraints                                                             = false
+        table.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                             = true
+        table.topAnchor.constraint(equalTo: header.bottomAnchor, constant: topPadding/2).isActive                   = true
+        table.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.paddedWidth).isActive                    = true
+        table.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.tableHeight).isActive                   = true
+    }
+    
+}
+
+extension ExperienceCell {
+    
+    func iconConstraints() {
+        
+    }
+    
+    func positionConstraints() {
+        position.translatesAutoresizingMaskIntoConstraints                                                          = false
+        position.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                          = true
+        position.topAnchor.constraint(equalTo: topAnchor).isActive                                                  = true
+        position.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.paddedWidth).isActive                 = true
+        position.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.positionHeight).isActive             = true
+    }
+    
+    func accomplishmentsConstraints() {
+        accomplishments.translatesAutoresizingMaskIntoConstraints                                                          = false
+        accomplishments.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                          = true
+        accomplishments.topAnchor.constraint(equalTo: position.bottomAnchor).isActive                                      = true
+        accomplishments.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.paddedWidth).isActive                 = true
+        accomplishments.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.accomplishmentsHeight).isActive      = true
     }
     
 }

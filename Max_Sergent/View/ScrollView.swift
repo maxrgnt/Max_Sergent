@@ -80,6 +80,10 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         let diff = UI.Sizing.Header.expandedHeight-UI.Sizing.Header.minimizedHeight
         let newConstant = (ratio > 1) ? ratio*UI.Sizing.Header.expandedHeight : ratio*diff + UI.Sizing.Header.minimizedHeight
         alpha = (ratio > 1) ? 1-(contentOffset.x/(-UI.Sizing.Scroll.limit)) : 1
+        
+        let meh = contentOffset.x / UI.Sizing.Scroll.width
+        experience.alpha = (meh <= 1.0) ? meh : 1.0
+        
         self.customDelegate.adjustHeader(toHeight: newConstant)
     }
 

@@ -16,6 +16,7 @@ class Experience: UIView {
     var headerTop:   NSLayoutConstraint!
     // Objects
     let header = UILabel()
+    let table = ExperienceTable()
     
     //MARK: Initialization
     init() {
@@ -44,10 +45,14 @@ class Experience: UIView {
         header.font = UI.Fonts.Experience.header
         header.text = Constants.Experience.header
         header.textColor = UI.Colors.Experience.header
+        
+        addSubview(table)
+        table.setup()
     }
     
     func constraints() {
         headerConstraints()
+        tableConstraints()
     }
     
 }

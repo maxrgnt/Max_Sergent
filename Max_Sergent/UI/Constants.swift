@@ -28,6 +28,7 @@ struct Constants {
     
     struct Experience {
         static let header = "Experience"
+        static let cellReuseId = "ExperienceCell"
     }
     
 }

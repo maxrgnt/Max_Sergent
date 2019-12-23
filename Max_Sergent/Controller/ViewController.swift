@@ -50,7 +50,7 @@ class ViewController: UIViewController, ScrollDelegate {
         headerConstraints()
         header.layoutIfNeeded()
         scrollConstraints()
-        scroll.layoutIfNeeded()
+        scroll.overview.layoutIfNeeded()
     }
     
     //MARK: Functionality
@@ -164,6 +164,7 @@ class ViewController: UIViewController, ScrollDelegate {
         header.pictureWidth.constant = newDiameter
         header.picture.alpha = newAlpha
         scroll.overview.alpha = newAlpha
+        scroll.experience.alpha = (1-newAlpha)
         header.picture.layer.cornerRadius = newDiameter/2
         let x = UI.Sizing.Header.expandedHeight/UI.Sizing.Header.minimizedHeight
         let y = header.height.constant/UI.Sizing.Header.minimizedHeight
