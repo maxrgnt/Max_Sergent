@@ -19,6 +19,5 @@ struct Data {
         "Toggle":
             [(position: "Co-Founder", work: "Learn iOS")]
         ]
-    static let positions = [["AAaaaaa","BBbbbbbb"],["CCccccc","DDdddddd"]]
     
 }

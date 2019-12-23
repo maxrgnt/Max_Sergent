@@ -92,6 +92,15 @@ extension UI {
     
     struct Fonts {
         
+        struct Size {
+            static let H1 = Sizing.Header.expandedNameHeight/2
+            static let H2 = Sizing.Overview.objectiveHeight/2
+            static let H3 = Sizing.Overview.originDateHeight*(3/4)
+            static let H4 = 0.0
+            static let H5 = 0.0
+            static let H6 = 0.0
+        }
+        
         static let arvo = "Arvo"
         static let arvoBold = "Arvo-Bold"
         static let openSans = "OpenSans-Regular"
@@ -99,13 +108,13 @@ extension UI {
         static let openSansLight = "OpenSans-Light"
         
         struct Header {
-            static let name = UIFont(name: arvo, size: Sizing.Header.expandedNameHeight/2)
+            static let name = UIFont(name: arvo, size: Size.H1)
         }
         
         struct Overview {
-            static let objective = UIFont(name: openSans, size: Sizing.Overview.objectiveHeight/2)
-            static let originDateMain = UIFont(name: openSansBold, size: Sizing.Overview.originDateHeight*(3/4))
-            static let originDateSuper = UIFont(name: openSansBold, size: Sizing.Overview.originDateHeight*(3/4)/2)
+            static let objective = UIFont(name: openSans, size: Size.H2)
+            static let originDateMain = UIFont(name: openSansBold, size: Size.H3)
+            static let originDateSuper = UIFont(name: openSansBold, size: Size.H3/2)
             static let project = UIFont(name: openSans, size: Sizing.Overview.projectHeight*(3/4))
             static let stat = UIFont(name: openSans, size: Sizing.Overview.statHeight*(2/3))
         }
