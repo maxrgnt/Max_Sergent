@@ -37,10 +37,11 @@ class ExperienceSection: UIView {
         company.textColor      = UI.Colors.Experience.company
         company.font           = UI.Fonts.Experience.company
         company.text           = Constants.Experience.company
-        company.minimumScaleFactor = 0.1
-        company.numberOfLines = 1
+        //company.minimumScaleFactor = 0.1
+        company.numberOfLines = 0
         company.lineBreakMode = .byClipping
-        company.adjustsFontSizeToFitWidth = true
+        //company.adjustsFontSizeToFitWidth = true
+        //company.backgroundColor = .blue
     }
     
     //MARK: Constraints

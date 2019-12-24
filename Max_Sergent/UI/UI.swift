@@ -122,7 +122,7 @@ extension UI {
         struct Experience {
             static let header = UIFont(name: openSansBold, size: Sizing.Overview.originDateHeight*(3/4))
             static let company = UIFont(name: openSans, size: Sizing.Experience.sectionHeight*(2/4))
-            static let cellBody = UIFont(name: openSans, size: Sizing.Experience.sectionHeight*(2/4))
+            static let cellBody = UIFont(name: openSans, size: Sizing.Experience.sectionHeight*(1/4))
         }
         
     }

@@ -49,9 +49,29 @@ class ExperienceTable: UITableView, UITableViewDelegate, UITableViewDataSource, 
         let id = Constants.Experience.cellReuseId
         let cell: ExperienceCell = tableView.dequeueReusableCell(withIdentifier: id) as! ExperienceCell
         let keys = Array(Data.experience.keys)
-        cell.position.text = Data.experience[keys[indexPath.section]]![indexPath.row].position
-        cell.accomplishments.text = Data.experience[keys[indexPath.section]]![indexPath.row].work
+        let position = Data.experience[keys[indexPath.section]]![indexPath.row].position
+        let accomplishments = Data.experience[keys[indexPath.section]]![indexPath.row].work
+        
+        cell.position.text = position
+        cell.accomplishments.text = accomplishments
+        
+        let posHeight = heightForLabel(text: position, font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
+        cell.positionHeight.constant = posHeight
+        let accHeight = heightForLabel(text: accomplishments, font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
+        cell.accomplishmentsHeight.constant = accHeight
+
         return cell
+    }
+    
+    func heightForLabel(text:String, font:UIFont, width:CGFloat) -> CGFloat {
+        let label:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = font
+        label.text = text
+
+        label.sizeToFit()
+        return label.frame.height
     }
         
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
@@ -81,7 +101,14 @@ class ExperienceTable: UITableView, UITableViewDelegate, UITableViewDataSource, 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UI.Sizing.Experience.cellHeight
+        let keys = Array(Data.experience.keys)
+        let position = Data.experience[keys[indexPath.section]]![indexPath.row].position
+        let accomplishments = Data.experience[keys[indexPath.section]]![indexPath.row].work
+
+        let posHeight = heightForLabel(text: position, font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
+        let accHeight = heightForLabel(text: accomplishments, font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
+        
+        return posHeight + accHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -224,19 +224,23 @@ extension ExperienceCell {
     }
     
     func positionConstraints() {
+        positionHeight = position.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.positionHeight)
+        
         position.translatesAutoresizingMaskIntoConstraints                                                          = false
         position.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                          = true
         position.topAnchor.constraint(equalTo: topAnchor).isActive                                                  = true
         position.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.paddedWidth).isActive                 = true
-        position.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.positionHeight).isActive             = true
+        positionHeight.isActive                                                                                     = true
     }
     
     func accomplishmentsConstraints() {
+        accomplishmentsHeight = accomplishments.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.accomplishmentsHeight)
+        
         accomplishments.translatesAutoresizingMaskIntoConstraints                                                          = false
         accomplishments.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                          = true
         accomplishments.topAnchor.constraint(equalTo: position.bottomAnchor).isActive                                      = true
         accomplishments.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.paddedWidth).isActive                 = true
-        accomplishments.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.accomplishmentsHeight).isActive      = true
+        accomplishmentsHeight.isActive                                                                                     = true
     }
     
 }
