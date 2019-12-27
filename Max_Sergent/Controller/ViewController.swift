@@ -14,6 +14,7 @@ import FirebaseStorage
 class ViewController: UIViewController, ScrollDelegate {
     
     let header = Header()
+    let menu = Menu()
     let scroll = Scroll()
     let ref = Database.database().reference()
 //    let storage = Storage.storage(url:"gs://max-sergent-45387.appspot.com")
@@ -41,6 +42,8 @@ class ViewController: UIViewController, ScrollDelegate {
     func objectSettings() {
         view.addSubview(header)
         header.setup()
+        view.addSubview(menu)
+        menu.setup()
         view.addSubview(scroll)
         scroll.setup()
         scroll.customDelegate = self
@@ -50,6 +53,8 @@ class ViewController: UIViewController, ScrollDelegate {
     func constraints() {
         headerConstraints()
         header.layoutIfNeeded()
+        menuConstraints()
+        menu.layoutIfNeeded()
         scrollConstraints()
         scroll.overview.layoutIfNeeded()
     }

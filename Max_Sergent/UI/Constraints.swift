@@ -20,10 +20,18 @@ extension ViewController {
         header.height.isActive                                                                                      = true
     }
     
+    func menuConstraints() {
+        menu.translatesAutoresizingMaskIntoConstraints                                                            = false
+        menu.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive                                  = true
+        menu.topAnchor.constraint(equalTo: header.bottomAnchor).isActive                                          = true
+        menu.widthAnchor.constraint(equalToConstant: UI.Sizing.Menu.width).isActive                             = true
+        menu.heightAnchor.constraint(equalToConstant: UI.Sizing.Menu.height).isActive                           = true
+    }
+    
     func scrollConstraints() {
         scroll.translatesAutoresizingMaskIntoConstraints                                                            = false
         scroll.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive                                  = true
-        scroll.topAnchor.constraint(equalTo: header.bottomAnchor).isActive                                          = true
+        scroll.topAnchor.constraint(equalTo: menu.bottomAnchor).isActive                                          = true
         scroll.widthAnchor.constraint(equalToConstant: UI.Sizing.Scroll.width).isActive                             = true
         scroll.heightAnchor.constraint(equalToConstant: UI.Sizing.Scroll.height).isActive                           = true
     }
@@ -48,6 +56,35 @@ extension Header {
         name.bottomAnchor.constraint(equalTo: bottomAnchor, constant: UI.Sizing.Header.nameBottomPadding).isActive  = true
         name.widthAnchor.constraint(equalToConstant: UI.Sizing.Header.nameWidth).isActive                           = true
         nameHeight.isActive                                                                                         = true
+    }
+    
+}
+
+extension Menu {
+    
+    func page1Constraints() {
+        page1_width = page1.widthAnchor.constraint(equalToConstant: UI.Sizing.Menu.barWidth/4)
+        page2_width = page2.widthAnchor.constraint(equalToConstant: UI.Sizing.Menu.barWidth/4)
+        page3_width = page2.widthAnchor.constraint(equalToConstant: UI.Sizing.Menu.barWidth/4)
+        
+        page1.translatesAutoresizingMaskIntoConstraints                                                          = false
+        page1.leadingAnchor.constraint(equalTo: leadingAnchor).isActive                               = true
+        page1.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                                  = true
+        page1_width.isActive                                                                                     = true
+        page1.heightAnchor.constraint(equalTo: heightAnchor).isActive                                    = true
+        
+        page2.translatesAutoresizingMaskIntoConstraints                                                          = false
+        page2.leadingAnchor.constraint(equalTo: page1.trailingAnchor).isActive                          = true
+        page2.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                                  = true
+        page2_width.isActive                                                                                     = true
+        page2.heightAnchor.constraint(equalTo: heightAnchor).isActive                                      = true
+        
+        page3.translatesAutoresizingMaskIntoConstraints                                                          = false
+        page3.leadingAnchor.constraint(equalTo: page2.trailingAnchor).isActive                          = true
+        page3.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                                  = true
+        page3_width.isActive                                                                                     = true
+        page3.heightAnchor.constraint(equalTo: heightAnchor).isActive                                      = true
+
     }
     
 }

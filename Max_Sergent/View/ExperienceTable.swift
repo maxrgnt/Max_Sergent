@@ -73,6 +73,7 @@ class ExperienceTable: UITableView, UITableViewDelegate, UITableViewDataSource, 
         label.sizeToFit()
         return label.frame.height
     }
+    
         
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         let indexTitles: [String]? = []

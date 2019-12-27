@@ -26,6 +26,7 @@
 		66C4C60423B1010400DEDF6D /* ExperienceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C4C60323B1010400DEDF6D /* ExperienceCell.swift */; };
 		66C4C60623B13F2300DEDF6D /* ExperienceSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C4C60523B13F2300DEDF6D /* ExperienceSection.swift */; };
 		66C4C60823B14BB300DEDF6D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C4C60723B14BB300DEDF6D /* Data.swift */; };
+		66C4C60A23B687B500DEDF6D /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C4C60923B687B500DEDF6D /* Menu.swift */; };
 		66FD8A79239AD18E00B90C69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A78239AD18E00B90C69 /* AppDelegate.swift */; };
 		66FD8A7B239AD18E00B90C69 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */; };
 		66FD8A7E239AD18E00B90C69 /* Max_Sergent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A7C239AD18E00B90C69 /* Max_Sergent.xcdatamodeld */; };
@@ -81,6 +82,7 @@
 		66C4C60323B1010400DEDF6D /* ExperienceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceCell.swift; sourceTree = "<group>"; };
 		66C4C60523B13F2300DEDF6D /* ExperienceSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceSection.swift; sourceTree = "<group>"; };
 		66C4C60723B14BB300DEDF6D /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		66C4C60923B687B500DEDF6D /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		66FD8A75239AD18E00B90C69 /* Max Sergent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Max Sergent.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FD8A78239AD18E00B90C69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				6651C6AA239F12B0003B49A1 /* Header.swift */,
+				66C4C60923B687B500DEDF6D /* Menu.swift */,
 				6636D13A23A7BBDC00290C3D /* ScrollView.swift */,
 				6636D13C23A837E900290C3D /* Overview.swift */,
 				66C4C5FF23AE45EB00DEDF6D /* Experience.swift */,
@@ -526,6 +529,7 @@
 				66FD8A79239AD18E00B90C69 /* AppDelegate.swift in Sources */,
 				66C4C5FE23ABDF1C00DEDF6D /* Extension.swift in Sources */,
 				6636D13B23A7BBDC00290C3D /* ScrollView.swift in Sources */,
+				66C4C60A23B687B500DEDF6D /* Menu.swift in Sources */,
 				6636D13D23A837E900290C3D /* Overview.swift in Sources */,
 				66FD8A7E239AD18E00B90C69 /* Max_Sergent.xcdatamodeld in Sources */,
 				6651C6B1239F171C003B49A1 /* Constants.swift in Sources */,

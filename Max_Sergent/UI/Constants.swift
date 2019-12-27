@@ -15,6 +15,12 @@ struct Constants {
         static let name = "Max\nSergent"
     }
     
+    struct Menu {
+        static let page1 = "Overview"
+        static let page2 = "Experience"
+        static let page3 = "Education"
+    }
+    
     struct Overview {
         static let objective  = """
                                 Having spent the past two years designing and developing iOS applications in my spare time, I am determined to join an organization that understands the value of continued learning, intentional design, and selfless collaboration.
