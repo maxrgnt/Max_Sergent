@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import CoreData
+import Firebase
+import FirebaseStorage
 
 struct Data {
     
@@ -19,5 +21,18 @@ struct Data {
         "Toggle":
             [(position: "Co-Founder", work: "But then our visions of the future began to diverge and eventually we had a falling out. When we did, our Board of Directors sided with him. So at 30 I was out. And very publicly out. What had been the focus of my entire adult life was gone, and it was devastating.")]
         ]
+ 
+    static func checkForUpdate() {
+        Database.database().reference(withPath: "reset").observe(.value) { (snapshot:DataSnapshot) in
+            if let resetData = snapshot.value as? NSString {
+                (resetData.boolValue == true) ? print("reset!") : print("don't reset!")
+            }
+            else {
+                print("Error: NSString not convertible to Bool")
+            }
+        }
+     
+    }
+    
     
 }

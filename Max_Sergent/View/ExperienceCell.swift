@@ -66,7 +66,6 @@ class ExperienceCell: UITableViewCell {
     
     //MARK: Constraints
     func constraints() {
-        iconConstraints()
         positionConstraints()
         accomplishmentsConstraints()
     }

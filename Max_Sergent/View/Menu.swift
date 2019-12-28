@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol MenuDelegate {
-    func moveScroll(toPage: Int)
+    func menuMoveScroll(toPage: Int)
 }
 
 class Menu: UIView {
@@ -32,6 +32,7 @@ class Menu: UIView {
     let page5 = UILabel()
     lazy var labels: [UILabel] = [page1, page2, page3, page4, page5]
     var touchPosition: CGPoint = CGPoint(x: 0.0, y: 0.0)
+    var pageSelected = false
     
     //MARK: Initialization
     init() {
@@ -117,17 +118,11 @@ class Menu: UIView {
         
         var tagForPoint = 0
         labels.forEach { (label) in
-            label.font = (label.frame.minX <= point.x && point.x <= label.frame.maxX)
-                ? UI.Fonts.Menu.selected
-                : UI.Fonts.Menu.normal
-            label.alpha = (label.frame.minX <= point.x && point.x <= label.frame.maxX)
-                ? 1.0
-                : 0.7
             tagForPoint = (label.frame.minX <= point.x && point.x <= label.frame.maxX)
                 ? label.tag
                 : tagForPoint
         }
-        self.customDelegate.moveScroll(toPage: tagForPoint)
+        self.customDelegate.menuMoveScroll(toPage: tagForPoint)
     }
     
     func widthForLabel(text:String, font:UIFont) -> CGFloat {

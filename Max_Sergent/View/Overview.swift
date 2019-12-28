@@ -58,7 +58,6 @@ class Overview: UIView {
         objective.font = UI.Fonts.Overview.objective
         objective.text = Constants.Overview.objective
         objective.textColor = UI.Colors.Overview.objective
-        print("Obj line #: ",objective.actualNumberOfLines)
         
         addSubview(originDate)
         originDate.numberOfLines = 1

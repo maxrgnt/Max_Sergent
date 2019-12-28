@@ -24,12 +24,16 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
     // Create a storage reference from our storage service
     let storageRef = Storage.storage().reference()
     
+    var currentPage: Int = 0
+    
     override func viewDidLoad() {
         print("Hello World!")
         view.backgroundColor = UI.Colors.Header.background
         setup()
         //retrieveData()
         populateExperience()
+        
+        Data.checkForUpdate()
     }
     
     //MARK: Setup
@@ -200,23 +204,26 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
         }
     }
     
-    func moveScroll(toPage page: Int) {
-        if scroll.currentPage != page {
-            scroll.currentPage = page
+    func menuMoveScroll(toPage page: Int) {
+        if currentPage != page {
+            currentPage = page
             let newX = UI.Sizing.Scroll.width * CGFloat(page)
             let newOffset = CGPoint(x: newX, y: 0.0)
             self.scroll.setContentOffset(newOffset, animated: true)
         }
     }
     
-    func moveMenu(toPage page: Int) {
-        menu.labels.forEach { (label) in
-            label.font = (label.tag == page)
-                ? UI.Fonts.Menu.selected
-                : UI.Fonts.Menu.normal
-            label.alpha = (label.tag == page)
-                ? 1.0
-                : 0.7
+    func scrollMoveMenu(toPage page: Int) {
+        if currentPage != page {
+            currentPage = page
+            menu.labels.forEach { (label) in
+                label.font = (label.tag == page)
+                    ? UI.Fonts.Menu.selected
+                    : UI.Fonts.Menu.normal
+                label.alpha = (label.tag == page)
+                    ? 1.0
+                    : 0.7
+            }
         }
     }
     

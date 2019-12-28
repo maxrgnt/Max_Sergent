@@ -258,15 +258,7 @@ extension ExperienceSection {
 }
 
 extension ExperienceCell {
-    
-    func iconConstraints() {
-        position.translatesAutoresizingMaskIntoConstraints                                                          = false
-        position.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                          = true
-        position.topAnchor.constraint(equalTo: topAnchor).isActive                                                  = true
-        position.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.paddedWidth).isActive                 = true
-        position.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.positionHeight).isActive             = true
-    }
-    
+        
     func positionConstraints() {
         positionHeight = position.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.positionHeight)
         
