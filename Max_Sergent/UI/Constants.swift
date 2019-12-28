@@ -17,8 +17,10 @@ struct Constants {
     
     struct Menu {
         static let page1 = "Overview"
-        static let page2 = "Experience"
-        static let page3 = "Education"
+        static let page2 = "Work"
+        static let page3 = "School"
+        static let page4 = "Projects"
+        static let page5 = "Achievements"
     }
     
     struct Overview {

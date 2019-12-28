@@ -9,18 +9,28 @@
 import Foundation
 import UIKit
 
+protocol MenuDelegate {
+    func moveScroll(toPage: Int)
+}
+
 class Menu: UIView {
     
     //MARK: Definitions
+    // Delegate
+    var customDelegate : MenuDelegate!
     // Constraints
     var page1_width:   NSLayoutConstraint!
     var page2_width:   NSLayoutConstraint!
     var page3_width:   NSLayoutConstraint!
+    var page4_width:   NSLayoutConstraint!
+    var page5_width:   NSLayoutConstraint!
     // Objects
     let page1 = UILabel()
     let page2 = UILabel()
     let page3 = UILabel()
-    lazy var labels: [UILabel] = [page1, page2, page3]
+    let page4 = UILabel()
+    let page5 = UILabel()
+    lazy var labels: [UILabel] = [page1, page2, page3, page4, page5]
     var touchPosition: CGPoint = CGPoint(x: 0.0, y: 0.0)
     
     //MARK: Initialization
@@ -39,34 +49,29 @@ class Menu: UIView {
     }
     
     func objectSettings() {
-        backgroundColor = .white
+        backgroundColor = .black
         
-        addSubview(page1)
+        for (i, page) in [page1, page2, page3, page4, page5].enumerated() {
+            addSubview(page)
+            page.textAlignment = .center
+            page.backgroundColor = .black
+            page.textColor = .white
+            page.tag = i
+            page.alpha = 0.7
+            page.font = UI.Fonts.Menu.normal
+            page.isEnabled = false
+        }
+        
+        labels[0].alpha = 1.0
+        labels[0].textAlignment = .left
+        labels[0].font = UI.Fonts.Menu.selected
+        labels[(labels.count-1)].textAlignment = .right
+        
         page1.text = Constants.Menu.page1
-        page1.textAlignment = .center
-        page1.backgroundColor = .black
-        page1.textColor = .white
-        page1.tag = 0
-        page1.font = UI.Fonts.Menu.selected
-        page1.isEnabled = false
-        
-        addSubview(page2)
         page2.text = Constants.Menu.page2
-        page2.textAlignment = .center
-        page2.backgroundColor = .black
-        page2.textColor = .white
-        page2.tag = 1
-        page2.font = UI.Fonts.Menu.normal
-        page2.isEnabled = false
-        
-        addSubview(page3)
         page3.text = Constants.Menu.page3
-        page3.textAlignment = .center
-        page3.backgroundColor = .black
-        page3.textColor = .white
-        page3.tag = 2
-        page3.font = UI.Fonts.Menu.normal
-        page3.isEnabled = false
+        page4.text = Constants.Menu.page4
+        page5.text = Constants.Menu.page5
         
         let pan = UIPanGestureRecognizer(target: self, action: #selector(reactToPan(_:)))
         addGestureRecognizer(pan)
@@ -75,49 +80,55 @@ class Menu: UIView {
     
     func constraints() {
         page1Constraints()
-        page1_width.constant = widthForLabel(text: page1.text!, font: page1.font) + UI.Sizing.Menu.padding
-        page2_width.constant = widthForLabel(text: page2.text!, font: page2.font) + UI.Sizing.Menu.padding
-        page3_width.constant = widthForLabel(text: page3.text!, font: page3.font) + UI.Sizing.Menu.padding
+        setLabels()
+    }
+    
+    func setLabels() {
+        var widthNeededForLabels: CGFloat = 0.0
+        labels.forEach { (label) in
+            widthNeededForLabels += widthForLabel(text: label.text!, font: label.font)
+        }
+        let availableSpace = (UI.Sizing.Menu.barWidth - widthNeededForLabels) / CGFloat(labels.count-1)
+        page1_width.constant = widthForLabel(text: page1.text!, font: page1.font) + availableSpace/2
+        page2_width.constant = widthForLabel(text: page2.text!, font: page2.font) + availableSpace
+        page3_width.constant = widthForLabel(text: page3.text!, font: page3.font) + availableSpace
+        page4_width.constant = widthForLabel(text: page4.text!, font: page4.font) + availableSpace
+        page5_width.constant = widthForLabel(text: page5.text!, font: page5.font) + availableSpace/2
         layoutIfNeeded()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             touchPosition = touch.location(in: self)
-            labels.forEach { (label) in
-                if label.frame.contains(touchPosition) {
-                    label.font = UI.Fonts.Menu.selected
-                }
-                else {
-                    label.font = UI.Fonts.Menu.normal
-                }
-            }
+            updateLabels(atPoint: touchPosition)
         }
     }
     
     @objc func reactToPan(_ sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: self)
         let positionInMenu: CGPoint = CGPoint(x: touchPosition.x + translation.x, y: touchPosition.y + translation.y)
-        print(positionInMenu)
+        updateLabels(atPoint: positionInMenu)
+    }
+    
+    func updateLabels(atPoint pointInMenu: CGPoint) {
+        var point = pointInMenu
+        point.x = (point.x <= labels.first!.frame.minX) ? labels.first!.frame.minX : point.x
+        point.x = (point.x >= labels.last!.frame.maxX) ? labels.last!.frame.maxX : point.x
+        
+        var tagForPoint = 0
         labels.forEach { (label) in
-            if label.frame.contains(positionInMenu) {
-                label.font = UI.Fonts.Menu.selected
-            }
-            else {
-                label.font = UI.Fonts.Menu.normal
-            }
+            label.font = (label.frame.minX <= point.x && point.x <= label.frame.maxX)
+                ? UI.Fonts.Menu.selected
+                : UI.Fonts.Menu.normal
+            label.alpha = (label.frame.minX <= point.x && point.x <= label.frame.maxX)
+                ? 1.0
+                : 0.7
+            tagForPoint = (label.frame.minX <= point.x && point.x <= label.frame.maxX)
+                ? label.tag
+                : tagForPoint
         }
-        if sender.state == UIPanGestureRecognizer.State.ended {
-            print("Ended: \(positionInMenu)")
-            labels.forEach { (label) in
-                if label.frame.contains(positionInMenu) {
-                    label.font = UI.Fonts.Menu.selected
-                }
-                else {
-                    label.font = UI.Fonts.Menu.normal
-                }
-            }
-        }
+        
+        self.customDelegate.moveScroll(toPage: tagForPoint)
     }
     
     func widthForLabel(text:String, font:UIFont) -> CGFloat {

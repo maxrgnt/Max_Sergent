@@ -105,7 +105,7 @@ extension UI {
             static let H2 = Sizing.Overview.objectiveHeight/2
             static let H3 = Sizing.Overview.originDateHeight*(3/4)
             static let H4 = 0.0
-            static let H5 = 0.0
+            static let H5 = Sizing.Menu.height/2
             static let H6 = Sizing.Menu.height/3
         }
         

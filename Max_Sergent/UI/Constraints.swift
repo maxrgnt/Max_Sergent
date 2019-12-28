@@ -65,10 +65,12 @@ extension Menu {
     func page1Constraints() {
         page1_width = page1.widthAnchor.constraint(equalToConstant: UI.Sizing.Menu.barWidth/4)
         page2_width = page2.widthAnchor.constraint(equalToConstant: UI.Sizing.Menu.barWidth/4)
-        page3_width = page2.widthAnchor.constraint(equalToConstant: UI.Sizing.Menu.barWidth/4)
+        page3_width = page3.widthAnchor.constraint(equalToConstant: UI.Sizing.Menu.barWidth/4)
+        page4_width = page4.widthAnchor.constraint(equalToConstant: UI.Sizing.Menu.barWidth/4)
+        page5_width = page5.widthAnchor.constraint(equalToConstant: UI.Sizing.Menu.barWidth/4)
         
         page1.translatesAutoresizingMaskIntoConstraints                                                          = false
-        page1.leadingAnchor.constraint(equalTo: leadingAnchor).isActive                               = true
+        page1.leadingAnchor.constraint(equalTo: leadingAnchor, constant: UI.Sizing.Menu.padding).isActive           = true
         page1.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                                  = true
         page1_width.isActive                                                                                     = true
         page1.heightAnchor.constraint(equalTo: heightAnchor).isActive                                    = true
@@ -84,7 +86,18 @@ extension Menu {
         page3.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                                  = true
         page3_width.isActive                                                                                     = true
         page3.heightAnchor.constraint(equalTo: heightAnchor).isActive                                      = true
-
+        
+        page4.translatesAutoresizingMaskIntoConstraints                                                          = false
+        page4.leadingAnchor.constraint(equalTo: page3.trailingAnchor).isActive                          = true
+        page4.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                                  = true
+        page4_width.isActive                                                                                     = true
+        page4.heightAnchor.constraint(equalTo: heightAnchor).isActive                                      = true
+        
+        page5.translatesAutoresizingMaskIntoConstraints                                                          = false
+        page5.leadingAnchor.constraint(equalTo: page4.trailingAnchor).isActive                          = true
+        page5.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                                  = true
+        page5_width.isActive                                                                                     = true
+        page5.heightAnchor.constraint(equalTo: heightAnchor).isActive                                      = true
     }
     
 }
@@ -104,17 +117,23 @@ extension Scroll {
         experience.widthAnchor.constraint(equalTo: widthAnchor).isActive                                            = true
         experience.heightAnchor.constraint(equalTo: heightAnchor).isActive                                          = true
         
-        page1.translatesAutoresizingMaskIntoConstraints                                                             = false
-        page1.leadingAnchor.constraint(equalTo: experience.trailingAnchor).isActive                                   = true
-        page1.topAnchor.constraint(equalTo: topAnchor).isActive                                                     = true
-        page1.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                 = true
-        page1.heightAnchor.constraint(equalTo: heightAnchor).isActive                                               = true
+        page3.translatesAutoresizingMaskIntoConstraints                                                             = false
+        page3.leadingAnchor.constraint(equalTo: experience.trailingAnchor).isActive                                   = true
+        page3.topAnchor.constraint(equalTo: topAnchor).isActive                                                     = true
+        page3.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                 = true
+        page3.heightAnchor.constraint(equalTo: heightAnchor).isActive                                               = true
         
-        page2.translatesAutoresizingMaskIntoConstraints                                                             = false
-        page2.leadingAnchor.constraint(equalTo: page1.trailingAnchor).isActive                                      = true
-        page2.topAnchor.constraint(equalTo: topAnchor).isActive                                                     = true
-        page2.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                 = true
-        page2.heightAnchor.constraint(equalTo: heightAnchor).isActive                                               = true
+        page4.translatesAutoresizingMaskIntoConstraints                                                             = false
+        page4.leadingAnchor.constraint(equalTo: page3.trailingAnchor).isActive                                      = true
+        page4.topAnchor.constraint(equalTo: topAnchor).isActive                                                     = true
+        page4.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                 = true
+        page4.heightAnchor.constraint(equalTo: heightAnchor).isActive                                               = true
+        
+        page5.translatesAutoresizingMaskIntoConstraints                                                             = false
+        page5.leadingAnchor.constraint(equalTo: page4.trailingAnchor).isActive                                   = true
+        page5.topAnchor.constraint(equalTo: topAnchor).isActive                                                     = true
+        page5.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                 = true
+        page5.heightAnchor.constraint(equalTo: heightAnchor).isActive                                               = true
         
     }
     

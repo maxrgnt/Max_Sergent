@@ -11,7 +11,7 @@ import UIKit
 import Firebase
 import FirebaseStorage
 
-class ViewController: UIViewController, ScrollDelegate {
+class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
     
     let header = Header()
     let menu = Menu()
@@ -44,6 +44,7 @@ class ViewController: UIViewController, ScrollDelegate {
         header.setup()
         view.addSubview(menu)
         menu.setup()
+        menu.customDelegate = self
         view.addSubview(scroll)
         scroll.setup()
         scroll.customDelegate = self
@@ -196,6 +197,12 @@ class ViewController: UIViewController, ScrollDelegate {
                     self.header.name.alpha = 1.0
                 }))
         }
+    }
+    
+    func moveScroll(toPage page: Int) {
+        let newX = UI.Sizing.Scroll.width * CGFloat(page)
+        let newOffset = CGPoint(x: newX, y: 0.0)
+        self.scroll.setContentOffset(newOffset, animated: true)
     }
     
 }

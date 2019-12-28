@@ -120,13 +120,13 @@ class ExperienceTable: UITableView, UITableViewDelegate, UITableViewDataSource, 
         return true
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let DeleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: { (action, view, success) in
-            // pass
-        })
-        DeleteAction.backgroundColor = .red // UI.Color.begonia
-        return UISwipeActionsConfiguration(actions: [DeleteAction])
-    }
+//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        let DeleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: { (action, view, success) in
+//            // pass
+//        })
+//        DeleteAction.backgroundColor = .red // UI.Color.begonia
+//        return UISwipeActionsConfiguration(actions: [DeleteAction])
+//    }
  
     //MARK: Functions
     func scrollToFirstRow() {

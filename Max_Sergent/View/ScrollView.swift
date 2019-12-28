@@ -23,9 +23,10 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     // Objects
     let overview = Overview()
     let experience = Experience()
-    let page1 = UILabel()
-    let page2 = UILabel()
-    lazy var pages = [overview,experience,page1,page2]
+    let page3 = UILabel()
+    let page4 = UILabel()
+    let page5 = UILabel()
+    lazy var pages = [overview,experience,page3,page4,page5]
     
     //MARK: Initialization
     init() {
@@ -62,10 +63,12 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         overview.setup()
         addSubview(experience)
         experience.setup()
-        addSubview(page1)
-        page1.backgroundColor = .blue
-        addSubview(page2)
-        page2.backgroundColor = .yellow
+        addSubview(page3)
+        page3.backgroundColor = .blue
+        addSubview(page4)
+        page4.backgroundColor = .yellow
+        addSubview(page5)
+        page5.backgroundColor = .green
     }
     
     //MARK: Constraints() {
