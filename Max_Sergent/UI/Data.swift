@@ -31,8 +31,42 @@ struct Data {
                 print("Error: NSString not convertible to Bool")
             }
         }
-     
     }
     
+    static func imageStuff() {
+        if let success = UIImage(named: "placeholder.png")?.saveImage(as: "placeholder") {
+            
+        }
+        if let image = loadImage(named: "placeholder") {
+            print("loaded")
+            print(image)
+        }
+    }
     
+    static func loadImage(named: String) -> UIImage? {
+        if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
+            return UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(named).path)
+        }
+        return nil
+    }
+    
+    static func deleteImages() {
+        let fileManager = FileManager.default
+        let myDocuments = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        do {
+            try fileManager.removeItem(at: myDocuments)
+        } catch {
+            return
+        }
+    }
+    
+    static func contentsOfDocumentsDirectory() {
+        do {
+            let documentsURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            let docs = try FileManager.default.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: [], options:  [.skipsHiddenFiles, .skipsSubdirectoryDescendants])
+            print(docs)
+        } catch {
+            print(error)
+        }
+    }
 }

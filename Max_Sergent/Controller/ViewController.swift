@@ -31,9 +31,12 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
         view.backgroundColor = UI.Colors.Header.background
         setup()
         //retrieveData()
-        populateExperience()
+        //populateExperience()
         
-        Data.checkForUpdate()
+        //Data.checkForUpdate()
+        //Data.imageStuff()
+        //Data.deleteImages()
+        Data.contentsOfDocumentsDirectory()
     }
     
     //MARK: Setup
