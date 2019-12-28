@@ -200,9 +200,12 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
     }
     
     func moveScroll(toPage page: Int) {
-        let newX = UI.Sizing.Scroll.width * CGFloat(page)
-        let newOffset = CGPoint(x: newX, y: 0.0)
-        self.scroll.setContentOffset(newOffset, animated: true)
+        if scroll.currentPage != page {
+            scroll.currentPage = page
+            let newX = UI.Sizing.Scroll.width * CGFloat(page)
+            let newOffset = CGPoint(x: newX, y: 0.0)
+            self.scroll.setContentOffset(newOffset, animated: true)
+        }
     }
     
 }

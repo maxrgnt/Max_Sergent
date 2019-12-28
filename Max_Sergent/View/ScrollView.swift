@@ -27,6 +27,7 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     let page4 = UILabel()
     let page5 = UILabel()
     lazy var pages = [overview,experience,page3,page4,page5]
+    var currentPage: Int = 0
     
     //MARK: Initialization
     init() {

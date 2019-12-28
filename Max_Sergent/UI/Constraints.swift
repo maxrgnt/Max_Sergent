@@ -234,27 +234,15 @@ extension Overview {
 }
 
 extension Experience {
-    
-    func headerConstraints() {
-        let topPadding = UI.Sizing.Overview.topPadding
-        
-        header.translatesAutoresizingMaskIntoConstraints                                                            = false
-        header.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                            = true
-        header.topAnchor.constraint(equalTo: topAnchor, constant: topPadding/2).isActive                            = true
-        header.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.paddedWidth).isActive                   = true
-        header.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.headerHeight).isActive                 = true
-    }
-    
     func tableConstraints() {
         let topPadding = UI.Sizing.Overview.topPadding
         
         table.translatesAutoresizingMaskIntoConstraints                                                             = false
         table.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                             = true
-        table.topAnchor.constraint(equalTo: header.bottomAnchor, constant: topPadding/2).isActive                   = true
+        table.topAnchor.constraint(equalTo: topAnchor, constant: topPadding/2).isActive                   = true
         table.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.paddedWidth).isActive                    = true
         table.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.tableHeight).isActive                   = true
     }
-    
 }
 
 extension ExperienceSection {

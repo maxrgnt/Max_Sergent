@@ -12,10 +12,7 @@ import UIKit
 class Experience: UIView {
     
     //MARK: Definitions
-    // Constraints
-    var headerTop:   NSLayoutConstraint!
     // Objects
-    let header = UILabel()
     let table = ExperienceTable()
     
     //MARK: Initialization
@@ -35,23 +32,11 @@ class Experience: UIView {
     }
     
     func objectSettings() {
-        addSubview(header)
-        header.numberOfLines = 1
-        header.textAlignment = .left
-        header.backgroundColor = .clear
-        header.minimumScaleFactor = 0.1
-        header.lineBreakMode = .byClipping
-        header.adjustsFontSizeToFitWidth = true
-        header.font = UI.Fonts.Experience.header
-        header.text = Constants.Experience.header
-        header.textColor = UI.Colors.Experience.header
-        
         addSubview(table)
         table.setup()
     }
     
     func constraints() {
-        headerConstraints()
         tableConstraints()
     }
     
