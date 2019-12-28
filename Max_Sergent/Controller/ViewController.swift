@@ -185,6 +185,7 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
         let z = header.height.constant/UI.Sizing.Header.expandedHeight
         let zz = 1-((z-1)/(UI.Sizing.Scroll.limit/UI.Sizing.Scroll.width))
         header.name.alpha = (newConstant > UI.Sizing.Header.expandedHeight) ? zz : header.name.alpha
+        menu.alpha = (newConstant > UI.Sizing.Header.expandedHeight) ? zz : menu.alpha
         header.nameHeight.constant = adjFontHeight
         header.layoutIfNeeded()
         header.name.sizeToFit()
@@ -205,6 +206,17 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
             let newX = UI.Sizing.Scroll.width * CGFloat(page)
             let newOffset = CGPoint(x: newX, y: 0.0)
             self.scroll.setContentOffset(newOffset, animated: true)
+        }
+    }
+    
+    func moveMenu(toPage page: Int) {
+        menu.labels.forEach { (label) in
+            label.font = (label.tag == page)
+                ? UI.Fonts.Menu.selected
+                : UI.Fonts.Menu.normal
+            label.alpha = (label.tag == page)
+                ? 1.0
+                : 0.7
         }
     }
     

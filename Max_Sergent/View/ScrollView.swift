@@ -11,6 +11,7 @@ import UIKit
 
 protocol ScrollDelegate {
     func adjustHeader(toHeight: CGFloat)
+    func moveMenu(toPage: Int)
 }
 
 class Scroll: UIScrollView, UIScrollViewDelegate {
@@ -88,7 +89,11 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         let meh = contentOffset.x / UI.Sizing.Scroll.width
         experience.alpha = (meh <= 1.0) ? meh : 1.0
         
+        var page = Int(floor(Double(contentOffset.x)/Double(UI.Sizing.Scroll.width)))
+        page = (page <= 0) ? 0 : page
+        
         self.customDelegate.adjustHeader(toHeight: newConstant)
+        self.customDelegate.moveMenu(toPage: page)
     }
 
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {

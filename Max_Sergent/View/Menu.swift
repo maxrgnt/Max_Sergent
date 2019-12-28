@@ -127,7 +127,6 @@ class Menu: UIView {
                 ? label.tag
                 : tagForPoint
         }
-        
         self.customDelegate.moveScroll(toPage: tagForPoint)
     }
     
