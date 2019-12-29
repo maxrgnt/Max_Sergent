@@ -14,6 +14,8 @@ import FirebaseStorage
 
 struct Data {
     
+    static var profile: (name: String, picture: String) = (name: "Ivan", picture: "UGLY")
+    
     static let experience: [String : [(position: String, work: String)]] =
         ["BEA":
             [(position: "Analyst", work: "I was lucky — I found what I loved to do early in life. Woz and I started Apple in my parents’ garage when I was 20. We worked hard, and in 10 years Apple had grown from just the two of us in a garage into a $2 billion company with over 4,000 employees."),
@@ -22,7 +24,7 @@ struct Data {
             [(position: "Co-Founder", work: "But then our visions of the future began to diverge and eventually we had a falling out. When we did, our Board of Directors sided with him. So at 30 I was out. And very publicly out. What had been the focus of my entire adult life was gone, and it was devastating.")]
         ]
      
-//    static func imageStuff() {
+//    func imageStuff() {
 //        if let success = UIImage(named: "placeholder.png")?.saveImage(as: "placeholder") {
 //
 //        }
@@ -32,14 +34,14 @@ struct Data {
 //        }
 //    }
 //
-//    static func loadImage(named: String) -> UIImage? {
+//    func loadImage(named: String) -> UIImage? {
 //        if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
 //            return UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(named).path)
 //        }
 //        return nil
 //    }
 //
-//    static func deleteImages() {
+//    func deleteImages() {
 //        let fileManager = FileManager.default
 //        let myDocuments = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
 //        do {
@@ -49,7 +51,7 @@ struct Data {
 //        }
 //    }
 //
-//    static func contentsOfDocumentsDirectory() {
+//    func contentsOfDocumentsDirectory() {
 //        do {
 //            let documentsURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
 //            let docs = try FileManager.default.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: [], options:  [.skipsHiddenFiles, .skipsSubdirectoryDescendants])
@@ -59,19 +61,77 @@ struct Data {
 //        }
 //    }
     
+    //MARK: UserDefaults
+    static func coreDataPopulated() -> Bool {
+        print("Has coreDataPopulated? \(UserDefaults.standard.bool(forKey: "CoreData"))")
+        return UserDefaults.standard.bool(forKey: "CoreData")
+    }
+    
+    //MARK: CoreData Profile
+    static func setProfile(name: String, picture: String) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let profileEntity = NSEntityDescription.entity(forEntityName: Constants.Data.CoreData.Profile, in: managedContext)!
+        let profile = NSManagedObject(entity: profileEntity, insertInto: managedContext)
+        profile.setValue(name, forKeyPath: Constants.Data.Profile.name)
+        profile.setValue(picture, forKeyPath: Constants.Data.Profile.picture)
+        do {
+            try managedContext.save()
+            loadProfile()
+            UserDefaults.standard.set(true, forKey: "CoreData")
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    static func loadProfile() {
+        print("Loading Profile from CoreData")
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Data.CoreData.Profile)
+        let objects = try! managedContext.fetch(fetch) as! [ProfileData]
+        print(profile)
+        if let object = objects.first {
+            if  let name = object.name,
+                let picture = object.picture
+            {
+                profile = (name: name, picture: picture)
+            }
+        }
+        print(profile)
+    }
+    
+    //MARK: CoreData Delete
+    static func deleteCoreData(forEntity entity: String) {
+        print("Deleting CoreData for \(entity)")
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        do {
+            try managedContext.execute(deleteRequest)
+            try managedContext.save()
+        } catch {
+            print ("There was an error")
+        }
+    }
+    
+    //MARK: Reload Firebase
     static func reloadFirebase(for key: String) {
         firebaseReset() { reset in
             if reset {
                 firebaseProfile()
-                firebaseOverview()
-                firebaseWork()
+                //firebaseOverview()
+                //firebaseWork()
             }
             else {
                 print("Do not reset from Firebase")
+                loadProfile()
             }
         }
     }
     
+    //MARK: Firebase Reset
     static func firebaseReset(completionHandler:@escaping (Bool) -> ()) {
         Database.database().reference(withPath: Constants.Data.Firebase.reset).observe(.value, with: { snapshot in
             if let dict = snapshot.value as? [String: AnyObject] {
@@ -90,19 +150,29 @@ struct Data {
         })
     }
     
+    //MARK: Firebase Profile
     static func firebaseProfile() {
+        print("Firebase Profile has fired")
         Database.database().reference(withPath: Constants.Data.Firebase.profile).observe(.value, with: { snapshot in
             if let dict = snapshot.value as? [String: AnyObject] {
                 if  let name = dict[Constants.Data.Profile.name] as? String,
                     let pictureURL = dict[Constants.Data.Profile.picture] as? String
                 {
-                    //print("-- PROFILE ------")
-                    //print(name," | ",pictureURL)
+                    if coreDataPopulated() {
+                        print("coreDataPopulated @ Profile")
+                        deleteCoreData(forEntity: Constants.Data.CoreData.Profile)
+                        setProfile(name: name, picture: pictureURL)
+                    }
+                    else {
+                        print("coreDataNOTPopulated @ Profile")
+                        setProfile(name: name, picture: pictureURL)
+                    }
                 }
             }
         })
     }
     
+    //MARK: Firebase Overview
     static func firebaseOverview() {
         Database.database().reference(withPath: Constants.Data.Firebase.overview).observe(.value, with: { snapshot in
             if let dict = snapshot.value as? [String: AnyObject] {
@@ -136,6 +206,7 @@ struct Data {
         })
     }
     
+    //MARK: Firebase Work
     static func firebaseWork() {
         Database.database().reference(withPath: Constants.Data.Firebase.work).observe(.value, with: { snapshot in
             if let dict = snapshot.value as? [String: AnyObject] {
@@ -163,3 +234,51 @@ struct Data {
         })
     }
 }
+
+/*
+func updateCoreData(for attribute: String, from entity: String, oldValue: String, newValue: String) {
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+    let managedContext = appDelegate.persistentContainer.viewContext
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+    //fetchRequest.predicate = NSPredicate(format: "userID = %@ AND name = %&", argumentArray: value)
+    //fetchRequest.predicate = NSPredicate(format: "userID == %@", oldValue)
+    fetchRequest.predicate = NSPredicate(format: "%K BEGINSWITH[cd] %@", attribute, oldValue)
+    do {
+        let results = try managedContext.fetch(fetchRequest) as? [NSManagedObject]
+        if results?.count != 0 { // Atleast one was returned
+            // In my case, I only updated the first item in results
+            //print("results: \(results![0])")
+            results![0].setValue(newValue, forKey: attribute)
+        }
+    }
+    catch {print("Fetch Failed: \(error)")}
+    do {
+        try managedContext.save()
+    }
+    catch {print("Saving Core Data Failed: \(error)")}
+}
+
+func createWallet(for user: String, coins: [String]) {
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+    let managedContext = appDelegate.persistentContainer.viewContext
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Person")
+    fetchRequest.predicate = NSPredicate(format: "%K BEGINSWITH[cd] %@", "name", user)
+    do {
+        let results = try managedContext.fetch(fetchRequest) as? [NSManagedObject]
+        if results?.count != 0 {
+            //print("results: \(results![0])")
+            let person = results![0]
+            let definedCoin = NSEntityDescription.entity(forEntityName: "Coin", in: managedContext)!
+            let coin1 = NSManagedObject(entity: definedCoin, insertInto: managedContext)
+            coin1.setValue(coins[0], forKey: "symbol")
+            coin1.setValue(coins[1], forKey: "walletID")
+            coin1.setValue(person, forKey: "person")
+        }
+    }
+    catch {print("Fetch Failed: \(error)")}
+    do {
+        try managedContext.save()
+    }
+    catch {print("Saving Core Data Failed: \(error)")}
+}
+*/

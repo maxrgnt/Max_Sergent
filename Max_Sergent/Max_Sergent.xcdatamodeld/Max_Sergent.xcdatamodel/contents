@@ -4,12 +4,12 @@
         <attribute name="originDate" optional="YES" attributeType="String"/>
         <attribute name="statement" optional="YES" attributeType="String"/>
     </entity>
-    <entity name="ResetData" representedClassName="ResetData" syncable="YES" codeGenerationType="class">
-        <attribute name="lastReset" optional="YES" attributeType="String"/>
-        <attribute name="proceed" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+    <entity name="ProfileData" representedClassName="ProfileData" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="picture" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="ResetData" positionX="-63" positionY="-18" width="128" height="73"/>
         <element name="OverviewData" positionX="-54" positionY="9" width="128" height="73"/>
+        <element name="ProfileData" positionX="-36" positionY="27" width="128" height="73"/>
     </elements>
 </model>

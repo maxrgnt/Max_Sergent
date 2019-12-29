@@ -49,6 +49,11 @@ struct Constants {
             static let work = "work"
         }
         
+        struct CoreData {
+            static let Profile = "ProfileData"
+            static let Overview = "OverviewData"
+        }
+        
         struct Reset {
             static let proceed = "proceed"
         }
