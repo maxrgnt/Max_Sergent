@@ -15,6 +15,7 @@ import FirebaseStorage
 struct Data {
     
     static var profile: (name: String, picture: String) = (name: "Ivan", picture: "UGLY")
+    static var overview: (originDate: String, statement: String, personal: [(language: String, days: Int)], work: [(language: String, days: Int)]) = (originDate: "01/01/2001", statement: "Think different.", personal: [], work: [])
     
     static let experience: [String : [(position: String, work: String)]] =
         ["BEA":
@@ -78,19 +79,16 @@ struct Data {
         do {
             try managedContext.save()
             loadProfile()
-            UserDefaults.standard.set(true, forKey: "CoreData")
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
     }
     
     static func loadProfile() {
-        print("Loading Profile from CoreData")
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Data.CoreData.Profile)
         let objects = try! managedContext.fetch(fetch) as! [ProfileData]
-        print(profile)
         if let object = objects.first {
             if  let name = object.name,
                 let picture = object.picture
@@ -98,7 +96,70 @@ struct Data {
                 profile = (name: name, picture: picture)
             }
         }
-        print(profile)
+    }
+    
+    //MARK: CoreData Overview
+    static func setOverview(originDate: String, statement: String, personalProjects: [String: AnyObject], workProjects: [String: AnyObject]) {
+        print("Setting CoreData Overview")
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let overviewEntity = NSEntityDescription.entity(forEntityName: Constants.Data.CoreData.Overview, in: managedContext)!
+        let overview = NSManagedObject(entity: overviewEntity, insertInto: managedContext)
+        overview.setValue(originDate, forKeyPath: Constants.Data.Overview.originDate)
+        overview.setValue(statement, forKeyPath: Constants.Data.Overview.statement)
+        
+        let lists = [workProjects, personalProjects]
+        let types = [Constants.Data.Overview.workProjects, Constants.Data.Overview.personalProjects]
+        for (i, keyList) in [workProjects.keys, personalProjects.keys].enumerated() {
+            keyList.forEach { key in
+                 if let dict = lists[i][key] as? [String: AnyObject] {
+                    if  let language = dict[Constants.Data.Overview.language] as? String,
+                        let days = dict[Constants.Data.Overview.days] as? Int
+                    {
+                        let newProject = NSEntityDescription.entity(forEntityName: Constants.Data.CoreData.OverviewProject, in: managedContext)!
+                        let project = NSManagedObject(entity: newProject, insertInto: managedContext)
+                        project.setValue(types[i], forKey: Constants.Data.Overview.type)
+                        project.setValue(language, forKey: Constants.Data.Overview.language)
+                        project.setValue(days, forKey: Constants.Data.Overview.days)
+                        project.setValue(overview, forKey: "overview")
+                    }
+                 }
+            }
+        }
+        do {
+            try managedContext.save()
+            loadOverview()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    static func loadOverview() {
+        print("Loading CoreData Overview")
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Data.CoreData.Overview)
+        let objects = try! managedContext.fetch(fetch) as! [OverviewData]
+        objects.forEach { object in
+            if  let originDate = object.originDate,
+                let statement = object.statement,
+                let projects = object.projects?.allObjects as? [OverviewProject] // Set One-to-Many
+            {
+                var personal: [(language: String, days: Int)] = []
+                var work: [(language: String, days: Int)] = []
+                projects.forEach { project in
+                    if project.type == Constants.Data.Overview.personalProjects {
+                        personal.append((language: project.language!, days: Int(project.days)))
+                    }
+                    else if project.type == Constants.Data.Overview.workProjects {
+                        work.append((language: project.language!, days: Int(project.days)))
+                    }
+                }
+                print(overview)
+                overview = (originDate: originDate, statement: statement, personal: personal, work: work)
+                print(overview)
+            }
+        }
     }
     
     //MARK: CoreData Delete
@@ -120,13 +181,15 @@ struct Data {
     static func reloadFirebase(for key: String) {
         firebaseReset() { reset in
             if reset {
-                firebaseProfile()
-                //firebaseOverview()
+                //firebaseProfile()
+                firebaseOverview()
                 //firebaseWork()
+                UserDefaults.standard.set(true, forKey: "CoreData")
             }
             else {
                 print("Do not reset from Firebase")
-                loadProfile()
+                //loadProfile()
+                loadOverview()
             }
         }
     }
@@ -179,28 +242,37 @@ struct Data {
                 if  let originDate = dict[Constants.Data.Overview.originDate] as? String,
                     let personalProjects = dict[Constants.Data.Overview.personalProjects] as? [String: AnyObject],
                     let workProjects = dict[Constants.Data.Overview.workProjects] as? [String: AnyObject],
-                    let statement = dict[Constants.Data.Overview.statement]
+                    let statement = dict[Constants.Data.Overview.statement] as? String
                 {
                     //print("-- OVERVIEW ------")
                     //print(originDate,"\n",statement)
-                    personalProjects.keys.forEach { key in
-                        if let dict = personalProjects[key] as? [String: AnyObject] {
-                            if  let language = dict[Constants.Data.Overview.language] as? String,
-                                let days = dict[Constants.Data.Overview.days] as? Int
-                            {
-                                //print("\(language) | \(days)")
-                            }
-                        }
+//                    personalProjects.keys.forEach { key in
+//                        if let dict = personalProjects[key] as? [String: AnyObject] {
+//                            if  let language = dict[Constants.Data.Overview.language] as? String,
+//                                let days = dict[Constants.Data.Overview.days] as? Int
+//                            {
+//                                //print("\(language) | \(days)")
+//                            }
+//                        }
+//                    }
+//                    workProjects.keys.forEach { key in
+//                        if let dict = workProjects[key] as? [String: AnyObject] {
+//                            if  let language = dict[Constants.Data.Overview.language] as? String,
+//                                let days = dict[Constants.Data.Overview.days] as? Int
+//                            {
+//                                //print("\(language) | \(days)")
+//                            }
+//                        }
+//                    }
+                    if coreDataPopulated() {
+                        print("coreDataPopulated @ Overview")
+                        deleteCoreData(forEntity: Constants.Data.CoreData.Overview)
+                        deleteCoreData(forEntity: Constants.Data.CoreData.OverviewProject)
                     }
-                    workProjects.keys.forEach { key in
-                        if let dict = workProjects[key] as? [String: AnyObject] {
-                            if  let language = dict[Constants.Data.Overview.language] as? String,
-                                let days = dict[Constants.Data.Overview.days] as? Int
-                            {
-                                //print("\(language) | \(days)")
-                            }
-                        }
+                    else {
+                        print("coreDataNOTPopulated @ Overview")
                     }
+                    setOverview(originDate: originDate, statement: statement, personalProjects: personalProjects, workProjects: workProjects)
                 }
             }
         })

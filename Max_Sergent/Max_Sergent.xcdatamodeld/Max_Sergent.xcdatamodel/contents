@@ -3,13 +3,21 @@
     <entity name="OverviewData" representedClassName="OverviewData" syncable="YES" codeGenerationType="class">
         <attribute name="originDate" optional="YES" attributeType="String"/>
         <attribute name="statement" optional="YES" attributeType="String"/>
+        <relationship name="projects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="OverviewProject" inverseName="overview" inverseEntity="OverviewProject"/>
+    </entity>
+    <entity name="OverviewProject" representedClassName="OverviewProject" syncable="YES" codeGenerationType="class">
+        <attribute name="days" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="language" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="overview" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="OverviewData" inverseName="projects" inverseEntity="OverviewData"/>
     </entity>
     <entity name="ProfileData" representedClassName="ProfileData" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="picture" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="OverviewData" positionX="-54" positionY="9" width="128" height="73"/>
+        <element name="OverviewData" positionX="-54" positionY="9" width="128" height="88"/>
         <element name="ProfileData" positionX="-36" positionY="27" width="128" height="73"/>
+        <element name="OverviewProject" positionX="-45" positionY="36" width="128" height="103"/>
     </elements>
 </model>

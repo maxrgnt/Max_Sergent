@@ -52,6 +52,7 @@ struct Constants {
         struct CoreData {
             static let Profile = "ProfileData"
             static let Overview = "OverviewData"
+            static let OverviewProject = "OverviewProject"
         }
         
         struct Reset {
@@ -70,6 +71,7 @@ struct Constants {
             static let workProjects = "workProjects"
             static let language = "language"
             static let days = "days"
+            static let type = "type"
         }
         
         struct Work {
