@@ -21,18 +21,7 @@ struct Data {
         "Toggle":
             [(position: "Co-Founder", work: "But then our visions of the future began to diverge and eventually we had a falling out. When we did, our Board of Directors sided with him. So at 30 I was out. And very publicly out. What had been the focus of my entire adult life was gone, and it was devastating.")]
         ]
- 
-    static func checkForUpdate() {
-        Database.database().reference(withPath: "reset").observe(.value) { (snapshot:DataSnapshot) in
-            if let resetData = snapshot.value as? NSString {
-                (resetData.boolValue == true) ? print("reset!") : print("don't reset!")
-            }
-            else {
-                print("Error: NSString not convertible to Bool")
-            }
-        }
-    }
-    
+     
     static func imageStuff() {
         if let success = UIImage(named: "placeholder.png")?.saveImage(as: "placeholder") {
             
@@ -71,23 +60,28 @@ struct Data {
     }
     
     static func reloadFirebase(for key: String) {
-        if key != "all" {
-            Database.database().reference().observe(.value, with: { snapshot in
-                for child in snapshot.children {
-                    if let snapshot = child as? DataSnapshot {
-                        print(snapshot.key)
-                        if let value = snapshot.value as? [String: AnyObject] {
-                            print(value.keys)
-                        }
-                    }
-                }
-            })
+        firebaseReset() { reset in
+            if reset {
+                firebaseProfile()
+                firebaseOverview()
+                firebaseWork()
+            }
+            else {
+                print("Do not reset from Firebase")
+            }
         }
-        else {
-//            firebaseProfile()
-//            firebaseOverview()
-//            firebaseWork()
-        }
+    }
+    
+    static func firebaseReset(completionHandler:@escaping (Bool) -> ()) {
+        Database.database().reference(withPath: "_reset").observe(.value, with: { snapshot in
+            if let reset = snapshot.value as? Bool {
+                completionHandler(reset)
+            }
+            else {
+                completionHandler(false)
+                print("Error: NSString not convertible to Bool")
+            }
+        })
     }
     
     static func firebaseProfile() {
