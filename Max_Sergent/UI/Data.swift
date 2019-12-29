@@ -99,7 +99,7 @@ struct Data {
     }
     
     //MARK: CoreData Overview
-    static func setOverview(originDate: String, statement: String, personalProjects: [String: AnyObject], workProjects: [String: AnyObject]) {
+    static func setOverview(originDate: String, statement: String, personal: [String: AnyObject], work: [String: AnyObject]) {
         print("Setting CoreData Overview")
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let managedContext = appDelegate.persistentContainer.viewContext
@@ -108,9 +108,9 @@ struct Data {
         overview.setValue(originDate, forKeyPath: Constants.Data.Overview.originDate)
         overview.setValue(statement, forKeyPath: Constants.Data.Overview.statement)
         
-        let lists = [workProjects, personalProjects]
-        let types = [Constants.Data.Overview.workProjects, Constants.Data.Overview.personalProjects]
-        for (i, keyList) in [workProjects.keys, personalProjects.keys].enumerated() {
+        let lists = [personal, work]
+        let types = [Constants.Data.Overview.personalProjects, Constants.Data.Overview.workProjects]
+        for (i, keyList) in [personal.keys, work.keys].enumerated() {
             keyList.forEach { key in
                  if let dict = lists[i][key] as? [String: AnyObject] {
                     if  let language = dict[Constants.Data.Overview.language] as? String,
@@ -216,7 +216,7 @@ struct Data {
     //MARK: Firebase Profile
     static func firebaseProfile() {
         print("Firebase Profile has fired")
-        Database.database().reference(withPath: Constants.Data.Firebase.profile).observe(.value, with: { snapshot in
+        Database.database().reference(withPath: Constants.Data.Firebase.profile).observeSingleEvent(of: .value, with: { snapshot in
             if let dict = snapshot.value as? [String: AnyObject] {
                 if  let name = dict[Constants.Data.Profile.name] as? String,
                     let pictureURL = dict[Constants.Data.Profile.picture] as? String
@@ -237,33 +237,13 @@ struct Data {
     
     //MARK: Firebase Overview
     static func firebaseOverview() {
-        Database.database().reference(withPath: Constants.Data.Firebase.overview).observe(.value, with: { snapshot in
+        Database.database().reference(withPath: Constants.Data.Firebase.overview).observeSingleEvent(of: .value, with: { snapshot in
             if let dict = snapshot.value as? [String: AnyObject] {
                 if  let originDate = dict[Constants.Data.Overview.originDate] as? String,
                     let personalProjects = dict[Constants.Data.Overview.personalProjects] as? [String: AnyObject],
                     let workProjects = dict[Constants.Data.Overview.workProjects] as? [String: AnyObject],
                     let statement = dict[Constants.Data.Overview.statement] as? String
                 {
-                    //print("-- OVERVIEW ------")
-                    //print(originDate,"\n",statement)
-//                    personalProjects.keys.forEach { key in
-//                        if let dict = personalProjects[key] as? [String: AnyObject] {
-//                            if  let language = dict[Constants.Data.Overview.language] as? String,
-//                                let days = dict[Constants.Data.Overview.days] as? Int
-//                            {
-//                                //print("\(language) | \(days)")
-//                            }
-//                        }
-//                    }
-//                    workProjects.keys.forEach { key in
-//                        if let dict = workProjects[key] as? [String: AnyObject] {
-//                            if  let language = dict[Constants.Data.Overview.language] as? String,
-//                                let days = dict[Constants.Data.Overview.days] as? Int
-//                            {
-//                                //print("\(language) | \(days)")
-//                            }
-//                        }
-//                    }
                     if coreDataPopulated() {
                         print("coreDataPopulated @ Overview")
                         deleteCoreData(forEntity: Constants.Data.CoreData.Overview)
@@ -272,7 +252,7 @@ struct Data {
                     else {
                         print("coreDataNOTPopulated @ Overview")
                     }
-                    setOverview(originDate: originDate, statement: statement, personalProjects: personalProjects, workProjects: workProjects)
+                    setOverview(originDate: originDate, statement: statement, personal: personalProjects, work: workProjects)
                 }
             }
         })
@@ -280,7 +260,7 @@ struct Data {
     
     //MARK: Firebase Work
     static func firebaseWork() {
-        Database.database().reference(withPath: Constants.Data.Firebase.work).observe(.value, with: { snapshot in
+        Database.database().reference(withPath: Constants.Data.Firebase.work).observeSingleEvent(of: .value, with: { snapshot in
             if let dict = snapshot.value as? [String: AnyObject] {
                 //print("-- WORK ------")
                 dict.keys.forEach { key in
