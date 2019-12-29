@@ -69,4 +69,99 @@ struct Data {
             print(error)
         }
     }
+    
+    static func reloadFirebase(for key: String) {
+        if key != "all" {
+            Database.database().reference().observe(.value, with: { snapshot in
+                for child in snapshot.children {
+                    if let snapshot = child as? DataSnapshot {
+                        print(snapshot.key)
+                        if let value = snapshot.value as? [String: AnyObject] {
+                            print(value.keys)
+                        }
+                    }
+                }
+            })
+        }
+        else {
+//            firebaseProfile()
+//            firebaseOverview()
+//            firebaseWork()
+        }
+    }
+    
+    static func firebaseProfile() {
+        Database.database().reference(withPath: "profile").observe(.value, with: { snapshot in
+            if let dict = snapshot.value as? [String: AnyObject] {
+                if  let name = dict["name"] as? String,
+                    let pictureURL = dict["picture"] as? String
+                {
+                    print("-- PROFILE ------")
+                    print(name," | ",pictureURL)
+                }
+            }
+        })
+    }
+    
+    static func firebaseOverview() {
+        Database.database().reference(withPath: "overview").observe(.value, with: { snapshot in
+            if let dict = snapshot.value as? [String: AnyObject] {
+                if  let originDate = dict["originDate"] as? String,
+                    let personalProjects = dict["personalProjects"] as? [String: AnyObject],
+                    let workProjects = dict["workProjects"] as? [String: AnyObject],
+                    let statement = dict["statement"]
+                {
+                    print("-- OVERVIEW ------")
+                    print(originDate,"\n",statement)
+                    print("personalProjects")
+                    personalProjects.keys.forEach { key in
+                        if let dict = personalProjects[key] as? [String: AnyObject] {
+                            if  let language = dict["language"] as? String,
+                                let days = dict["days"] as? Int
+                            {
+                                print("\(language) | \(days)")
+                            }
+                        }
+                    }
+                    print("workProjects")
+                    workProjects.keys.forEach { key in
+                        if let dict = workProjects[key] as? [String: AnyObject] {
+                            if  let language = dict["language"] as? String,
+                                let days = dict["days"] as? Int
+                            {
+                                print("\(language) | \(days)")
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
+    
+    static func firebaseWork() {
+        Database.database().reference(withPath: "work").observe(.value, with: { snapshot in
+            if let dict = snapshot.value as? [String: AnyObject] {
+                print("-- WORK ------")
+                dict.keys.forEach { key in
+                    if let job = dict[key] as? [String: AnyObject] {
+                        if  let company = job["company"] as? String,
+                            let positions = job["positions"] as? [String: AnyObject]
+                        {
+                            positions.keys.forEach { key in
+                                if let position = positions[key] {
+                                    if  let startDate = position["startDate"] as? String,
+                                        let title = position["title"] as? String,
+                                        let workCompleted = position["workCompleted"] as? String
+                                    {
+                                        print(company)
+                                        print(startDate," | ",title,"\n",workCompleted)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
 }

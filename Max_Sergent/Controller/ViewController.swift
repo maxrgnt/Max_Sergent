@@ -36,7 +36,8 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
         //Data.checkForUpdate()
         //Data.imageStuff()
         //Data.deleteImages()
-        Data.contentsOfDocumentsDirectory()
+        //Data.contentsOfDocumentsDirectory()
+        Data.reloadFirebase(for: "all")
     }
     
     //MARK: Setup
