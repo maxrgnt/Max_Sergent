@@ -40,4 +40,41 @@ struct Constants {
         static let company = "Capital One"
     }
     
+    struct Data {
+        
+        struct Firebase {
+            static let reset = "_reset"
+            static let profile = "profile"
+            static let overview = "overview"
+            static let work = "work"
+        }
+        
+        struct Reset {
+            static let proceed = "proceed"
+        }
+        
+        struct Profile {
+            static let name = "name"
+            static let picture = "picture"
+        }
+        
+        struct Overview {
+            static let statement = "statement"
+            static let originDate = "originDate"
+            static let personalProjects = "personalProjects"
+            static let workProjects = "workProjects"
+            static let language = "language"
+            static let days = "days"
+        }
+        
+        struct Work {
+            static let company = "company"
+            static let positions = "positions"
+            static let startDate = "startDate"
+            static let title = "title"
+            static let workCompleted = "workCompleted"
+        }
+        
+    }
+    
 }
