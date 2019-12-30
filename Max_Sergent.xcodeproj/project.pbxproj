@@ -29,6 +29,7 @@
 		66C4C60A23B687B500DEDF6D /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C4C60923B687B500DEDF6D /* Menu.swift */; };
 		66DCB72623BA3872007AAF78 /* Data_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DCB72523BA3872007AAF78 /* Data_CoreData.swift */; };
 		66DCB72823BA387F007AAF78 /* Data_Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DCB72723BA387F007AAF78 /* Data_Firebase.swift */; };
+		66DCB72A23BA54D5007AAF78 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DCB72923BA54D5007AAF78 /* Reachability.swift */; };
 		66FD8A79239AD18E00B90C69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A78239AD18E00B90C69 /* AppDelegate.swift */; };
 		66FD8A7B239AD18E00B90C69 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */; };
 		66FD8A7E239AD18E00B90C69 /* Max_Sergent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A7C239AD18E00B90C69 /* Max_Sergent.xcdatamodeld */; };
@@ -87,6 +88,7 @@
 		66C4C60923B687B500DEDF6D /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		66DCB72523BA3872007AAF78 /* Data_CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data_CoreData.swift; sourceTree = "<group>"; };
 		66DCB72723BA387F007AAF78 /* Data_Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data_Firebase.swift; sourceTree = "<group>"; };
+		66DCB72923BA54D5007AAF78 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		66FD8A75239AD18E00B90C69 /* Max Sergent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Max Sergent.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FD8A78239AD18E00B90C69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */,
 				66FD8A7F239AD18E00B90C69 /* ContentView.swift */,
 				66C4C5FD23ABDF1C00DEDF6D /* Extension.swift */,
+				66DCB72923BA54D5007AAF78 /* Reachability.swift */,
 				6651C6B4239F17B0003B49A1 /* UI */,
 				6651C6B2239F179F003B49A1 /* View */,
 				6651C6B5239F17D4003B49A1 /* Controller */,
@@ -543,6 +546,7 @@
 				6651C6AD239F12C2003B49A1 /* Constraints.swift in Sources */,
 				66FD8A80239AD18E00B90C69 /* ContentView.swift in Sources */,
 				66C4C60423B1010400DEDF6D /* ExperienceCell.swift in Sources */,
+				66DCB72A23BA54D5007AAF78 /* Reachability.swift in Sources */,
 				66C4C60023AE45EB00DEDF6D /* Experience.swift in Sources */,
 				66C4C60823B14BB300DEDF6D /* Data.swift in Sources */,
 				66FD8A7B239AD18E00B90C69 /* SceneDelegate.swift in Sources */,

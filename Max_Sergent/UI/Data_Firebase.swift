@@ -13,6 +13,15 @@ import FirebaseStorage
 
 extension Data {
     
+    //MARK: Firebase All
+    static func firebaseAll(completion:@escaping () -> Void) {
+        //print("startFireBaseAll")
+        firebaseProfile()
+        firebaseOverview()
+        firebaseWork()
+        completion()
+    }
+    
     //MARK: Firebase Reset
     static func firebaseReset(completionHandler:@escaping (Bool) -> ()) {
         Database.database().reference(withPath: Constants.Data.Firebase.reset).observe(.value, with: { snapshot in
@@ -30,15 +39,6 @@ extension Data {
                 print("Error: snapshot.value not convertible to [String: AnyObject]")
             }
         })
-    }
-    
-    //MARK: Firebase All
-    static func firebaseAll(completion:@escaping () -> Void) {
-        //print("startFireBaseAll")
-        firebaseProfile()
-        firebaseOverview()
-        firebaseWork()
-        completion()
     }
     
     //MARK: Firebase Profile

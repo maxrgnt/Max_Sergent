@@ -29,8 +29,14 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
     override func viewDidLoad() {
         print("Hello World!")
         view.backgroundColor = UI.Colors.Header.background
-        Data.checkFirebaseForReset()
-        Data.populateData(for: "all")
+        
+        if Reachability.isConnectedToNetwork(){
+            print("Internet Connection Available!")
+            Data.checkFirebaseForReset()
+        }else{
+            print("Internet Connection not Available!")
+            Data.populateData(from: false)
+        }
         
         setup()
         

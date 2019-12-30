@@ -64,25 +64,26 @@ struct Data {
 //    }
     
     //MARK: Populate Data
-    static func populateData(for key: String) {
-        if coreDataPopulated() {
+    static func checkFirebaseForReset() {
+        firebaseReset() { reset in
+            //print("Check Firebase reset: \(reset)")
+            (reset == true) ? UserDefaults.standard.set(false, forKey: "CoreData") : nil
+            print("Reset from Firebase? ",reset)
+            populateData(from: reset)
+        }
+    }
+    
+    static func populateData(from reset: Bool) {
+        if !reset && coreDataPopulated() {
+            print("Load from CoreData")
             loadProfile()
             loadOverview()
             loadWork()
         }
         else {
+            print("Load from Firebase")
             firebaseAll {
                 UserDefaults.standard.set(true, forKey: "CoreData")
-            }
-        }
-    }
-    
-    static func checkFirebaseForReset() {
-        firebaseReset() { reset in
-            //print("Check Firebase reset: \(reset)")
-            if reset {
-                UserDefaults.standard.set(false, forKey: "CoreData")
-                populateData(for: "all")
             }
         }
     }

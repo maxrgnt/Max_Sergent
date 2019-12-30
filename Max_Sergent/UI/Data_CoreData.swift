@@ -146,7 +146,6 @@ extension Data {
     }
     
     static func loadWork() {
-        print("Loading CoreData Work")
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Data.CoreData.Work)
