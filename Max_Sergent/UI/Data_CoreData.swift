@@ -86,7 +86,8 @@ extension Data {
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Data.CoreData.Overview)
         let objects = try! managedContext.fetch(fetch) as! [OverviewData]
-        objects.forEach { object in
+        overview = [:]
+        if let object = objects.first {
             if  let originDate = object.originDate,
                 let statement = object.statement,
                 let projects = object.projects?.allObjects as? [OverviewProject] // Set One-to-Many
@@ -101,8 +102,18 @@ extension Data {
                         work.append((language: project.language!, days: Int(project.days)))
                     }
                 }
-                overview = (originDate: originDate, statement: statement, personal: personal, work: work)
+                overview[Constants.Data.Overview.originDate] = originDate as AnyObject
+                overview[Constants.Data.Overview.statement] = statement as AnyObject
+                overview[Constants.Data.Overview.personalProjects] = personal as AnyObject
+                overview[Constants.Data.Overview.workProjects] = work as AnyObject
+                print(overview)
             }
+            else {
+                print("ERROR: Could not access object in loadOverview")
+            }
+        }
+        else {
+            print("ERROR: No 'Overview' objects in CoreData in loadOverview")
         }
     }
     

@@ -15,7 +15,7 @@ import FirebaseStorage
 struct Data {
     
     static var profile: (name: String, picture: String) = (name: "", picture: "")
-    static var overview: (originDate: String, statement: String, personal: [(language: String, days: Int)], work: [(language: String, days: Int)]) = (originDate: "", statement: "", personal: [], work: [])
+    static var overview: [String: AnyObject] = [:]
     static var work: [String : AnyObject] = [:] {
         didSet {
             companyKeys = Array(work.keys).sorted()
