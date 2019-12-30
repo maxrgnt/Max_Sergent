@@ -64,6 +64,7 @@ extension Data {
     static func firebaseOverview() {
         Database.database().reference(withPath: Constants.Data.Firebase.overview).observeSingleEvent(of: .value, with: { snapshot in
             if let dict = snapshot.value as? [String: AnyObject] {
+                var tempOverview: [String: AnyObject] = [:]
                 if  let originDate = dict[Constants.Data.Overview.originDate] as? String,
                     let personalProjects = dict[Constants.Data.Overview.personalProjects] as? [String: AnyObject],
                     let workProjects = dict[Constants.Data.Overview.workProjects] as? [String: AnyObject],
@@ -74,7 +75,11 @@ extension Data {
                         deleteCoreData(forEntity: Constants.Data.CoreData.Overview)
                         deleteCoreData(forEntity: Constants.Data.CoreData.OverviewProject)
                     }
-                    setOverview(originDate: originDate, statement: statement, personal: personalProjects, work: workProjects)
+                    tempOverview[Constants.Data.Overview.originDate] = originDate as AnyObject
+                    tempOverview[Constants.Data.Overview.statement] = statement as AnyObject
+                    tempOverview[Constants.Data.Overview.personalProjects] = personalProjects as AnyObject
+                    tempOverview[Constants.Data.Overview.workProjects] = workProjects as AnyObject
+                    setOverview(overviewData: tempOverview)
                 }
             }
         })
@@ -84,6 +89,7 @@ extension Data {
     static func firebaseWork() {
         Database.database().reference(withPath: Constants.Data.Firebase.work).observeSingleEvent(of: .value, with: { snapshot in
             if let workData = snapshot.value as? [String: AnyObject] {
+                var tempWork: [String: AnyObject] = [:]
                 workData.keys.forEach { jobKey in
                     if  let job = workData[jobKey] as? [String: AnyObject],
                         let company = job[Constants.Data.Work.company] as? String,
@@ -104,7 +110,7 @@ extension Data {
                                 print("ERROR: Could not access dictionary using positionKey in firebaseWork")
                             }
                         }
-                        work[jobKey] = [Constants.Data.Work.company: company,
+                        tempWork[jobKey] = [Constants.Data.Work.company: company,
                                          Constants.Data.Work.positions: positionsList] as AnyObject
                     }
                     else {
@@ -112,7 +118,7 @@ extension Data {
                     }
                 }
                 coreDataPopulated() ? deleteCoreData(forEntity: Constants.Data.CoreData.Work) : nil
-                setWork(workData: work)
+                setWork(workData: tempWork)
             }
             else {
                 print("ERROR: Could not access workData snapshot in firebaseWork")

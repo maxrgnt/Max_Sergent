@@ -6,7 +6,8 @@
         <relationship name="projects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="OverviewProject" inverseName="overview" inverseEntity="OverviewProject"/>
     </entity>
     <entity name="OverviewProject" representedClassName="OverviewProject" syncable="YES" codeGenerationType="class">
-        <attribute name="days" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="days" optional="YES" attributeType="String"/>
+        <attribute name="key" optional="YES" attributeType="String"/>
         <attribute name="language" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
         <relationship name="overview" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="OverviewData" inverseName="projects" inverseEntity="OverviewData"/>
@@ -29,7 +30,7 @@
     </entity>
     <elements>
         <element name="OverviewData" positionX="-54" positionY="9" width="128" height="88"/>
-        <element name="OverviewProject" positionX="-45" positionY="36" width="128" height="103"/>
+        <element name="OverviewProject" positionX="-45" positionY="36" width="128" height="118"/>
         <element name="ProfileData" positionX="-36" positionY="27" width="128" height="73"/>
         <element name="WorkData" positionX="-36" positionY="90" width="128" height="88"/>
         <element name="WorkPosition" positionX="-45" positionY="72" width="128" height="118"/>

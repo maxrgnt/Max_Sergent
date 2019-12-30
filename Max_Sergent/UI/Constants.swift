@@ -75,6 +75,7 @@ struct Constants {
             static let days = "days"
             static let type = "type"
             static let manyToOne = "overview"
+            static let key = "key"
         }
         
         struct Work {

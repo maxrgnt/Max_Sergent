@@ -241,8 +241,17 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
         }
     }
     
-    func reloadWorkTable() {
+    func reloadWork() {
         scroll.experience.table.reloadData()
+    }
+    
+    func reloadOverview() {
+        if  let statement = Data.overview[Constants.Data.Overview.statement] as? String,
+            let originDate = Data.overview[Constants.Data.Overview.originDate] as? String
+        {
+            scroll.overview.objective.text = statement
+            scroll.overview.originDate.text = originDate
+        }
     }
     
 }

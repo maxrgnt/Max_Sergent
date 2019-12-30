@@ -11,7 +11,8 @@ import UIKit
 import CoreData
 
 protocol DataDelegate {
-    func reloadWorkTable()
+    func reloadWork()
+    func reloadOverview()
 }
 
 extension Data {
@@ -46,30 +47,37 @@ extension Data {
     }
     
     //MARK: CoreData Overview
-    static func setOverview(originDate: String, statement: String, personal: [String: AnyObject], work: [String: AnyObject]) {
+    static func setOverview(overviewData: [String: AnyObject]) {
         //print("Setting CoreData Overview")
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let managedContext = appDelegate.persistentContainer.viewContext
         let overviewEntity = NSEntityDescription.entity(forEntityName: Constants.Data.CoreData.Overview, in: managedContext)!
         let overview = NSManagedObject(entity: overviewEntity, insertInto: managedContext)
-        overview.setValue(originDate, forKeyPath: Constants.Data.Overview.originDate)
-        overview.setValue(statement, forKeyPath: Constants.Data.Overview.statement)
-        let lists = [personal, work]
-        let types = [Constants.Data.Overview.personalProjects, Constants.Data.Overview.workProjects]
-        for (i, keyList) in [personal.keys, work.keys].enumerated() {
-            keyList.forEach { key in
-                 if let dict = lists[i][key] as? [String: AnyObject] {
-                    if  let language = dict[Constants.Data.Overview.language] as? String,
-                        let days = dict[Constants.Data.Overview.days] as? Int
-                    {
-                        let newProject = NSEntityDescription.entity(forEntityName: Constants.Data.CoreData.OverviewProject, in: managedContext)!
-                        let project = NSManagedObject(entity: newProject, insertInto: managedContext)
-                        project.setValue(types[i], forKey: Constants.Data.Overview.type)
-                        project.setValue(language, forKey: Constants.Data.Overview.language)
-                        project.setValue(days, forKey: Constants.Data.Overview.days)
-                        project.setValue(overview, forKey: Constants.Data.Overview.manyToOne)
+        if  let originDate = overviewData[Constants.Data.Overview.originDate] as? String,
+            let statement = overviewData[Constants.Data.Overview.statement] as? String,
+            let personal = overviewData[Constants.Data.Overview.personalProjects] as? [String: AnyObject],
+            let work = overviewData[Constants.Data.Overview.workProjects] as? [String: AnyObject]
+        {
+            overview.setValue(originDate, forKeyPath: Constants.Data.Overview.originDate)
+            overview.setValue(statement, forKeyPath: Constants.Data.Overview.statement)
+            let lists = [personal, work]
+            let types = [Constants.Data.Overview.personalProjects, Constants.Data.Overview.workProjects]
+            for (i, keyList) in [personal.keys, work.keys].enumerated() {
+               keyList.forEach { languageKeys in
+                    if let languageData = lists[i][languageKeys] as? [String: AnyObject] {
+                        if  let language = languageData[Constants.Data.Overview.language] as? String,
+                            let days = languageData[Constants.Data.Overview.days] as? String
+                        {
+                            let x = NSEntityDescription.entity(forEntityName: Constants.Data.CoreData.OverviewProject, in: managedContext)!
+                            let newLanguage = NSManagedObject(entity: x, insertInto: managedContext)
+                            newLanguage.setValue(types[i], forKey: Constants.Data.Overview.type)
+                            newLanguage.setValue(language, forKey: Constants.Data.Overview.language)
+                            newLanguage.setValue(days, forKey: Constants.Data.Overview.days)
+                            newLanguage.setValue(overview, forKey: Constants.Data.Overview.manyToOne)
+                            newLanguage.setValue(languageKeys, forKey: Constants.Data.Overview.key)
+                        }
                     }
-                 }
+               }
             }
         }
         do {
@@ -87,26 +95,34 @@ extension Data {
         let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Data.CoreData.Overview)
         let objects = try! managedContext.fetch(fetch) as! [OverviewData]
         overview = [:]
+        var tempOverview: [String: AnyObject] = [:]
         if let object = objects.first {
             if  let originDate = object.originDate,
                 let statement = object.statement,
                 let projects = object.projects?.allObjects as? [OverviewProject] // Set One-to-Many
             {
-                var personal: [(language: String, days: Int)] = []
-                var work: [(language: String, days: Int)] = []
+                var personal: [String: AnyObject] = [:]
+                var work: [String: AnyObject] = [:]
                 projects.forEach { project in
                     if project.type == Constants.Data.Overview.personalProjects {
-                        personal.append((language: project.language!, days: Int(project.days)))
+                        if let projectKey = project.key {
+                            personal[projectKey] = [Constants.Data.Overview.language: project.language,
+                                                    Constants.Data.Overview.days: project.days] as AnyObject
+                        }
                     }
                     else if project.type == Constants.Data.Overview.workProjects {
-                        work.append((language: project.language!, days: Int(project.days)))
+                        if let projectKey = project.key {
+                            work[projectKey] = [Constants.Data.Overview.language: project.language,
+                                                Constants.Data.Overview.days: project.days] as AnyObject
+                        }
                     }
                 }
-                overview[Constants.Data.Overview.originDate] = originDate as AnyObject
-                overview[Constants.Data.Overview.statement] = statement as AnyObject
-                overview[Constants.Data.Overview.personalProjects] = personal as AnyObject
-                overview[Constants.Data.Overview.workProjects] = work as AnyObject
-                print(overview)
+                tempOverview[Constants.Data.Overview.originDate] = originDate as AnyObject
+                tempOverview[Constants.Data.Overview.statement] = statement as AnyObject
+                tempOverview[Constants.Data.Overview.personalProjects] = personal as AnyObject
+                tempOverview[Constants.Data.Overview.workProjects] = work as AnyObject
+                overview = tempOverview
+                self.customDelegate.reloadOverview()
             }
             else {
                 print("ERROR: Could not access object in loadOverview")
@@ -195,7 +211,7 @@ extension Data {
                 print("ERROR: Could not company or positions in loadWork")
             }
         }
-        self.customDelegate.reloadWorkTable()
+        self.customDelegate.reloadWork()
     }
     
     //MARK: CoreData Delete
