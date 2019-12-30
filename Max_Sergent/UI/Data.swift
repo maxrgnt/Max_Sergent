@@ -14,8 +14,9 @@ import FirebaseStorage
 
 struct Data {
     
-    static var profile: (name: String, picture: String) = (name: "Ivan", picture: "UGLY")
-    static var overview: (originDate: String, statement: String, personal: [(language: String, days: Int)], work: [(language: String, days: Int)]) = (originDate: "01/01/2001", statement: "Think different.", personal: [], work: [])
+    static var profile: (name: String, picture: String) = (name: "", picture: "")
+    static var overview: (originDate: String, statement: String, personal: [(language: String, days: Int)], work: [(language: String, days: Int)]) = (originDate: "", statement: "", personal: [], work: [])
+    static var work: (originDate: String, statement: String, personal: [(language: String, days: Int)], work: [(language: String, days: Int)]) = (originDate: "", statement: "", personal: [], work: [])
     
     static let experience: [String : [(position: String, work: String)]] =
         ["BEA":
@@ -62,9 +63,32 @@ struct Data {
 //        }
 //    }
     
+    //MARK: Populate Data
+    static func populateData(for key: String) {
+        if coreDataPopulated() {
+            loadProfile()
+            loadOverview()
+            loadWork()
+        }
+        else {
+            firebaseAll {
+                UserDefaults.standard.set(true, forKey: "CoreData")
+            }
+        }
+    }
+    
+    static func checkFirebaseForReset() {
+        firebaseReset() { reset in
+            //print("Check Firebase reset: \(reset)")
+            if reset {
+                UserDefaults.standard.set(false, forKey: "CoreData")
+                populateData(for: "all")
+            }
+        }
+    }
+    
     //MARK: UserDefaults
     static func coreDataPopulated() -> Bool {
-        print("Has coreDataPopulated? \(UserDefaults.standard.bool(forKey: "CoreData"))")
         return UserDefaults.standard.bool(forKey: "CoreData")
     }
     
@@ -85,29 +109,25 @@ struct Data {
     }
     
     static func loadProfile() {
+        //print("Loading CoreData Profile")
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Data.CoreData.Profile)
         let objects = try! managedContext.fetch(fetch) as! [ProfileData]
-        if let object = objects.first {
-            if  let name = object.name,
-                let picture = object.picture
-            {
-                profile = (name: name, picture: picture)
-            }
+        if let object = objects.first, let name = object.name, let picture = object.picture {
+            profile = (name: name, picture: picture)
         }
     }
     
     //MARK: CoreData Overview
     static func setOverview(originDate: String, statement: String, personal: [String: AnyObject], work: [String: AnyObject]) {
-        print("Setting CoreData Overview")
+        //print("Setting CoreData Overview")
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let managedContext = appDelegate.persistentContainer.viewContext
         let overviewEntity = NSEntityDescription.entity(forEntityName: Constants.Data.CoreData.Overview, in: managedContext)!
         let overview = NSManagedObject(entity: overviewEntity, insertInto: managedContext)
         overview.setValue(originDate, forKeyPath: Constants.Data.Overview.originDate)
         overview.setValue(statement, forKeyPath: Constants.Data.Overview.statement)
-        
         let lists = [personal, work]
         let types = [Constants.Data.Overview.personalProjects, Constants.Data.Overview.workProjects]
         for (i, keyList) in [personal.keys, work.keys].enumerated() {
@@ -121,7 +141,7 @@ struct Data {
                         project.setValue(types[i], forKey: Constants.Data.Overview.type)
                         project.setValue(language, forKey: Constants.Data.Overview.language)
                         project.setValue(days, forKey: Constants.Data.Overview.days)
-                        project.setValue(overview, forKey: "overview")
+                        project.setValue(overview, forKey: Constants.Data.Overview.manyToOne)
                     }
                  }
             }
@@ -135,7 +155,7 @@ struct Data {
     }
     
     static func loadOverview() {
-        print("Loading CoreData Overview")
+        //print("Loading CoreData Overview")
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Data.CoreData.Overview)
@@ -155,16 +175,62 @@ struct Data {
                         work.append((language: project.language!, days: Int(project.days)))
                     }
                 }
-                print(overview)
                 overview = (originDate: originDate, statement: statement, personal: personal, work: work)
-                print(overview)
+            }
+        }
+    }
+    
+    //MARK: CoreData Work
+    static func setWork(jobs: [(company: String, positions: [(startDate: String, title: String, workCompleted: String)])]) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        jobs.forEach { job in
+            let workEntity = NSEntityDescription.entity(forEntityName: Constants.Data.CoreData.Work, in: managedContext)!
+            let work = NSManagedObject(entity: workEntity, insertInto: managedContext)
+            work.setValue(job.company, forKeyPath: Constants.Data.Work.company)
+            job.positions.forEach { positionInfo in
+                let newPosition = NSEntityDescription.entity(forEntityName: Constants.Data.CoreData.WorkPosition, in: managedContext)!
+                let position = NSManagedObject(entity: newPosition, insertInto: managedContext)
+                position.setValue(positionInfo.startDate, forKeyPath: Constants.Data.Work.startDate)
+                position.setValue(positionInfo.title, forKeyPath: Constants.Data.Work.title)
+                position.setValue(positionInfo.workCompleted, forKeyPath: Constants.Data.Work.workCompleted)
+                position.setValue(work, forKey: Constants.Data.Work.manyToOne)
+            }
+        }
+        do {
+            try managedContext.save()
+            loadWork()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    static func loadWork() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Data.CoreData.Work)
+        let objects = try! managedContext.fetch(fetch) as! [WorkData]
+        objects.forEach { object in
+            if  let company = object.company,
+                let positions = object.positions?.allObjects as? [WorkPosition] // Set One-to-Many
+            {
+                var jobs = [(company: String, positions: [(startDate: String, title: String, workCompleted: String)])]
+                positions.forEach { position in
+                    if  let startDate = position.startDate,
+                        let title = position.title,
+                        let workCompleted = position.workCompleted
+                    {
+                        jobs.append((company: company, positions))
+                    }
+                }
+                //overview = (originDate: originDate, statement: statement, personal: personal, work: work)
             }
         }
     }
     
     //MARK: CoreData Delete
     static func deleteCoreData(forEntity entity: String) {
-        print("Deleting CoreData for \(entity)")
+        //print("Deleting CoreData for \(entity)")
         let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
@@ -174,23 +240,6 @@ struct Data {
             try managedContext.save()
         } catch {
             print ("There was an error")
-        }
-    }
-    
-    //MARK: Reload Firebase
-    static func reloadFirebase(for key: String) {
-        firebaseReset() { reset in
-            if reset {
-                //firebaseProfile()
-                firebaseOverview()
-                //firebaseWork()
-                UserDefaults.standard.set(true, forKey: "CoreData")
-            }
-            else {
-                print("Do not reset from Firebase")
-                //loadProfile()
-                loadOverview()
-            }
         }
     }
     
@@ -213,23 +262,29 @@ struct Data {
         })
     }
     
+    //MARK: Firebase All
+    static func firebaseAll(completion:@escaping () -> Void) {
+        //print("startFireBaseAll")
+        firebaseProfile()
+        firebaseOverview()
+        firebaseWork()
+        completion()
+    }
+    
     //MARK: Firebase Profile
     static func firebaseProfile() {
-        print("Firebase Profile has fired")
+        //print("Firebase Profile has fired")
         Database.database().reference(withPath: Constants.Data.Firebase.profile).observeSingleEvent(of: .value, with: { snapshot in
             if let dict = snapshot.value as? [String: AnyObject] {
                 if  let name = dict[Constants.Data.Profile.name] as? String,
                     let pictureURL = dict[Constants.Data.Profile.picture] as? String
                 {
                     if coreDataPopulated() {
-                        print("coreDataPopulated @ Profile")
+                        //print("coreDataPopulated @ Profile")
                         deleteCoreData(forEntity: Constants.Data.CoreData.Profile)
-                        setProfile(name: name, picture: pictureURL)
                     }
-                    else {
-                        print("coreDataNOTPopulated @ Profile")
-                        setProfile(name: name, picture: pictureURL)
-                    }
+                    //print("coreDataNOTPopulated @ Profile")
+                    setProfile(name: name, picture: pictureURL)
                 }
             }
         })
@@ -245,12 +300,9 @@ struct Data {
                     let statement = dict[Constants.Data.Overview.statement] as? String
                 {
                     if coreDataPopulated() {
-                        print("coreDataPopulated @ Overview")
+                        //print("coreDataPopulated @ Overview")
                         deleteCoreData(forEntity: Constants.Data.CoreData.Overview)
                         deleteCoreData(forEntity: Constants.Data.CoreData.OverviewProject)
-                    }
-                    else {
-                        print("coreDataNOTPopulated @ Overview")
                     }
                     setOverview(originDate: originDate, statement: statement, personal: personalProjects, work: workProjects)
                 }
@@ -262,75 +314,33 @@ struct Data {
     static func firebaseWork() {
         Database.database().reference(withPath: Constants.Data.Firebase.work).observeSingleEvent(of: .value, with: { snapshot in
             if let dict = snapshot.value as? [String: AnyObject] {
-                //print("-- WORK ------")
+                var jobs: [(company: String, positions: [(startDate: String, title: String, workCompleted: String)])] = []
                 dict.keys.forEach { key in
-                    if let job = dict[key] as? [String: AnyObject] {
-                        if  let company = job[Constants.Data.Work.company] as? String,
-                            let positions = job[Constants.Data.Work.positions] as? [String: AnyObject]
-                        {
-                            positions.keys.forEach { key in
-                                if let position = positions[key] {
-                                    if  let startDate = position[Constants.Data.Work.startDate] as? String,
-                                        let title = position[Constants.Data.Work.title] as? String,
-                                        let workCompleted = position[Constants.Data.Work.workCompleted] as? String
-                                    {
-                                        //print(company)
-                                        //print(startDate," | ",title,"\n",workCompleted)
-                                    }
-                                }
+                    if  let job = dict[key] as? [String: AnyObject],
+                        let company = job[Constants.Data.Work.company] as? String,
+                        let positions = job[Constants.Data.Work.positions] as? [String: AnyObject]
+                    {
+                        var positionsList: [(startDate: String, title: String, workCompleted: String)] = []
+                        positions.keys.forEach { key in
+                            if  let position = positions[key],
+                                let startDate = position[Constants.Data.Work.startDate] as? String,
+                                let title = position[Constants.Data.Work.title] as? String,
+                                let workCompleted = position[Constants.Data.Work.workCompleted] as? String
+                            {
+                                positionsList.append((startDate: startDate, title: title, workCompleted: workCompleted))
                             }
                         }
+                        jobs.append((company: company, positions: positionsList))
                     }
                 }
+                if coreDataPopulated() {
+                    //print("coreDataPopulated @ Overview")
+                    deleteCoreData(forEntity: Constants.Data.CoreData.Work)
+                }
+                setWork(jobs: jobs)
             }
         })
     }
+
 }
 
-/*
-func updateCoreData(for attribute: String, from entity: String, oldValue: String, newValue: String) {
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
-    let managedContext = appDelegate.persistentContainer.viewContext
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
-    //fetchRequest.predicate = NSPredicate(format: "userID = %@ AND name = %&", argumentArray: value)
-    //fetchRequest.predicate = NSPredicate(format: "userID == %@", oldValue)
-    fetchRequest.predicate = NSPredicate(format: "%K BEGINSWITH[cd] %@", attribute, oldValue)
-    do {
-        let results = try managedContext.fetch(fetchRequest) as? [NSManagedObject]
-        if results?.count != 0 { // Atleast one was returned
-            // In my case, I only updated the first item in results
-            //print("results: \(results![0])")
-            results![0].setValue(newValue, forKey: attribute)
-        }
-    }
-    catch {print("Fetch Failed: \(error)")}
-    do {
-        try managedContext.save()
-    }
-    catch {print("Saving Core Data Failed: \(error)")}
-}
-
-func createWallet(for user: String, coins: [String]) {
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
-    let managedContext = appDelegate.persistentContainer.viewContext
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Person")
-    fetchRequest.predicate = NSPredicate(format: "%K BEGINSWITH[cd] %@", "name", user)
-    do {
-        let results = try managedContext.fetch(fetchRequest) as? [NSManagedObject]
-        if results?.count != 0 {
-            //print("results: \(results![0])")
-            let person = results![0]
-            let definedCoin = NSEntityDescription.entity(forEntityName: "Coin", in: managedContext)!
-            let coin1 = NSManagedObject(entity: definedCoin, insertInto: managedContext)
-            coin1.setValue(coins[0], forKey: "symbol")
-            coin1.setValue(coins[1], forKey: "walletID")
-            coin1.setValue(person, forKey: "person")
-        }
-    }
-    catch {print("Fetch Failed: \(error)")}
-    do {
-        try managedContext.save()
-    }
-    catch {print("Saving Core Data Failed: \(error)")}
-}
-*/

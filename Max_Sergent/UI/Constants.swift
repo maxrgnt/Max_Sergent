@@ -53,6 +53,8 @@ struct Constants {
             static let Profile = "ProfileData"
             static let Overview = "OverviewData"
             static let OverviewProject = "OverviewProject"
+            static let Work = "WorkData"
+            static let WorkPosition = "WorkPosition"
         }
         
         struct Reset {
@@ -72,6 +74,7 @@ struct Constants {
             static let language = "language"
             static let days = "days"
             static let type = "type"
+            static let manyToOne = "overview"
         }
         
         struct Work {
@@ -80,6 +83,7 @@ struct Constants {
             static let startDate = "startDate"
             static let title = "title"
             static let workCompleted = "workCompleted"
+            static let manyToOne = "work"
         }
         
     }

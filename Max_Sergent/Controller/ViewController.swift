@@ -33,11 +33,11 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
         //retrieveData()
         //populateExperience()
         
-        //Data.checkForUpdate()
         //Data.imageStuff()
         //Data.deleteImages()
         //Data.contentsOfDocumentsDirectory()
-        Data.reloadFirebase(for: "all")
+        Data.checkFirebaseForReset()
+        Data.populateData(for: "all")
     }
     
     //MARK: Setup

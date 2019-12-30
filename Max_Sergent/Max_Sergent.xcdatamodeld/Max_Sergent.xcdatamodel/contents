@@ -15,9 +15,21 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="picture" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="WorkData" representedClassName="WorkData" syncable="YES" codeGenerationType="class">
+        <attribute name="company" optional="YES" attributeType="String"/>
+        <relationship name="positions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkPosition" inverseName="work" inverseEntity="WorkPosition"/>
+    </entity>
+    <entity name="WorkPosition" representedClassName="WorkPosition" syncable="YES" codeGenerationType="class">
+        <attribute name="startDate" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="workCompleted" optional="YES" attributeType="String"/>
+        <relationship name="work" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkData" inverseName="positions" inverseEntity="WorkData"/>
+    </entity>
     <elements>
         <element name="OverviewData" positionX="-54" positionY="9" width="128" height="88"/>
-        <element name="ProfileData" positionX="-36" positionY="27" width="128" height="73"/>
         <element name="OverviewProject" positionX="-45" positionY="36" width="128" height="103"/>
+        <element name="ProfileData" positionX="-36" positionY="27" width="128" height="73"/>
+        <element name="WorkPosition" positionX="-45" positionY="72" width="128" height="103"/>
+        <element name="WorkData" positionX="-36" positionY="90" width="128" height="73"/>
     </elements>
 </model>
