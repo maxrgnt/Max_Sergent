@@ -16,7 +16,7 @@ struct Data {
     
     static var profile: (name: String, picture: String) = (name: "", picture: "")
     static var overview: (originDate: String, statement: String, personal: [(language: String, days: Int)], work: [(language: String, days: Int)]) = (originDate: "", statement: "", personal: [], work: [])
-    static var work: (originDate: String, statement: String, personal: [(language: String, days: Int)], work: [(language: String, days: Int)]) = (originDate: "", statement: "", personal: [], work: [])
+    static var work: [(company: String, positions: [(startDate: String, title: String, workCompleted: String)])] = []
     
     static let experience: [String : [(position: String, work: String)]] =
         ["BEA":
@@ -206,25 +206,30 @@ struct Data {
     }
     
     static func loadWork() {
+        print("Loading CoreData Work")
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Data.CoreData.Work)
         let objects = try! managedContext.fetch(fetch) as! [WorkData]
+        work = []
         objects.forEach { object in
             if  let company = object.company,
                 let positions = object.positions?.allObjects as? [WorkPosition] // Set One-to-Many
             {
-                var jobs = [(company: String, positions: [(startDate: String, title: String, workCompleted: String)])]
+                var positionsList: [(startDate: String, title: String, workCompleted: String)] = []
                 positions.forEach { position in
                     if  let startDate = position.startDate,
                         let title = position.title,
                         let workCompleted = position.workCompleted
                     {
-                        jobs.append((company: company, positions))
+                        positionsList.append((startDate: startDate, title: title, workCompleted: workCompleted))
                     }
                 }
-                //overview = (originDate: originDate, statement: statement, personal: personal, work: work)
+                work.append((company: company, positions: positionsList))
             }
+        }
+        work.forEach { w in
+            print(w.company)
         }
     }
     
