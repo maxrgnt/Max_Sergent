@@ -10,7 +10,13 @@ import Foundation
 import UIKit
 import CoreData
 
+protocol DataDelegate {
+    func reloadWorkTable()
+}
+
 extension Data {
+    
+    static var customDelegate : DataDelegate!
     
     //MARK: CoreData Profile
     static func setProfile(name: String, picture: String) {
@@ -172,12 +178,13 @@ extension Data {
                     }
                 }
                 work[companyKey] = [Constants.Data.Work.company: company,
-                                     Constants.Data.Work.positions: positionsList] as AnyObject
+                                    Constants.Data.Work.positions: positionsList] as AnyObject
             }
             else {
                 print("ERROR: Could not company or positions in loadWork")
             }
         }
+        self.customDelegate.reloadWorkTable()
     }
     
     //MARK: CoreData Delete

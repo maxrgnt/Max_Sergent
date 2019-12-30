@@ -48,17 +48,26 @@ class ExperienceTable: UITableView, UITableViewDelegate, UITableViewDataSource, 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let id = Constants.Experience.cellReuseId
         let cell: ExperienceCell = tableView.dequeueReusableCell(withIdentifier: id) as! ExperienceCell
-        let keys = Array(Data.experience.keys)
-        let position = Data.experience[keys[indexPath.section]]![indexPath.row].position
-        let accomplishments = Data.experience[keys[indexPath.section]]![indexPath.row].work
         
-        cell.position.text = position
-        cell.accomplishments.text = accomplishments
-        
-        let posHeight = heightForLabel(text: position, font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
-        cell.positionHeight.constant = posHeight
-        let accHeight = heightForLabel(text: accomplishments, font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
-        cell.accomplishmentsHeight.constant = accHeight
+        if  let company = Data.work[Data.companyKeys[indexPath.section]] as? [String: AnyObject],
+            let positions = company[Constants.Data.Work.positions] as? [String: AnyObject]
+        {
+            let positionKeys = Array(positions.keys).sorted()
+            if  let position = positions[positionKeys[indexPath.row]] as? [String: AnyObject],
+                let title = position[Constants.Data.Work.title] as? String,
+                let startDate = position[Constants.Data.Work.startDate] as? String,
+                let workCompleted = position[Constants.Data.Work.workCompleted] as? String
+            {
+                cell.position.text = "\(title) | \(startDate)"
+                cell.accomplishments.text = workCompleted
+                
+                let x = heightForLabel(text: "\(title) | \(startDate)", font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
+                cell.positionHeight.constant = x
+                
+                let y = heightForLabel(text: workCompleted, font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
+                cell.accomplishmentsHeight.constant = y
+            }
+        }
 
         return cell
     }
@@ -83,8 +92,11 @@ class ExperienceTable: UITableView, UITableViewDelegate, UITableViewDataSource, 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionVar = ExperienceSection()
         sectionVar.setup()
-        let keys = Array(Data.experience.keys)
-        sectionVar.company.text = keys[section]
+        if  let company = Data.work[Data.companyKeys[section]] as? [String: AnyObject],
+            let name = company[Constants.Data.Work.company] as? String
+        {
+            sectionVar.company.text = name
+        }
         return sectionVar
     }
     
@@ -93,23 +105,38 @@ class ExperienceTable: UITableView, UITableViewDelegate, UITableViewDataSource, 
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Data.experience.keys.count
+        return Data.work.keys.count
     }
  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let keys = Array(Data.experience.keys)
-        return Data.experience[keys[section]]!.count
+        var rows = 0
+        if  let jobs = Data.work[Data.companyKeys[section]] as? [String: AnyObject],
+            let positions = jobs[Constants.Data.Work.positions]?.count {
+            rows = positions
+        }
+        return rows
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let keys = Array(Data.experience.keys)
-        let position = Data.experience[keys[indexPath.section]]![indexPath.row].position
-        let accomplishments = Data.experience[keys[indexPath.section]]![indexPath.row].work
-
-        let posHeight = heightForLabel(text: position, font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
-        let accHeight = heightForLabel(text: accomplishments, font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
         
-        return posHeight + accHeight
+        var x: CGFloat = 0.0
+        var y: CGFloat = 0.0
+        
+        if  let company = Data.work[Data.companyKeys[indexPath.section]] as? [String: AnyObject],
+            let positions = company[Constants.Data.Work.positions] as? [String: AnyObject]
+        {
+            let positionKeys = Array(positions.keys).sorted()
+            if  let position = positions[positionKeys[indexPath.row]] as? [String: AnyObject],
+                let title = position[Constants.Data.Work.title] as? String,
+                let startDate = position[Constants.Data.Work.startDate] as? String,
+                let workCompleted = position[Constants.Data.Work.workCompleted] as? String
+            {
+                x = heightForLabel(text: "\(title) | \(startDate)", font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
+                y = heightForLabel(text: workCompleted, font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
+            }
+        }
+        
+        return x + y
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

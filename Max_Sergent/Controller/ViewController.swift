@@ -11,7 +11,7 @@ import UIKit
 import Firebase
 import FirebaseStorage
 
-class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
+class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelegate {
     
     let header = Header()
     let menu = Menu()
@@ -30,6 +30,8 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
         print("Hello World!")
         view.backgroundColor = UI.Colors.Header.background
         
+        setup()
+        
         if Reachability.isConnectedToNetwork(){
             print("Internet Connection Available!")
             Data.checkFirebaseForReset()
@@ -37,8 +39,6 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
             print("Internet Connection not Available!")
             Data.populateData(from: false)
         }
-        
-        setup()
         
         //retrieveData()
         //populateExperience()
@@ -55,6 +55,9 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
     
     //MARK: Settings
     func objectSettings() {
+        
+        Data.customDelegate = self
+        
         view.addSubview(header)
         header.setup()
         view.addSubview(menu)
@@ -110,9 +113,9 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
     }
     
     func populateExperience() {
-        for key in Data.experience.keys {
-            print(key, Data.experience[key]!)
-        }
+//        for key in Data.experience.keys {
+//            print(key, Data.experience[key]!)
+//        }
     }
     
     func alterLabel(snapshot: DataSnapshot) {
@@ -236,6 +239,10 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
                     : 0.7
             }
         }
+    }
+    
+    func reloadWorkTable() {
+        scroll.experience.table.reloadData()
     }
     
 }
