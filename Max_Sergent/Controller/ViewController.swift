@@ -29,15 +29,16 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
     override func viewDidLoad() {
         print("Hello World!")
         view.backgroundColor = UI.Colors.Header.background
+        Data.checkFirebaseForReset()
+        Data.populateData(for: "all")
+        
         setup()
+        
         //retrieveData()
         //populateExperience()
-        
         //Data.imageStuff()
         //Data.deleteImages()
         //Data.contentsOfDocumentsDirectory()
-        Data.checkFirebaseForReset()
-        Data.populateData(for: "all")
     }
     
     //MARK: Setup

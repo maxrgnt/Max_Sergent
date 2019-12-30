@@ -84,6 +84,7 @@ struct Constants {
             static let title = "title"
             static let workCompleted = "workCompleted"
             static let manyToOne = "work"
+            static let key = "key"
         }
         
     }
