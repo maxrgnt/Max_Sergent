@@ -99,10 +99,12 @@ class Menu: UIView {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            touchPosition = touch.location(in: self)
-            updateLabels(atPoint: touchPosition)
+        guard let touch = touches.first else {
+            print("Not first touch on menu bar.")
+            return
         }
+        touchPosition = touch.location(in: self)
+        updateLabels(atPoint: touchPosition)
     }
     
     @objc func reactToPan(_ sender: UIPanGestureRecognizer) {

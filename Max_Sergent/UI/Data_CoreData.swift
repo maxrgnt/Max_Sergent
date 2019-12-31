@@ -41,9 +41,11 @@ extension Data {
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Data.CoreData.Profile)
         let objects = try! managedContext.fetch(fetch) as! [ProfileData]
-        if let object = objects.first, let name = object.name, let picture = object.picture {
-            profile = (name: name, picture: picture)
+        guard let object = objects.first, let name = object.name, let picture = object.picture else {
+            print("Error: loadProfile - [object, name, picture] not found in ProfileData")
+            return
         }
+        profile = (name: name, picture: picture)
     }
     
     //MARK: CoreData Overview
@@ -53,34 +55,38 @@ extension Data {
         let managedContext = appDelegate.persistentContainer.viewContext
         let overviewEntity = NSEntityDescription.entity(forEntityName: Constants.Data.CoreData.Overview, in: managedContext)!
         let overview = NSManagedObject(entity: overviewEntity, insertInto: managedContext)
-        if  let originDate = overviewData[Constants.Data.Overview.originDate] as? String,
-            let statement = overviewData[Constants.Data.Overview.statement] as? String,
-            let personal = overviewData[Constants.Data.Overview.personalProjects] as? [String: AnyObject],
-            let work = overviewData[Constants.Data.Overview.workProjects] as? [String: AnyObject]
+        guard let originDate = overviewData[Constants.Data.Overview.originDate] as? String,
+              let statement = overviewData[Constants.Data.Overview.statement] as? String,
+              let personal = overviewData[Constants.Data.Overview.personalProjects] as? [String: AnyObject],
+              let work = overviewData[Constants.Data.Overview.workProjects] as? [String: AnyObject] else
         {
-            overview.setValue(originDate, forKeyPath: Constants.Data.Overview.originDate)
-            overview.setValue(statement, forKeyPath: Constants.Data.Overview.statement)
-            let lists = [personal, work]
-            let types = [Constants.Data.Overview.personalProjects, Constants.Data.Overview.workProjects]
-            for (i, keyList) in [personal.keys, work.keys].enumerated() {
-               keyList.forEach { languageKeys in
-                    if let languageData = lists[i][languageKeys] as? [String: AnyObject] {
-                        if  let language = languageData[Constants.Data.Overview.language] as? String,
-                            let days = languageData[Constants.Data.Overview.days] as? String,
-                            let color = languageData[Constants.Data.Overview.color] as? String
-                        {
-                            let x = NSEntityDescription.entity(forEntityName: Constants.Data.CoreData.OverviewProject, in: managedContext)!
-                            let newLanguage = NSManagedObject(entity: x, insertInto: managedContext)
-                            newLanguage.setValue(types[i], forKey: Constants.Data.Overview.type)
-                            newLanguage.setValue(language, forKey: Constants.Data.Overview.language)
-                            newLanguage.setValue(days, forKey: Constants.Data.Overview.days)
-                            newLanguage.setValue(overview, forKey: Constants.Data.Overview.manyToOne)
-                            newLanguage.setValue(languageKeys, forKey: Constants.Data.Overview.key)
-                            newLanguage.setValue(color, forKey: Constants.Data.Overview.color)
-                        }
-                    }
-               }
-            }
+            print("Error: setOverview - [originDate, statement, personal, work] not found in parameter")
+            return
+        }
+        overview.setValue(originDate, forKeyPath: Constants.Data.Overview.originDate)
+        overview.setValue(statement, forKeyPath: Constants.Data.Overview.statement)
+        
+        let lists = [personal, work]
+        let types = [Constants.Data.Overview.personalProjects, Constants.Data.Overview.workProjects]
+        for (i, keyList) in [personal.keys, work.keys].enumerated() {
+           keyList.forEach { languageKeys in
+                guard let languageData = lists[i][languageKeys] as? [String: AnyObject],
+                      let language = languageData[Constants.Data.Overview.language] as? String,
+                      let days = languageData[Constants.Data.Overview.days] as? String,
+                      let color = languageData[Constants.Data.Overview.color] as? String else
+                {
+                    print("Error: setOverview - [language, days, color] not found in \(types[i]) data")
+                    return
+                }
+                let x = NSEntityDescription.entity(forEntityName: Constants.Data.CoreData.OverviewProject, in: managedContext)!
+                let newLanguage = NSManagedObject(entity: x, insertInto: managedContext)
+                newLanguage.setValue(types[i], forKey: Constants.Data.Overview.type)
+                newLanguage.setValue(language, forKey: Constants.Data.Overview.language)
+                newLanguage.setValue(days, forKey: Constants.Data.Overview.days)
+                newLanguage.setValue(overview, forKey: Constants.Data.Overview.manyToOne)
+                newLanguage.setValue(languageKeys, forKey: Constants.Data.Overview.key)
+                newLanguage.setValue(color, forKey: Constants.Data.Overview.color)
+           }
         }
         do {
             try managedContext.save()
@@ -98,43 +104,43 @@ extension Data {
         let objects = try! managedContext.fetch(fetch) as! [OverviewData]
         overview = [:]
         var tempOverview: [String: AnyObject] = [:]
-        if let object = objects.first {
-            if  let originDate = object.originDate,
-                let statement = object.statement,
-                let projects = object.projects?.allObjects as? [OverviewProject] // Set One-to-Many
+        
+        guard let object = objects.first,
+              let originDate = object.originDate,
+              let statement = object.statement,
+              let projects = object.projects?.allObjects as? [OverviewProject] /* Set One-to-Many */ else
+        {
+            print("Error: loadOverview - [object, originDate, statement, projects] not found in OverviewData")
+            return
+        }
+        
+        var personal: [String: AnyObject] = [:]
+        var work: [String: AnyObject] = [:]
+        projects.forEach { project in
+            guard let projectKey = project.key,
+                  let projectType = project.type else
             {
-                var personal: [String: AnyObject] = [:]
-                var work: [String: AnyObject] = [:]
-                projects.forEach { project in
-                    if project.type == Constants.Data.Overview.personalProjects {
-                        if let projectKey = project.key {
-                            personal[projectKey] = [Constants.Data.Overview.language: project.language,
-                                                    Constants.Data.Overview.days: project.days,
-                                                    Constants.Data.Overview.color: project.color] as AnyObject
-                        }
-                    }
-                    else if project.type == Constants.Data.Overview.workProjects {
-                        if let projectKey = project.key {
-                            work[projectKey] = [Constants.Data.Overview.language: project.language,
-                                                Constants.Data.Overview.days: project.days,
-                                                Constants.Data.Overview.color: project.color] as AnyObject
-                        }
-                    }
-                }
-                tempOverview[Constants.Data.Overview.originDate] = originDate as AnyObject
-                tempOverview[Constants.Data.Overview.statement] = statement as AnyObject
-                tempOverview[Constants.Data.Overview.personalProjects] = personal as AnyObject
-                tempOverview[Constants.Data.Overview.workProjects] = work as AnyObject
-                overview = tempOverview
-                self.customDelegate.reloadOverview()
+                print("Error: loadOverview - [key] not found in OverviewData")
+                return
             }
-            else {
-                print("ERROR: Could not access object in loadOverview")
+            if projectType == Constants.Data.Overview.personalProjects {
+                personal[projectKey] = [Constants.Data.Overview.language: project.language,
+                                        Constants.Data.Overview.days: project.days,
+                                        Constants.Data.Overview.color: project.color] as AnyObject
+            }
+            else if projectType == Constants.Data.Overview.workProjects {
+                work[projectKey] = [Constants.Data.Overview.language: project.language,
+                                    Constants.Data.Overview.days: project.days,
+                                    Constants.Data.Overview.color: project.color] as AnyObject
             }
         }
-        else {
-            print("ERROR: No 'Overview' objects in CoreData in loadOverview")
-        }
+        
+        tempOverview[Constants.Data.Overview.originDate] = originDate as AnyObject
+        tempOverview[Constants.Data.Overview.statement] = statement as AnyObject
+        tempOverview[Constants.Data.Overview.personalProjects] = personal as AnyObject
+        tempOverview[Constants.Data.Overview.workProjects] = work as AnyObject
+        overview = tempOverview
+        self.customDelegate.reloadOverview()
     }
     
     //MARK: CoreData Work
@@ -144,34 +150,31 @@ extension Data {
         workData.keys.forEach { companyKey in
             let workEntity = NSEntityDescription.entity(forEntityName: Constants.Data.CoreData.Work, in: managedContext)!
             let work = NSManagedObject(entity: workEntity, insertInto: managedContext)
-            
-            if  let job = workData[companyKey] as? [String: AnyObject],
-                let company = job[Constants.Data.Work.company] as? String,
-                let positions = job[Constants.Data.Work.positions] as? [String: AnyObject]
+            guard let job = workData[companyKey] as? [String: AnyObject],
+                  let company = job[Constants.Data.Work.company] as? String,
+                  let positions = job[Constants.Data.Work.positions] as? [String: AnyObject] else
             {
-                work.setValue(company, forKeyPath: Constants.Data.Work.company)
-                work.setValue(companyKey, forKeyPath: Constants.Data.Work.key)
-                positions.keys.forEach { positionKey in
-                    if  let position = positions[positionKey],
-                        let startDate = position[Constants.Data.Work.startDate] as? String,
-                        let title = position[Constants.Data.Work.title] as? String,
-                        let workCompleted = position[Constants.Data.Work.workCompleted] as? String
-                    {
-                        let x = NSEntityDescription.entity(forEntityName: Constants.Data.CoreData.WorkPosition, in: managedContext)!
-                        let newPosition = NSManagedObject(entity: x, insertInto: managedContext)
-                        newPosition.setValue(positionKey, forKeyPath: Constants.Data.Work.key)
-                        newPosition.setValue(startDate, forKeyPath: Constants.Data.Work.startDate)
-                        newPosition.setValue(title, forKeyPath: Constants.Data.Work.title)
-                        newPosition.setValue(workCompleted, forKeyPath: Constants.Data.Work.workCompleted)
-                        newPosition.setValue(work, forKey: Constants.Data.Work.manyToOne)
-                    }
-                    else {
-                        print("ERROR: Could not access dictionary using positionKey in setWork")
-                    }
-                }
+                print("Error: setWork - [job, company, positions] not found in parameter")
+                return
             }
-            else {
-                print("ERROR: Could not access dictionary using jobKey in firebaseWork")
+            work.setValue(company, forKeyPath: Constants.Data.Work.company)
+            work.setValue(companyKey, forKeyPath: Constants.Data.Work.key)
+            positions.keys.forEach { positionKey in
+                guard let position = positions[positionKey],
+                      let startDate = position[Constants.Data.Work.startDate] as? String,
+                      let title = position[Constants.Data.Work.title] as? String,
+                      let workCompleted = position[Constants.Data.Work.workCompleted] as? String else
+                {
+                    print("Error: setWork - [position, startDate, title, workCompleted] not found in parameter")
+                    return
+                }
+                let x = NSEntityDescription.entity(forEntityName: Constants.Data.CoreData.WorkPosition, in: managedContext)!
+                let newPosition = NSManagedObject(entity: x, insertInto: managedContext)
+                newPosition.setValue(positionKey, forKeyPath: Constants.Data.Work.key)
+                newPosition.setValue(startDate, forKeyPath: Constants.Data.Work.startDate)
+                newPosition.setValue(title, forKeyPath: Constants.Data.Work.title)
+                newPosition.setValue(workCompleted, forKeyPath: Constants.Data.Work.workCompleted)
+                newPosition.setValue(work, forKey: Constants.Data.Work.manyToOne)
             }
         }
         do {
@@ -189,31 +192,29 @@ extension Data {
         let objects = try! managedContext.fetch(fetch) as! [WorkData]
         work = [:]
         objects.forEach { object in
-            if  let companyKey = object.key,
-                let company = object.company,
-                let positions = object.positions?.allObjects as? [WorkPosition] // Set One-to-Many
+            guard let companyKey = object.key,
+                  let company = object.company,
+                  let positions = object.positions?.allObjects as? [WorkPosition] /* Set One-to-Many */ else
             {
-                var positionsList: [String: AnyObject] = [:]
-                positions.forEach { object in
-                    if  let positionKey = object.key,
-                        let startDate = object.startDate,
-                        let title = object.title,
-                        let workCompleted = object.workCompleted
-                    {
-                        positionsList[positionKey] = [Constants.Data.Work.startDate: startDate,
-                                                      Constants.Data.Work.title: title,
-                                                      Constants.Data.Work.workCompleted: workCompleted] as AnyObject
-                    }
-                    else {
-                        print("ERROR: Could not access dictionary using positionKey in loadWork")
-                    }
+                print("Error: loadWork - [companyKey, company, positions] not found in WorkData")
+                return
+            }
+            var positionsList: [String: AnyObject] = [:]
+            positions.forEach { object in
+                guard let positionKey = object.key,
+                      let startDate = object.startDate,
+                      let title = object.title,
+                      let workCompleted = object.workCompleted else
+                {
+                    print("Error: loadWork - [positionKey, startDate, title, workCompleted] not found in WorkData")
+                    return
                 }
-                work[companyKey] = [Constants.Data.Work.company: company,
-                                    Constants.Data.Work.positions: positionsList] as AnyObject
+                positionsList[positionKey] = [Constants.Data.Work.startDate: startDate,
+                                              Constants.Data.Work.title: title,
+                                              Constants.Data.Work.workCompleted: workCompleted] as AnyObject
             }
-            else {
-                print("ERROR: Could not company or positions in loadWork")
-            }
+            work[companyKey] = [Constants.Data.Work.company: company,
+                                Constants.Data.Work.positions: positionsList] as AnyObject
         }
         self.customDelegate.reloadWork()
     }
