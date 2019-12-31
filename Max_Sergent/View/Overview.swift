@@ -13,23 +13,17 @@ class Overview: UIView {
     
     //MARK: Definitions
     // Constraints
-    var personal_swiftWidth:   NSLayoutConstraint!
-    var personal_pythonWidth:   NSLayoutConstraint!
-    var personal_emptyWidth:   NSLayoutConstraint!
     var work_sqlWidth:   NSLayoutConstraint!
     var work_emptyWidth:   NSLayoutConstraint!
     // Objects
     let objective = UILabel()
     let originDate = UILabel()
     let personalProject = UILabel()
+    let personalBar = UIView()
     let personalStats = UILabel()
-    let personal_swiftBar = UIView()
-    let personal_pythonBar = UIView()
-    let personal_emptyBar = UIView()
     let workProject = UILabel()
+    let workBar = UIView()
     let workStats = UILabel()
-    let work_sqlBar = UIView()
-    let work_emptyBar = UIView()
     
     //MARK: Initialization
     init() {
@@ -102,15 +96,11 @@ class Overview: UIView {
             label.textColor = UI.Colors.Overview.stat
         }
         
-        let colors: [UIColor] = [.lightGray, .white, .black, .lightGray, .black]
-        for (i, bar) in [personal_swiftBar, personal_pythonBar, personal_emptyBar, work_sqlBar, work_emptyBar].enumerated() {
+        for bar in [personalBar, workBar] {
             addSubview(bar)
-            bar.backgroundColor = colors[i]
+            bar.backgroundColor = UI.Colors.Overview.barBackground
+            bar.roundCorners(corners: [.topLeft, .bottomLeft, .topRight, .bottomRight], radius: UI.Sizing.Overview.barRadius)
         }
-        personal_swiftBar.roundCorners(corners: [.topLeft,.bottomLeft], radius: UI.Sizing.Overview.barRadius)
-        personal_emptyBar.roundCorners(corners: [.topRight,.bottomRight], radius: UI.Sizing.Overview.barRadius)
-        work_sqlBar.roundCorners(corners: [.topLeft,.bottomLeft], radius: UI.Sizing.Overview.barRadius)
-        work_emptyBar.roundCorners(corners: [.topRight,.bottomRight], radius: UI.Sizing.Overview.barRadius)
     }
     
     func constraints() {
@@ -118,6 +108,60 @@ class Overview: UIView {
         originDateConstraints()
         projectConstraints()
         workProjectConstraints()
+    }
+    
+    func buildProjectBar(for projects: [String: AnyObject], since totalDays: Int, anchoredTo anchor: UIView, withTag tagToRemove: Int) {
+        
+        let remove = anchor.subviews.filter { ($0 as UIView).tag == tagToRemove } as [UIView]
+        print("Remove: \(remove.count) subviews from overview.bar")
+        remove.forEach { subview in
+            subview.removeFromSuperview()
+        }
+        
+        // Get key for each specific language
+        var projectBars: [(language: String, days: Int)] = []
+        let projectKeys = Array(projects.keys).sorted()
+        var projectDays = 0
+        projectKeys.forEach { projectKey in
+            if  let project = projects[projectKey] as? [String: AnyObject],
+                let language = project[Constants.Data.Overview.language] as? String,
+                let days = Int((project[Constants.Data.Overview.days] as? String)!)
+            {
+                let daysToAppend = (days > totalDays-projectDays) ? totalDays-projectDays : days
+                projectBars.append((language: language, days: daysToAppend))
+                projectDays += daysToAppend
+            }
+            else {
+                print("Error: buildingProjectBar for can't break down projects parameter")
+            }
+        }
+        
+        // projectBars
+        // [(language: "Swift", days: 42), (language: "Python", days: 42)]
+        
+        let colors: [UIColor] = [.blue, .green]
+        var padding: CGFloat = 0.0 + UI.Sizing.Overview.padding
+        
+        for (i, bar) in projectBars.enumerated() {
+            let tempView = UIView()
+            anchor.addSubview(tempView)
+            tempView.backgroundColor = colors[i]
+            
+            i == 0 ? tempView.roundCorners(corners: [.topLeft, .bottomLeft], radius: UI.Sizing.Overview.barRadius) : nil
+            
+            let width = UI.Sizing.Overview.projectWidth * (CGFloat(bar.days)/CGFloat(totalDays))
+            padding += (i > 0)
+                ? UI.Sizing.Overview.projectWidth * (CGFloat(projectBars[i-1].days)/CGFloat(totalDays))
+                : 0.0
+            
+            tempView.tag = tagToRemove
+            tempView.translatesAutoresizingMaskIntoConstraints                                                     = false
+            tempView.widthAnchor.constraint(equalToConstant: width).isActive                                       = true
+            tempView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding).isActive                  = true
+            tempView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                     = true
+            tempView.heightAnchor.constraint(equalTo: heightAnchor).isActive                                       = true
+            
+        }
     }
     
 }

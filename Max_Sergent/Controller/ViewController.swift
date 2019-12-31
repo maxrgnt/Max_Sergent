@@ -102,10 +102,10 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
                         let personal_python = tracker["personal"]!["python"] as? CGFloat,
                         let work_sql = tracker["work"]!["sql"] as? CGFloat {
                             let daysFromOrigin = self.numberOfDays(since: origin)
-                            let personalEmpty = daysFromOrigin-personal_swift-personal_python
-                            let work_empty = daysFromOrigin-work_sql
-                            self.getDays(forBars: ["side":[personal_swift,personal_python, personalEmpty],
-                                                   "work":[work_sql, work_empty]])
+//                            let personalEmpty = daysFromOrigin-personal_swift-personal_python
+//                            let work_empty = daysFromOrigin-work_sql
+//                            self.getDays(forBars: ["side":[personal_swift,personal_python, personalEmpty],
+//                                                   "work":[work_sql, work_empty]])
                     }
                 }
             }
@@ -152,12 +152,12 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
       ]
     }
     
-    func numberOfDays(since origin: String) -> CGFloat {
+    func numberOfDays(since origin: String) -> Int {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         let date = dateFormatter.date(from: origin) // "01/01/2019"
         let diff = Date().interval(ofComponent: .day, fromDate: date!)
-        return CGFloat(diff)
+        return Int(diff)
     }
     
     func getDays(forBars bars: [String:[CGFloat]]) {
@@ -166,9 +166,6 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
         let side_empty = bars["side"]![2]
         let totalDays = side_swift+side_python+side_empty
         let w = UI.Sizing.Overview.barWidth
-        scroll.overview.personal_swiftWidth.constant = w*(side_swift/totalDays)
-        scroll.overview.personal_pythonWidth.constant = w*(side_python/totalDays)
-        scroll.overview.personal_emptyWidth.constant = w*(side_empty/totalDays)
         let work_sql = bars["work"]![0]
         let work_empty = bars["work"]![1]
         scroll.overview.work_sqlWidth.constant = w*(work_sql/totalDays)
@@ -247,10 +244,22 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
     
     func reloadOverview() {
         if  let statement = Data.overview[Constants.Data.Overview.statement] as? String,
-            let originDate = Data.overview[Constants.Data.Overview.originDate] as? String
+            let originDate = Data.overview[Constants.Data.Overview.originDate] as? String,
+            let personal = Data.overview[Constants.Data.Overview.personalProjects] as? [String: AnyObject],
+            let work = Data.overview[Constants.Data.Overview.workProjects] as? [String: AnyObject]
         {
             scroll.overview.objective.text = statement
             scroll.overview.originDate.text = originDate
+            let daysFromOrigin = numberOfDays(since: originDate)
+            scroll.overview.buildProjectBar(for: personal,
+                                            since: daysFromOrigin,
+                                            anchoredTo: scroll.overview.personalBar,
+                                            withTag: 42)
+            scroll.overview.buildProjectBar(for: work,
+                                            since: daysFromOrigin,
+                                            anchoredTo: scroll.overview.workBar,
+                                            withTag: 123)
+            //print(work)
         }
     }
     

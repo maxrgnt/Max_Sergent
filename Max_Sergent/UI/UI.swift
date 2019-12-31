@@ -164,6 +164,7 @@ extension UI {
             static let objective = secondaryFontColor
             static let originDate = secondaryFontColor
             static let project = secondaryFontColor
+            static let barBackground = tertiaryFontColor
             static let stat = secondaryFontColor
         }
      
