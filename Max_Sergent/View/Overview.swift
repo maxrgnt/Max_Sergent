@@ -110,42 +110,32 @@ class Overview: UIView {
         workProjectConstraints()
     }
     
-    func buildProjectBar(for projects: [String: AnyObject], since totalDays: Int, anchoredTo anchor: UIView, withTag tagToRemove: Int) {
+    func buildProjectBar(for projects: [String: AnyObject], since totalDays: Int, anchoredTo anchor: UIView) {
         
-        let remove = anchor.subviews.filter { ($0 as UIView).tag == tagToRemove } as [UIView]
-        print("Remove: \(remove.count) subviews from overview.bar")
-        remove.forEach { subview in
+        anchor.subviews.forEach { subview in
             subview.removeFromSuperview()
         }
         
         // Get key for each specific language
-        var projectBars: [(language: String, days: Int)] = []
+        var projectBars: [(language: String, days: Int, hexColor: String)] = []
         let projectKeys = Array(projects.keys).sorted()
         var projectDays = 0
         projectKeys.forEach { projectKey in
-            if  let project = projects[projectKey] as? [String: AnyObject],
-                let language = project[Constants.Data.Overview.language] as? String,
-                let days = Int((project[Constants.Data.Overview.days] as? String)!)
-            {
-                let daysToAppend = (days > totalDays-projectDays) ? totalDays-projectDays : days
-                projectBars.append((language: language, days: daysToAppend))
-                projectDays += daysToAppend
-            }
-            else {
-                print("Error: buildingProjectBar for can't break down projects parameter")
-            }
+            guard   let project = projects[projectKey] as? [String: AnyObject],
+                    let language = project[Constants.Data.Overview.language] as? String,
+                    let days = Int((project[Constants.Data.Overview.days] as? String)!),
+                    let color = project[Constants.Data.Overview.color] as? String else { return }
+            let daysToAppend = (days > totalDays-projectDays) ? totalDays-projectDays : days
+            projectBars.append((language: language, days: daysToAppend, hexColor: color))
+            projectDays += daysToAppend
         }
         
-        // projectBars
-        // [(language: "Swift", days: 42), (language: "Python", days: 42)]
-        
-        let colors: [UIColor] = [.blue, .green]
         var padding: CGFloat = 0.0 + UI.Sizing.Overview.padding
         
         for (i, bar) in projectBars.enumerated() {
             let tempView = UIView()
             anchor.addSubview(tempView)
-            tempView.backgroundColor = colors[i]
+            tempView.backgroundColor = UIColor(hexFromString: bar.hexColor, alpha: 1.0)
             
             i == 0 ? tempView.roundCorners(corners: [.topLeft, .bottomLeft], radius: UI.Sizing.Overview.barRadius) : nil
             
@@ -154,7 +144,6 @@ class Overview: UIView {
                 ? UI.Sizing.Overview.projectWidth * (CGFloat(projectBars[i-1].days)/CGFloat(totalDays))
                 : 0.0
             
-            tempView.tag = tagToRemove
             tempView.translatesAutoresizingMaskIntoConstraints                                                     = false
             tempView.widthAnchor.constraint(equalToConstant: width).isActive                                       = true
             tempView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding).isActive                  = true
@@ -162,6 +151,19 @@ class Overview: UIView {
             tempView.heightAnchor.constraint(equalTo: heightAnchor).isActive                                       = true
             
         }
+    }
+    
+    func buildProjectLabel(for projects: [String: AnyObject], changing label: UILabel) {
+        let projectKeys = Array(projects.keys).sorted()
+        var newLabel = ""
+        projectKeys.forEach { projectKey in
+            guard   let project = projects[projectKey] as? [String: AnyObject],
+                    let language = project[Constants.Data.Overview.language] as? String,
+                    let days = Int((project[Constants.Data.Overview.days] as? String)!) else { return }
+            newLabel += "\(language): \(days) days | "
+        }
+        newLabel = String(newLabel.dropLast(3))
+        label.text = newLabel
     }
     
 }

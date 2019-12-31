@@ -66,7 +66,8 @@ extension Data {
                keyList.forEach { languageKeys in
                     if let languageData = lists[i][languageKeys] as? [String: AnyObject] {
                         if  let language = languageData[Constants.Data.Overview.language] as? String,
-                            let days = languageData[Constants.Data.Overview.days] as? String
+                            let days = languageData[Constants.Data.Overview.days] as? String,
+                            let color = languageData[Constants.Data.Overview.color] as? String
                         {
                             let x = NSEntityDescription.entity(forEntityName: Constants.Data.CoreData.OverviewProject, in: managedContext)!
                             let newLanguage = NSManagedObject(entity: x, insertInto: managedContext)
@@ -75,6 +76,7 @@ extension Data {
                             newLanguage.setValue(days, forKey: Constants.Data.Overview.days)
                             newLanguage.setValue(overview, forKey: Constants.Data.Overview.manyToOne)
                             newLanguage.setValue(languageKeys, forKey: Constants.Data.Overview.key)
+                            newLanguage.setValue(color, forKey: Constants.Data.Overview.color)
                         }
                     }
                }
@@ -107,13 +109,15 @@ extension Data {
                     if project.type == Constants.Data.Overview.personalProjects {
                         if let projectKey = project.key {
                             personal[projectKey] = [Constants.Data.Overview.language: project.language,
-                                                    Constants.Data.Overview.days: project.days] as AnyObject
+                                                    Constants.Data.Overview.days: project.days,
+                                                    Constants.Data.Overview.color: project.color] as AnyObject
                         }
                     }
                     else if project.type == Constants.Data.Overview.workProjects {
                         if let projectKey = project.key {
                             work[projectKey] = [Constants.Data.Overview.language: project.language,
-                                                Constants.Data.Overview.days: project.days] as AnyObject
+                                                Constants.Data.Overview.days: project.days,
+                                                Constants.Data.Overview.color: project.color] as AnyObject
                         }
                     }
                 }

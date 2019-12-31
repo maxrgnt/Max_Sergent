@@ -253,12 +253,12 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
             let daysFromOrigin = numberOfDays(since: originDate)
             scroll.overview.buildProjectBar(for: personal,
                                             since: daysFromOrigin,
-                                            anchoredTo: scroll.overview.personalBar,
-                                            withTag: 42)
+                                            anchoredTo: scroll.overview.personalBar)
+            scroll.overview.buildProjectLabel(for: personal, changing: scroll.overview.personalStats)
             scroll.overview.buildProjectBar(for: work,
                                             since: daysFromOrigin,
-                                            anchoredTo: scroll.overview.workBar,
-                                            withTag: 123)
+                                            anchoredTo: scroll.overview.workBar)
+            scroll.overview.buildProjectLabel(for: personal, changing: scroll.overview.workStats)
             //print(work)
         }
     }

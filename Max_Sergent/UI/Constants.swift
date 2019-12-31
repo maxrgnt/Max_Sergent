@@ -73,6 +73,7 @@ struct Constants {
             static let workProjects = "workProjects"
             static let language = "language"
             static let days = "days"
+            static let color = "color"
             static let type = "type"
             static let manyToOne = "overview"
             static let key = "key"
