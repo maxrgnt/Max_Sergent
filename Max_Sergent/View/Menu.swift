@@ -100,7 +100,6 @@ class Menu: UIView {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {
-            print("Not first touch on menu bar.")
             return
         }
         touchPosition = touch.location(in: self)

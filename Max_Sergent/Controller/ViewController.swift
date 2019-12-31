@@ -217,7 +217,6 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
     
     func menuMoveScroll(toPage page: Int) {
         if currentPage != page {
-            currentPage = page
             let newX = UI.Sizing.Scroll.width * CGFloat(page)
             let newOffset = CGPoint(x: newX, y: 0.0)
             self.scroll.setContentOffset(newOffset, animated: true)
