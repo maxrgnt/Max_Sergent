@@ -34,7 +34,7 @@ class WorkSection: UIView {
         addSubview(company)
         company.alpha          = 1.0
         company.textAlignment  = .left
-        company.textColor      = UI.Colors.Experience.company
+        company.textColor      = .black
         company.font           = UI.Fonts.Experience.company
         company.text           = Constants.Experience.company
         //company.minimumScaleFactor = 0.1

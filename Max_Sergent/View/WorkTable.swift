@@ -52,7 +52,7 @@ class WorkTable: UITableView, UITableViewDelegate, UITableViewDataSource, UIScro
         if  let company = Data.work[Data.companyKeys[indexPath.section]] as? [String: AnyObject],
             let positions = company[Constants.Data.Work.positions] as? [String: AnyObject]
         {
-            let positionKeys = Array(positions.keys).sorted()
+            let positionKeys = Array(positions.keys.reversed())
             if  let position = positions[positionKeys[indexPath.row]] as? [String: AnyObject],
                 let title = position[Constants.Data.Work.title] as? String,
                 let startDate = position[Constants.Data.Work.startDate] as? String,
@@ -127,7 +127,7 @@ class WorkTable: UITableView, UITableViewDelegate, UITableViewDataSource, UIScro
         if  let company = Data.work[Data.companyKeys[indexPath.section]] as? [String: AnyObject],
             let positions = company[Constants.Data.Work.positions] as? [String: AnyObject]
         {
-            let positionKeys = Array(positions.keys).sorted()
+            let positionKeys = Array(positions.keys.reversed())
             if  let position = positions[positionKeys[indexPath.row]] as? [String: AnyObject],
                 let title = position[Constants.Data.Work.title] as? String,
                 let startDate = position[Constants.Data.Work.startDate] as? String,
