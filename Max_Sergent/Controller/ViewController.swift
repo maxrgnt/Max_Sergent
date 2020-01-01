@@ -136,24 +136,6 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
         return Int(diff)
     }
     
-    func getDays(forBars bars: [String:[CGFloat]]) {
-        let side_swift = bars["side"]![0]
-        let side_python = bars["side"]![1]
-        let side_empty = bars["side"]![2]
-        let totalDays = side_swift+side_python+side_empty
-        let w = UI.Sizing.Overview.barWidth
-        let work_sql = bars["work"]![0]
-        let work_empty = bars["work"]![1]
-        scroll.overview.work_sqlWidth.constant = w*(work_sql/totalDays)
-        scroll.overview.work_emptyWidth.constant = w*(work_empty/totalDays)
-        UIView.animate(withDuration: 0.3, delay: 0.3, options: .curveEaseInOut
-        , animations: ({
-            self.scroll.overview.personalStats.text = "Swift: \(Int(side_swift)) days | Python: \(Int(side_python)) days"
-            self.scroll.overview.workStats.text = "SQL: \(Int(work_sql)) days"
-            self.scroll.overview.layoutIfNeeded()
-        }))
-    }
-    
     //MARK: Custom Delegates
     func adjustHeader(toHeight newConstant: CGFloat) {
         var newDiameter = newConstant - UI.Sizing.Header.pictureDiameter - UI.Sizing.Header.padding
@@ -223,8 +205,34 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
             let personal = Data.overview[Constants.Data.Overview.personalProjects] as? [String: AnyObject],
             let work = Data.overview[Constants.Data.Overview.workProjects] as? [String: AnyObject]
         {
+            let dateFormatterIn = DateFormatter()
+            dateFormatterIn.dateFormat = "dd-MM-yyyy"
+
+            let dateFormatterOut = DateFormatter()
+            dateFormatterOut.dateFormat = "MMM,yyyy"
+
+            guard let date = dateFormatterIn.date(from: originDate) else {
+                print("There was an error decoding the originDate")
+                return
+            }
+            
+            let dateComponents = Calendar.current.component(.day, from: date)
+            let numberFormatter = NumberFormatter()
+            numberFormatter.numberStyle = .ordinal
+            guard let day = numberFormatter.string(from: dateComponents as NSNumber) else {
+                print("Number formattter not working")
+                return
+            }
+
+            let pieces = dateFormatterOut.string(from: date).split(separator: ",")
+            let largeFont = UI.Fonts.Overview.originDateMain
+            let superScriptFont = UI.Fonts.Overview.originDateSuper
+            let attrString = NSMutableAttributedString(string: "Since \(pieces[0]) \(day.dropLast(2))", attributes: [.font: largeFont!])
+            attrString.append(NSAttributedString(string: "\(day.suffix(2))", attributes: [.font: superScriptFont!, .baselineOffset: 10]))
+            attrString.append(NSAttributedString(string: " \(pieces[1]):", attributes: [.font: largeFont!]))
+            scroll.overview.originDate.attributedText = attrString
+            
             scroll.overview.objective.text = statement
-            scroll.overview.originDate.text = originDate
             let daysFromOrigin = numberOfDays(since: originDate)
             scroll.overview.buildProjectBar(for: personal,
                                             since: daysFromOrigin,

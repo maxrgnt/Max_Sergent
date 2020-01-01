@@ -104,12 +104,12 @@ extension UI {
     struct Fonts {
         
         struct Size {
-            static let H1 = Sizing.Header.expandedNameHeight/2
-            static let H2 = Sizing.Overview.objectiveHeight/2
-            static let H3 = Sizing.Overview.originDateHeight*(3/4)
-            static let H4 = 0.0
-            static let H5 = Sizing.Menu.height/2
-            static let H6 = Sizing.Menu.height/3
+            static let H1 = UI.Sizing.height * (0.105) // Sizing.Header.expandedNameHeight/2
+            static let H2 = UI.Sizing.height * (0.085) // Sizing.Overview.objectiveHeight/2
+            static let H3 = UI.Sizing.height * (0.065) // Sizing.Overview.originDateHeight*(3/4)
+            static let H4 = UI.Sizing.height * (0.045)
+            static let H5 = UI.Sizing.height * (0.025) // Sizing.Menu.height/2
+            static let H6 = UI.Sizing.height * (0.015) // Sizing.Menu.height/3
         }
         
         static let arvo = "Arvo"
@@ -124,22 +124,22 @@ extension UI {
         
         struct Menu {
             static let selected = UIFont(name: openSansBold, size: Size.H6)
-            static let normal = UIFont(name: openSans, size: Size.H6)
+            static let normal   = UIFont(name: openSans,     size: Size.H6)
         }
         
         struct Overview {
-            static let objective = UIFont(name: openSans, size: Size.H2)
-            static let originDateMain = UIFont(name: openSansBold, size: Size.H3)
-            static let originDateSuper = UIFont(name: openSansBold, size: Size.H3/2)
-            static let project = UIFont(name: openSans, size: Sizing.Overview.projectHeight*(3/4))
-            static let stat = UIFont(name: openSans, size: Sizing.Overview.statHeight*(2/3))
+            static let objective       = UIFont(name: openSans,     size: Size.H2)
+            static let originDateMain  = UIFont(name: openSansBold, size: Size.H5)
+            static let originDateSuper = UIFont(name: openSansBold, size: Size.H6)
+            static let project         = UIFont(name: openSans,     size: Size.H5)
+            static let stat            = UIFont(name: openSans,     size: Size.H6)
         }
         
         struct Experience {
-            static let header = UIFont(name: openSansBold, size: Sizing.Overview.originDateHeight*(3/4))
-            static let company = UIFont(name: openSans, size: Sizing.Experience.sectionHeight*(2/4))
-            static let cellHeader = UIFont(name: openSansBold, size: Sizing.Experience.sectionHeight*(1/3))
-            static let cellBody = UIFont(name: openSans, size: Sizing.Experience.sectionHeight*(1/4))
+            static let header     = UIFont(name: openSansBold, size: Size.H4)
+            static let company    = UIFont(name: openSans,     size: Size.H5)
+            static let cellHeader = UIFont(name: openSansBold, size: Size.H6)
+            static let cellBody   = UIFont(name: openSans,     size: Size.H6)
         }
         
     }

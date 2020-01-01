@@ -61,12 +61,6 @@ class Overview: UIView {
         originDate.lineBreakMode = .byClipping
         originDate.adjustsFontSizeToFitWidth = true
         originDate.textColor = UI.Colors.Overview.originDate
-        let largeFont = UI.Fonts.Overview.originDateMain
-        let superScriptFont = UI.Fonts.Overview.originDateSuper
-        let attrString = NSMutableAttributedString(string: "Since Jan 1", attributes: [.font: largeFont!])
-        attrString.append(NSAttributedString(string: "st", attributes: [.font: superScriptFont!, .baselineOffset: 10]))
-        attrString.append(NSAttributedString(string: " 2019", attributes: [.font: largeFont!]))
-        originDate.attributedText = attrString
         
         var text = [Constants.Overview.selfProject, Constants.Overview.workProject]
         for (i, project) in [personalProject,workProject].enumerated() {
