@@ -11,6 +11,7 @@ import UIKit
 import CoreData
 
 protocol DataDelegate {
+    func reloadProfile()
     func reloadWork()
     func reloadOverview()
 }
@@ -46,6 +47,7 @@ extension Data {
             return
         }
         profile = (name: name, picture: picture)
+        self.customDelegate.reloadProfile()
     }
     
     //MARK: CoreData Overview

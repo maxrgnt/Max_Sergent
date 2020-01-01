@@ -97,22 +97,17 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
     func alterLabel(snapshot: DataSnapshot) {
         print("trying to alter label")
         if let value = snapshot.value as? [String: AnyObject]
-            , let reset = value["reset"] as? Bool
-            , let name = value["name"] as? String
-            , let imageURL = value["imageURL"] as? String {
-            if reset {
-                let nameArray = name.split(separator: " ")
-                self.header.name.text = "\(nameArray[0])\n\(nameArray[1])"
-                let reference = storage.reference(forURL: imageURL)
-                reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                  if let error = error {
-                    print(error)
-                    self.header.picture.image = UIImage(named: "placeholder.jpg")
-                  } else {
-                    let image = UIImage(data: data!)
-                    self.header.picture.image = image
-                  }
-                }
+            , let imageURL = value["imageURL"] as? String
+        {
+            let reference = storage.reference(forURL: imageURL)
+            reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+              if let error = error {
+                print(error)
+                self.header.picture.image = UIImage(named: "placeholder.jpg")
+              } else {
+                let image = UIImage(data: data!)
+                self.header.picture.image = image
+              }
             }
         }
         else {
@@ -196,7 +191,8 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
     }
     
     func reloadProfile() {
-        
+        header.name.text = Data.profile.name
+        print(Data.profile.picture)
     }
     
     func reloadWork() {
