@@ -195,6 +195,10 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
         }
     }
     
+    func reloadProfile() {
+        
+    }
+    
     func reloadWork() {
         scroll.work.table.reloadData()
     }
@@ -241,7 +245,7 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
             scroll.overview.buildProjectBar(for: work,
                                             since: daysFromOrigin,
                                             anchoredTo: scroll.overview.workBar)
-            scroll.overview.buildProjectLabel(for: personal, changing: scroll.overview.workStats)
+            scroll.overview.buildProjectLabel(for: work, changing: scroll.overview.workStats)
             //print(work)
         }
     }
