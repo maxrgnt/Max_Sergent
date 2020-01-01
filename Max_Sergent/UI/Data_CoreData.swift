@@ -147,6 +147,7 @@ extension Data {
     
     //MARK: CoreData Work
     static func setWork(workData: [String: AnyObject]) {
+        print(workData)
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let managedContext = appDelegate.persistentContainer.viewContext
         workData.keys.forEach { companyKey in
@@ -159,6 +160,9 @@ extension Data {
                 print("Error: setWork - [job, company, positions] not found in parameter")
                 return
             }
+            print(companyKey, company)
+            print(positions.count)
+            print("-------")
             work.setValue(company, forKeyPath: Constants.Data.Work.company)
             work.setValue(companyKey, forKeyPath: Constants.Data.Work.key)
             positions.keys.forEach { positionKey in

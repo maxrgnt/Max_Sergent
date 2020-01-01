@@ -191,7 +191,8 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
     }
     
     func reloadProfile() {
-        header.name.text = Data.profile.name
+        let pieces = Data.profile.name.split(separator: " ")
+        header.name.text = "\(pieces[0])\n\(pieces[1])"
         print(Data.profile.picture)
     }
     

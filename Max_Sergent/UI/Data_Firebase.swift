@@ -92,11 +92,12 @@ extension Data {
                 print("Error: firebaseWork - snapshot.value not convertible to [String: AnyObject]")
                 return
             }
-            
+                 
             var tempWork: [String: AnyObject] = [:]
             var positionsList: [String: AnyObject] = [:]
             
             workData.keys.forEach { jobKey in
+                positionsList = [:]
                 guard let job = workData[jobKey] as? [String: AnyObject],
                       let company = job[Constants.Data.Work.company] as? String,
                       let positions = job[Constants.Data.Work.positions] as? [String: AnyObject] else
