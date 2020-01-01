@@ -1,5 +1,5 @@
 //
-//  ExperienceCell.swift
+//  WorkCell.swift
 //  Max_Sergent
 //
 //  Created by Max Sergent on 12/23/19.
@@ -8,16 +8,18 @@
 
 import UIKit
 
-class ExperienceCell: UITableViewCell {
+class WorkCell: UITableViewCell {
 
     // Constraints
     var positionHeight: NSLayoutConstraint!
-    var accomplishmentsHeight: NSLayoutConstraint!
+    var workCompletedHeight: NSLayoutConstraint!
+    var startDateHeight: NSLayoutConstraint!
     
     // Objects
     let icon = UIImageView()
     let position = UILabel()
-    let accomplishments = UILabel()
+    let startDate = UILabel()
+    let workCompleted = UILabel()
     
     //MARK: Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -43,31 +45,33 @@ class ExperienceCell: UITableViewCell {
         addSubview(position)
         position.textColor            = UI.Colors.Experience.cellText
         position.textAlignment        = .left
-        position.font                 = UI.Fonts.Experience.cellBody
+        position.font                 = UI.Fonts.Experience.cellHeader
         position.alpha                = 1.0
-        //position.minimumScaleFactor = 0.1
         position.numberOfLines = 0
         position.lineBreakMode = .byClipping
-        //position.backgroundColor = .red
-        position.sizeToFit()
-        //position.adjustsFontSizeToFitWidth = true
-        addSubview(accomplishments)
-        accomplishments.textColor     = UI.Colors.Experience.cellText
-        accomplishments.textAlignment = .left
-        accomplishments.font          = UI.Fonts.Experience.cellBody
-        accomplishments.alpha         = 1.0
-        //accomplishments.minimumScaleFactor = 0.1
-        accomplishments.numberOfLines = 0
-        accomplishments.lineBreakMode = .byClipping
-        //accomplishments.backgroundColor = .green
-        accomplishments.sizeToFit()
-        //accomplishments.adjustsFontSizeToFitWidth = true
+
+        addSubview(startDate)
+        startDate.textColor     = UI.Colors.Experience.cellText
+        startDate.textAlignment = .right
+        startDate.font          = UI.Fonts.Experience.cellHeader
+        startDate.alpha         = 1.0
+        startDate.numberOfLines = 0
+        startDate.lineBreakMode = .byClipping
+        
+        addSubview(workCompleted)
+        workCompleted.textColor     = UI.Colors.Experience.cellText
+        workCompleted.textAlignment = .left
+        workCompleted.font          = UI.Fonts.Experience.cellBody
+        workCompleted.alpha         = 1.0
+        workCompleted.numberOfLines = 0
+        workCompleted.lineBreakMode = .byClipping
     }
     
     //MARK: Constraints
     func constraints() {
         positionConstraints()
-        accomplishmentsConstraints()
+        startDateConstraints()
+        workCompletedConstraints()
     }
     
 }

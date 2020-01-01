@@ -88,30 +88,6 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
         refItem.setValue(dictionary)
     }
     
-    func retrieveData() {
-        let background = DispatchQueue.global()
-        background.sync {print("retrieving --")}
-        ref.observe(.value, with: { snapshot in
-            for child in snapshot.children {
-                if let snapshot = child as? DataSnapshot {
-                    self.alterLabel(snapshot: snapshot)
-                    if let value = snapshot.value as? [String: AnyObject],
-                        let tracker = value["overviewTracker"] as? [String: AnyObject],
-                        let origin = tracker["originDate"] as? String,
-                        let personal_swift = tracker["personal"]!["swift"] as? CGFloat,
-                        let personal_python = tracker["personal"]!["python"] as? CGFloat,
-                        let work_sql = tracker["work"]!["sql"] as? CGFloat {
-                            let daysFromOrigin = self.numberOfDays(since: origin)
-//                            let personalEmpty = daysFromOrigin-personal_swift-personal_python
-//                            let work_empty = daysFromOrigin-work_sql
-//                            self.getDays(forBars: ["side":[personal_swift,personal_python, personalEmpty],
-//                                                   "work":[work_sql, work_empty]])
-                    }
-                }
-            }
-        })
-    }
-    
     func populateExperience() {
 //        for key in Data.experience.keys {
 //            print(key, Data.experience[key]!)
@@ -192,7 +168,7 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
         header.pictureWidth.constant = newDiameter
         header.picture.alpha = newAlpha
         scroll.overview.alpha = newAlpha
-        scroll.experience.alpha = (1-newAlpha)
+        scroll.work.alpha = (1-newAlpha)
         header.picture.layer.cornerRadius = newDiameter/2
         let x = UI.Sizing.Header.expandedHeight/UI.Sizing.Header.minimizedHeight
         let y = header.height.constant/UI.Sizing.Header.minimizedHeight
@@ -238,7 +214,7 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
     }
     
     func reloadWork() {
-        scroll.experience.table.reloadData()
+        scroll.work.table.reloadData()
     }
     
     func reloadOverview() {

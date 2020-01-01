@@ -1,5 +1,5 @@
 //
-//  ExperienceSection.swift
+//  WorkSection.swift
 //  Max_Sergent
 //
 //  Created by Max Sergent on 12/23/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExperienceSection: UIView {
+class WorkSection: UIView {
 
     // Objects
     let company = UILabel()

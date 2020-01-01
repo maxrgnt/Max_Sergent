@@ -1,5 +1,5 @@
 //
-//  ExperienceTable.swift
+//  WorkTable.swift
 //  Max_Sergent
 //
 //  Created by Max Sergent on 12/23/19.
@@ -9,15 +9,15 @@
 import Foundation
 import UIKit
 
-protocol ExperienceTableDelegate {
+protocol WorkTableDelegate {
     
 }
 
-class ExperienceTable: UITableView, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+class WorkTable: UITableView, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
         
     //MARK: Definitions
     // Delegate object
-    var customDelegate : ExperienceTableDelegate!
+    var customDelegate : WorkTableDelegate!
     // Variables
     
     //MARK: - Initialization
@@ -33,7 +33,7 @@ class ExperienceTable: UITableView, UITableViewDelegate, UITableViewDataSource, 
     //MARK: Setup
     func setup() {
         backgroundColor = .clear //UI.Color.alculatePurpleLite
-        register(ExperienceCell.self, forCellReuseIdentifier: Constants.Experience.cellReuseId)
+        register(WorkCell.self, forCellReuseIdentifier: Constants.Experience.cellReuseId)
         delegate                     = self
         dataSource                   = self
         tableHeaderView              = nil
@@ -47,7 +47,7 @@ class ExperienceTable: UITableView, UITableViewDelegate, UITableViewDataSource, 
     // MARK: TableView Delegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let id = Constants.Experience.cellReuseId
-        let cell: ExperienceCell = tableView.dequeueReusableCell(withIdentifier: id) as! ExperienceCell
+        let cell: WorkCell = tableView.dequeueReusableCell(withIdentifier: id) as! WorkCell
         
         if  let company = Data.work[Data.companyKeys[indexPath.section]] as? [String: AnyObject],
             let positions = company[Constants.Data.Work.positions] as? [String: AnyObject]
@@ -58,14 +58,16 @@ class ExperienceTable: UITableView, UITableViewDelegate, UITableViewDataSource, 
                 let startDate = position[Constants.Data.Work.startDate] as? String,
                 let workCompleted = position[Constants.Data.Work.workCompleted] as? String
             {
-                cell.position.text = "\(title) | \(startDate)"
-                cell.accomplishments.text = workCompleted
+                cell.position.text = title
+                cell.startDate.text = startDate
+                cell.workCompleted.text = workCompleted
                 
                 let x = heightForLabel(text: "\(title) | \(startDate)", font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
                 cell.positionHeight.constant = x
+                cell.startDateHeight.constant = x
                 
                 let y = heightForLabel(text: workCompleted, font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
-                cell.accomplishmentsHeight.constant = y
+                cell.workCompletedHeight.constant = y
             }
         }
 
@@ -90,7 +92,7 @@ class ExperienceTable: UITableView, UITableViewDelegate, UITableViewDataSource, 
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionVar = ExperienceSection()
+        let sectionVar = WorkSection()
         sectionVar.setup()
         if  let company = Data.work[Data.companyKeys[section]] as? [String: AnyObject],
             let name = company[Constants.Data.Work.company] as? String

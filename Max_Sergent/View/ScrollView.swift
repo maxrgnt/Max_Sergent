@@ -23,11 +23,11 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     var height:   NSLayoutConstraint!
     // Objects
     let overview = Overview()
-    let experience = Experience()
+    let work = Work()
     let page3 = UILabel()
     let page4 = UILabel()
     let page5 = UILabel()
-    lazy var pages = [overview,experience,page3,page4,page5]
+    lazy var pages = [overview,work,page3,page4,page5]
     
     //MARK: Initialization
     init() {
@@ -62,8 +62,8 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         
         addSubview(overview)
         overview.setup()
-        addSubview(experience)
-        experience.setup()
+        addSubview(work)
+        work.setup()
         addSubview(page3)
         page3.backgroundColor = .blue
         addSubview(page4)
@@ -86,7 +86,7 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         alpha = (ratio > 1) ? 1-(contentOffset.x/(-UI.Sizing.Scroll.limit)) : 1
         
         let meh = contentOffset.x / UI.Sizing.Scroll.width
-        experience.alpha = (meh <= 1.0) ? meh : 1.0
+        work.alpha = (meh <= 1.0) ? meh : 1.0
         
         var page = Int(floor(Double(contentOffset.x)/Double(UI.Sizing.Scroll.width)))
         page = (page <= 0) ? 0 : page

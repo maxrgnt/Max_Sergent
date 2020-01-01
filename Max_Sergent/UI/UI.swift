@@ -88,9 +88,12 @@ struct UI {
             static let sectionHeight = height*(0.07)
             static let cellHeight = height*(0.22)
             static let positionHeight = height*(0.07)
-            static let accomplishmentsHeight = height*(0.15)
+            static let startDateHeight = height*(0.07)
+            static let workCompletedHeight = height*(0.15)
             
             static let paddedWidth = width-(padding*2)
+            static let positionWidth = paddedWidth*0.7
+            static let startDateWidth = paddedWidth*0.3
         }
     }
     
@@ -135,6 +138,7 @@ extension UI {
         struct Experience {
             static let header = UIFont(name: openSansBold, size: Sizing.Overview.originDateHeight*(3/4))
             static let company = UIFont(name: openSans, size: Sizing.Experience.sectionHeight*(2/4))
+            static let cellHeader = UIFont(name: openSansBold, size: Sizing.Experience.sectionHeight*(1/3))
             static let cellBody = UIFont(name: openSans, size: Sizing.Experience.sectionHeight*(1/4))
         }
         

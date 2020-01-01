@@ -111,14 +111,14 @@ extension Scroll {
         overview.widthAnchor.constraint(equalTo: widthAnchor).isActive                                              = true
         overview.heightAnchor.constraint(equalTo: heightAnchor).isActive                                            = true
 
-        experience.translatesAutoresizingMaskIntoConstraints                                                        = false
-        experience.leadingAnchor.constraint(equalTo: overview.trailingAnchor).isActive                              = true
-        experience.topAnchor.constraint(equalTo: topAnchor).isActive                                                = true
-        experience.widthAnchor.constraint(equalTo: widthAnchor).isActive                                            = true
-        experience.heightAnchor.constraint(equalTo: heightAnchor).isActive                                          = true
+        work.translatesAutoresizingMaskIntoConstraints                                                        = false
+        work.leadingAnchor.constraint(equalTo: overview.trailingAnchor).isActive                              = true
+        work.topAnchor.constraint(equalTo: topAnchor).isActive                                                = true
+        work.widthAnchor.constraint(equalTo: widthAnchor).isActive                                            = true
+        work.heightAnchor.constraint(equalTo: heightAnchor).isActive                                          = true
         
         page3.translatesAutoresizingMaskIntoConstraints                                                             = false
-        page3.leadingAnchor.constraint(equalTo: experience.trailingAnchor).isActive                                   = true
+        page3.leadingAnchor.constraint(equalTo: work.trailingAnchor).isActive                                   = true
         page3.topAnchor.constraint(equalTo: topAnchor).isActive                                                     = true
         page3.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                 = true
         page3.heightAnchor.constraint(equalTo: heightAnchor).isActive                                               = true
@@ -208,7 +208,7 @@ extension Overview {
     
 }
 
-extension Experience {
+extension Work {
     func tableConstraints() {
         let topPadding = UI.Sizing.Overview.topPadding
         
@@ -220,7 +220,7 @@ extension Experience {
     }
 }
 
-extension ExperienceSection {
+extension WorkSection {
     
     func companyConstraints() {
         company.translatesAutoresizingMaskIntoConstraints                                                          = false
@@ -232,26 +232,36 @@ extension ExperienceSection {
     
 }
 
-extension ExperienceCell {
+extension WorkCell {
         
     func positionConstraints() {
         positionHeight = position.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.positionHeight)
         
         position.translatesAutoresizingMaskIntoConstraints                                                          = false
-        position.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                          = true
+        position.leadingAnchor.constraint(equalTo: leadingAnchor).isActive                                          = true
         position.topAnchor.constraint(equalTo: topAnchor).isActive                                                  = true
-        position.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.paddedWidth).isActive                 = true
+        position.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.positionWidth).isActive                 = true
         positionHeight.isActive                                                                                     = true
     }
-    
-    func accomplishmentsConstraints() {
-        accomplishmentsHeight = accomplishments.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.accomplishmentsHeight)
+
+    func startDateConstraints() {
+        startDateHeight = startDate.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.startDateHeight)
         
-        accomplishments.translatesAutoresizingMaskIntoConstraints                                                          = false
-        accomplishments.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                          = true
-        accomplishments.topAnchor.constraint(equalTo: position.bottomAnchor).isActive                                      = true
-        accomplishments.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.paddedWidth).isActive                 = true
-        accomplishmentsHeight.isActive                                                                                     = true
+        startDate.translatesAutoresizingMaskIntoConstraints                                                          = false
+        startDate.trailingAnchor.constraint(equalTo: trailingAnchor).isActive                                          = true
+        startDate.topAnchor.constraint(equalTo: topAnchor).isActive                                                  = true
+        startDate.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.startDateWidth).isActive                 = true
+        startDateHeight.isActive                                                                                     = true
+    }
+    
+    func workCompletedConstraints() {
+        workCompletedHeight = workCompleted.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.workCompletedHeight)
+        
+        workCompleted.translatesAutoresizingMaskIntoConstraints                                                          = false
+        workCompleted.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                          = true
+        workCompleted.topAnchor.constraint(equalTo: position.bottomAnchor).isActive                                      = true
+        workCompleted.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.paddedWidth).isActive                 = true
+        workCompletedHeight.isActive                                                                                     = true
     }
     
 }

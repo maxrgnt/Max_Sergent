@@ -1,5 +1,5 @@
 //
-//  Experience.swift
+//  Work.swift
 //  Max_Sergent
 //
 //  Created by Max Sergent on 12/21/19.
@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-class Experience: UIView {
+class Work: UIView {
     
     //MARK: Definitions
     // Objects
-    let table = ExperienceTable()
+    let table = WorkTable()
     
     //MARK: Initialization
     init() {
