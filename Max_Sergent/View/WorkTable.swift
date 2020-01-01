@@ -62,12 +62,12 @@ class WorkTable: UITableView, UITableViewDelegate, UITableViewDataSource, UIScro
                 cell.startDate.text = startDate
                 cell.workCompleted.text = workCompleted
                 
-                let x = heightForLabel(text: "\(title) | \(startDate)", font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
-                cell.positionHeight.constant = x
-                cell.startDateHeight.constant = x
+                let x = heightForLabel(text: "\(title) | \(startDate)", font: UI.Fonts.Experience.cellHeader!, width: UI.Sizing.widthObjectPadding)
+                cell.positionHeight.constant = x + 5.0
+                cell.startDateHeight.constant = x + 5.0
                 
                 let y = heightForLabel(text: workCompleted, font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
-                cell.workCompletedHeight.constant = y
+                cell.workCompletedHeight.constant = y + 5.0
             }
         }
 
@@ -138,7 +138,7 @@ class WorkTable: UITableView, UITableViewDelegate, UITableViewDataSource, UIScro
             }
         }
         
-        return x + y
+        return x + y + 5.0 + 5.0 + 5.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

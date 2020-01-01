@@ -65,11 +65,11 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         addSubview(work)
         work.setup()
         addSubview(page3)
-        page3.backgroundColor = .blue
+        page3.backgroundColor = .darkGray
         addSubview(page4)
-        page4.backgroundColor = .yellow
+        page4.backgroundColor = .darkGray
         addSubview(page5)
-        page5.backgroundColor = .green
+        page5.backgroundColor = .darkGray
     }
     
     //MARK: Constraints() {
