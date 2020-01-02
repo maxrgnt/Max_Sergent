@@ -9,15 +9,15 @@
 import Foundation
 import UIKit
 
-protocol WorkTableDelegate {
+protocol SchoolTableDelegate {
     
 }
 
-class WorkTable: UITableView, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+class SchoolTable: UITableView, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
         
     //MARK: Definitions
     // Delegate object
-    var customDelegate : WorkTableDelegate!
+    var customDelegate : SchoolTableDelegate!
     // Variables
     
     //MARK: - Initialization
@@ -33,7 +33,7 @@ class WorkTable: UITableView, UITableViewDelegate, UITableViewDataSource, UIScro
     //MARK: Setup
     func setup() {
         backgroundColor = .clear //UI.Color.alculatePurpleLite
-        register(WorkCell.self, forCellReuseIdentifier: Constants.Experience.cellReuseId)
+        register(SchoolCell.self, forCellReuseIdentifier: Constants.School.cellReuseId)
         delegate                     = self
         dataSource                   = self
         tableHeaderView              = nil
@@ -46,27 +46,27 @@ class WorkTable: UITableView, UITableViewDelegate, UITableViewDataSource, UIScro
     
     // MARK: TableView Delegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let id = Constants.Experience.cellReuseId
-        let cell: WorkCell = tableView.dequeueReusableCell(withIdentifier: id) as! WorkCell
+        let id = Constants.School.cellReuseId
+        let cell: SchoolCell = tableView.dequeueReusableCell(withIdentifier: id) as! SchoolCell
         
-        if  let company = Data.work[Data.companyKeys[indexPath.section]] as? [String: AnyObject],
-            let positions = company[Constants.Data.Work.positions] as? [String: AnyObject]
+        if  let school = Data.school[Data.schoolNameKeys[indexPath.section]] as? [String: AnyObject],
+            let classes = school[Constants.Data.School.classes] as? [String: AnyObject]
         {
-            let positionKeys = Array(positions.keys.sorted().reversed())
-            if  let position = positions[positionKeys[indexPath.row]] as? [String: AnyObject],
-                let title = position[Constants.Data.Work.title] as? String,
-                let startDate = position[Constants.Data.Work.startDate] as? String,
-                let workCompleted = position[Constants.Data.Work.workCompleted] as? String
+            let classKeys = Array(classes.keys.sorted().reversed())
+            if  let aClass = classes[classKeys[indexPath.row]] as? [String: AnyObject],
+                let nameOfClass = aClass[Constants.Data.School.nameOfClass] as? String,
+                let startDate = aClass[Constants.Data.School.startDate] as? String,
+                let stuffLearned = aClass[Constants.Data.School.stuffLearned] as? String
             {
-                cell.position.text = title
+                cell.nameOfClass.text = nameOfClass
                 cell.startDate.text = startDate
-                cell.workCompleted.text = workCompleted
+                cell.stuffLearned.text = stuffLearned
                 
-                let x = heightForLabel(text: "\(title) | \(startDate)", font: UI.Fonts.Experience.cellHeader!, width: UI.Sizing.widthObjectPadding)
+                let x = heightForLabel(text: "\(nameOfClass) | \(startDate)", font: UI.Fonts.Experience.cellHeader!, width: UI.Sizing.widthObjectPadding)
                 cell.positionHeight.constant = x + 5.0
                 cell.startDateHeight.constant = x + 5.0
                 
-                let y = heightForLabel(text: workCompleted, font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
+                let y = heightForLabel(text: stuffLearned, font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
                 cell.workCompletedHeight.constant = y + 5.0
             }
         }
@@ -92,29 +92,29 @@ class WorkTable: UITableView, UITableViewDelegate, UITableViewDataSource, UIScro
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionVar = WorkSection()
+        let sectionVar = SchoolSection()
         sectionVar.setup()
-        if  let company = Data.work[Data.companyKeys[section]] as? [String: AnyObject],
-            let name = company[Constants.Data.Work.company] as? String
+        if  let school = Data.school[Data.schoolNameKeys[section]] as? [String: AnyObject],
+            let name = school[Constants.Data.School.schoolName] as? String
         {
-            sectionVar.company.text = name
+            sectionVar.school.text = name
         }
         return sectionVar
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return UI.Sizing.Experience.sectionHeight
+        return UI.Sizing.School.sectionHeight
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Data.work.keys.count
+        return Data.school.keys.count
     }
  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var rows = 0
-        if  let jobs = Data.work[Data.companyKeys[section]] as? [String: AnyObject],
-            let positions = jobs[Constants.Data.Work.positions]?.count {
-            rows = positions
+        if  let school = Data.school[Data.schoolNameKeys[section]] as? [String: AnyObject],
+            let classes = school[Constants.Data.School.classes]?.count {
+            rows = classes
         }
         return rows
     }
@@ -124,17 +124,17 @@ class WorkTable: UITableView, UITableViewDelegate, UITableViewDataSource, UIScro
         var x: CGFloat = 0.0
         var y: CGFloat = 0.0
         
-        if  let company = Data.work[Data.companyKeys[indexPath.section]] as? [String: AnyObject],
-            let positions = company[Constants.Data.Work.positions] as? [String: AnyObject]
+        if  let school = Data.school[Data.schoolNameKeys[indexPath.section]] as? [String: AnyObject],
+            let classes = school[Constants.Data.School.classes] as? [String: AnyObject]
         {
-            let positionKeys = Array(positions.keys.sorted().reversed())
-            if  let position = positions[positionKeys[indexPath.row]] as? [String: AnyObject],
-                let title = position[Constants.Data.Work.title] as? String,
-                let startDate = position[Constants.Data.Work.startDate] as? String,
-                let workCompleted = position[Constants.Data.Work.workCompleted] as? String
+            let classKeys = Array(classes.keys.sorted().reversed())
+            if  let aClass = classes[classKeys[indexPath.row]] as? [String: AnyObject],
+                let nameOfClass = aClass[Constants.Data.School.nameOfClass] as? String,
+                let startDate = aClass[Constants.Data.School.startDate] as? String,
+                let stuffLearned = aClass[Constants.Data.School.stuffLearned] as? String
             {
-                x = heightForLabel(text: "\(title) | \(startDate)", font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
-                y = heightForLabel(text: workCompleted, font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
+                x = heightForLabel(text: "\(nameOfClass) | \(startDate)", font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
+                y = heightForLabel(text: stuffLearned, font: UI.Fonts.Experience.cellBody!, width: UI.Sizing.widthObjectPadding)
             }
         }
         

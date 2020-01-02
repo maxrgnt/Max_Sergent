@@ -24,10 +24,10 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     // Objects
     let overview = Overview()
     let work = Work()
-    let page3 = UILabel()
+    let school = School()
     let page4 = UILabel()
     let page5 = UILabel()
-    lazy var pages = [overview,work,page3,page4,page5]
+    lazy var pages = [overview,work,school,page4,page5]
     
     //MARK: Initialization
     init() {
@@ -64,8 +64,8 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         overview.setup()
         addSubview(work)
         work.setup()
-        addSubview(page3)
-        page3.backgroundColor = .darkGray
+        addSubview(school)
+        school.setup()
         addSubview(page4)
         page4.backgroundColor = .darkGray
         addSubview(page5)
@@ -132,9 +132,7 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         let newPhotoDiameter = height - UI.Sizing.Header.pictureDiameter - UI.Sizing.Header.padding
         var scaleDiameter = newPhotoDiameter / UI.Sizing.Header.pictureDiameter
         scaleDiameter = (scaleDiameter > 1) ? 1.0 : scaleDiameter
-        scaleDiameter = (scaleDiameter < 0) ? 0.0 : scaleDiameter
-        print(scaleDiameter)
-        
+        scaleDiameter = (scaleDiameter < 0) ? 0.0 : scaleDiameter        
         // Use variables above to update respective alpha
         alpha = headerAlpha
         overview.alpha = scaleDiameter

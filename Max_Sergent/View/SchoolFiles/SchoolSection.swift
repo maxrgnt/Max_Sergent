@@ -8,10 +8,10 @@
 
 import UIKit
 
-class WorkSection: UIView {
+class SchoolSection: UIView {
 
     // Objects
-    let company = UILabel()
+    let school = UILabel()
     
     //MARK: Initialization
     init() {
@@ -31,22 +31,22 @@ class WorkSection: UIView {
     
     //MARK: Object Settings
     func objectSettings() {
-        addSubview(company)
-        company.alpha          = 1.0
-        company.textAlignment  = .left
-        company.textColor      = UI.Colors.Experience.company
-        company.font           = UI.Fonts.Experience.company
-        company.text           = Constants.Experience.company
+        addSubview(school)
+        school.alpha          = 1.0
+        school.textAlignment  = .left
+        school.textColor      = UI.Colors.Experience.company
+        school.font           = UI.Fonts.Experience.company
+        school.text           = Constants.Experience.company
         //company.minimumScaleFactor = 0.1
-        company.numberOfLines = 0
-        company.lineBreakMode = .byClipping
+        school.numberOfLines = 0
+        school.lineBreakMode = .byClipping
         //company.adjustsFontSizeToFitWidth = true
         //company.backgroundColor = .blue
     }
     
     //MARK: Constraints
     func constraints() {
-        companyConstraints()
+        schoolConstraints()
     }
     
 }

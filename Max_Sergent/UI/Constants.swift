@@ -40,6 +40,12 @@ struct Constants {
         static let company = "Capital One"
     }
     
+    struct School {
+        static let header = "School"
+        static let cellReuseId = "SchoolCell"
+        static let company = "Capital One"
+    }
+    
     struct Data {
         
         struct Firebase {
@@ -47,6 +53,7 @@ struct Constants {
             static let profile = "profile"
             static let overview = "overview"
             static let work = "work"
+            static let school = "school"
         }
         
         struct CoreData {
@@ -55,6 +62,8 @@ struct Constants {
             static let OverviewProject = "OverviewProject"
             static let Work = "WorkData"
             static let WorkPosition = "WorkPosition"
+            static let School = "SchoolData"
+            static let SchoolClass = "SchoolClass"
         }
         
         struct Reset {
@@ -88,6 +97,16 @@ struct Constants {
             static let workCompleted = "workCompleted"
             static let manyToOne = "work"
             static let key = "key"
+        }
+        
+        struct School {
+            static let schoolName = "schoolName"
+            static let classes = "classes"
+            static let key = "key"
+            static let startDate = "startDate"
+            static let nameOfClass = "nameOfClass"
+            static let manyToOne = "school"
+            static let stuffLearned = "stuffLearned"
         }
         
     }

@@ -19,6 +19,7 @@ extension Data {
         firebaseProfile()
         firebaseOverview()
         firebaseWork()
+        firebaseSchool()
         completion()
     }
     
@@ -134,7 +135,50 @@ extension Data {
                                     Constants.Data.Work.positions: positionsList] as AnyObject
             }
             coreDataPopulated() ? deleteCoreData(forEntity: Constants.Data.CoreData.Work) : nil
+            coreDataPopulated() ? deleteCoreData(forEntity: Constants.Data.CoreData.WorkPosition) : nil
             setWork(workData: tempWork)
+        })
+    }
+    
+    //MARK: Firebase School
+    static func firebaseSchool() {
+        Database.database().reference(withPath: Constants.Data.Firebase.school).observeSingleEvent(of: .value, with: { snapshot in
+            guard let schoolData = snapshot.value as? [String: AnyObject] else {
+                print("Error: firebaseSchool - snapshot.value not convertible to [String: AnyObject]")
+                return
+            }
+                 
+            var tempSchool: [String: AnyObject] = [:]
+            var classList: [String: AnyObject] = [:]
+            
+            schoolData.keys.forEach { schoolKey in
+                classList = [:]
+                guard let year = schoolData[schoolKey] as? [String: AnyObject],
+                      let schoolName = year[Constants.Data.School.schoolName] as? String,
+                      let classes = year[Constants.Data.School.classes] as? [String: AnyObject] else
+                {
+                    print("Error: firebaseSchool - [year, schoolName, classes] not convertible")
+                    return
+                }
+                classes.keys.forEach { classKey in
+                    guard let aClass = classes[classKey],
+                          let startDate = aClass[Constants.Data.School.startDate] as? String,
+                          let nameOfClass = aClass[Constants.Data.School.nameOfClass] as? String,
+                          let stuffLearned = aClass[Constants.Data.School.stuffLearned] as? String else
+                    {
+                        print("Error: firebaseSchool - [aClass, startDate, nameOfClass, stuffLearned] not convertible")
+                        return
+                    }
+                    classList[classKey] = [Constants.Data.Work.startDate: startDate,
+                                           Constants.Data.School.nameOfClass: nameOfClass,
+                                           Constants.Data.School.stuffLearned: stuffLearned] as AnyObject
+                }
+                tempSchool[schoolKey] = [Constants.Data.School.schoolName: schoolName,
+                                    Constants.Data.School.classes: classList] as AnyObject
+            }
+            coreDataPopulated() ? deleteCoreData(forEntity: Constants.Data.CoreData.School) : nil
+            coreDataPopulated() ? deleteCoreData(forEntity: Constants.Data.CoreData.SchoolClass) : nil
+            setSchool(schoolData: tempSchool)
         })
     }
 }

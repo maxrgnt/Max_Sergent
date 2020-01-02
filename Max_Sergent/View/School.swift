@@ -13,7 +13,7 @@ class School: UIView {
     
     //MARK: Definitions
     // Objects
-    let table = WorkTable()
+    let table = SchoolTable()
     
     //MARK: Initialization
     init() {

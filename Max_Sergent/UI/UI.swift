@@ -96,6 +96,24 @@ struct UI {
             static let positionWidth = paddedWidth*0.7
             static let startDateWidth = paddedWidth*0.3
         }
+        
+        struct School {
+            static let padding = objectPadding
+            static let height = Scroll.height
+            static let width = UI.Sizing.width
+            static let topPadding = padding/2
+
+            static let headerHeight = height*(0.04)
+            static let tableHeight = height-headerHeight
+            static let sectionHeight = height*(0.07)
+            static let cellHeight = height*(0.22)
+            static let positionHeight = height*(0.07)
+            static let startDateHeight = height*(0.07)
+            static let workCompletedHeight = height*(0.15)
+            
+            static let paddedWidth = width-(padding*2)
+            static let positionWidth = paddedWidth*0.7
+            static let startDateWidth = paddedWidth*0.3        }
     }
     
 }

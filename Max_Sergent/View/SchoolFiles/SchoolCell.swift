@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WorkCell: UITableViewCell {
+class SchoolCell: UITableViewCell {
 
     // Constraints
     var positionHeight: NSLayoutConstraint!
@@ -17,9 +17,9 @@ class WorkCell: UITableViewCell {
     
     // Objects
     let icon = UIImageView()
-    let position = UILabel()
+    let nameOfClass = UILabel()
     let startDate = UILabel()
-    let workCompleted = UILabel()
+    let stuffLearned = UILabel()
     
     //MARK: Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -42,13 +42,13 @@ class WorkCell: UITableViewCell {
     //MARK: Object Settings
     func objectSettings() {
         addSubview(icon)
-        addSubview(position)
-        position.textColor            = UI.Colors.Experience.cellText
-        position.textAlignment        = .left
-        position.font                 = UI.Fonts.Experience.cellHeader
-        position.alpha                = 1.0
-        position.numberOfLines = 0
-        position.lineBreakMode = .byClipping
+        addSubview(nameOfClass)
+        nameOfClass.textColor            = UI.Colors.Experience.cellText
+        nameOfClass.textAlignment        = .left
+        nameOfClass.font                 = UI.Fonts.Experience.cellHeader
+        nameOfClass.alpha                = 1.0
+        nameOfClass.numberOfLines = 0
+        nameOfClass.lineBreakMode = .byClipping
 
         addSubview(startDate)
         startDate.textColor     = UI.Colors.Experience.cellText
@@ -58,20 +58,20 @@ class WorkCell: UITableViewCell {
         startDate.numberOfLines = 0
         startDate.lineBreakMode = .byClipping
         
-        addSubview(workCompleted)
-        workCompleted.textColor     = UI.Colors.Experience.cellText
-        workCompleted.textAlignment = .left
-        workCompleted.font          = UI.Fonts.Experience.cellBody
-        workCompleted.alpha         = 1.0
-        workCompleted.numberOfLines = 0
-        workCompleted.lineBreakMode = .byClipping
+        addSubview(stuffLearned)
+        stuffLearned.textColor     = UI.Colors.Experience.cellText
+        stuffLearned.textAlignment = .left
+        stuffLearned.font          = UI.Fonts.Experience.cellBody
+        stuffLearned.alpha         = 1.0
+        stuffLearned.numberOfLines = 0
+        stuffLearned.lineBreakMode = .byClipping
     }
     
     //MARK: Constraints
     func constraints() {
-        positionConstraints()
+        nameOfClassConstraints()
         startDateConstraints()
-        workCompletedConstraints()
+        stuffLearnedConstraints()
     }
     
 }

@@ -12,7 +12,7 @@ import Firebase
 import FirebaseStorage
 
 class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelegate {
-    
+        
     let header = Header()
     let menu = Menu()
     let scroll = Scroll()
@@ -214,10 +214,6 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
         header.picture.setNeedsDisplay()
     }
     
-    func reloadWork() {
-        scroll.work.table.reloadData()
-    }
-    
     func reloadOverview() {
         if  let statement = Data.overview[Constants.Data.Overview.statement] as? String,
             let originDate = Data.overview[Constants.Data.Overview.originDate] as? String,
@@ -263,6 +259,14 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
             scroll.overview.buildProjectLabel(for: work, changing: scroll.overview.workStats)
             //print(work)
         }
+    }
+    
+    func reloadWork() {
+        scroll.work.table.reloadData()
+    }
+
+    func reloadSchool() {
+        scroll.school.table.reloadData()
     }
     
 }

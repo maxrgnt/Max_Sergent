@@ -22,24 +22,13 @@ struct Data {
         }
     }
     static var companyKeys: [String] = []
-     
-//    func imageStuff() {
-//        if let success = UIImage(named: "placeholder.png")?.saveImage(as: "placeholder") {
-//
-//        }
-//        if let image = loadImage(named: "placeholder") {
-//            print("loaded")
-//            print(image)
-//        }
-//    }
-//
-//    func loadImage(named: String) -> UIImage? {
-//        if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
-//            return UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(named).path)
-//        }
-//        return nil
-//    }
-//
+    static var school: [String : AnyObject] = [:] {
+        didSet {
+            schoolNameKeys = Array(school.keys).sorted()
+        }
+    }
+    static var schoolNameKeys: [String] = []
+
 //    func deleteImages() {
 //        let fileManager = FileManager.default
 //        let myDocuments = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -76,6 +65,7 @@ struct Data {
             loadProfile()
             loadOverview()
             loadWork()
+            loadSchool()
         }
         else {
             print("Load from Firebase")

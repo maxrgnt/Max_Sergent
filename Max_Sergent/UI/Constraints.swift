@@ -117,14 +117,14 @@ extension Scroll {
         work.widthAnchor.constraint(equalTo: widthAnchor).isActive                                            = true
         work.heightAnchor.constraint(equalTo: heightAnchor).isActive                                          = true
         
-        page3.translatesAutoresizingMaskIntoConstraints                                                             = false
-        page3.leadingAnchor.constraint(equalTo: work.trailingAnchor).isActive                                   = true
-        page3.topAnchor.constraint(equalTo: topAnchor).isActive                                                     = true
-        page3.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                 = true
-        page3.heightAnchor.constraint(equalTo: heightAnchor).isActive                                               = true
+        school.translatesAutoresizingMaskIntoConstraints                                                             = false
+        school.leadingAnchor.constraint(equalTo: work.trailingAnchor).isActive                                   = true
+        school.topAnchor.constraint(equalTo: topAnchor).isActive                                                     = true
+        school.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                 = true
+        school.heightAnchor.constraint(equalTo: heightAnchor).isActive                                               = true
         
         page4.translatesAutoresizingMaskIntoConstraints                                                             = false
-        page4.leadingAnchor.constraint(equalTo: page3.trailingAnchor).isActive                                      = true
+        page4.leadingAnchor.constraint(equalTo: school.trailingAnchor).isActive                                      = true
         page4.topAnchor.constraint(equalTo: topAnchor).isActive                                                     = true
         page4.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                 = true
         page4.heightAnchor.constraint(equalTo: heightAnchor).isActive                                               = true
@@ -261,6 +261,64 @@ extension WorkCell {
         workCompleted.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                          = true
         workCompleted.topAnchor.constraint(equalTo: position.bottomAnchor).isActive                                      = true
         workCompleted.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.paddedWidth).isActive                 = true
+        workCompletedHeight.isActive                                                                                     = true
+    }
+    
+}
+
+extension School {
+    func tableConstraints() {
+        let topPadding = UI.Sizing.Overview.topPadding
+        
+        table.translatesAutoresizingMaskIntoConstraints                                                             = false
+        table.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                             = true
+        table.topAnchor.constraint(equalTo: topAnchor, constant: topPadding/2).isActive                   = true
+        table.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.paddedWidth).isActive                    = true
+        table.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.tableHeight).isActive                   = true
+    }
+}
+
+extension SchoolSection {
+    
+    func schoolConstraints() {
+        school.translatesAutoresizingMaskIntoConstraints                                                          = false
+        school.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                          = true
+        school.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                              = true
+        school.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.paddedWidth).isActive                 = true
+        school.heightAnchor.constraint(equalTo: heightAnchor).isActive                                            = true
+    }
+    
+}
+
+extension SchoolCell {
+        
+    func nameOfClassConstraints() {
+        positionHeight = nameOfClass.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.positionHeight)
+        
+        nameOfClass.translatesAutoresizingMaskIntoConstraints                                                          = false
+        nameOfClass.leadingAnchor.constraint(equalTo: leadingAnchor).isActive                                          = true
+        nameOfClass.topAnchor.constraint(equalTo: topAnchor).isActive                                                  = true
+        nameOfClass.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.positionWidth).isActive                 = true
+        positionHeight.isActive                                                                                     = true
+    }
+
+    func startDateConstraints() {
+        startDateHeight = startDate.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.startDateHeight)
+        
+        startDate.translatesAutoresizingMaskIntoConstraints                                                          = false
+        startDate.trailingAnchor.constraint(equalTo: trailingAnchor).isActive                                          = true
+        startDate.topAnchor.constraint(equalTo: topAnchor).isActive                                                  = true
+        startDate.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.startDateWidth).isActive                 = true
+        startDateHeight.isActive                                                                                     = true
+    }
+    
+    func stuffLearnedConstraints() {
+        workCompletedHeight = stuffLearned.heightAnchor.constraint(equalToConstant: UI.Sizing.Experience.workCompletedHeight)
+        
+        stuffLearned.translatesAutoresizingMaskIntoConstraints                                                          = false
+        stuffLearned.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                          = true
+        stuffLearned.topAnchor.constraint(equalTo: nameOfClass.bottomAnchor).isActive                                      = true
+        stuffLearned.widthAnchor.constraint(equalToConstant: UI.Sizing.Experience.paddedWidth).isActive                 = true
         workCompletedHeight.isActive                                                                                     = true
     }
     

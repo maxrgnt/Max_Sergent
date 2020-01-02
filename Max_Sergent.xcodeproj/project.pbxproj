@@ -179,9 +179,9 @@
 		661C67D623BE81D600B9A81E /* SchoolFiles */ = {
 			isa = PBXGroup;
 			children = (
-				66E72F3E23BE834B004F3C43 /* SchoolCell.swift */,
-				66E72F4023BE834B004F3C43 /* SchoolSection.swift */,
 				66E72F3F23BE834B004F3C43 /* SchoolTable.swift */,
+				66E72F4023BE834B004F3C43 /* SchoolSection.swift */,
+				66E72F3E23BE834B004F3C43 /* SchoolCell.swift */,
 			);
 			path = SchoolFiles;
 			sourceTree = "<group>";

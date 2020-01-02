@@ -12,8 +12,9 @@ import CoreData
 
 protocol DataDelegate {
     func reloadProfile()
-    func reloadWork()
     func reloadOverview()
+    func reloadWork()
+    func reloadSchool()
 }
 
 extension Data {
@@ -235,6 +236,82 @@ extension Data {
                                 Constants.Data.Work.positions: positionsList] as AnyObject
         }
         self.customDelegate.reloadWork()
+    }
+    
+    //MARK: CoreData School
+    static func setSchool(schoolData: [String: AnyObject]) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        schoolData.keys.forEach { schoolKey in
+            let schoolEntity = NSEntityDescription.entity(forEntityName: Constants.Data.CoreData.School, in: managedContext)!
+            let school = NSManagedObject(entity: schoolEntity, insertInto: managedContext)
+            guard let year = schoolData[schoolKey] as? [String: AnyObject],
+                  let schoolName = year[Constants.Data.School.schoolName] as? String,
+                  let classes = year[Constants.Data.School.classes] as? [String: AnyObject] else
+            {
+                print("Error: setSchool - [year, schoolName, classes] not found in parameter")
+                return
+            }
+            school.setValue(schoolName, forKeyPath: Constants.Data.School.schoolName)
+            school.setValue(schoolKey, forKeyPath: Constants.Data.School.key)
+            classes.keys.forEach { classKey in
+                guard let aClass = classes[classKey],
+                      let startDate = aClass[Constants.Data.School.startDate] as? String,
+                      let nameOfClass = aClass[Constants.Data.School.nameOfClass] as? String,
+                      let stuffLearned = aClass[Constants.Data.School.stuffLearned] as? String else
+                {
+                    print("Error: setWork - [aClass, startDate, nameOfClass, stuffLearned] not found in parameter")
+                    return
+                }
+                let x = NSEntityDescription.entity(forEntityName: Constants.Data.CoreData.SchoolClass, in: managedContext)!
+                let newClass = NSManagedObject(entity: x, insertInto: managedContext)
+                newClass.setValue(classKey, forKeyPath: Constants.Data.School.key)
+                newClass.setValue(startDate, forKeyPath: Constants.Data.School.startDate)
+                newClass.setValue(nameOfClass, forKeyPath: Constants.Data.School.nameOfClass)
+                newClass.setValue(stuffLearned, forKeyPath: Constants.Data.School.stuffLearned)
+                newClass.setValue(school, forKey: Constants.Data.School.manyToOne)
+            }
+        }
+        do {
+            try managedContext.save()
+            loadSchool()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    static func loadSchool() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Data.CoreData.School)
+        let objects = try! managedContext.fetch(fetch) as! [SchoolData]
+        school = [:]
+        objects.forEach { object in
+            guard let schoolKey = object.key,
+                  let schoolName = object.schoolName,
+                  let classes = object.classes?.allObjects as? [SchoolClass] /* Set One-to-Many */ else
+            {
+                print("Error: loadWork - [schoolKey, school, classes] not found in SchoolData")
+                return
+            }
+            var classList: [String: AnyObject] = [:]
+            classes.forEach { object in
+                guard let classKey = object.key,
+                      let startDate = object.startDate,
+                      let nameOfClass = object.nameOfClass,
+                      let stuffLearned = object.stuffLearned else
+                {
+                    print("Error: loadWork - [classKey, startDate, nameOfClass, stuffLearned] not found in SchoolData")
+                    return
+                }
+                classList[classKey] = [Constants.Data.School.startDate: startDate,
+                                       Constants.Data.School.nameOfClass: nameOfClass,
+                                       Constants.Data.School.stuffLearned: stuffLearned] as AnyObject
+            }
+            school[schoolKey] = [Constants.Data.School.schoolName: schoolName,
+                                 Constants.Data.School.classes: classList] as AnyObject
+        }
+        self.customDelegate.reloadSchool()
     }
     
     //MARK: CoreData Delete
