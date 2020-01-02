@@ -14,7 +14,7 @@ import FirebaseStorage
 
 struct Data {
     
-    static var profile: (name: String, picture: String) = (name: "", picture: "")
+    static var profile: (name: String, picture: UIImage)!
     static var overview: [String: AnyObject] = [:] 
     static var work: [String : AnyObject] = [:] {
         didSet {

@@ -64,6 +64,7 @@ struct Constants {
         struct Profile {
             static let name = "name"
             static let picture = "picture"
+            static let placeholder = "placeholder.jpg"
         }
         
         struct Overview {

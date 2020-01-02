@@ -21,15 +21,24 @@ extension Data {
     static var customDelegate : DataDelegate!
     
     //MARK: CoreData Profile
-    static func setProfile(name: String, picture: String) {
+    static func setProfile(name: String, pictureURL: String, picture: UIImage) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let managedContext = appDelegate.persistentContainer.viewContext
         let profileEntity = NSEntityDescription.entity(forEntityName: Constants.Data.CoreData.Profile, in: managedContext)!
         let profile = NSManagedObject(entity: profileEntity, insertInto: managedContext)
         profile.setValue(name, forKeyPath: Constants.Data.Profile.name)
-        profile.setValue(picture, forKeyPath: Constants.Data.Profile.picture)
+        profile.setValue(pictureURL, forKeyPath: Constants.Data.Profile.picture)
         do {
             try managedContext.save()
+            if picture.saveImage(as: Constants.Data.Profile.picture) {
+                do {
+                    let documentsURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+                    let docs = try FileManager.default.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: [], options:  [.skipsHiddenFiles, .skipsSubdirectoryDescendants])
+                    print(docs)
+                } catch {
+                    print(error)
+                }
+            }
             loadProfile()
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
@@ -42,10 +51,17 @@ extension Data {
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Data.CoreData.Profile)
         let objects = try! managedContext.fetch(fetch) as! [ProfileData]
-        guard let object = objects.first, let name = object.name, let picture = object.picture else {
+        guard let object = objects.first, let name = object.name else {
             print("Error: loadProfile - [object, name, picture] not found in ProfileData")
             return
         }
+        
+        guard let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
+            return
+        }
+        
+        let picture = UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(Constants.Data.Profile.picture).path)!
+        
         profile = (name: name, picture: picture)
         self.customDelegate.reloadProfile()
     }
@@ -147,7 +163,6 @@ extension Data {
     
     //MARK: CoreData Work
     static func setWork(workData: [String: AnyObject]) {
-        print(workData)
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let managedContext = appDelegate.persistentContainer.viewContext
         workData.keys.forEach { companyKey in
@@ -160,9 +175,6 @@ extension Data {
                 print("Error: setWork - [job, company, positions] not found in parameter")
                 return
             }
-            print(companyKey, company)
-            print(positions.count)
-            print("-------")
             work.setValue(company, forKeyPath: Constants.Data.Work.company)
             work.setValue(companyKey, forKeyPath: Constants.Data.Work.key)
             positions.keys.forEach { positionKey in

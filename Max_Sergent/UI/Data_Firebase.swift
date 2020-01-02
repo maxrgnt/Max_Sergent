@@ -53,8 +53,20 @@ extension Data {
                 print("Error: firebaseProfile - [name,pictureURL] not convertible")
                 return
             }
+            
             coreDataPopulated() ? deleteCoreData(forEntity: Constants.Data.CoreData.Profile) : nil
-            setProfile(name: name, picture: pictureURL)
+            
+            let storageRef = Storage.storage().reference(forURL: pictureURL)
+            storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                if let error = error {
+                    print(error)
+                    setProfile(name: name, pictureURL: pictureURL, picture: UIImage(named: Constants.Data.Profile.placeholder)!)
+                }
+                else {
+                    setProfile(name: name, pictureURL: pictureURL, picture: UIImage(data: data!)!)
+                }
+            }
+            
         })
     }
     
