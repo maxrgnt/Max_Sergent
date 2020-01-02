@@ -161,12 +161,37 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
         if header.name.textAlignment != newAlignment {
             header.name.alpha = 0.0
             header.name.textAlignment = newAlignment
-            UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseInOut
-                , animations: ({
+            UIView.animate(withDuration: 0.3,
+                           delay: 0.0,
+                           // 1.0 is smooth, 0.0 is bouncy
+                           usingSpringWithDamping: 0.5,
+                           // 1.0 corresponds to the total animation distance traversed in one second
+                           // distance/seconds, 1.0 = total animation distance traversed in one second
+                           initialSpringVelocity: 1.0,
+                           options: [.curveEaseInOut],
+                           // [autoReverse, curveEaseIn, curveEaseOut, curveEaseInOut, curveLinear]
+                animations: ({
                     self.header.name.alpha = 1.0
                 }))
         }
     }
+
+//    UIView.animate(withDuration: 0.55, delay: 0.0,
+//        // 1.0 is smooth, 0.0 is bouncy
+//        usingSpringWithDamping: 0.7,
+//        // 1.0 corresponds to the total animation distance traversed in one second
+//        // distance/seconds, 1.0 = total animation distance traversed in one second
+//        initialSpringVelocity: 1.0,
+//        options: [.curveEaseInOut],
+//        // [autoReverse, curveEaseIn, curveEaseOut, curveEaseInOut, curveLinear]
+//        animations: {
+//            //Do all animations here
+//            self.view.layoutIfNeeded()
+//    }, completion: {
+//           //Code to run after animating
+//            (value: Bool) in
+//        }
+//    )
     
     func menuMoveScroll(toPage page: Int) {
         if currentPage != page {
