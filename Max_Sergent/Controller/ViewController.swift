@@ -164,10 +164,10 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
             UIView.animate(withDuration: 0.3,
                            delay: 0.0,
                            // 1.0 is smooth, 0.0 is bouncy
-                           usingSpringWithDamping: 0.5,
+                           //usingSpringWithDamping: 0.5,
                            // 1.0 corresponds to the total animation distance traversed in one second
                            // distance/seconds, 1.0 = total animation distance traversed in one second
-                           initialSpringVelocity: 1.0,
+                           //initialSpringVelocity: 1.0,
                            options: [.curveEaseInOut],
                            // [autoReverse, curveEaseIn, curveEaseOut, curveEaseInOut, curveLinear]
                 animations: ({
