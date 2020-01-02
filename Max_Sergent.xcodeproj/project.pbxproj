@@ -31,6 +31,9 @@
 		66DCB72623BA3872007AAF78 /* Data_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DCB72523BA3872007AAF78 /* Data_CoreData.swift */; };
 		66DCB72823BA387F007AAF78 /* Data_Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DCB72723BA387F007AAF78 /* Data_Firebase.swift */; };
 		66DCB72A23BA54D5007AAF78 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DCB72923BA54D5007AAF78 /* Reachability.swift */; };
+		66E72F4123BE834B004F3C43 /* SchoolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F3E23BE834B004F3C43 /* SchoolCell.swift */; };
+		66E72F4223BE834B004F3C43 /* SchoolTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F3F23BE834B004F3C43 /* SchoolTable.swift */; };
+		66E72F4323BE834B004F3C43 /* SchoolSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F4023BE834B004F3C43 /* SchoolSection.swift */; };
 		66FD8A79239AD18E00B90C69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A78239AD18E00B90C69 /* AppDelegate.swift */; };
 		66FD8A7B239AD18E00B90C69 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */; };
 		66FD8A7E239AD18E00B90C69 /* Max_Sergent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A7C239AD18E00B90C69 /* Max_Sergent.xcdatamodeld */; };
@@ -91,6 +94,9 @@
 		66DCB72523BA3872007AAF78 /* Data_CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data_CoreData.swift; sourceTree = "<group>"; };
 		66DCB72723BA387F007AAF78 /* Data_Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data_Firebase.swift; sourceTree = "<group>"; };
 		66DCB72923BA54D5007AAF78 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		66E72F3E23BE834B004F3C43 /* SchoolCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolCell.swift; sourceTree = "<group>"; };
+		66E72F3F23BE834B004F3C43 /* SchoolTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolTable.swift; sourceTree = "<group>"; };
+		66E72F4023BE834B004F3C43 /* SchoolSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolSection.swift; sourceTree = "<group>"; };
 		66FD8A75239AD18E00B90C69 /* Max Sergent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Max Sergent.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FD8A78239AD18E00B90C69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +179,9 @@
 		661C67D623BE81D600B9A81E /* SchoolFiles */ = {
 			isa = PBXGroup;
 			children = (
+				66E72F3E23BE834B004F3C43 /* SchoolCell.swift */,
+				66E72F4023BE834B004F3C43 /* SchoolSection.swift */,
+				66E72F3F23BE834B004F3C43 /* SchoolTable.swift */,
 			);
 			path = SchoolFiles;
 			sourceTree = "<group>";
@@ -551,9 +560,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66E72F4123BE834B004F3C43 /* SchoolCell.swift in Sources */,
 				66C4C60223B0FF9700DEDF6D /* WorkTable.swift in Sources */,
 				66FD8AB2239AEADA00B90C69 /* ViewController.swift in Sources */,
 				6651C6AF239F1353003B49A1 /* UI.swift in Sources */,
+				66E72F4323BE834B004F3C43 /* SchoolSection.swift in Sources */,
 				66FD8A79239AD18E00B90C69 /* AppDelegate.swift in Sources */,
 				66C4C5FE23ABDF1C00DEDF6D /* Extension.swift in Sources */,
 				6636D13B23A7BBDC00290C3D /* ScrollView.swift in Sources */,
@@ -562,6 +573,7 @@
 				66DCB72823BA387F007AAF78 /* Data_Firebase.swift in Sources */,
 				66FD8A7E239AD18E00B90C69 /* Max_Sergent.xcdatamodeld in Sources */,
 				6651C6B1239F171C003B49A1 /* Constants.swift in Sources */,
+				66E72F4223BE834B004F3C43 /* SchoolTable.swift in Sources */,
 				6651C6AD239F12C2003B49A1 /* Constraints.swift in Sources */,
 				66FD8A80239AD18E00B90C69 /* ContentView.swift in Sources */,
 				66C4C60423B1010400DEDF6D /* WorkCell.swift in Sources */,
