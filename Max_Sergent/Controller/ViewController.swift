@@ -132,32 +132,41 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
     }
     
     //MARK: Custom Delegates
-    func adjustHeader(toHeight newConstant: CGFloat) {
-        var newDiameter = newConstant - UI.Sizing.Header.pictureDiameter - UI.Sizing.Header.padding
+    func adjustHeader(toHeight newHeight: CGFloat) {
+        var newDiameter = newHeight - UI.Sizing.Header.pictureDiameter - UI.Sizing.Header.padding
         var newAlpha = newDiameter / UI.Sizing.Header.pictureDiameter
         newAlpha = (newAlpha > 1) ? 1.0 : newAlpha
         newAlpha = (newAlpha < 0) ? 0.0 : newAlpha
         newDiameter = (newDiameter <= 0) ? 0 : newDiameter
-        var adjFontHeight = newConstant - UI.Sizing.Header.padding
-        adjFontHeight = (adjFontHeight >= UI.Sizing.Header.expandedNameHeight) ? UI.Sizing.Header.expandedNameHeight : adjFontHeight
-        header.height.constant = newConstant
+        var adjFontHeight = newHeight - UI.Sizing.Header.padding
+        adjFontHeight = (adjFontHeight >= UI.Sizing.Header.expandedNameHeight)
+            ? UI.Sizing.Header.expandedNameHeight
+            : adjFontHeight
+        
+        header.height.constant = newHeight
         header.pictureHeight.constant = newDiameter
         header.pictureWidth.constant = newDiameter
         header.picture.alpha = newAlpha
-        scroll.overview.alpha = newAlpha
-        scroll.work.alpha = (1-newAlpha)
         header.picture.layer.cornerRadius = newDiameter/2
-        let x = UI.Sizing.Header.expandedHeight/UI.Sizing.Header.minimizedHeight
-        let y = header.height.constant/UI.Sizing.Header.minimizedHeight
-        header.name.alpha = (newConstant == UI.Sizing.Header.minimizedHeight) ? 1.0 : (y-1)/x
-        let z = header.height.constant/UI.Sizing.Header.expandedHeight
-        let zz = 1-((z-1)/(UI.Sizing.Scroll.limit/UI.Sizing.Scroll.width))
-        header.name.alpha = (newConstant > UI.Sizing.Header.expandedHeight) ? zz : header.name.alpha
-        menu.alpha = (newConstant > UI.Sizing.Header.expandedHeight) ? zz : menu.alpha
         header.nameHeight.constant = adjFontHeight
+        
+        let expandedOverMinimizedRatio = UI.Sizing.Header.expandedHeight/UI.Sizing.Header.minimizedHeight
+        let currentOverMinimizedRatio = header.height.constant/UI.Sizing.Header.minimizedHeight
+        let currentOverExpandedRatio = header.height.constant/UI.Sizing.Header.expandedHeight
+        let limitOverWidthRatio = UI.Sizing.Scroll.limit/UI.Sizing.Scroll.width
+        let newNameAlpha = 1-((currentOverExpandedRatio-1)/limitOverWidthRatio)
+        
+        header.name.alpha = (newHeight == UI.Sizing.Header.minimizedHeight)
+            ? 1.0
+            : (currentOverMinimizedRatio-1)/expandedOverMinimizedRatio
+        
+        header.name.alpha = (newHeight > UI.Sizing.Header.expandedHeight) ? newNameAlpha : header.name.alpha
+        menu.alpha = (newHeight > UI.Sizing.Header.expandedHeight) ? newNameAlpha : menu.alpha
+        
         header.layoutIfNeeded()
         header.name.sizeToFit()
-        let newAlignment: NSTextAlignment = (newConstant == UI.Sizing.Header.minimizedHeight) ? .center : .left
+        let newAlignment: NSTextAlignment = (newHeight == UI.Sizing.Header.minimizedHeight) ? .center : .left
+        
         if header.name.textAlignment != newAlignment {
             header.name.alpha = 0.0
             header.name.textAlignment = newAlignment
@@ -175,23 +184,6 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
                 }))
         }
     }
-
-//    UIView.animate(withDuration: 0.55, delay: 0.0,
-//        // 1.0 is smooth, 0.0 is bouncy
-//        usingSpringWithDamping: 0.7,
-//        // 1.0 corresponds to the total animation distance traversed in one second
-//        // distance/seconds, 1.0 = total animation distance traversed in one second
-//        initialSpringVelocity: 1.0,
-//        options: [.curveEaseInOut],
-//        // [autoReverse, curveEaseIn, curveEaseOut, curveEaseInOut, curveLinear]
-//        animations: {
-//            //Do all animations here
-//            self.view.layoutIfNeeded()
-//    }, completion: {
-//           //Code to run after animating
-//            (value: Bool) in
-//        }
-//    )
     
     func menuMoveScroll(toPage page: Int) {
         if currentPage != page {

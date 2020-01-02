@@ -31,6 +31,7 @@ struct UI {
             static let padding = objectPadding
             static let expandedHeight = (UI.Sizing.height - statusBar.height) * Ratio.expandedHeaderHeight
             static let minimizedHeight = (UI.Sizing.height - statusBar.height) * Ratio.minimizedHeaderHeight
+            static let heightDiff = UI.Sizing.Header.expandedHeight-UI.Sizing.Header.minimizedHeight
             static let width = UI.Sizing.width
             static let pictureDiameter = (expandedHeight-padding)/2
             static let pictureRadius = pictureDiameter/2

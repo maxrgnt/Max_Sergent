@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		18213500DB9B082120CA5CCD /* Pods_Max_SergentUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C23E36182F966F329B52E3B1 /* Pods_Max_SergentUITests.framework */; };
 		251690D36F279F07ABE3A194 /* Pods_Max_SergentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C277D5D3F2F86DBF0422A5 /* Pods_Max_SergentTests.framework */; };
+		661C67D523BE819F00B9A81E /* School.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661C67D423BE819F00B9A81E /* School.swift */; };
 		6636D13B23A7BBDC00290C3D /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6636D13A23A7BBDC00290C3D /* ScrollView.swift */; };
 		6636D13D23A837E900290C3D /* Overview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6636D13C23A837E900290C3D /* Overview.swift */; };
 		6636D14D23A8406F00290C3D /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6636D14823A8406F00290C3D /* OpenSans-Bold.ttf */; };
@@ -68,6 +69,7 @@
 /* Begin PBXFileReference section */
 		27FE27BEA6A862D528E9EA46 /* Pods-Max_SergentTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Max_SergentTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Max_SergentTests/Pods-Max_SergentTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2F41528ABE3454D44918FFA6 /* Pods-Max_SergentTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Max_SergentTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Max_SergentTests/Pods-Max_SergentTests.release.xcconfig"; sourceTree = "<group>"; };
+		661C67D423BE819F00B9A81E /* School.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = School.swift; sourceTree = "<group>"; };
 		6636D13A23A7BBDC00290C3D /* ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollView.swift; sourceTree = "<group>"; };
 		6636D13C23A837E900290C3D /* Overview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overview.swift; sourceTree = "<group>"; };
 		6636D14823A8406F00290C3D /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -158,6 +160,23 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		661C67D323BE818200B9A81E /* WorkFiles */ = {
+			isa = PBXGroup;
+			children = (
+				66C4C60123B0FF9700DEDF6D /* WorkTable.swift */,
+				66C4C60523B13F2300DEDF6D /* WorkSection.swift */,
+				66C4C60323B1010400DEDF6D /* WorkCell.swift */,
+			);
+			path = WorkFiles;
+			sourceTree = "<group>";
+		};
+		661C67D623BE81D600B9A81E /* SchoolFiles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SchoolFiles;
+			sourceTree = "<group>";
+		};
 		6651C6B2239F179F003B49A1 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,9 +185,9 @@
 				6636D13A23A7BBDC00290C3D /* ScrollView.swift */,
 				6636D13C23A837E900290C3D /* Overview.swift */,
 				66C4C5FF23AE45EB00DEDF6D /* Work.swift */,
-				66C4C60123B0FF9700DEDF6D /* WorkTable.swift */,
-				66C4C60523B13F2300DEDF6D /* WorkSection.swift */,
-				66C4C60323B1010400DEDF6D /* WorkCell.swift */,
+				661C67D323BE818200B9A81E /* WorkFiles */,
+				661C67D423BE819F00B9A81E /* School.swift */,
+				661C67D623BE81D600B9A81E /* SchoolFiles */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -551,6 +570,7 @@
 				66C4C60823B14BB300DEDF6D /* Data.swift in Sources */,
 				66FD8A7B239AD18E00B90C69 /* SceneDelegate.swift in Sources */,
 				6651C6AB239F12B0003B49A1 /* Header.swift in Sources */,
+				661C67D523BE819F00B9A81E /* School.swift in Sources */,
 				66DCB72623BA3872007AAF78 /* Data_CoreData.swift in Sources */,
 				66C4C60623B13F2300DEDF6D /* WorkSection.swift in Sources */,
 			);

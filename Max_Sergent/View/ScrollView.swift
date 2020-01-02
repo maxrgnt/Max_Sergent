@@ -79,20 +79,22 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     
     //MARK: Scroll Delegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // Make sure user can not scroll backwards past scroll limit
         contentOffset.x = (contentOffset.x < -UI.Sizing.Scroll.limit) ? -UI.Sizing.Scroll.limit : contentOffset.x
-        let ratio = (1-(contentOffset.x/UI.Sizing.Scroll.width) <= 0) ? 0.0 : 1-(contentOffset.x/UI.Sizing.Scroll.width)
-        let diff = UI.Sizing.Header.expandedHeight-UI.Sizing.Header.minimizedHeight
-        let newConstant = (ratio > 1) ? ratio*UI.Sizing.Header.expandedHeight : ratio*diff + UI.Sizing.Header.minimizedHeight
-        alpha = (ratio > 1) ? 1-(contentOffset.x/(-UI.Sizing.Scroll.limit)) : 1
         
-        let meh = contentOffset.x / UI.Sizing.Scroll.width
-        work.alpha = (meh <= 1.0) ? meh : 1.0
+        // If the scale factor goes negative, reset to zero
+        var scaleFactor = 1-(contentOffset.x/UI.Sizing.Scroll.width)
+        scaleFactor = (scaleFactor <= 0) ? 0.0 : scaleFactor
         
-        var page = Int(floor(Double(contentOffset.x)/Double(UI.Sizing.Scroll.width)))
-        page = (page <= 0) ? 0 : page
+        let newHeight = (scaleFactor > 1.0)
+            ? scaleFactor * UI.Sizing.Header.expandedHeight
+            : scaleFactor * UI.Sizing.Header.heightDiff + UI.Sizing.Header.minimizedHeight
         
-        self.customDelegate.adjustHeader(toHeight: newConstant)
-        self.customDelegate.scrollMoveMenu(toPage: page)
+        let newPage = movePage(forOffset: contentOffset.x)
+    
+        adjustAlphas(forOffset: contentOffset.x, withScaleFactor: scaleFactor, andHeight: newHeight)
+        self.customDelegate.scrollMoveMenu(toPage: newPage)
+        self.customDelegate.adjustHeader(toHeight: newHeight)
     }
 
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
@@ -111,6 +113,32 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         if contentOffset.x < 0.0 {
             setContentOffset(CGPoint(x: 0.0, y: 0.0), animated: true)
         }
+    }
+    
+    func movePage(forOffset offset: CGFloat) -> Int {
+        let offset = Double(offset)
+        let width = Double(UI.Sizing.Scroll.width)
+        let floorOfRatio = floor(offset/width)
+        let page = Int(floorOfRatio)
+        return (page <= 0) ? 0 : page
+    }
+    
+    func adjustAlphas(forOffset offset: CGFloat, withScaleFactor scaleFactor: CGFloat, andHeight height: CGFloat) {
+        // If the scaleFactor > 1 (the header is growing) fade out contents of header
+        let headerAlpha = (scaleFactor > 1)
+            ? 1-(offset/(-UI.Sizing.Scroll.limit))
+            : 1.0
+        // Find alpha depending on photo diameter
+        let newPhotoDiameter = height - UI.Sizing.Header.pictureDiameter - UI.Sizing.Header.padding
+        var scaleDiameter = newPhotoDiameter / UI.Sizing.Header.pictureDiameter
+        scaleDiameter = (scaleDiameter > 1) ? 1.0 : scaleDiameter
+        scaleDiameter = (scaleDiameter < 0) ? 0.0 : scaleDiameter
+        print(scaleDiameter)
+        
+        // Use variables above to update respective alpha
+        alpha = headerAlpha
+        overview.alpha = scaleDiameter
+        work.alpha = (1-scaleDiameter)
     }
     
     //MARK: Animate
