@@ -52,7 +52,7 @@ class SchoolTable: UITableView, UITableViewDelegate, UITableViewDataSource, UISc
         if  let school = Data.school[Data.schoolNameKeys[indexPath.section]] as? [String: AnyObject],
             let classes = school[Constants.Data.School.classes] as? [String: AnyObject]
         {
-            let classKeys = Array(classes.keys.sorted().reversed())
+            let classKeys = Array(classes.keys.sorted())
             if  let aClass = classes[classKeys[indexPath.row]] as? [String: AnyObject],
                 let nameOfClass = aClass[Constants.Data.School.nameOfClass] as? String,
                 let startDate = aClass[Constants.Data.School.startDate] as? String,
@@ -127,7 +127,7 @@ class SchoolTable: UITableView, UITableViewDelegate, UITableViewDataSource, UISc
         if  let school = Data.school[Data.schoolNameKeys[indexPath.section]] as? [String: AnyObject],
             let classes = school[Constants.Data.School.classes] as? [String: AnyObject]
         {
-            let classKeys = Array(classes.keys.sorted().reversed())
+            let classKeys = Array(classes.keys.sorted())
             if  let aClass = classes[classKeys[indexPath.row]] as? [String: AnyObject],
                 let nameOfClass = aClass[Constants.Data.School.nameOfClass] as? String,
                 let startDate = aClass[Constants.Data.School.startDate] as? String,
