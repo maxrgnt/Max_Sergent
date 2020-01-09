@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol Menu_NEWDelegate {
-    func menuMoveScroll(toPage: Int)
+    func menuSet(toPage: Int)
 }
 
 class Menu_NEW: UIView {
@@ -29,7 +29,7 @@ class Menu_NEW: UIView {
     let page1 = UILabel()
     let page2 = UILabel()
     let page3 = UILabel()
-    lazy var labels: [UILabel] = [page1, page2, page3]
+    lazy var pages: [UILabel] = [page1, page2, page3]
     var touchPosition: CGPoint = CGPoint(x: 0.0, y: 0.0)
     var pageSelected = false
     
@@ -46,13 +46,12 @@ class Menu_NEW: UIView {
     func setup() {
         objectSettings()
         constraints()
-        setLabels()
+        updatePageConstraints()
     }
     
     func objectSettings() {
-        backgroundColor = .black
         
-        for (i, page) in [page1, page2, page3].enumerated() {
+        for (i, page) in pages.enumerated() {
             addSubview(page)
             page.textAlignment = .center
             page.backgroundColor = .black
@@ -64,35 +63,30 @@ class Menu_NEW: UIView {
             page.text = Constants_NEW.Header.pages[i]
         }
         
-        labels[0].alpha = 1.0
-        labels[0].textAlignment = .left
-        labels[0].font = UI_NEW.Fonts.Menu.selected
-        labels[(labels.count-1)].textAlignment = .right
+        pages[0].alpha = 1.0
+        pages[0].textAlignment = .left
+        pages[0].font = UI_NEW.Fonts.Menu.selected
+        pages[(pages.count-1)].textAlignment = .right
         
         let pan = UIPanGestureRecognizer(target: self, action: #selector(reactToPan(_:)))
         addGestureRecognizer(pan)
         
     }
     
-    func setLabels() {
+    func updatePageConstraints() {
         var widthNeededForLabels: CGFloat = 0.0
-        labels.forEach { label in
+        pages.forEach { label in
             widthNeededForLabels += frameForLabel(text: label.text!, font: label.font).width
         }
-        let availableSpace = (UI_NEW.Sizing.Header.menuWidth - widthNeededForLabels) / CGFloat(labels.count-1)
-        
-        let page1_frame = frameForLabel(text: page1.text!, font: page1.font)
-        page1_width.constant = page1_frame.width + availableSpace/2
-        page1_height.constant = page1_frame.height
-        
-        let page2_frame = frameForLabel(text: page2.text!, font: page2.font)
-        page2_width.constant = page2_frame.width + availableSpace
-        page2_height.constant = page2_frame.height
-        
-        let page3_frame = frameForLabel(text: page3.text!, font: page3.font)
-        page3_width.constant = page3_frame.width + availableSpace/2
-        page3_height.constant = page3_frame.height
-        
+        let availableSpace = (UI_NEW.Sizing.Header.menuWidth - widthNeededForLabels) / CGFloat(pages.count-1)
+        let widths = [page1_width, page2_width, page3_width]
+        let heights = [page1_height, page2_height, page3_height]
+        for (i, page) in pages.enumerated() {
+            let pageFrame = frameForLabel(text: page.text!, font: page.font)
+            let widthPadding = (i == 0 || i == pages.count-1) ? availableSpace/2 : availableSpace
+            widths[i]!.constant = pageFrame.width + widthPadding
+            heights[i]!.constant = pageFrame.height
+        }
         layoutIfNeeded()
     }
     
@@ -113,27 +107,27 @@ class Menu_NEW: UIView {
             return
         }
         touchPosition = touch.location(in: self)
-        updateLabels(atPoint: touchPosition)
+        setNewPage(atPoint: touchPosition)
     }
     
     @objc func reactToPan(_ sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: self)
         let positionInMenu: CGPoint = CGPoint(x: touchPosition.x + translation.x, y: touchPosition.y + translation.y)
-        updateLabels(atPoint: positionInMenu)
+        setNewPage(atPoint: positionInMenu)
     }
     
-    func updateLabels(atPoint pointInMenu: CGPoint) {
+    func setNewPage(atPoint pointInMenu: CGPoint) {
         var point = pointInMenu
-        point.x = (point.x <= labels.first!.frame.minX) ? labels.first!.frame.minX : point.x
-        point.x = (point.x >= labels.last!.frame.maxX) ? labels.last!.frame.maxX : point.x
+        point.x = (point.x <= pages.first!.frame.minX) ? pages.first!.frame.minX : point.x
+        point.x = (point.x >= pages.last!.frame.maxX) ? pages.last!.frame.maxX : point.x
         
         var tagForPoint = 0
-        labels.forEach { (label) in
+        pages.forEach { (label) in
             tagForPoint = (label.frame.minX <= point.x && point.x <= label.frame.maxX)
                 ? label.tag
                 : tagForPoint
         }
-        self.customDelegate.menuMoveScroll(toPage: tagForPoint)
+        self.customDelegate.menuSet(toPage: tagForPoint)
     }
 
 }

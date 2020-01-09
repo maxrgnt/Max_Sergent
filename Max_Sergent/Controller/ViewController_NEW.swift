@@ -11,7 +11,7 @@ import UIKit
 import Firebase
 import FirebaseStorage
 
-class ViewController_NEW: UIViewController {
+class ViewController_NEW: UIViewController, Menu_NEWDelegate {
     
     let header = Header_NEW()
     
@@ -37,16 +37,14 @@ class ViewController_NEW: UIViewController {
     func objectSettings() {
         view.addSubview(header)
         header.setup()
-    }
-    
-    //MARK: Constraints
-    func constraints() {
-        headerConstraints()
-        header.layoutIfNeeded()
+        header.menu.customDelegate = self
     }
     
     //MARK: Functionality
     
     //MARK: Custom Delegates
+    func menuSet(toPage page: Int) {
+        // pass
+    }
     
 }

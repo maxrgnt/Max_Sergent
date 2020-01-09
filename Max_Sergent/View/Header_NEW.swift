@@ -34,10 +34,8 @@ class Header_NEW: UIView {
     }
     
     func setup() {
-//        clipsToBounds = true
         objectSettings()
         constraints()
-        backgroundColor = .white        
     }
     
     func objectSettings() {

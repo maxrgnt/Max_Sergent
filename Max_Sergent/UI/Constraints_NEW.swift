@@ -11,6 +11,11 @@ import UIKit
 
 extension ViewController_NEW {
     
+    func constraints() {
+        headerConstraints()
+        header.layoutIfNeeded()
+    }
+    
     func headerConstraints() {
         header.height = header.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.Header.expandedHeight)
         header.translatesAutoresizingMaskIntoConstraints                                                            = false
