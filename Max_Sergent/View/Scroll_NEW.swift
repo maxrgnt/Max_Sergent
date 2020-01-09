@@ -26,6 +26,7 @@ class Scroll_NEW: UIScrollView, UIScrollViewDelegate {
     let page2 = UILabel()
     let page3 = UILabel()
     lazy var pages = [page1,page2,page3]
+    var scrollingFromMenu = false
     
     //MARK: Initialization
     init() {
@@ -68,19 +69,19 @@ class Scroll_NEW: UIScrollView, UIScrollViewDelegate {
     //MARK: Scroll Delegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // Make sure user can not scroll backwards past scroll limit
-        contentOffset.x = (contentOffset.x < -UI.Sizing.Scroll.limit) ? -UI.Sizing.Scroll.limit : contentOffset.x
+//        contentOffset.x = (contentOffset.x < -UI_NEW.Sizing.Scroll.limit) ? -UI_NEW.Sizing.Scroll.limit : contentOffset.x
         
         // If the scale factor goes negative, reset to zero
-        var scaleFactor = 1-(contentOffset.x/UI.Sizing.Scroll.width)
+        var scaleFactor = 1-(contentOffset.x/UI_NEW.Sizing.Scroll.width)
         scaleFactor = (scaleFactor <= 0) ? 0.0 : scaleFactor
         
-        let newHeight = (scaleFactor > 1.0)
-            ? scaleFactor * UI.Sizing.Header.expandedHeight
-            : scaleFactor * UI.Sizing.Header.heightDiff + UI.Sizing.Header.minimizedHeight
+//        let newHeight = (scaleFactor > 1.0)
+//            ? scaleFactor * UI.Sizing.Header.expandedHeight
+//            : scaleFactor * UI.Sizing.Header.heightDiff + UI.Sizing.Header.minimizedHeight
         
         let newPage = movePage(forOffset: contentOffset.x)
     
-        adjustAlphas(forOffset: contentOffset.x, withScaleFactor: scaleFactor, andHeight: newHeight)
+//        adjustAlphas(forOffset: contentOffset.x, withScaleFactor: scaleFactor, andHeight: newHeight)
         self.customDelegate.scrollSet(toPage: newPage)
 //        self.customDelegate.adjustHeader(toHeight: newHeight)
     }
@@ -105,7 +106,7 @@ class Scroll_NEW: UIScrollView, UIScrollViewDelegate {
     
     func movePage(forOffset offset: CGFloat) -> Int {
         let offset = Double(offset)
-        let width = Double(UI.Sizing.Scroll.width)
+        let width = Double(UI_NEW.Sizing.Scroll.width)
         let floorOfRatio = floor(offset/width)
         let page = Int(floorOfRatio)
         return (page <= 0) ? 0 : page

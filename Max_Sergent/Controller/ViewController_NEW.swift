@@ -51,11 +51,13 @@ class ViewController_NEW: UIViewController, Menu_NEWDelegate, Scroll_NEWDelegate
         let newX = UI.Sizing.Scroll.width * CGFloat(page)
         let newOffset = CGPoint(x: newX, y: 0.0)
         scroll.setContentOffset(newOffset, animated: true)
+        header.menu.canSetFromMenu = false
     }
     
     func scrollSet(toPage page: Int) {
         if header.menu.currentPage != page {
             header.menu.currentPage = page
+            header.menu.canSetFromMenu = true
             header.menu.pages.forEach { (label) in
                 label.font = (label.tag == page)
                     ? UI_NEW.Fonts.Menu.selected

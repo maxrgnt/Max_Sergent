@@ -35,6 +35,7 @@ class Menu_NEW: UIView {
     // Default to first page
     var currentPage = 0
     var touchPosition: CGPoint = CGPoint(x: 0.0, y: 0.0)
+    var canSetFromMenu = true
     
     //MARK: Initialization
     init() {
@@ -146,12 +147,13 @@ class Menu_NEW: UIView {
         var newPage = 0
         pages.forEach { (label) in
             // Tag for a label assigned if it is greater than or equal to its minimum frame and less than maximum frame
-            newPage = (label.frame.minX <= point.x && point.x < label.frame.maxX) // <=
+            newPage = (label.frame.minX <= point.x && point.x <= label.frame.maxX) // <=
                 ? label.tag
                 : newPage
         }
         // Alert the scroll view to change pages based off menu input
-        (currentPage != newPage) ? self.customDelegate.menuSet(toPage: newPage) : nil
+        (currentPage != newPage && canSetFromMenu) ? self.customDelegate.menuSet(toPage: newPage) : nil
+        
     }
 
 }
