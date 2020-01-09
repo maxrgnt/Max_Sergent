@@ -44,7 +44,23 @@ class ViewController_NEW: UIViewController, Menu_NEWDelegate {
     
     //MARK: Custom Delegates
     func menuSet(toPage page: Int) {
-        // pass
+//        let newX = UI.Sizing.Scroll.width * CGFloat(page)
+//        let newOffset = CGPoint(x: newX, y: 0.0)
+//        self.scroll.setContentOffset(newOffset, animated: true)
+    }
+    
+    func scrollSet(toPage page: Int) {
+        if header.menu.currentPage != page {
+            header.menu.currentPage = page
+            header.menu.pages.forEach { (label) in
+                label.font = (label.tag == page)
+                    ? UI_NEW.Fonts.Menu.selected
+                    : UI_NEW.Fonts.Menu.normal
+                label.alpha = (label.tag == page)
+                    ? 1.0
+                    : 0.7
+            }
+        }
     }
     
 }

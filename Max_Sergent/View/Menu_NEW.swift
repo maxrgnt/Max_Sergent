@@ -32,8 +32,9 @@ class Menu_NEW: UIView {
     let page2 = UILabel()
     let page3 = UILabel()
     lazy var pages: [UILabel] = [page1, page2, page3]
+    // Default to first page
+    var currentPage = 0
     var touchPosition: CGPoint = CGPoint(x: 0.0, y: 0.0)
-    var pageSelected = false
     
     //MARK: Initialization
     init() {
@@ -142,15 +143,15 @@ class Menu_NEW: UIView {
         // If the menu point is larger than maximum point for last label, make it last page (far right of screen)
         point.x = (point.x >= pages.last!.frame.maxX) ? pages.last!.frame.maxX : point.x
         // Declare temp variable to determine tag of label for given point in menu view
-        var tagForPoint = 0
+        var newPage = 0
         pages.forEach { (label) in
             // Tag for a label assigned if it is greater than or equal to its minimum frame and less than maximum frame
-            tagForPoint = (label.frame.minX <= point.x && point.x < label.frame.maxX) // <=
+            newPage = (label.frame.minX <= point.x && point.x < label.frame.maxX) // <=
                 ? label.tag
-                : tagForPoint
+                : newPage
         }
         // Alert the scroll view to change pages based off menu input
-        self.customDelegate.menuSet(toPage: tagForPoint)
+        (currentPage != newPage) ? self.customDelegate.menuSet(toPage: newPage) : nil
     }
 
 }
