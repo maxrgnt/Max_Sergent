@@ -23,7 +23,7 @@ struct UI_NEW {
         struct Ratio {
             static let minimizedHeaderHeight: CGFloat = 0.1
             static let expandedHeaderHeight: CGFloat = 0.42
-            static let menuHeight: CGFloat = 0.05
+            static let menuHeight: CGFloat = 0.07
             static let scrollHeight: CGFloat = 1-minimizedHeaderHeight-menuHeight
         }
         
