@@ -107,7 +107,7 @@ class Scroll_NEW: UIScrollView, UIScrollViewDelegate {
     func movePage(forOffset offset: CGFloat) -> Int {
         let offset = Double(offset)
         let width = Double(UI_NEW.Sizing.Scroll.width)
-        let floorOfRatio = floor(offset/width)
+        let floorOfRatio = round(offset/width)
         let page = Int(floorOfRatio)
         return (page <= 0) ? 0 : page
     }

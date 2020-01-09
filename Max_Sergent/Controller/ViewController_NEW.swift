@@ -48,10 +48,10 @@ class ViewController_NEW: UIViewController, Menu_NEWDelegate, Scroll_NEWDelegate
     
     //MARK: Custom Delegates
     func menuSet(toPage page: Int) {
+        header.menu.canSetFromMenu = false
         let newX = UI.Sizing.Scroll.width * CGFloat(page)
         let newOffset = CGPoint(x: newX, y: 0.0)
         scroll.setContentOffset(newOffset, animated: true)
-        header.menu.canSetFromMenu = false
     }
     
     func scrollSet(toPage page: Int) {
