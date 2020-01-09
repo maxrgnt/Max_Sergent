@@ -29,19 +29,32 @@ struct UI_NEW {
         
         struct Header {
             //static let expandedHeight = (UI.Sizing.height - statusBar.height) * Ratio.expandedHeaderHeight
-            static let expandedHeight = (UI.Sizing.height) * Ratio.expandedHeaderHeight
+            static let expandedHeight = (Sizing.height) * Ratio.expandedHeaderHeight
             //static let minimizedHeight = (UI.Sizing.height - statusBar.height) * Ratio.minimizedHeaderHeight
-            static let minimizedHeight = (UI.Sizing.height) * Ratio.minimizedHeaderHeight
-            static let heightDiff = UI.Sizing.Header.expandedHeight-UI.Sizing.Header.minimizedHeight
-            static let width = UI.Sizing.width
+            static let minimizedHeight = (Sizing.height) * Ratio.minimizedHeaderHeight
+            static let heightDiff = Sizing.Header.expandedHeight-Sizing.Header.minimizedHeight
+            static let width = Sizing.width
             static let pictureHeight = expandedHeight
             static let gradientHeight = expandedHeight - statusBar.height
             static let expandedNameHeight = (expandedHeight-padding)/2
             static let minimizedNameHeight = (minimizedHeight-padding)
-            static let nameWidth = width - padding*2
-            static let menuHeight = (UI.Sizing.height) * Ratio.menuHeight
-            static let menuWidth = width - padding*2
+            static let nameWidth = widthObjectPadding
+            static let menuHeight = (Sizing.height) * Ratio.menuHeight
+            static let menuWidth = widthObjectPadding
         }
+        
+        struct Scroll {
+            static let height = Sizing.height - Header.minimizedHeight - statusBar.height
+            static let width = Sizing.width
+        }
+        
+        struct Overview {
+            static let height = Sizing.height - Header.expandedHeight
+            static let width = Sizing.width
+            static let objectiveHeight = height * 0.5
+            static let objectiveWidth = widthObjectPadding
+        }
+        
     }
 }
 
@@ -50,13 +63,13 @@ extension UI_NEW {
     struct Fonts {
         
         struct Size {
-            static let H1 = UI.Sizing.height * (0.105)
-            static let H2 = UI.Sizing.height * (0.085)
-            static let H3 = UI.Sizing.height * (0.065)
-            static let H4 = UI.Sizing.height * (0.045)
-            static let H5 = UI.Sizing.height * (0.025)
-            static let H6 = UI.Sizing.height * (0.020)
-            static let H7 = UI.Sizing.height * (0.015)
+            static let H1 = Sizing.height * (0.105)
+            static let H2 = Sizing.height * (0.085)
+            static let H3 = Sizing.height * (0.065)
+            static let H4 = Sizing.height * (0.045)
+            static let H5 = Sizing.height * (0.025)
+            static let H6 = Sizing.height * (0.020)
+            static let H7 = Sizing.height * (0.015)
         }
         
         static let arvo = "Arvo"
