@@ -14,6 +14,8 @@ extension ViewController_NEW {
     func constraints() {
         headerConstraints()
         header.layoutIfNeeded()
+        scrollConstraints()
+        scroll.layoutIfNeeded()
     }
     
     func headerConstraints() {
@@ -23,6 +25,14 @@ extension ViewController_NEW {
         header.topAnchor.constraint(equalTo: self.view.topAnchor).isActive    = true
         header.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.Header.width).isActive                             = true
         header.height.isActive                                                                                      = true
+    }
+    
+    func scrollConstraints() {
+        scroll.translatesAutoresizingMaskIntoConstraints                                                            = false
+        scroll.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive                                  = true
+        scroll.topAnchor.constraint(equalTo: header.bottomAnchor).isActive                                          = true
+        scroll.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.Scroll.width).isActive                             = true
+        scroll.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.Scroll.height).isActive                           = true
     }
     
 }
@@ -83,6 +93,40 @@ extension Menu_NEW {
         page3_width.isActive                                                                                     = true
         page3_height.isActive                                      = true
 
+    }
+    
+}
+
+extension Scroll_NEW {
+    
+    func constraints() {
+        page1Constraints()
+        page2Constraints()
+        page3Constraints()
+    }
+    
+    func page1Constraints() {
+        page1.translatesAutoresizingMaskIntoConstraints                                                          = false
+        page1.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                          = true
+        page1.topAnchor.constraint(equalTo: topAnchor).isActive                                                  = true
+        page1.widthAnchor.constraint(equalTo: widthAnchor).isActive                                              = true
+        page1.heightAnchor.constraint(equalTo: heightAnchor).isActive                                            = true
+    }
+    
+    func page2Constraints() {
+        page2.translatesAutoresizingMaskIntoConstraints                                                        = false
+        page2.leadingAnchor.constraint(equalTo: page1.trailingAnchor).isActive                              = true
+        page2.topAnchor.constraint(equalTo: topAnchor).isActive                                                = true
+        page2.widthAnchor.constraint(equalTo: widthAnchor).isActive                                            = true
+        page2.heightAnchor.constraint(equalTo: heightAnchor).isActive                                          = true
+    }
+    
+    func page3Constraints() {
+        page3.translatesAutoresizingMaskIntoConstraints                                                             = false
+        page3.leadingAnchor.constraint(equalTo: page2.trailingAnchor).isActive                                      = true
+        page3.topAnchor.constraint(equalTo: topAnchor).isActive                                                     = true
+        page3.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                 = true
+        page3.heightAnchor.constraint(equalTo: heightAnchor).isActive                                               = true
     }
     
 }

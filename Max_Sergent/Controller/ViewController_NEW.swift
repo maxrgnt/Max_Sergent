@@ -11,9 +11,10 @@ import UIKit
 import Firebase
 import FirebaseStorage
 
-class ViewController_NEW: UIViewController, Menu_NEWDelegate {
+class ViewController_NEW: UIViewController, Menu_NEWDelegate, Scroll_NEWDelegate {
     
     let header = Header_NEW()
+    let scroll = Scroll_NEW()
     
     override func viewDidLoad() {
         print("Hello World!")
@@ -38,15 +39,18 @@ class ViewController_NEW: UIViewController, Menu_NEWDelegate {
         view.addSubview(header)
         header.setup()
         header.menu.customDelegate = self
+        view.addSubview(scroll)
+        scroll.setup()
+        scroll.customDelegate = self
     }
     
     //MARK: Functionality
     
     //MARK: Custom Delegates
     func menuSet(toPage page: Int) {
-//        let newX = UI.Sizing.Scroll.width * CGFloat(page)
-//        let newOffset = CGPoint(x: newX, y: 0.0)
-//        self.scroll.setContentOffset(newOffset, animated: true)
+        let newX = UI.Sizing.Scroll.width * CGFloat(page)
+        let newOffset = CGPoint(x: newX, y: 0.0)
+        scroll.setContentOffset(newOffset, animated: true)
     }
     
     func scrollSet(toPage page: Int) {
