@@ -13,8 +13,8 @@ class Footer_NEW: UIView {
     
     //MARK: Definitions
     let menu = Menu_NEW()
-    let blur = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.dark))
-    let vibrancy = UIVisualEffectView(effect: UIVibrancyEffect(blurEffect: UIBlurEffect(style: UIBlurEffect.Style.dark)))
+    let blur = UIVisualEffectView(effect: UIBlurEffect(style: UI_NEW.Colors.footerEffectStyle))
+    let vibrancy = UIVisualEffectView(effect: UIVibrancyEffect(blurEffect: UIBlurEffect(style: UI_NEW.Colors.footerEffectStyle)))
     
     //MARK: Initialization
     init() {

@@ -104,10 +104,11 @@ extension UI_NEW {
         /* Alter color scheme here  */
         static let headerBackground = UIColor.black
         static let overviewBackground = UIColor.darkGray
-        static let footerBackgorund = headerBackground
         static let primaryFontColor = UIColor.white
         static let secondaryFontColor = UIColor.lightGray
         static let tertiaryFontColor = UIColor.black
+        
+        static let footerEffectStyle = UIBlurEffect.Style.light
         /****************************/
         
         struct Header {
@@ -115,9 +116,6 @@ extension UI_NEW {
             static let name = primaryFontColor
         }
         
-        struct Footer {
-            static let background = footerBackgorund
-        }
     }
     
 }
