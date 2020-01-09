@@ -12,8 +12,8 @@ import Firebase
 import FirebaseStorage
 
 class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelegate {
-        
-    let header = Header()
+    
+    let header = Header_NEW()
     let menu = Menu()
     let scroll = Scroll()
     let ref = Database.database().reference()
@@ -145,7 +145,7 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
         
         header.height.constant = newHeight
         header.pictureHeight.constant = newDiameter
-        header.pictureWidth.constant = newDiameter
+//        header.pictureWidth.constant = newDiameter
         header.picture.alpha = newAlpha
         header.picture.layer.cornerRadius = newDiameter/2
         header.nameHeight.constant = adjFontHeight
@@ -266,7 +266,7 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
     }
 
     func reloadSchool() {
-        scroll.school.table.reloadData()
+        //
     }
     
 }

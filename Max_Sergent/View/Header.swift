@@ -50,9 +50,11 @@ class Header: UIView {
         name.textColor = UI.Colors.Header.name
         
         addSubview(picture)
-        //picture.contentMode = .scaleAspectFit
         picture.image = UIImage(named: "placeholder.jpg")
-        picture.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: UI.Sizing.Header.pictureRadius)
+//        picture.contentMode = .scaleAspectFit
+        picture.contentMode = .scaleToFill
+//        picture.contentMode = .center
+//        picture.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: UI.Sizing.Header.pictureRadius)
     }
     
     func constraints() {

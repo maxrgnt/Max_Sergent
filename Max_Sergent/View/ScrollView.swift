@@ -24,10 +24,8 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     // Objects
     let overview = Overview()
     let work = Work()
-    let school = School()
-    let page4 = UILabel()
-    let page5 = UILabel()
-    lazy var pages = [overview,work,school,page4,page5]
+    let page3 = UILabel()
+    lazy var pages = [overview,work,page3]
     
     //MARK: Initialization
     init() {
@@ -64,12 +62,7 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         overview.setup()
         addSubview(work)
         work.setup()
-        addSubview(school)
-        school.setup()
-        addSubview(page4)
-        page4.backgroundColor = .darkGray
-        addSubview(page5)
-        page5.backgroundColor = .darkGray
+        addSubview(page3)
     }
     
     //MARK: Constraints() {
