@@ -21,10 +21,11 @@ extension ViewController_NEW {
     }
     
     func headerConstraints() {
+        header.top = header.topAnchor.constraint(equalTo: self.view.topAnchor)
         header.height = header.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.Header.expandedHeight)
         header.translatesAutoresizingMaskIntoConstraints                                                            = false
         header.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive                                  = true
-        header.topAnchor.constraint(equalTo: self.view.topAnchor).isActive    = true
+        header.top.isActive    = true
         header.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.Header.width).isActive                             = true
         header.height.isActive                                                                                      = true
     }

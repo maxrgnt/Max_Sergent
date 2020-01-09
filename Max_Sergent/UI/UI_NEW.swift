@@ -32,7 +32,7 @@ struct UI_NEW {
             //static let expandedHeight = (UI.Sizing.height - statusBar.height) * Ratio.expandedHeaderHeight
             static let expandedHeight = (Sizing.height) * Ratio.expandedHeaderHeight
             //static let minimizedHeight = (UI.Sizing.height - statusBar.height) * Ratio.minimizedHeaderHeight
-            static let minimizedHeight = (Sizing.height) * Ratio.minimizedHeaderHeight
+            static let minimizedHeight = (Sizing.height) * Ratio.minimizedHeaderHeight + statusBar.height
             static let heightDiff = Sizing.Header.expandedHeight-Sizing.Header.minimizedHeight
             static let width = Sizing.width
             static let pictureHeight = expandedHeight

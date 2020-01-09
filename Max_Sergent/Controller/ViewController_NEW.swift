@@ -32,7 +32,6 @@ class ViewController_NEW: UIViewController, Menu_NEWDelegate, Scroll_NEWDelegate
     func setup() {
         objectSettings()
         constraints()
-        
     }
     
     //MARK: Settings
@@ -60,16 +59,20 @@ class ViewController_NEW: UIViewController, Menu_NEWDelegate, Scroll_NEWDelegate
     func scrollSet(toPage page: Int) {
         if footer.menu.currentPage != page {
             footer.menu.currentPage = page
+            footer.menu.setAlphaForPage()
             footer.menu.canSetFromMenu = true
-            footer.menu.pages.forEach { (label) in
-                label.font = (label.tag == page)
-                    ? UI_NEW.Fonts.Menu.selected
-                    : UI_NEW.Fonts.Menu.normal
-                label.alpha = (label.tag == page)
-                    ? 1.0
-                    : 0.7
-            }
         }
+    }
+    
+    func calculateRatio(for contentOffset: CGFloat) {
+        // The scale factor is inversely related to the ratio of the currentOffset.x to Scroll.width
+        // If the scrollview has been offset 20% the scale factor should be 80%
+        // As the scrollview moves right the scale factor shrinks the header
+        var scaleHeaderHeight = 1-(contentOffset/UI_NEW.Sizing.Scroll.width)
+        // If the scale factor goes negative, reset to zero
+        scaleHeaderHeight = (scaleHeaderHeight <= 0) ? 0.0 : scaleHeaderHeight
+        
+        header.resetView(with: scaleHeaderHeight)
     }
     
 }

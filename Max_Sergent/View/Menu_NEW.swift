@@ -152,7 +152,17 @@ class Menu_NEW: UIView {
         }
         // Alert the scroll view to change pages based off menu input
         (currentPage != newPage && canSetFromMenu) ? self.customDelegate.menuSet(toPage: newPage) : nil
-        
     }
 
+    func setAlphaForPage() {
+        pages.forEach { (label) in
+            label.font = (label.tag == currentPage)
+                ? UI_NEW.Fonts.Menu.selected
+                : UI_NEW.Fonts.Menu.normal
+            label.alpha = (label.tag == currentPage)
+                ? 1.0
+                : 0.7
+        }
+    }
+    
 }

@@ -12,6 +12,8 @@ import UIKit
 protocol Scroll_NEWDelegate {
 //    func adjustHeader(toHeight: CGFloat)
     func scrollSet(toPage: Int)
+//    func updateHeader(toHeight: CGFloat)
+    func calculateRatio(for: CGFloat)
 }
 
 class Scroll_NEW: UIScrollView, UIScrollViewDelegate {
@@ -71,19 +73,12 @@ class Scroll_NEW: UIScrollView, UIScrollViewDelegate {
         // Make sure user can not scroll backwards past scroll limit
 //        contentOffset.x = (contentOffset.x < -UI_NEW.Sizing.Scroll.limit) ? -UI_NEW.Sizing.Scroll.limit : contentOffset.x
         
-        // If the scale factor goes negative, reset to zero
-        var scaleFactor = 1-(contentOffset.x/UI_NEW.Sizing.Scroll.width)
-        scaleFactor = (scaleFactor <= 0) ? 0.0 : scaleFactor
-        
-//        let newHeight = (scaleFactor > 1.0)
-//            ? scaleFactor * UI.Sizing.Header.expandedHeight
-//            : scaleFactor * UI.Sizing.Header.heightDiff + UI.Sizing.Header.minimizedHeight
-        
         let newPage = movePage(forOffset: contentOffset.x)
     
 //        adjustAlphas(forOffset: contentOffset.x, withScaleFactor: scaleFactor, andHeight: newHeight)
         self.customDelegate.scrollSet(toPage: newPage)
-//        self.customDelegate.adjustHeader(toHeight: newHeight)
+        self.customDelegate.calculateRatio(for: contentOffset.x)
+//        self.customDelegate.updateHeader(toHeight: newHeight)
     }
 
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
@@ -113,19 +108,19 @@ class Scroll_NEW: UIScrollView, UIScrollViewDelegate {
     }
     
     func adjustAlphas(forOffset offset: CGFloat, withScaleFactor scaleFactor: CGFloat, andHeight height: CGFloat) {
-        // If the scaleFactor > 1 (the header is growing) fade out contents of header
-        let headerAlpha = (scaleFactor > 1)
-            ? 1-(offset/(-UI.Sizing.Scroll.limit))
-            : 1.0
-        // Find alpha depending on photo diameter
-        let newPhotoDiameter = height - UI.Sizing.Header.pictureDiameter - UI.Sizing.Header.padding
-        var scaleDiameter = newPhotoDiameter / UI.Sizing.Header.pictureDiameter
-        scaleDiameter = (scaleDiameter > 1) ? 1.0 : scaleDiameter
-        scaleDiameter = (scaleDiameter < 0) ? 0.0 : scaleDiameter
-        // Use variables above to update respective alpha
-        alpha = headerAlpha
-        page1.alpha = scaleDiameter
-        page2.alpha = (1-scaleDiameter)
+//        // If the scaleFactor > 1 (the header is growing) fade out contents of header
+//        let headerAlpha = (scaleFactor > 1)
+//            ? 1-(offset/(-UI.Sizing.Scroll.limit))
+//            : 1.0
+//        // Find alpha depending on photo diameter
+//        let newPhotoDiameter = height - UI.Sizing.Header.pictureDiameter - UI.Sizing.Header.padding
+//        var scaleDiameter = newPhotoDiameter / UI.Sizing.Header.pictureDiameter
+//        scaleDiameter = (scaleDiameter > 1) ? 1.0 : scaleDiameter
+//        scaleDiameter = (scaleDiameter < 0) ? 0.0 : scaleDiameter
+//        // Use variables above to update respective alpha
+//        alpha = headerAlpha
+//        page1.alpha = scaleDiameter
+//        page2.alpha = (1-scaleDiameter)
     }
     
     //MARK: Animate

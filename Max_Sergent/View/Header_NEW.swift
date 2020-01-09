@@ -14,6 +14,7 @@ class Header_NEW: UIView {
     //MARK: Definitions
     // Constraints
     var height:        NSLayoutConstraint!
+    var top:           NSLayoutConstraint!
     var pictureHeight: NSLayoutConstraint!
     var nameHeight:    NSLayoutConstraint!
     var menuHeight:    NSLayoutConstraint!
@@ -73,6 +74,28 @@ class Header_NEW: UIView {
         gradient.locations = [0.0,0.75]
         // Add gradient as bottom layer in sublayer array
         self.layer.insertSublayer(gradient, at: 1)
+    }
+    
+    func resetView(with scaleHeaderHeight: CGFloat) {
+        resetAlpha(with: scaleHeaderHeight)
+        resetHeight(with: scaleHeaderHeight)
+    }
+    
+    func resetHeight(with scaleHeaderHeight: CGFloat) {
+        let newHeight = (scaleHeaderHeight > 1.0)
+          ? scaleHeaderHeight * UI_NEW.Sizing.Header.expandedHeight
+          : scaleHeaderHeight * UI_NEW.Sizing.Header.heightDiff + UI_NEW.Sizing.Header.minimizedHeight
+        height.constant = newHeight
+    }
+    
+    func resetAlpha(with scaleHeaderHeight: CGFloat) {
+        print(scaleHeaderHeight)
+//        gradient.locations = (scaleHeaderHeight < 0.75)
+//            ? [0.0, NSNumber(value: Float(scaleHeaderHeight))]
+//            : [0.0, 0.75]
+        gradient.locations = [0.0, NSNumber(value: Float(scaleHeaderHeight))]
+
+        gradient.layoutIfNeeded()
     }
     
 }
