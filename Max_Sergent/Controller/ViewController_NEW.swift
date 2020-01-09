@@ -17,6 +17,7 @@ class ViewController_NEW: UIViewController {
     
     override func viewDidLoad() {
         print("Hello World!")
+        view.backgroundColor = .darkGray
         setup()
     }
     
@@ -29,6 +30,7 @@ class ViewController_NEW: UIViewController {
     func setup() {
         objectSettings()
         constraints()
+        
     }
     
     //MARK: Settings

@@ -16,6 +16,7 @@ class Header_NEW: UIView {
     var height:        NSLayoutConstraint!
     var pictureHeight: NSLayoutConstraint!
     var nameHeight:    NSLayoutConstraint!
+    var menuHeight:    NSLayoutConstraint!
     // Objects
     let picture = UIImageView()
     let name = UILabel()
@@ -33,14 +34,18 @@ class Header_NEW: UIView {
     }
     
     func setup() {
+//        clipsToBounds = true
         objectSettings()
         constraints()
+        backgroundColor = .white        
     }
     
     func objectSettings() {
         
         addSubview(picture)
         picture.image = UIImage(named: "profile.jpg")
+        picture.clipsToBounds = true
+        picture.layer.masksToBounds = true
         picture.contentMode = .scaleAspectFill // .scaleToFill - .center - .scaleAspectFit
         //picture.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: UI.Sizing.Header.pictureRadius)
                 
@@ -65,7 +70,7 @@ class Header_NEW: UIView {
         // Set origin of gradient (top left of screen)
         let gradientOrigin = CGPoint(x: 0, y: UI_NEW.Sizing.statusBar.height)
         // Set frame of gradient (header height, because status bar will be solid color)
-        let gradientSize = CGSize(width: UI_NEW.Sizing.Header.width, height: UI_NEW.Sizing.Header.expandedHeight)
+        let gradientSize = CGSize(width: UI_NEW.Sizing.Header.width, height: UI_NEW.Sizing.Header.gradientHeight)
         gradient.frame = CGRect(origin: gradientOrigin, size: gradientSize)
         // Set color progression for gradient, alphaComponent of zero important for color shifting to
         gradient.colors = [UIColor.black.withAlphaComponent(0.0).cgColor,

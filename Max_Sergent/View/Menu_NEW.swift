@@ -19,9 +19,12 @@ class Menu_NEW: UIView {
     // Delegate
     var customDelegate : Menu_NEWDelegate!
     // Constraints
-    var page1_width:   NSLayoutConstraint!
-    var page2_width:   NSLayoutConstraint!
-    var page3_width:   NSLayoutConstraint!
+    var page1_width :   NSLayoutConstraint!
+    var page1_height:   NSLayoutConstraint!
+    var page2_width :   NSLayoutConstraint!
+    var page2_height:   NSLayoutConstraint!
+    var page3_width :   NSLayoutConstraint!
+    var page3_height:   NSLayoutConstraint!
     // Objects
     let page1 = UILabel()
     let page2 = UILabel()
@@ -73,16 +76,38 @@ class Menu_NEW: UIView {
     
     func setLabels() {
         var widthNeededForLabels: CGFloat = 0.0
-        labels.forEach { (label) in
-            widthNeededForLabels += widthForLabel(text: label.text!, font: label.font)
+        labels.forEach { label in
+            widthNeededForLabels += frameForLabel(text: label.text!, font: label.font).width
         }
         let availableSpace = (UI_NEW.Sizing.Header.menuWidth - widthNeededForLabels) / CGFloat(labels.count-1)
-        page1_width.constant = widthForLabel(text: page1.text!, font: page1.font) + availableSpace/2
-        page2_width.constant = widthForLabel(text: page2.text!, font: page2.font) + availableSpace
-        page3_width.constant = widthForLabel(text: page3.text!, font: page3.font) + availableSpace/2
+        
+        let page1_frame = frameForLabel(text: page1.text!, font: page1.font)
+        page1_width.constant = page1_frame.width + availableSpace/2
+        page1_height.constant = page1_frame.height
+        
+        let page2_frame = frameForLabel(text: page2.text!, font: page2.font)
+        page2_width.constant = page2_frame.width + availableSpace
+        page2_height.constant = page2_frame.height
+        
+        let page3_frame = frameForLabel(text: page3.text!, font: page3.font)
+        page3_width.constant = page3_frame.width + availableSpace/2
+        page3_height.constant = page3_frame.height
+        
         layoutIfNeeded()
     }
     
+    func frameForLabel(text:String, font:UIFont) -> (width: CGFloat, height: CGFloat) {
+        let max = CGFloat.greatestFiniteMagnitude
+        let label:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: max, height: max))
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = font
+        label.text = text
+
+        label.sizeToFit()
+        return (width: label.frame.width, height: label.frame.height)
+    }
+        
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {
             return
@@ -109,18 +134,6 @@ class Menu_NEW: UIView {
                 : tagForPoint
         }
         self.customDelegate.menuMoveScroll(toPage: tagForPoint)
-    }
-    
-    func widthForLabel(text:String, font:UIFont) -> CGFloat {
-        let max = CGFloat.greatestFiniteMagnitude
-        let label:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: max, height: max))
-        label.numberOfLines = 0
-        label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.font = font
-        label.text = text
-
-        label.sizeToFit()
-        return label.frame.width
     }
 
 }

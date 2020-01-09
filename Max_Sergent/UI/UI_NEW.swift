@@ -55,7 +55,8 @@ extension UI_NEW {
             static let H3 = UI.Sizing.height * (0.065)
             static let H4 = UI.Sizing.height * (0.045)
             static let H5 = UI.Sizing.height * (0.025)
-            static let H6 = UI.Sizing.height * (0.015)
+            static let H6 = UI.Sizing.height * (0.020)
+            static let H7 = UI.Sizing.height * (0.015)
         }
         
         static let arvo = "Arvo"
@@ -69,8 +70,8 @@ extension UI_NEW {
         }
         
         struct Menu {
-            static let selected = UIFont(name: openSansBold, size: Size.H5)
-            static let normal   = UIFont(name: openSans,     size: Size.H5)
+            static let selected = UIFont(name: openSansBold, size: Size.H6)
+            static let normal   = UIFont(name: openSans,     size: Size.H6)
         }
     }
 }
