@@ -15,6 +15,7 @@ class ViewController_NEW: UIViewController, Menu_NEWDelegate, Scroll_NEWDelegate
     
     let header = Header_NEW()
     let scroll = Scroll_NEW()
+    let footer = Footer_NEW()
     
     override func viewDidLoad() {
         print("Hello World!")
@@ -38,27 +39,29 @@ class ViewController_NEW: UIViewController, Menu_NEWDelegate, Scroll_NEWDelegate
     func objectSettings() {
         view.addSubview(header)
         header.setup()
-        header.menu.customDelegate = self
         view.addSubview(scroll)
         scroll.setup()
         scroll.customDelegate = self
+        view.addSubview(footer)
+        footer.setup()
+        footer.menu.customDelegate = self
     }
     
     //MARK: Functionality
     
     //MARK: Custom Delegates
     func menuSet(toPage page: Int) {
-        header.menu.canSetFromMenu = false
+        footer.menu.canSetFromMenu = false
         let newX = UI.Sizing.Scroll.width * CGFloat(page)
         let newOffset = CGPoint(x: newX, y: 0.0)
         scroll.setContentOffset(newOffset, animated: true)
     }
     
     func scrollSet(toPage page: Int) {
-        if header.menu.currentPage != page {
-            header.menu.currentPage = page
-            header.menu.canSetFromMenu = true
-            header.menu.pages.forEach { (label) in
+        if footer.menu.currentPage != page {
+            footer.menu.currentPage = page
+            footer.menu.canSetFromMenu = true
+            footer.menu.pages.forEach { (label) in
                 label.font = (label.tag == page)
                     ? UI_NEW.Fonts.Menu.selected
                     : UI_NEW.Fonts.Menu.normal

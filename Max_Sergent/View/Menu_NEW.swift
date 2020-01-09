@@ -58,7 +58,6 @@ class Menu_NEW: UIView {
         for (i, page) in pages.enumerated() {
             addSubview(page)
             page.textAlignment = .center
-            page.backgroundColor = .black
             page.textColor = .white
             page.tag = i
             page.alpha = 0.7

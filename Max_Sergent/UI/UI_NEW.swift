@@ -22,7 +22,7 @@ struct UI_NEW {
         
         struct Ratio {
             static let minimizedHeaderHeight: CGFloat = 0.1
-            static let expandedHeaderHeight: CGFloat = 0.42
+            static let expandedHeaderHeight: CGFloat = 0.35
             static let menuHeight: CGFloat = 0.07
             static let scrollHeight: CGFloat = 1-minimizedHeaderHeight-menuHeight
         }
@@ -53,6 +53,13 @@ struct UI_NEW {
             static let width = Sizing.width
             static let objectiveHeight = height * 0.5
             static let objectiveWidth = widthObjectPadding
+        }
+        
+        struct Footer {
+            static let height = menuHeight + statusBar.height
+            static let width = Sizing.width
+            static let menuHeight = (Sizing.height) * Ratio.menuHeight
+            static let menuWidth = widthObjectPadding
         }
         
     }
@@ -96,6 +103,7 @@ extension UI_NEW {
         /* Alter color scheme here  */
         static let headerBackground = UIColor.black
         static let overviewBackground = UIColor.darkGray
+        static let footerBackgorund = headerBackground
         static let primaryFontColor = UIColor.white
         static let secondaryFontColor = UIColor.lightGray
         static let tertiaryFontColor = UIColor.black
@@ -104,6 +112,10 @@ extension UI_NEW {
         struct Header {
             static let background = headerBackground
             static let name = primaryFontColor
+        }
+        
+        struct Footer {
+            static let background = footerBackgorund
         }
     }
     

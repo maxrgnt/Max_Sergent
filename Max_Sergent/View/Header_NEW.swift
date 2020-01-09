@@ -21,7 +21,6 @@ class Header_NEW: UIView {
     let picture = UIImageView()
     let name = UILabel()
     let gradient = CAGradientLayer()
-    let menu = Menu_NEW()
     
     //MARK: Initialization
     init() {
@@ -59,9 +58,6 @@ class Header_NEW: UIView {
         name.font = UI_NEW.Fonts.Header.name
         name.text = Constants_NEW.Header.name
         name.textColor = UI_NEW.Colors.Header.name
-        
-        addSubview(menu)
-        menu.setup()
     }
     
     func buildGradient() {
@@ -74,7 +70,7 @@ class Header_NEW: UIView {
         gradient.colors = [UIColor.black.withAlphaComponent(0.0).cgColor,
                            UIColor.black.withAlphaComponent(1.0).cgColor]
         // Set locations of where gradient will transition
-        gradient.locations = [0.0,0.65]
+        gradient.locations = [0.0,0.75]
         // Add gradient as bottom layer in sublayer array
         self.layer.insertSublayer(gradient, at: 1)
     }
