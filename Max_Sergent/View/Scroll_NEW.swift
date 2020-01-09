@@ -59,11 +59,11 @@ class Scroll_NEW: UIScrollView, UIScrollViewDelegate {
     //MARK: Object Settings
     func objectSettings() {
         addSubview(page1)
-        page1.backgroundColor = .darkGray
+        page1.backgroundColor = .black
         addSubview(page2)
-        page2.backgroundColor = .gray
+        page2.backgroundColor = .darkGray
         addSubview(page3)
-        page3.backgroundColor = .lightGray
+        page3.backgroundColor = .gray
     }
     
     //MARK: Scroll Delegate

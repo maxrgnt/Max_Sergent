@@ -24,6 +24,7 @@ struct UI_NEW {
             static let minimizedHeaderHeight: CGFloat = 0.1
             static let expandedHeaderHeight: CGFloat = 0.35
             static let menuHeight: CGFloat = 0.07
+            // Scroll height behind footer, do we want this?
             static let scrollHeight: CGFloat = 1-minimizedHeaderHeight-menuHeight
         }
         
