@@ -141,7 +141,6 @@ class Header_NEW: UIView {
     func resetGradient(with scalar: CGFloat) {
         // Set origin of gradient (top left of screen)
         let scale = (scalar > 1.0) ? scalar-1 : 0.0
-        print(scalar, (scale)*UI_NEW.Sizing.Header.minimizedHeight)
         let gradientOrigin = CGPoint(x: 0, y: (scale)*UI_NEW.Sizing.Header.minimizedHeight)
         // Set frame of gradient (header height, because status bar will be solid color)
         let gradientSize = CGSize(width: UI_NEW.Sizing.Header.width, height: UI_NEW.Sizing.Header.expandedHeight)
