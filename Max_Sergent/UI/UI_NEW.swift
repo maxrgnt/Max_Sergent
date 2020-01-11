@@ -47,14 +47,14 @@ struct UI_NEW {
         }
         
         struct Scroll {
-            static let height = Sizing.height - Header.minimizedHeight - statusBar.height
+            static let height = Sizing.height - Header.minimizedHeight - Footer.height
             static let width = Sizing.width
         }
         
         struct Overview {
-            static let height = Sizing.height - Header.expandedHeight
+            static let height = Sizing.height - Header.expandedHeight - Footer.height
             static let width = Sizing.width
-            static let objectiveHeight = height * 0.5
+            static let objectiveHeight = height * 0.4
             static let objectiveWidth = widthObjectPadding
         }
         
@@ -92,6 +92,10 @@ extension UI_NEW {
             static let name = UIFont(name: arvo, size: Size.H1)
         }
         
+        struct Overview {
+            static let objective = UIFont(name: openSans, size: Size.H3)
+        }
+        
         struct Menu {
             static let selected = UIFont(name: openSansBold, size: Size.H6)
             static let normal   = UIFont(name: openSans,     size: Size.H6)
@@ -116,6 +120,10 @@ extension UI_NEW {
         struct Header {
             static let background = headerBackground
             static let name = primaryFontColor
+        }
+        
+        struct Overview {
+            static let objective = primaryFontColor
         }
         
     }

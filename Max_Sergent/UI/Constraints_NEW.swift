@@ -82,7 +82,7 @@ extension Scroll_NEW {
         page1.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                          = true
         page1.topAnchor.constraint(equalTo: topAnchor).isActive                                                  = true
         page1.widthAnchor.constraint(equalTo: widthAnchor).isActive                                              = true
-        page1.heightAnchor.constraint(equalTo: heightAnchor).isActive                                            = true
+        page1.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.Overview.height).isActive                   = true
     }
     
     func page2Constraints() {
@@ -101,6 +101,21 @@ extension Scroll_NEW {
         page3.heightAnchor.constraint(equalTo: heightAnchor).isActive                                               = true
     }
     
+}
+
+extension Overview_NEW {
+    
+    func constraints() {
+        objectiveConstraints()
+    }
+    
+    func objectiveConstraints() {
+        objective.translatesAutoresizingMaskIntoConstraints  = false
+        objective.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                           = true
+        objective.topAnchor.constraint(equalTo: topAnchor).isActive     = true
+        objective.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.Overview.objectiveWidth).isActive              = true
+        objective.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.Overview.objectiveHeight).isActive            = true
+    }
 }
 
 extension Footer_NEW {

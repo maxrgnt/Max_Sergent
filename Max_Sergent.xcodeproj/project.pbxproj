@@ -38,6 +38,7 @@
 		66E72F4F23C6AE17004F3C43 /* Constants_NEW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F4E23C6AE17004F3C43 /* Constants_NEW.swift */; };
 		66E72F5123C78557004F3C43 /* Scroll_NEW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F5023C78557004F3C43 /* Scroll_NEW.swift */; };
 		66E72F5323C7B6A4004F3C43 /* Footer_NEW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F5223C7B6A4004F3C43 /* Footer_NEW.swift */; };
+		66E72F5523C96622004F3C43 /* Overview_NEW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F5423C96622004F3C43 /* Overview_NEW.swift */; };
 		66FD8A79239AD18E00B90C69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A78239AD18E00B90C69 /* AppDelegate.swift */; };
 		66FD8A7B239AD18E00B90C69 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */; };
 		66FD8A7E239AD18E00B90C69 /* Max_Sergent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A7C239AD18E00B90C69 /* Max_Sergent.xcdatamodeld */; };
@@ -105,6 +106,7 @@
 		66E72F4E23C6AE17004F3C43 /* Constants_NEW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants_NEW.swift; sourceTree = "<group>"; };
 		66E72F5023C78557004F3C43 /* Scroll_NEW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scroll_NEW.swift; sourceTree = "<group>"; };
 		66E72F5223C7B6A4004F3C43 /* Footer_NEW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Footer_NEW.swift; sourceTree = "<group>"; };
+		66E72F5423C96622004F3C43 /* Overview_NEW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overview_NEW.swift; sourceTree = "<group>"; };
 		66FD8A75239AD18E00B90C69 /* Max Sergent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Max Sergent.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FD8A78239AD18E00B90C69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				66C4C60923B687B500DEDF6D /* Menu.swift */,
 				66E72F5023C78557004F3C43 /* Scroll_NEW.swift */,
 				6636D13A23A7BBDC00290C3D /* ScrollView.swift */,
+				66E72F5423C96622004F3C43 /* Overview_NEW.swift */,
 				6636D13C23A837E900290C3D /* Overview.swift */,
 				66C4C5FF23AE45EB00DEDF6D /* Work.swift */,
 				661C67D323BE818200B9A81E /* WorkFiles */,
@@ -567,6 +570,7 @@
 				66E72F4B23C6A36A004F3C43 /* Constraints_NEW.swift in Sources */,
 				66C4C60223B0FF9700DEDF6D /* WorkTable.swift in Sources */,
 				66FD8AB2239AEADA00B90C69 /* ViewController.swift in Sources */,
+				66E72F5523C96622004F3C43 /* Overview_NEW.swift in Sources */,
 				66E72F4F23C6AE17004F3C43 /* Constants_NEW.swift in Sources */,
 				6651C6AF239F1353003B49A1 /* UI.swift in Sources */,
 				66FD8A79239AD18E00B90C69 /* AppDelegate.swift in Sources */,

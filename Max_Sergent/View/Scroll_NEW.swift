@@ -24,7 +24,7 @@ class Scroll_NEW: UIScrollView, UIScrollViewDelegate {
     // Constraints
     var height:   NSLayoutConstraint!
     // Objects
-    let page1 = UILabel()
+    let page1 = Overview_NEW()
     let page2 = UILabel()
     let page3 = UILabel()
     lazy var pages = [page1,page2,page3]
@@ -62,6 +62,7 @@ class Scroll_NEW: UIScrollView, UIScrollViewDelegate {
     func objectSettings() {
         addSubview(page1)
         page1.backgroundColor = .darkGray
+        page1.setup()
         addSubview(page2)
         page2.backgroundColor = .gray
         addSubview(page3)
