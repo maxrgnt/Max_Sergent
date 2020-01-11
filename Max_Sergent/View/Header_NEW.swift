@@ -131,7 +131,7 @@ class Header_NEW: UIView {
     
     func hideName(with scalar: CGFloat) {
         name.alpha = scalar+1.0
-        nameBottom.constant = UI_NEW.Sizing.Header.nameBottom + -scalar*UI_NEW.Sizing.width*(0.8)
+        nameBottom.constant = UI_NEW.Sizing.Header.nameBottom + -scalar*UI_NEW.Sizing.width
     }
     
     func resetPicture(with scalar: CGFloat) {
