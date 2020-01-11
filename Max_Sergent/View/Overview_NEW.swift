@@ -45,5 +45,12 @@ class Overview_NEW: UIView {
         objective.text = Constants_NEW.Overview.objective
         objective.textColor = UI_NEW.Colors.Overview.objective
     }
+ 
+    func scaleInversely(with scalar: CGFloat) {
+        (scalar < 0.0) ? hide(with: scalar) : nil
+    }
     
+    func hide(with scalar: CGFloat) {
+        alpha = scalar+1.0
+    }
 }

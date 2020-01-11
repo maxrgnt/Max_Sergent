@@ -75,6 +75,7 @@ class ViewController_NEW: UIViewController, Menu_NEWDelegate, Scroll_NEWDelegate
         
         header.scaleDirectly(with: directScalar)
         header.scaleInversely(with: inverseScalar)
+        scroll.page1.scaleInversely(with: inverseScalar)
     }
     
 }
