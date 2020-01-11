@@ -33,13 +33,15 @@ struct UI_NEW {
             static let expandedHeight = (Sizing.height) * Ratio.expandedHeaderHeight
             //static let minimizedHeight = (UI.Sizing.height - statusBar.height) * Ratio.minimizedHeaderHeight
             static let minimizedHeight = (Sizing.height) * Ratio.minimizedHeaderHeight + statusBar.height
-            static let heightDiff = Sizing.Header.expandedHeight-Sizing.Header.minimizedHeight
+            static let heightDiff = expandedHeight-minimizedHeight
             static let width = Sizing.width
             static let pictureHeight = expandedHeight
             static let gradientHeight = expandedHeight - statusBar.height
             static let expandedNameHeight = (expandedHeight-padding)/2
-            static let minimizedNameHeight = (minimizedHeight-padding)
+            static let minimizedNameHeight = (minimizedHeight-padding-statusBar.height)
+            static let nameDiff = expandedNameHeight-minimizedNameHeight
             static let nameWidth = widthObjectPadding
+            static let nameBottom = -padding/2
             static let menuHeight = (Sizing.height) * Ratio.menuHeight
             static let menuWidth = widthObjectPadding
         }

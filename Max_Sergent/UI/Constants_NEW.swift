@@ -14,6 +14,7 @@ struct Constants_NEW {
     struct Header {
         static let name = "Max\nSergent"
         static let pages = ["Overview","Timeline","Details"]
+        static let gradient: Float = 0.75
     }
     
 

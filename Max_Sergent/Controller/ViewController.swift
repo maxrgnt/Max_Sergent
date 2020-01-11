@@ -142,6 +142,7 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate, DataDelega
         adjFontHeight = (adjFontHeight >= UI.Sizing.Header.expandedNameHeight)
             ? UI.Sizing.Header.expandedNameHeight
             : adjFontHeight
+        header.nameHeight.constant = adjFontHeight
         
         header.height.constant = newHeight
         header.pictureHeight.constant = newDiameter

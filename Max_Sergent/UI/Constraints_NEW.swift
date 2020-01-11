@@ -52,6 +52,7 @@ extension Header_NEW {
     
     func constraints() {
         nameHeight = name.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.Header.expandedNameHeight)
+        nameBottom = name.bottomAnchor.constraint(equalTo: bottomAnchor, constant: UI_NEW.Sizing.Header.nameBottom)
         
         picture.translatesAutoresizingMaskIntoConstraints                                                           = false
         picture.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                           = true
@@ -61,7 +62,7 @@ extension Header_NEW {
         
         name.translatesAutoresizingMaskIntoConstraints                                                              = false
         name.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                              = true
-        name.bottomAnchor.constraint(equalTo: bottomAnchor).isActive  = true
+        nameBottom.isActive  = true
         name.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.Header.nameWidth).isActive                           = true
         nameHeight.isActive                                                                                         = true
     }

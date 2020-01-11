@@ -17,7 +17,7 @@ class Header_NEW: UIView {
     var top:           NSLayoutConstraint!
     var pictureHeight: NSLayoutConstraint!
     var nameHeight:    NSLayoutConstraint!
-    var menuHeight:    NSLayoutConstraint!
+    var nameBottom:    NSLayoutConstraint!
     // Objects
     let picture = UIImageView()
     let name = UILabel()
@@ -39,6 +39,7 @@ class Header_NEW: UIView {
     }
     
     func objectSettings() {
+        backgroundColor = UI_NEW.Colors.Header.background
         
         addSubview(picture)
         picture.image = UIImage(named: "profile.jpg")
@@ -63,39 +64,88 @@ class Header_NEW: UIView {
     
     func buildGradient() {
         // Set origin of gradient (top left of screen)
-        let gradientOrigin = CGPoint(x: 0, y: UI_NEW.Sizing.statusBar.height)
+        let gradientOrigin = CGPoint(x: 0, y: 0.0)
         // Set frame of gradient (header height, because status bar will be solid color)
-        let gradientSize = CGSize(width: UI_NEW.Sizing.Header.width, height: UI_NEW.Sizing.Header.gradientHeight)
+        let gradientSize = CGSize(width: UI_NEW.Sizing.Header.width, height: UI_NEW.Sizing.Header.expandedHeight)
         gradient.frame = CGRect(origin: gradientOrigin, size: gradientSize)
         // Set color progression for gradient, alphaComponent of zero important for color shifting to
         gradient.colors = [UIColor.black.withAlphaComponent(0.0).cgColor,
                            UIColor.black.withAlphaComponent(1.0).cgColor]
         // Set locations of where gradient will transition
-        gradient.locations = [0.0,0.75]
+        gradient.locations = [0.0,NSNumber(value: Constants_NEW.Header.gradient)]
         // Add gradient as bottom layer in sublayer array
         self.layer.insertSublayer(gradient, at: 1)
     }
     
-    func resetView(with scaleHeaderHeight: CGFloat) {
-        resetAlpha(with: scaleHeaderHeight)
-        resetHeight(with: scaleHeaderHeight)
+    func scaleDirectly(with scalar: CGFloat) {
+        resetHeight(with: scalar)
+        resetName(with: scalar)
+        resetPicture(with: scalar)
+        resetGradient(with: scalar)
     }
     
-    func resetHeight(with scaleHeaderHeight: CGFloat) {
-        let newHeight = (scaleHeaderHeight > 1.0)
-          ? scaleHeaderHeight * UI_NEW.Sizing.Header.expandedHeight
-          : scaleHeaderHeight * UI_NEW.Sizing.Header.heightDiff + UI_NEW.Sizing.Header.minimizedHeight
+    func scaleInversely(with scalar: CGFloat) {
+        (scalar < 0.0) ? hideName(with: scalar) : nil
+    }
+    
+    func resetView(with scaleHeaderHeight: CGFloat) {
+        // Move to a background thread to do some long running work
+        DispatchQueue.global(qos: .userInitiated).async {
+            // Bounce back to the main thread to update the UI
+            DispatchQueue.main.async {
+                self.resetHeight(with: scaleHeaderHeight)
+                self.resetPicture(with: scaleHeaderHeight)
+                self.resetName(with: scaleHeaderHeight)
+            }
+        }
+    }
+    
+    func resetHeight(with scalar: CGFloat) {
+        let newHeight = (scalar > 1.0)
+          ? UI_NEW.Sizing.Header.expandedHeight
+          : scalar * UI_NEW.Sizing.Header.heightDiff + UI_NEW.Sizing.Header.minimizedHeight
         height.constant = newHeight
     }
     
-    func resetAlpha(with scaleHeaderHeight: CGFloat) {
-        print(scaleHeaderHeight)
-//        gradient.locations = (scaleHeaderHeight < 0.75)
-//            ? [0.0, NSNumber(value: Float(scaleHeaderHeight))]
-//            : [0.0, 0.75]
-        gradient.locations = [0.0, NSNumber(value: Float(scaleHeaderHeight))]
-
-        gradient.layoutIfNeeded()
+    func resetName(with scalar: CGFloat) {
+        var adjFontHeight = scalar*UI_NEW.Sizing.Header.nameDiff + UI_NEW.Sizing.Header.minimizedNameHeight
+        adjFontHeight = (adjFontHeight >= UI_NEW.Sizing.Header.expandedNameHeight)
+            ? UI_NEW.Sizing.Header.expandedNameHeight
+            : adjFontHeight
+        nameHeight.constant = adjFontHeight
+        name.sizeToFit()
+        
+        name.alpha = (name.textAlignment == .left) ? scalar : 1.0
+        let newAlignment: NSTextAlignment = (scalar == 0.0) ? .center : .left
+        if name.textAlignment != newAlignment {
+            name.alpha = 0.0
+            name.textAlignment = newAlignment
+            UIView.animate(withDuration: 0.3,
+                           delay: 0.0,
+                           options: [.curveEaseInOut],
+                animations: ({
+                    self.name.alpha = 1.0
+                }))
+        }
+    }
+    
+    func hideName(with scalar: CGFloat) {
+        name.alpha = scalar+1.0
+        nameBottom.constant = UI_NEW.Sizing.Header.nameBottom + -scalar*UI_NEW.Sizing.width*(0.8)
+    }
+    
+    func resetPicture(with scalar: CGFloat) {
+        picture.alpha = scalar
+    }
+    
+    func resetGradient(with scalar: CGFloat) {
+        // Set origin of gradient (top left of screen)
+        let scale = (scalar > 1.0) ? scalar-1 : 0.0
+        print(scalar, (scale)*UI_NEW.Sizing.Header.minimizedHeight)
+        let gradientOrigin = CGPoint(x: 0, y: (scale)*UI_NEW.Sizing.Header.minimizedHeight)
+        // Set frame of gradient (header height, because status bar will be solid color)
+        let gradientSize = CGSize(width: UI_NEW.Sizing.Header.width, height: UI_NEW.Sizing.Header.expandedHeight)
+        gradient.frame = CGRect(origin: gradientOrigin, size: gradientSize)
     }
     
 }

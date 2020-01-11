@@ -68,11 +68,13 @@ class ViewController_NEW: UIViewController, Menu_NEWDelegate, Scroll_NEWDelegate
         // The scale factor is inversely related to the ratio of the currentOffset.x to Scroll.width
         // If the scrollview has been offset 20% the scale factor should be 80%
         // As the scrollview moves right the scale factor shrinks the header
-        var scaleHeaderHeight = 1-(contentOffset/UI_NEW.Sizing.Scroll.width)
+        let inverseScalar = (contentOffset/UI_NEW.Sizing.Scroll.width)
+        var directScalar = 1-(contentOffset/UI_NEW.Sizing.Scroll.width)
         // If the scale factor goes negative, reset to zero
-        scaleHeaderHeight = (scaleHeaderHeight <= 0) ? 0.0 : scaleHeaderHeight
+        directScalar = (directScalar <= 0) ? 0.0 : directScalar
         
-        header.resetView(with: scaleHeaderHeight)
+        header.scaleDirectly(with: directScalar)
+        header.scaleInversely(with: inverseScalar)
     }
     
 }
