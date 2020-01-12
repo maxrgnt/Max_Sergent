@@ -16,6 +16,8 @@ class Overview_NEW: UIView {
     var x:   NSLayoutConstraint!
     // Objects
     let objective = UILabel()
+    let contactBar = ContactBar()
+    let tracker = Tracker()
     
     //MARK: Initialization
     init() {
@@ -44,6 +46,10 @@ class Overview_NEW: UIView {
         objective.font = UI_NEW.Fonts.Overview.objective
         objective.text = Constants_NEW.Overview.objective
         objective.textColor = UI_NEW.Colors.Overview.objective
+        addSubview(contactBar)
+        contactBar.setup()
+        addSubview(tracker)
+        tracker.setup()
     }
  
     func scaleInversely(with scalar: CGFloat) {

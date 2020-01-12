@@ -56,6 +56,15 @@ struct UI_NEW {
             static let width = Sizing.width
             static let objectiveHeight = height * 0.4
             static let objectiveWidth = widthObjectPadding
+            static let contactBarHeight = ContactBar.height
+            static let contactBarWidth = ContactBar.width
+        }
+        
+        struct ContactBar {
+            static let height = iconDiameter + padding
+            static let width = widthObjectPadding
+            static let iconDiameter = Overview.height*0.05
+            static let textWidth = (width-iconDiameter*2)/2
         }
         
         struct Footer {
@@ -94,6 +103,7 @@ extension UI_NEW {
         
         struct Overview {
             static let objective = UIFont(name: openSans, size: Size.H3)
+            static let contactText = UIFont(name: openSans, size: Size.H7)
         }
         
         struct Menu {
@@ -124,6 +134,8 @@ extension UI_NEW {
         
         struct Overview {
             static let objective = primaryFontColor
+            static let emailText = primaryFontColor
+            static let locationText = primaryFontColor
         }
         
     }

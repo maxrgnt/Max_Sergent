@@ -22,6 +22,10 @@ struct Constants_NEW {
         static let objective  = """
                                 Having spent the past two years designing and developing iOS applications in my spare time, I am determined to join an organization that understands the value of continued learning, intentional design, and selfless collaboration.
                                 """
+        static let emailText = "maxrgnt@umich.edu"
+        static let emailIcon = "email"
+        static let locationText = "Washington, D.C."
+        static let locationIcon = "location"
         static let originDate = "Since Jan 1st, 2019"
         static let selfProject = "Personal projects:"
         static let selfStats = "Swift: 0 days | Python: 0 days"

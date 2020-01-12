@@ -107,6 +107,7 @@ extension Overview_NEW {
     
     func constraints() {
         objectiveConstraints()
+        contactBarConstraints()
     }
     
     func objectiveConstraints() {
@@ -116,6 +117,52 @@ extension Overview_NEW {
         objective.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.Overview.objectiveWidth).isActive              = true
         objective.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.Overview.objectiveHeight).isActive            = true
     }
+    
+    func contactBarConstraints() {
+        contactBar.translatesAutoresizingMaskIntoConstraints  = false
+        contactBar.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                           = true
+        contactBar.topAnchor.constraint(equalTo: objective.bottomAnchor).isActive     = true
+        contactBar.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.Overview.contactBarWidth).isActive              = true
+        contactBar.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.Overview.contactBarHeight).isActive            = true
+    }
+    
+}
+
+extension ContactBar {
+    
+    func constraints() {
+        iconConstraints()
+        textConstraints()
+    }
+    
+    func iconConstraints() {
+        emailIcon.translatesAutoresizingMaskIntoConstraints                                                              = false
+        emailIcon.leadingAnchor.constraint(equalTo: leadingAnchor).isActive                                              = true
+        emailIcon.centerYAnchor.constraint(equalTo: centerYAnchor).isActive  = true
+        emailIcon.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.ContactBar.iconDiameter).isActive           = true
+        emailIcon.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.ContactBar.iconDiameter).isActive               = true
+        
+        locationIcon.translatesAutoresizingMaskIntoConstraints                                                         = false
+        locationIcon.leadingAnchor.constraint(equalTo: emailText.trailingAnchor).isActive                               = true
+        locationIcon.centerYAnchor.constraint(equalTo: centerYAnchor).isActive  = true
+        locationIcon.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.ContactBar.iconDiameter).isActive           = true
+        locationIcon.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.ContactBar.iconDiameter).isActive               = true
+    }
+    
+    func textConstraints() {
+        emailText.translatesAutoresizingMaskIntoConstraints                                                              = false
+        emailText.leadingAnchor.constraint(equalTo: emailIcon.trailingAnchor).isActive                                 = true
+        emailText.centerYAnchor.constraint(equalTo: centerYAnchor).isActive  = true
+        emailText.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.ContactBar.textWidth).isActive           = true
+        emailText.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.ContactBar.iconDiameter).isActive               = true
+        
+        locationText.translatesAutoresizingMaskIntoConstraints                                                              = false
+        locationText.leadingAnchor.constraint(equalTo: locationIcon.trailingAnchor).isActive                                 = true
+        locationText.centerYAnchor.constraint(equalTo: centerYAnchor).isActive  = true
+        locationText.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.ContactBar.textWidth).isActive           = true
+        locationText.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.ContactBar.iconDiameter).isActive               = true
+    }
+    
 }
 
 extension Footer_NEW {
