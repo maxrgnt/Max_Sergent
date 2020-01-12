@@ -61,10 +61,18 @@ struct UI_NEW {
         }
         
         struct ContactBar {
+            static let padding = Sizing.padding/2
             static let height = iconDiameter + padding
             static let width = widthObjectPadding
             static let iconDiameter = Overview.height*0.05
-            static let textWidth = (width-iconDiameter*2)/2
+            static let textWidth = (width-iconDiameter*2-padding*2)/2
+        }
+        
+        struct Tracker {
+            static let width = widthObjectPadding
+            static let height = Overview.height-Overview.objectiveHeight-ContactBar.height
+            static let headerWidth = widthObjectPadding
+            static let headerHeight = Overview.height*0.05
         }
         
         struct Footer {
@@ -106,6 +114,10 @@ extension UI_NEW {
             static let contactText = UIFont(name: openSans, size: Size.H7)
         }
         
+        struct Tracker {
+            static let header = UIFont(name: openSansBold, size: Size.H6)
+        }
+        
         struct Menu {
             static let selected = UIFont(name: openSansBold, size: Size.H6)
             static let normal   = UIFont(name: openSans,     size: Size.H6)
@@ -138,6 +150,9 @@ extension UI_NEW {
             static let locationText = primaryFontColor
         }
         
+        struct Tracker {
+            static let header = primaryFontColor
+        }
     }
     
 }

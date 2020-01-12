@@ -108,6 +108,7 @@ extension Overview_NEW {
     func constraints() {
         objectiveConstraints()
         contactBarConstraints()
+        trackerConstraints()
     }
     
     func objectiveConstraints() {
@@ -124,6 +125,14 @@ extension Overview_NEW {
         contactBar.topAnchor.constraint(equalTo: objective.bottomAnchor).isActive     = true
         contactBar.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.Overview.contactBarWidth).isActive              = true
         contactBar.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.Overview.contactBarHeight).isActive            = true
+    }
+    
+    func trackerConstraints() {
+        tracker.translatesAutoresizingMaskIntoConstraints  = false
+        tracker.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                           = true
+        tracker.topAnchor.constraint(equalTo: contactBar.bottomAnchor).isActive     = true
+        tracker.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.Tracker.width).isActive              = true
+        tracker.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.Tracker.height).isActive            = true
     }
     
 }
@@ -150,17 +159,35 @@ extension ContactBar {
     }
     
     func textConstraints() {
+        let padding = UI_NEW.Sizing.ContactBar.padding
+        
         emailText.translatesAutoresizingMaskIntoConstraints                                                              = false
-        emailText.leadingAnchor.constraint(equalTo: emailIcon.trailingAnchor).isActive                                 = true
+        emailText.leadingAnchor.constraint(equalTo: emailIcon.trailingAnchor, constant: padding).isActive  = true
         emailText.centerYAnchor.constraint(equalTo: centerYAnchor).isActive  = true
         emailText.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.ContactBar.textWidth).isActive           = true
         emailText.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.ContactBar.iconDiameter).isActive               = true
         
         locationText.translatesAutoresizingMaskIntoConstraints                                                              = false
-        locationText.leadingAnchor.constraint(equalTo: locationIcon.trailingAnchor).isActive                                 = true
+        locationText.leadingAnchor.constraint(equalTo: locationIcon.trailingAnchor, constant: padding).isActive  = true
         locationText.centerYAnchor.constraint(equalTo: centerYAnchor).isActive  = true
         locationText.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.ContactBar.textWidth).isActive           = true
         locationText.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.ContactBar.iconDiameter).isActive               = true
+    }
+    
+}
+
+extension Tracker {
+    
+    func constraints() {
+        headerConstraints()
+    }
+    
+    func headerConstraints() {
+        header.translatesAutoresizingMaskIntoConstraints                                                              = false
+        header.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                              = true
+        header.topAnchor.constraint(equalTo: topAnchor).isActive  = true
+        header.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.Tracker.headerHeight).isActive           = true
+        header.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.Tracker.headerWidth).isActive               = true
     }
     
 }

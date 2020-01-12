@@ -50,7 +50,7 @@ class ContactBar: UIView {
         for (i, label) in [emailText, locationText].enumerated() {
             addSubview(label)
             label.numberOfLines = 1
-            label.textAlignment = .center
+            label.textAlignment = .left
             label.backgroundColor = .clear
             label.font = UI_NEW.Fonts.Overview.contactText
             label.text = text[i]

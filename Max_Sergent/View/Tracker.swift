@@ -15,10 +15,7 @@ class Tracker: UIView {
     // Constraints
     var x:   NSLayoutConstraint!
     // Objects
-    let emailIcon = UIImageView()
-    let emailText = UILabel()
-    let locationIcon = UIImageView()
-    let locationText = UILabel()
+    let header = UILabel()
     
     //MARK: Initialization
     init() {
@@ -31,32 +28,19 @@ class Tracker: UIView {
     }
     
     func setup() {
-        backgroundColor = UI.Colors.Overview.background
+        backgroundColor = .red //UI.Colors.Overview.background
         objectSettings()
-//        constraints()
+        constraints()
     }
     
     func objectSettings() {
-        let icons = [Constants_NEW.Overview.emailIcon, Constants_NEW.Overview.locationIcon]
-        for (i, icon) in [emailIcon, locationIcon].enumerated() {
-            addSubview(icon)
-            icon.image = UIImage(named: icons[i])
-            icon.clipsToBounds = true
-            icon.layer.masksToBounds = true
-            icon.contentMode = .scaleAspectFill
-        }
-        
-        let text = [Constants_NEW.Overview.emailText, Constants_NEW.Overview.locationText]
-        for (i, label) in [emailText, locationText].enumerated() {
-            addSubview(label)
-            label.numberOfLines = 1
-            label.textAlignment = .center
-            label.backgroundColor = .clear
-            label.font = UI_NEW.Fonts.Overview.contactText
-            label.text = text[i]
-            label.textColor = UI_NEW.Colors.Overview.locationText
-        }
-        
+        addSubview(header)
+        header.numberOfLines = 1
+        header.textAlignment = .left
+        header.backgroundColor = .clear
+        header.font = UI_NEW.Fonts.Tracker.header
+        header.text = Constants_NEW.Overview.trackerHeader
+        header.textColor = UI_NEW.Colors.Tracker.header
     }
-    
+
 }

@@ -26,7 +26,7 @@ struct Constants_NEW {
         static let emailIcon = "email"
         static let locationText = "Washington, D.C."
         static let locationIcon = "location"
-        static let originDate = "Since Jan 1st, 2019"
+        static let trackerHeader = "Since Jan 1st, 2019"
         static let selfProject = "Personal projects:"
         static let selfStats = "Swift: 0 days | Python: 0 days"
         static let workProject = "Work projects:"
