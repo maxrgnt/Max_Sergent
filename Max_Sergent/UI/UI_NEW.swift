@@ -68,7 +68,7 @@ struct UI_NEW {
             static let textWidth = (width-iconDiameter*2-padding*2)/2
         }
         
-        struct Tracker {
+        struct OverviewStats {
             static let width = widthObjectPadding
             static let height = Overview.height-Overview.objectiveHeight-ContactBar.height
             static let headerWidth = widthObjectPadding
@@ -114,7 +114,7 @@ extension UI_NEW {
             static let contactText = UIFont(name: openSans, size: Size.H7)
         }
         
-        struct Tracker {
+        struct OverviewStats {
             static let header = UIFont(name: openSansBold, size: Size.H6)
         }
         
@@ -150,7 +150,7 @@ extension UI_NEW {
             static let locationText = primaryFontColor
         }
         
-        struct Tracker {
+        struct OverviewStats {
             static let header = primaryFontColor
         }
     }

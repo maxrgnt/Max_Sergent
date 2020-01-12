@@ -1,5 +1,5 @@
 //
-//  Tracker.swift
+//  OverviewStats.swift
 //  Max_Sergent
 //
 //  Created by Max Sergent on 1/12/20.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Tracker: UIView {
+class OverviewStats: UIView {
     
     //MARK: Definitions
     // Constraints
@@ -38,9 +38,9 @@ class Tracker: UIView {
         header.numberOfLines = 1
         header.textAlignment = .left
         header.backgroundColor = .clear
-        header.font = UI_NEW.Fonts.Tracker.header
+        header.font = UI_NEW.Fonts.OverviewStats.header
         header.text = Constants_NEW.Overview.trackerHeader
-        header.textColor = UI_NEW.Colors.Tracker.header
+        header.textColor = UI_NEW.Colors.OverviewStats.header
     }
 
 }

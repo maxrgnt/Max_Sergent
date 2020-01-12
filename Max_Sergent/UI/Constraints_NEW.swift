@@ -128,11 +128,11 @@ extension Overview_NEW {
     }
     
     func trackerConstraints() {
-        tracker.translatesAutoresizingMaskIntoConstraints  = false
-        tracker.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                           = true
-        tracker.topAnchor.constraint(equalTo: contactBar.bottomAnchor).isActive     = true
-        tracker.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.Tracker.width).isActive              = true
-        tracker.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.Tracker.height).isActive            = true
+        stats.translatesAutoresizingMaskIntoConstraints  = false
+        stats.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                           = true
+        stats.topAnchor.constraint(equalTo: contactBar.bottomAnchor).isActive     = true
+        stats.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.width).isActive              = true
+        stats.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.height).isActive            = true
     }
     
 }
@@ -176,7 +176,7 @@ extension ContactBar {
     
 }
 
-extension Tracker {
+extension OverviewStats {
     
     func constraints() {
         headerConstraints()
@@ -186,8 +186,8 @@ extension Tracker {
         header.translatesAutoresizingMaskIntoConstraints                                                              = false
         header.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                              = true
         header.topAnchor.constraint(equalTo: topAnchor).isActive  = true
-        header.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.Tracker.headerHeight).isActive           = true
-        header.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.Tracker.headerWidth).isActive               = true
+        header.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.headerHeight).isActive           = true
+        header.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.headerWidth).isActive               = true
     }
     
 }
