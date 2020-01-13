@@ -180,7 +180,7 @@ extension OverviewStats {
     
     func constraints() {
         headerConstraints()
-        track1Constraints()
+        trackConstraints()
     }
     
     func headerConstraints() {
@@ -191,12 +191,30 @@ extension OverviewStats {
         header.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.headerWidth).isActive               = true
     }
     
-    func track1Constraints() {
+    func trackConstraints() {
         track1.translatesAutoresizingMaskIntoConstraints                                                              = false
         track1.leadingAnchor.constraint(equalTo: leadingAnchor).isActive                                              = true
         track1.topAnchor.constraint(equalTo: header.bottomAnchor, constant: UI_NEW.Sizing.padding).isActive  = true
         track1.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.trackHeight).isActive           = true
         track1.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.trackWidth).isActive               = true
+        
+        track2.translatesAutoresizingMaskIntoConstraints                                                              = false
+        track2.leadingAnchor.constraint(equalTo: track1.trailingAnchor, constant: UI_NEW.Sizing.padding).isActive        = true
+        track2.topAnchor.constraint(equalTo: header.bottomAnchor, constant: UI_NEW.Sizing.padding).isActive  = true
+        track2.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.trackHeight).isActive           = true
+        track2.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.trackWidth).isActive               = true
+        
+        track3.translatesAutoresizingMaskIntoConstraints                                                              = false
+        track3.leadingAnchor.constraint(equalTo: track2.trailingAnchor, constant: UI_NEW.Sizing.padding).isActive        = true
+        track3.topAnchor.constraint(equalTo: header.bottomAnchor, constant: UI_NEW.Sizing.padding).isActive  = true
+        track3.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.trackHeight).isActive           = true
+        track3.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.trackWidth).isActive               = true
+        
+        track4.translatesAutoresizingMaskIntoConstraints                                                              = false
+        track4.leadingAnchor.constraint(equalTo: track3.trailingAnchor, constant: UI_NEW.Sizing.padding).isActive        = true
+        track4.topAnchor.constraint(equalTo: header.bottomAnchor, constant: UI_NEW.Sizing.padding).isActive  = true
+        track4.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.trackHeight).isActive           = true
+        track4.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.trackWidth).isActive               = true
     }
     
 }
@@ -204,11 +222,26 @@ extension OverviewStats {
 extension OverviewTrack {
     
     func constraints() {
-        
+        dayConstraints()
     }
     
-    func trackConstraints() {
+    func dayConstraints() {
+        dayStatTop = dayStat.topAnchor.constraint(equalTo: topAnchor, constant: 0.0)
+        dayUnitTop = dayUnit.topAnchor.constraint(equalTo: dayStat.bottomAnchor, constant: 0.0)
+        dayStatHeight = dayStat.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewTrack.radius)
+        dayUnitHeight = dayUnit.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewTrack.radius)
+            
+        dayStat.translatesAutoresizingMaskIntoConstraints                                                              = false
+        dayStat.centerXAnchor.constraint(equalTo: centerXAnchor).isActive        = true
+        dayStatTop.isActive        = true
+        dayStatHeight.isActive           = true
+        dayStat.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewTrack.radius).isActive           = true
         
+        dayUnit.translatesAutoresizingMaskIntoConstraints                                                              = false
+        dayUnit.centerXAnchor.constraint(equalTo: centerXAnchor).isActive        = true
+        dayUnitTop.isActive        = true
+        dayUnitHeight.isActive           = true
+        dayUnit.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewTrack.radius).isActive           = true
     }
     
 }

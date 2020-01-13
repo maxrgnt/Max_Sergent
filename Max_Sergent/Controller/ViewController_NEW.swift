@@ -44,9 +44,21 @@ class ViewController_NEW: UIViewController, Menu_NEWDelegate, Scroll_NEWDelegate
         view.addSubview(footer)
         footer.setup()
         footer.menu.customDelegate = self
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-//            self.scroll.page1.stats.track1.animateFill(to: CGFloat.pi*2)
+         
+        scroll.page1.stats.track1.animateFill(to: CGFloat.pi*2)
+        scroll.page1.stats.track2.animateFill(to: CGFloat.pi*0.33)
+        scroll.page1.stats.track3.animateFill(to: CGFloat.pi*0.66)
+        scroll.page1.stats.track4.animateFill(to: CGFloat.pi*0.40)
+
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+//
+//            DispatchQueue.global(qos: .background).async {
+//                print("This is run on the background queue")
+//
+//                DispatchQueue.main.async {
+//                    print("This is run on the main queue, after the previous code in outer block")
+//                }
+//            }
 //        }
     }
     

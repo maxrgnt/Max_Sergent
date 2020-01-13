@@ -17,6 +17,9 @@ class OverviewStats: UIView {
     // Objects
     let header = UILabel()
     let track1 = OverviewTrack()
+    let track2 = OverviewTrack()
+    let track3 = OverviewTrack()
+    let track4 = OverviewTrack()
     
     //MARK: Initialization
     init() {
@@ -43,8 +46,10 @@ class OverviewStats: UIView {
         header.text = Constants_NEW.Overview.trackerHeader
         header.textColor = UI_NEW.Colors.OverviewStats.header
         
-        addSubview(track1)
-        track1.setup()
+        for track in [track1, track2, track3, track4] {
+            addSubview(track)
+            track.setup()
+        }
     }
 
 }

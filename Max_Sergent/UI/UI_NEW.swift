@@ -73,14 +73,14 @@ struct UI_NEW {
             static let height = Overview.height-Overview.objectiveHeight-ContactBar.height
             static let headerWidth = widthObjectPadding
             static let headerHeight = Overview.height*0.05
-            static let trackWidth = (width - padding*(3/2))/4
+            static let trackWidth = (width - padding*3)/4
             static let trackHeight = height - headerHeight
         }
         
         struct OverviewTrack {
             static let center = CGPoint(x: UI_NEW.Sizing.OverviewStats.trackWidth/2, y: radius)
             static let radius = OverviewStats.trackWidth/2
-            static let lineWidth = OverviewStats.headerHeight/4
+            static let lineWidth = OverviewStats.headerHeight/3
         }
         
         struct Footer {
@@ -124,6 +124,8 @@ extension UI_NEW {
         
         struct OverviewStats {
             static let header = UIFont(name: openSansBold, size: Size.H6)
+            static let dayStat = UIFont(name: openSansBold, size: Size.H6)
+            static let dayUnit = UIFont(name: openSans, size: Size.H7)
         }
         
         struct Menu {
@@ -164,6 +166,7 @@ extension UI_NEW {
             static let track = headerBackground
             static let trackBackground = overviewBackground
             static let fill = primaryFontColor
+            static let days = primaryFontColor
         }
     }
     
