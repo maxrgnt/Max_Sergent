@@ -44,7 +44,7 @@ class OverviewTrack: UIView {
         dayUnitHeight.constant = unitHeight
         let innerCircle = UI_NEW.Sizing.OverviewTrack.radius-UI_NEW.Sizing.OverviewTrack.lineWidth
         dayStatTop.constant = (innerCircle*2-(statHeight+unitHeight)/2)/2
-        dayUnitTop.constant = -unitHeight/2
+        dayUnitTop.constant = -unitHeight/3
         layoutIfNeeded()
     }
     

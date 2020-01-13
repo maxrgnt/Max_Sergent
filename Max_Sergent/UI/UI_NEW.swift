@@ -22,7 +22,7 @@ struct UI_NEW {
         
         struct Ratio {
             static let minimizedHeaderHeight: CGFloat = 0.1
-            static let expandedHeaderHeight: CGFloat = 0.35
+            static let expandedHeaderHeight: CGFloat = 0.42
             static let menuHeight: CGFloat = 0.07
             // Scroll height behind footer, do we want this?
             static let scrollHeight: CGFloat = 1-minimizedHeaderHeight-menuHeight
@@ -54,7 +54,7 @@ struct UI_NEW {
         struct Overview {
             static let height = Sizing.height - Header.expandedHeight - Footer.height
             static let width = Sizing.width
-            static let objectiveHeight = height * 0.4
+            static let objectiveHeight = height - ContactBar.height //* 0.4
             static let objectiveWidth = widthObjectPadding
             static let contactBarHeight = ContactBar.height
             static let contactBarWidth = ContactBar.width
@@ -98,13 +98,13 @@ extension UI_NEW {
     struct Fonts {
         
         struct Size {
-            static let H1 = Sizing.height * (0.105)
-            static let H2 = Sizing.height * (0.085)
-            static let H3 = Sizing.height * (0.065)
-            static let H4 = Sizing.height * (0.045)
-            static let H5 = Sizing.height * (0.025)
-            static let H6 = Sizing.height * (0.020)
-            static let H7 = Sizing.height * (0.015)
+            static let H1 = Sizing.height *  (0.105)
+            static let H2 = Sizing.height *  (0.085)
+            static let H3 = Sizing.height *  (0.065)
+            static let H4 = Sizing.height *  (0.045)
+            static let H5 = Sizing.height *  (0.025)
+            static let H6 = Sizing.height *  (0.020)
+            static let H7 = Sizing.height *  (0.015)
         }
         
         static let arvo = "Arvo"
@@ -118,7 +118,7 @@ extension UI_NEW {
         }
         
         struct Overview {
-            static let objective = UIFont(name: openSans, size: Size.H3)
+            static let objective = UIFont(name: openSans, size: Size.H5)
             static let contactText = UIFont(name: openSans, size: Size.H7)
         }
         

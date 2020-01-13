@@ -108,32 +108,34 @@ extension Overview_NEW {
     func constraints() {
         objectiveConstraints()
         contactBarConstraints()
-        trackerConstraints()
+//        statsConstraints()
     }
     
     func objectiveConstraints() {
+        objectiveHeight = objective.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.Overview.objectiveHeight)
+        
         objective.translatesAutoresizingMaskIntoConstraints  = false
         objective.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                           = true
-        objective.topAnchor.constraint(equalTo: topAnchor).isActive     = true
+        objective.topAnchor.constraint(equalTo: contactBar.bottomAnchor, constant: UI_NEW.Sizing.padding/2).isActive     = true
         objective.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.Overview.objectiveWidth).isActive              = true
-        objective.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.Overview.objectiveHeight).isActive            = true
+        objectiveHeight.isActive            = true
     }
     
     func contactBarConstraints() {
         contactBar.translatesAutoresizingMaskIntoConstraints  = false
         contactBar.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                           = true
-        contactBar.topAnchor.constraint(equalTo: objective.bottomAnchor).isActive     = true
+        contactBar.topAnchor.constraint(equalTo: topAnchor, constant: UI_NEW.Sizing.padding/2).isActive     = true
         contactBar.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.Overview.contactBarWidth).isActive              = true
         contactBar.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.Overview.contactBarHeight).isActive            = true
     }
     
-    func trackerConstraints() {
-        stats.translatesAutoresizingMaskIntoConstraints  = false
-        stats.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                           = true
-        stats.topAnchor.constraint(equalTo: contactBar.bottomAnchor).isActive     = true
-        stats.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.width).isActive              = true
-        stats.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.height).isActive            = true
-    }
+//    func statsConstraints() {
+//        stats.translatesAutoresizingMaskIntoConstraints  = false
+//        stats.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                           = true
+//        stats.topAnchor.constraint(equalTo: contactBar.bottomAnchor).isActive     = true
+//        stats.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.width).isActive              = true
+//        stats.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.height).isActive            = true
+//    }
     
 }
 

@@ -13,11 +13,11 @@ class Overview_NEW: UIView {
     
     //MARK: Definitions
     // Constraints
-    var x:   NSLayoutConstraint!
+    var objectiveHeight:   NSLayoutConstraint!
     // Objects
     let objective = UILabel()
     let contactBar = ContactBar()
-    let stats = OverviewStats()
+//    let stats = OverviewStats()
     
     //MARK: Initialization
     init() {
@@ -33,23 +33,27 @@ class Overview_NEW: UIView {
         backgroundColor = UI.Colors.Overview.background
         objectSettings()
         constraints()
+        
+        print(frameForLabel(text: objective.text!, font: objective.font!).height)
+        objectiveHeight.constant = frameForLabel(text: objective.text!, font: objective.font!).height
+        layoutIfNeeded()
     }
     
     func objectSettings() {
         addSubview(objective)
-        objective.numberOfLines = 7
+        objective.numberOfLines = 0
         objective.textAlignment = .left
         objective.backgroundColor = .clear
-        objective.minimumScaleFactor = 0.1
-        objective.lineBreakMode = .byClipping
-        objective.adjustsFontSizeToFitWidth = true
+//        objective.minimumScaleFactor = 0.1
+        objective.lineBreakMode = .byWordWrapping
+//        objective.adjustsFontSizeToFitWidth = true
         objective.font = UI_NEW.Fonts.Overview.objective
         objective.text = Constants_NEW.Overview.objective
         objective.textColor = UI_NEW.Colors.Overview.objective
         addSubview(contactBar)
         contactBar.setup()
-        addSubview(stats)
-        stats.setup()
+//        addSubview(stats)
+//        stats.setup()
     }
  
     func scaleInversely(with scalar: CGFloat) {
@@ -58,5 +62,20 @@ class Overview_NEW: UIView {
     
     func hide(with scalar: CGFloat) {
         alpha = scalar+1.0
+    }
+    
+    func frameForLabel(text:String, font:UIFont) -> (width: CGFloat, height: CGFloat) {
+        // Setting max variable for readability in next line
+        let max = CGFloat.greatestFiniteMagnitude
+        // Create temp label to calculate size to fit
+        // Can't just size to fit each label because we want them spaced horizontally a certain way.
+        let label:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: UI_NEW.Sizing.widthObjectPadding, height: max))
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = font
+        label.text = text
+        label.sizeToFit()
+        // Return the width and height of label to center vertically in menu and space evenly horizontally
+        return (width: label.frame.width, height: label.frame.height)
     }
 }

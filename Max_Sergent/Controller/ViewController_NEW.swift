@@ -45,10 +45,10 @@ class ViewController_NEW: UIViewController, Menu_NEWDelegate, Scroll_NEWDelegate
         footer.setup()
         footer.menu.customDelegate = self
          
-        scroll.page1.stats.track1.animateFill(to: CGFloat.pi*2)
-        scroll.page1.stats.track2.animateFill(to: CGFloat.pi*0.33)
-        scroll.page1.stats.track3.animateFill(to: CGFloat.pi*0.66)
-        scroll.page1.stats.track4.animateFill(to: CGFloat.pi*0.40)
+//        scroll.page1.stats.track1.animateFill(to: CGFloat.pi*2)
+//        scroll.page1.stats.track2.animateFill(to: CGFloat.pi*0.33)
+//        scroll.page1.stats.track3.animateFill(to: CGFloat.pi*0.66)
+//        scroll.page1.stats.track4.animateFill(to: CGFloat.pi*0.40)
 
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
 //
