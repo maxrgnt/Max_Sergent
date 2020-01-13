@@ -180,6 +180,7 @@ extension OverviewStats {
     
     func constraints() {
         headerConstraints()
+        track1Constraints()
     }
     
     func headerConstraints() {
@@ -188,6 +189,26 @@ extension OverviewStats {
         header.topAnchor.constraint(equalTo: topAnchor).isActive  = true
         header.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.headerHeight).isActive           = true
         header.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.headerWidth).isActive               = true
+    }
+    
+    func track1Constraints() {
+        track1.translatesAutoresizingMaskIntoConstraints                                                              = false
+        track1.leadingAnchor.constraint(equalTo: leadingAnchor).isActive                                              = true
+        track1.topAnchor.constraint(equalTo: header.bottomAnchor, constant: UI_NEW.Sizing.padding).isActive  = true
+        track1.heightAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.trackHeight).isActive           = true
+        track1.widthAnchor.constraint(equalToConstant: UI_NEW.Sizing.OverviewStats.trackWidth).isActive               = true
+    }
+    
+}
+
+extension OverviewTrack {
+    
+    func constraints() {
+        
+    }
+    
+    func trackConstraints() {
+        
     }
     
 }

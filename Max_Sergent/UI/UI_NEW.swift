@@ -62,7 +62,7 @@ struct UI_NEW {
         
         struct ContactBar {
             static let padding = Sizing.padding/2
-            static let height = iconDiameter + padding
+            static let height = iconDiameter + padding * 2
             static let width = widthObjectPadding
             static let iconDiameter = Overview.height*0.05
             static let textWidth = (width-iconDiameter*2-padding*2)/2
@@ -73,6 +73,14 @@ struct UI_NEW {
             static let height = Overview.height-Overview.objectiveHeight-ContactBar.height
             static let headerWidth = widthObjectPadding
             static let headerHeight = Overview.height*0.05
+            static let trackWidth = (width - padding*(3/2))/4
+            static let trackHeight = height - headerHeight
+        }
+        
+        struct OverviewTrack {
+            static let center = CGPoint(x: UI_NEW.Sizing.OverviewStats.trackWidth/2, y: radius)
+            static let radius = OverviewStats.trackWidth/2
+            static let lineWidth = OverviewStats.headerHeight/4
         }
         
         struct Footer {
@@ -145,6 +153,7 @@ extension UI_NEW {
         }
         
         struct Overview {
+            static let background = overviewBackground
             static let objective = primaryFontColor
             static let emailText = primaryFontColor
             static let locationText = primaryFontColor
@@ -152,6 +161,9 @@ extension UI_NEW {
         
         struct OverviewStats {
             static let header = primaryFontColor
+            static let track = headerBackground
+            static let trackBackground = overviewBackground
+            static let fill = primaryFontColor
         }
     }
     

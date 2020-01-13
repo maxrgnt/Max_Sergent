@@ -16,6 +16,7 @@ class OverviewStats: UIView {
     var x:   NSLayoutConstraint!
     // Objects
     let header = UILabel()
+    let track1 = OverviewTrack()
     
     //MARK: Initialization
     init() {
@@ -28,7 +29,7 @@ class OverviewStats: UIView {
     }
     
     func setup() {
-        backgroundColor = .red //UI.Colors.Overview.background
+        backgroundColor = UI_NEW.Colors.Overview.background
         objectSettings()
         constraints()
     }
@@ -41,6 +42,9 @@ class OverviewStats: UIView {
         header.font = UI_NEW.Fonts.OverviewStats.header
         header.text = Constants_NEW.Overview.trackerHeader
         header.textColor = UI_NEW.Colors.OverviewStats.header
+        
+        addSubview(track1)
+        track1.setup()
     }
 
 }

@@ -44,6 +44,10 @@ class ViewController_NEW: UIViewController, Menu_NEWDelegate, Scroll_NEWDelegate
         view.addSubview(footer)
         footer.setup()
         footer.menu.customDelegate = self
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//            self.scroll.page1.stats.track1.animateFill(to: CGFloat.pi*2)
+//        }
     }
     
     //MARK: Functionality
