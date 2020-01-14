@@ -48,37 +48,37 @@ struct Data {
 //            print(error)
 //        }
 //    }
-    
-    //MARK: Populate Data
-    static func checkFirebaseForReset() {
-        firebaseReset() { reset in
-            //print("Check Firebase reset: \(reset)")
-            (reset == true) ? UserDefaults.standard.set(false, forKey: "CoreData") : nil
-            print("Reset from Firebase? ",reset)
-            populateData(from: reset)
-        }
-    }
-    
-    static func populateData(from reset: Bool) {
-        if !reset && coreDataPopulated() {
-            print("Load from CoreData")
-            loadProfile()
-            loadOverview()
-            loadWork()
-            loadSchool()
-        }
-        else {
-            print("Load from Firebase")
-            firebaseAll {
-                UserDefaults.standard.set(true, forKey: "CoreData")
-            }
-        }
-    }
-    
-    //MARK: UserDefaults
-    static func coreDataPopulated() -> Bool {
-        return UserDefaults.standard.bool(forKey: "CoreData")
-    }
+//
+//    //MARK: Populate Data
+//    static func checkFirebaseForReset() {
+//        firebaseReset() { reset in
+//            //print("Check Firebase reset: \(reset)")
+//            (reset == true) ? UserDefaults.standard.set(false, forKey: "CoreData") : nil
+//            print("Reset from Firebase? ",reset)
+//            populateData(from: reset)
+//        }
+//    }
+//
+//    static func populateData(from reset: Bool) {
+//        if !reset && coreDataPopulated() {
+//            print("Load from CoreData")
+////            loadProfile()
+////            loadOverview()
+////            loadWork()
+////            loadSchool()
+//        }
+//        else {
+//            print("Load from Firebase")
+////            firebaseAll {
+////                UserDefaults.standard.set(true, forKey: "CoreData")
+////            }
+//        }
+//    }
+//
+//    //MARK: UserDefaults
+//    static func coreDataPopulated() -> Bool {
+//        return UserDefaults.standard.bool(forKey: "CoreData")
+//    }
     
         
     
