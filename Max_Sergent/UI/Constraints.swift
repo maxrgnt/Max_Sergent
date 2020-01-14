@@ -87,17 +87,17 @@ extension Overview {
     func constraints() {
         let verticalPadding = Sizing.Header.nameBottom/2
         
-        box1TitleHeight = box1Title.heightAnchor.constraint(equalToConstant: 0.0)
-        box1Title.translatesAutoresizingMaskIntoConstraints                                                             = false
-        box1Title.centerXAnchor.constraint(equalTo: box1.centerXAnchor).isActive                                        = true
-        box1Title.topAnchor.constraint(equalTo: topAnchor, constant: verticalPadding*2).isActive                        = true
-        box1Title.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxPaddedWidth).isActive                      = true
-        box1TitleHeight.isActive                                                                                        = true
+        title1Height = title1.heightAnchor.constraint(equalToConstant: 0.0)
+        title1.translatesAutoresizingMaskIntoConstraints                                                                = false
+        title1.centerXAnchor.constraint(equalTo: box1.centerXAnchor).isActive                                           = true
+        title1.topAnchor.constraint(equalTo: topAnchor, constant: verticalPadding*2).isActive                           = true
+        title1.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxPaddedWidth).isActive                         = true
+        title1Height.isActive                                                                                           = true
         
         box1Height = box1.heightAnchor.constraint(equalToConstant: Sizing.Overview.box1Height)
         box1.translatesAutoresizingMaskIntoConstraints                                                                  = false
         box1.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                  = true
-        box1.topAnchor.constraint(equalTo: box1Title.bottomAnchor, constant: verticalPadding).isActive                  = true
+        box1.topAnchor.constraint(equalTo: title1.bottomAnchor, constant: verticalPadding).isActive                     = true
         box1.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxWidth).isActive                                 = true
         box1Height.isActive                                                                                             = true
         

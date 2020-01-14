@@ -15,13 +15,18 @@ class Overview: UIView {
     // Delegates
     // Constraints
     var box1Height: NSLayoutConstraint!
-    var box1TitleHeight: NSLayoutConstraint!
+    var title1Height: NSLayoutConstraint!
     var objectiveHeight: NSLayoutConstraint!
+    var box2Height: NSLayoutConstraint!
+    var title2Height: NSLayoutConstraint!
     // Objects
     var box1 = UIView()
-    var box1Title = UILabel()
+    var title1 = UILabel()
     var objective = UILabel()
-    
+    var box2 = UIView()
+    var title2 = UILabel()
+    lazy var boxes = [box1, box2]
+    lazy var titles = [title1, title2]
     
     //MARK: Initialization
     init() {
@@ -35,18 +40,23 @@ class Overview: UIView {
     
     //MARK: Settings
     func setup(closure: () -> Void) {
-        addSubview(box1)
-        box1.backgroundColor = Colors.Overview.box
-        box1.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: Sizing.Overview.boxRadius)
+        
+        for box in boxes {
+            addSubview(box)
+            box.backgroundColor = Colors.Overview.box
+            box.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: Sizing.Overview.boxRadius)
+        }
 
-        addSubview(box1Title)
-        box1Title.numberOfLines   = 1
-        box1Title.textAlignment   = .left
-        box1Title.backgroundColor = .clear
-        box1Title.lineBreakMode   = .byWordWrapping
-        box1Title.font            = Fonts.Overview.boxTitle
-        box1Title.text            = Constants.Overview.box1Title
-        box1Title.textColor       = Colors.Overview.boxTitle
+        for (i, title) in titles.enumerated() {
+            addSubview(title)
+            title.numberOfLines   = 1
+            title.textAlignment   = .left
+            title.backgroundColor = .clear
+            title.lineBreakMode   = .byWordWrapping
+            title.font            = Fonts.Overview.boxTitle
+            title.text            = Constants.Overview.titles[i]
+            title.textColor       = Colors.Overview.boxTitle
+        }
         
         box1.addSubview(objective)
         objective.numberOfLines   = 0
@@ -68,11 +78,11 @@ class Overview: UIView {
         Sizing.Overview.objectiveHeight = frame.height
         objectiveHeight.constant        = frame.height
         box1Height.constant       = Sizing.Overview.box1Height
-        let titleFrame = objective.frameForLabel(text: box1Title.text!,
-                                                 font: box1Title.font!,
-                                                 numberOfLines: box1Title.numberOfLines,
+        let titleFrame = objective.frameForLabel(text: title1.text!,
+                                                 font: title1.font!,
+                                                 numberOfLines: title1.numberOfLines,
                                                  width: Sizing.Overview.boxPaddedWidth)
-        box1TitleHeight.constant = titleFrame.height
+        title1Height.constant = titleFrame.height
         layoutIfNeeded()
     }
     
