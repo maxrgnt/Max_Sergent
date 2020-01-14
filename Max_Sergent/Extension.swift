@@ -34,9 +34,9 @@ extension Date {
 }
 
 extension UILabel {
-    func frameForLabel(text:String, font:UIFont, numberOfLines: Int) -> (width: CGFloat, height: CGFloat) {
+    func frameForLabel(text:String, font:UIFont, numberOfLines: Int, width: CGFloat? = CGFloat.greatestFiniteMagnitude) -> (width: CGFloat, height: CGFloat) {
         let max = CGFloat.greatestFiniteMagnitude
-        let label:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: max, height: max))
+        let label:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width!, height: max))
         label.numberOfLines = numberOfLines
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.font = font

@@ -50,9 +50,22 @@ struct Sizing {
         static let radius: CGFloat = min(0.094 * min(width, height), 39.0)
     }
     
+    struct Overview {
+        static let height = Sizing.height - Header.expandedHeight - Footer.height - padding
+        static var box1Height = objectiveHeight + Header.nameBottom
+        static let boxWidth = paddedWidth
+        static let boxRadius: CGFloat = min(0.047 * min(width, height), 39.0)
+        static var objectiveHeight = height * 0.6 {
+            didSet {
+                box1Height = objectiveHeight + Header.nameBottom
+            }
+        }
+        static let boxPaddedWidth = boxWidth - Header.nameBottom
+    }
+    
     struct Footer {
         static let height = Sizing.height * Ratio.footer - padding
-        static let radius: CGFloat = 0.188 * min(width, height)
+        static let radius: CGFloat = 0.047 * width// min(width, height) // 0.188
     }
     
     struct Menu {

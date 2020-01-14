@@ -18,6 +18,11 @@ struct Constants {
         static let gradientEnd: NSNumber = 0.85
     }
     
+    struct Overview {
+        static let box1Title = "Objective"
+        static let objective = "Using a hobby of designing and developing iOS applications to join an organization that understands the value of continued learning, intentional design, and selfless collaboration."
+    }
+    
     struct Menu {
         static let pages = ["Overview","Timeline","Details"]
     }

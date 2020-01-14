@@ -36,6 +36,11 @@ struct Fonts {
         
     }
     
+    struct Overview {
+        static let boxTitle = UIFont(name: openSansSemiBold, size: Size.primaryText)
+        static let objective = UIFont(name: openSans, size: Size.secondaryText)
+    }
+    
     struct Footer {
         
     }

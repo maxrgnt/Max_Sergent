@@ -14,6 +14,7 @@ struct Colors {
     /* Alter color scheme here  */
     static let primaryBackground   = UIColor.black
     static let secondaryBackground = UIColor.darkGray
+    static let tertiaryBackground = UIColor.gray
     static let primaryFontColor    = UIColor.white
     static let secondaryFontColor  = UIColor.lightGray
     static let tertiaryFontColor   = UIColor.black
@@ -32,6 +33,12 @@ struct Colors {
     
     struct Scroll {
         static let background = primaryBackground
+    }
+    
+    struct Overview {
+        static let box = tertiaryBackground
+        static let boxTitle = primaryFontColor
+        static let objectiveText = primaryFontColor
     }
     
     struct Footer {
