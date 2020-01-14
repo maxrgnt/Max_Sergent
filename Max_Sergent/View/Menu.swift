@@ -20,14 +20,14 @@ class Menu: UIView {
     var customDelegate: MenuDelegate!
     // Constraints
     // Objects
-    var text1 = UILabel()
-    var text2 = UILabel()
-    var text3 = UILabel()
+    var label1 = UILabel()
+    var label2 = UILabel()
+    var label3 = UILabel()
     var icon1 = UIImageView()
     var icon2 = UIImageView()
     var icon3 = UIImageView()
-    lazy var pages: [AnyObject] = [text1, icon1, text2, icon2, text3, icon3]
-    lazy var labels: [UILabel] = [text1, text2, text3]
+    lazy var pages: [AnyObject] = [label1, icon1, label2, icon2, label3, icon3]
+    lazy var labels: [UILabel] = [label1, label2, label3]
     lazy var icons: [UIImageView] = [icon1, icon2, icon3]
     // Default to first page
     var currentPage = 0
@@ -46,18 +46,18 @@ class Menu: UIView {
     
     func setup(closure: () -> Void) {
         
-        for (i, text) in [text1, text2, text3].enumerated() {
-            addSubview(text)
-            text.textAlignment = .center
-            text.textColor     = Colors.Menu.text
-            text.tag           = i
-            text.alpha         = 0.5
-            text.font          = Fonts.Menu.normal
-            text.isEnabled     = false
-            text.text          = Constants.Menu.pages[i]
+        for (i, label) in labels.enumerated() {
+            addSubview(label)
+            label.textAlignment = .center
+            label.textColor     = Colors.Menu.text
+            label.tag           = i
+            label.alpha         = 0.5
+            label.font          = Fonts.Menu.normal
+            label.isEnabled     = false
+            label.text          = Constants.Menu.pages[i]
         }
         
-        for (i, icon) in [icon1, icon2, icon3].enumerated() {
+        for (i, icon) in icons.enumerated() {
             addSubview(icon)
             icon.tag                 = i
             icon.alpha               = 0.5
@@ -67,8 +67,9 @@ class Menu: UIView {
             icon.image               = UIImage(named: Constants.Menu.pages[i])
         }
         
-        text1.alpha = 1.0
-        icon1.alpha = 1.0
+        labels[0].alpha = 1.0
+        labels[0].font  = Fonts.Menu.selected
+        icons[0].alpha = 1.0
         
         // Declare pan gesture that will power menu bar
         let pan = UIPanGestureRecognizer(target: self, action: #selector(reactToPan(_:)))

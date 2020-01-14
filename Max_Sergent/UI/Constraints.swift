@@ -111,40 +111,40 @@ extension Menu {
     
     func constraints() {
         icon1.translatesAutoresizingMaskIntoConstraints                                                                 = false
-        icon1.centerXAnchor.constraint(equalTo: text1.centerXAnchor).isActive                                           = true
+        icon1.centerXAnchor.constraint(equalTo: label1.centerXAnchor).isActive                                           = true
         icon1.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.padding/2).isActive                             = true
         icon1.widthAnchor.constraint(equalToConstant: Sizing.Menu.iconDiameter).isActive                                = true
         icon1.heightAnchor.constraint(equalToConstant: Sizing.Menu.iconDiameter).isActive                               = true
         
-        text1.translatesAutoresizingMaskIntoConstraints                                                                 = false
-        text1.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Sizing.padding/2).isActive                     = true
-        text1.topAnchor.constraint(equalTo: icon1.bottomAnchor).isActive                                                = true
-        text1.widthAnchor.constraint(equalToConstant: Sizing.Menu.textWidth).isActive                                   = true
-        text1.heightAnchor.constraint(equalToConstant: Sizing.Menu.textHeight).isActive                                 = true
+        label1.translatesAutoresizingMaskIntoConstraints                                                                 = false
+        label1.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Sizing.padding/2).isActive                     = true
+        label1.topAnchor.constraint(equalTo: icon1.bottomAnchor).isActive                                                = true
+        label1.widthAnchor.constraint(equalToConstant: Sizing.Menu.textWidth).isActive                                   = true
+        label1.heightAnchor.constraint(equalToConstant: Sizing.Menu.textHeight).isActive                                 = true
         
         icon2.translatesAutoresizingMaskIntoConstraints                                                                 = false
-        icon2.centerXAnchor.constraint(equalTo: text2.centerXAnchor).isActive                                           = true
+        icon2.centerXAnchor.constraint(equalTo: label2.centerXAnchor).isActive                                           = true
         icon2.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.padding/2).isActive                             = true
         icon2.widthAnchor.constraint(equalToConstant: Sizing.Menu.iconDiameter).isActive                                = true
         icon2.heightAnchor.constraint(equalToConstant: Sizing.Menu.iconDiameter).isActive                               = true
         
-        text2.translatesAutoresizingMaskIntoConstraints                                                                 = false
-        text2.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                 = true
-        text2.topAnchor.constraint(equalTo: icon2.bottomAnchor).isActive                                                = true
-        text2.widthAnchor.constraint(equalToConstant: Sizing.Menu.textWidth).isActive                                   = true
-        text2.heightAnchor.constraint(equalToConstant: Sizing.Menu.textHeight).isActive                                 = true
+        label2.translatesAutoresizingMaskIntoConstraints                                                                 = false
+        label2.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                 = true
+        label2.topAnchor.constraint(equalTo: icon2.bottomAnchor).isActive                                                = true
+        label2.widthAnchor.constraint(equalToConstant: Sizing.Menu.textWidth).isActive                                   = true
+        label2.heightAnchor.constraint(equalToConstant: Sizing.Menu.textHeight).isActive                                 = true
         
         icon3.translatesAutoresizingMaskIntoConstraints                                                                 = false
-        icon3.centerXAnchor.constraint(equalTo: text3.centerXAnchor).isActive                                           = true
+        icon3.centerXAnchor.constraint(equalTo: label3.centerXAnchor).isActive                                           = true
         icon3.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.padding/2).isActive                             = true
         icon3.widthAnchor.constraint(equalToConstant: Sizing.Menu.iconDiameter).isActive                                = true
         icon3.heightAnchor.constraint(equalToConstant: Sizing.Menu.iconDiameter).isActive                               = true
     
-        text3.translatesAutoresizingMaskIntoConstraints                                                                 = false
-        text3.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Sizing.padding/2).isActive                  = true
-        text3.topAnchor.constraint(equalTo: icon3.bottomAnchor).isActive                                                = true
-        text3.widthAnchor.constraint(equalToConstant: Sizing.Menu.textWidth).isActive                                   = true
-        text3.heightAnchor.constraint(equalToConstant: Sizing.Menu.textHeight).isActive                                 = true
+        label3.translatesAutoresizingMaskIntoConstraints                                                                 = false
+        label3.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Sizing.padding/2).isActive                  = true
+        label3.topAnchor.constraint(equalTo: icon3.bottomAnchor).isActive                                                = true
+        label3.widthAnchor.constraint(equalToConstant: Sizing.Menu.textWidth).isActive                                   = true
+        label3.heightAnchor.constraint(equalToConstant: Sizing.Menu.textHeight).isActive                                 = true
     }
     
 }
