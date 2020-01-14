@@ -11,6 +11,7 @@ import UIKit
 
 class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
     
+    let watermark = UILabel()
     let header = Header()
     let scroll = Scroll()
     let footer = Footer()
@@ -30,6 +31,17 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
 
     //MARK: Settings
     func setup(closure: () -> Void) {
+        
+        view.addSubview(watermark)
+        watermark.alpha            = 0.7
+        watermark.numberOfLines    = 2
+        watermark.textAlignment    = .center
+        watermark.backgroundColor  = .clear
+        watermark.lineBreakMode    = .byClipping
+        watermark.font             = Fonts.Header.name
+        watermark.textColor        = Colors.ViewController.watermark
+        watermark.text             = Constants.watermark
+        
         view.addSubview(header)
         header.setup() {
             header.constraints()

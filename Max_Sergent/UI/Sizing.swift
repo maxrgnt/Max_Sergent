@@ -17,10 +17,12 @@ struct Sizing {
     static let statusBar   = keyWindow.windowScene!.statusBarManager!.statusBarFrame
     static let padding     = statusBar.height/2
     static let paddedWidth = width-statusBar.height
+    static let watermarkHeight = (height * Ratio.watermark) - padding
     
     struct Ratio {
         static let expandedHeader:  CGFloat = 0.42
         static let minimizedHeader: CGFloat = 0.10
+        static let watermark:       CGFloat = 1-expandedHeader-footer
         static var scroll:          CGFloat = 1-minimizedHeader {
             didSet {
                 Scroll.height = Sizing.height * scroll

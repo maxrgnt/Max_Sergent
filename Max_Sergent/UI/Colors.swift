@@ -19,10 +19,12 @@ struct Colors {
     static let secondaryFontColor  = UIColor.lightGray
     static let tertiaryFontColor   = UIColor.black
     
+    
     static let footerEffectStyle   = UIBlurEffect.Style.dark
     /****************************/
     struct ViewController {
         static let background = primaryBackground
+        static let watermark = secondaryBackground
     }
     
     struct Header {

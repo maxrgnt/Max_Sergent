@@ -11,6 +11,8 @@ import UIKit
 
 struct Constants {
     
+    static let watermark = "max\nrgnt"
+    
     struct Header {
         static let photo = "profile.jpg"
         static let name = "Max\nSergent"

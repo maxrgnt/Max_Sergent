@@ -13,6 +13,12 @@ import UIKit
 extension ViewController {
     
     func constraints() {
+        watermark.translatesAutoresizingMaskIntoConstraints                                                             = false
+        watermark.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive                                   = true
+        watermark.topAnchor.constraint(equalTo: header.bottomAnchor).isActive                                           = true
+        watermark.widthAnchor.constraint(equalToConstant: Sizing.width).isActive                                        = true
+        watermark.heightAnchor.constraint(equalToConstant: Sizing.watermarkHeight).isActive                               = true
+        
         header.height = header.heightAnchor.constraint(equalToConstant: Sizing.Header.expandedHeight)
         header.translatesAutoresizingMaskIntoConstraints                                                                = false
         header.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive                                      = true
@@ -83,88 +89,6 @@ extension Scroll {
 
 //MARK: Overview
 extension Overview {
-    
-    func constraints() {
-        let verticalPadding = Sizing.Overview.padding/2
-        let horizontalPadding = Sizing.Overview.padding/2
-        
-        title1Height = title1.heightAnchor.constraint(equalToConstant: 0.0)
-        title1.translatesAutoresizingMaskIntoConstraints                                                                = false
-        title1.centerXAnchor.constraint(equalTo: box1.centerXAnchor).isActive                                           = true
-        title1.topAnchor.constraint(equalTo: topAnchor, constant: verticalPadding*2).isActive                           = true
-        title1.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxPaddedWidth).isActive                         = true
-        title1Height.isActive                                                                                           = true
-        
-        box1Height = box1.heightAnchor.constraint(equalToConstant: Sizing.Overview.box1Height)
-        box1.translatesAutoresizingMaskIntoConstraints                                                                  = false
-        box1.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                  = true
-        box1.topAnchor.constraint(equalTo: title1.bottomAnchor, constant: verticalPadding).isActive                     = true
-        box1.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxWidth).isActive                                 = true
-        box1Height.isActive                                                                                             = true
-        
-        objectiveHeight = objective.heightAnchor.constraint(equalToConstant: Sizing.Overview.objectiveHeight)
-        objective.translatesAutoresizingMaskIntoConstraints                                                             = false
-        objective.centerXAnchor.constraint(equalTo: box1.centerXAnchor).isActive                                        = true
-        objective.centerYAnchor.constraint(equalTo: box1.centerYAnchor).isActive                                        = true
-        objective.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxPaddedWidth).isActive                      = true
-        objectiveHeight.isActive                                                                                        = true
-        
-        title2Height = title2.heightAnchor.constraint(equalToConstant: 0.0)
-        title2.translatesAutoresizingMaskIntoConstraints                                                                = false
-        title2.centerXAnchor.constraint(equalTo: box2.centerXAnchor).isActive                                           = true
-        title2.topAnchor.constraint(equalTo: box1.bottomAnchor, constant: verticalPadding).isActive                     = true
-        title2.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxPaddedWidth).isActive                         = true
-        title2Height.isActive                                                                                           = true
-        
-        box2Height = box2.heightAnchor.constraint(equalToConstant: Sizing.Overview.box2Height)
-        box2.translatesAutoresizingMaskIntoConstraints                                                                  = false
-        box2.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                  = true
-        box2.topAnchor.constraint(equalTo: title2.bottomAnchor, constant: verticalPadding).isActive                     = true
-        box2.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxWidth).isActive                                 = true
-        box2Height.isActive                                                                                             = true
-        
-        emailIconHeight = emailIcon.heightAnchor.constraint(equalToConstant: Sizing.Overview.contactHeight)
-        emailIconWidth = emailIcon.widthAnchor.constraint(equalToConstant: Sizing.Overview.contactHeight)
-        emailIcon.translatesAutoresizingMaskIntoConstraints                                                             = false
-        emailIcon.leadingAnchor.constraint(equalTo: box2.leadingAnchor, constant: horizontalPadding).isActive           = true
-        emailIcon.centerYAnchor.constraint(equalTo: box2.centerYAnchor).isActive                                        = true
-        emailIconWidth.isActive                                                                                         = true
-        emailIconHeight.isActive                                                                                        = true
-        
-        emailHeight = emailText.heightAnchor.constraint(equalToConstant: Sizing.Overview.contactHeight)
-        emailText.translatesAutoresizingMaskIntoConstraints                                                             = false
-        emailText.leadingAnchor.constraint(equalTo: emailIcon.trailingAnchor, constant: horizontalPadding).isActive     = true
-        emailText.centerYAnchor.constraint(equalTo: box2.centerYAnchor).isActive                                        = true
-        emailText.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxPaddedWidth).isActive                      = true
-        emailHeight.isActive                                                                                            = true
-        
-        box3Height = box3.heightAnchor.constraint(equalToConstant: Sizing.Overview.box3Height)
-        box3.translatesAutoresizingMaskIntoConstraints                                                                  = false
-        box3.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                  = true
-        box3.topAnchor.constraint(equalTo: box2.bottomAnchor, constant: verticalPadding).isActive                       = true
-        box3.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxWidth).isActive                                 = true
-        box3Height.isActive                                                                                             = true
-        
-        locationIconHeight = locationIcon.heightAnchor.constraint(equalToConstant: Sizing.Overview.contactHeight)
-        locationIconWidth = locationIcon.widthAnchor.constraint(equalToConstant: Sizing.Overview.contactHeight)
-        locationIcon.translatesAutoresizingMaskIntoConstraints                                                          = false
-        locationIcon.leadingAnchor.constraint(equalTo: box3.leadingAnchor, constant: horizontalPadding).isActive        = true
-        locationIcon.centerYAnchor.constraint(equalTo: box3.centerYAnchor).isActive                                     = true
-        locationIconWidth.isActive                                                                                      = true
-        locationIconHeight.isActive                                                                                     = true
-        
-        locationHeight = locationText.heightAnchor.constraint(equalToConstant: Sizing.Overview.contactHeight)
-        locationText.translatesAutoresizingMaskIntoConstraints                                                          = false
-        locationText.leadingAnchor.constraint(equalTo: locationIcon.trailingAnchor, constant: horizontalPadding).isActive  = true
-        locationText.centerYAnchor.constraint(equalTo: box3.centerYAnchor).isActive                                     = true
-        locationText.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxPaddedWidth).isActive                   = true
-        locationHeight.isActive                                                                                         = true
-    }
-    
-}
-
-//MARK: Overview2
-extension Overview2 {
     
     func constraints() {
         table.translatesAutoresizingMaskIntoConstraints                                                                 = false

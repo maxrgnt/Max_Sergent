@@ -21,7 +21,7 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     var customDelegate: ScrollDelegate!
     // Constraints
     // Objects
-    var page1 = Overview2()
+    var page1 = Overview()
     var page2 = UIView()
     var page3 = UIView()
     lazy var pages = [page1,page2,page3]
