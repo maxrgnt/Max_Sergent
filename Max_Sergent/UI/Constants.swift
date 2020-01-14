@@ -19,10 +19,17 @@ struct Constants {
     }
     
     struct Overview {
+        static let cellReuseId = "OverviewCell"
         static let titles = ["Objective", "Contact"]
         static let objective = "Join an organization that understands the value of continued learning, intentional design, and selfless collaboration using skills acquired through the design and development of perrsonal iOS applications."
         static let contactIcons = ["email","location"]
         static let contactText = ["maxrgnt@umich.edu","Washington, D.C."]
+        
+        static let clusters = [
+            (title: "Objective", boxes: [(icon: "", content: objective)]),
+            (title: "Contact", boxes: [(icon: contactIcons[0], content: contactText[0]),
+                                       (icon: contactIcons[1], content: contactText[1])]),
+        ]
     }
     
     struct Menu {

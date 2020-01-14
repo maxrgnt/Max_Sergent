@@ -28,6 +28,10 @@ struct Data {
         }
     }
     static var schoolNameKeys: [String] = []
+    
+    static var tempO: [(title: String, boxes: [(icon: String, content: String)])] = [(title: "Contact",
+                                                                                      boxes: [(icon: "email",
+                                                                                               content: "maxrgnt@umich.edu")])]
 
 //    func deleteImages() {
 //        let fileManager = FileManager.default

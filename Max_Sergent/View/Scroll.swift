@@ -21,7 +21,7 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     var customDelegate: ScrollDelegate!
     // Constraints
     // Objects
-    var page1 = Overview()
+    var page1 = Overview2()
     var page2 = UIView()
     var page3 = UIView()
     lazy var pages = [page1,page2,page3]
@@ -60,7 +60,6 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         page1.backgroundColor = .darkGray
         page1.setup() {
             page1.constraints()
-            page1.resetObjectiveHeight()
         }
         addSubview(page2)
         page2.backgroundColor = .darkGray

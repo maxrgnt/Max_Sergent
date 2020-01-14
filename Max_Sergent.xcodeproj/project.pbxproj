@@ -30,6 +30,10 @@
 		66E72F7023CD1EA5004F3C43 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F6F23CD1EA5004F3C43 /* Constants.swift */; };
 		66E72F7223CD6ADF004F3C43 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F7123CD6ADF004F3C43 /* Menu.swift */; };
 		66E72F7423CE095F004F3C43 /* Overview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F7323CE095F004F3C43 /* Overview.swift */; };
+		66E72F7823CE4B1F004F3C43 /* OverviewTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F7723CE4B1F004F3C43 /* OverviewTable.swift */; };
+		66E72F7A23CE4C0F004F3C43 /* OverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F7923CE4C0F004F3C43 /* OverviewCell.swift */; };
+		66E72F7C23CE4FBF004F3C43 /* OverviewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F7B23CE4FBF004F3C43 /* OverviewSection.swift */; };
+		66E72F7E23CE6815004F3C43 /* Overview2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F7D23CE6815004F3C43 /* Overview2.swift */; };
 		66FD8A79239AD18E00B90C69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A78239AD18E00B90C69 /* AppDelegate.swift */; };
 		66FD8A7B239AD18E00B90C69 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */; };
 		66FD8A7E239AD18E00B90C69 /* Max_Sergent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A7C239AD18E00B90C69 /* Max_Sergent.xcdatamodeld */; };
@@ -87,6 +91,10 @@
 		66E72F6F23CD1EA5004F3C43 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		66E72F7123CD6ADF004F3C43 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		66E72F7323CE095F004F3C43 /* Overview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overview.swift; sourceTree = "<group>"; };
+		66E72F7723CE4B1F004F3C43 /* OverviewTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewTable.swift; sourceTree = "<group>"; };
+		66E72F7923CE4C0F004F3C43 /* OverviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewCell.swift; sourceTree = "<group>"; };
+		66E72F7B23CE4FBF004F3C43 /* OverviewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewSection.swift; sourceTree = "<group>"; };
+		66E72F7D23CE6815004F3C43 /* Overview2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overview2.swift; sourceTree = "<group>"; };
 		66FD8A75239AD18E00B90C69 /* Max Sergent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Max Sergent.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FD8A78239AD18E00B90C69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +168,10 @@
 				66E72F6023CD1323004F3C43 /* Header.swift */,
 				66E72F6223CD133F004F3C43 /* Scroll.swift */,
 				66E72F7323CE095F004F3C43 /* Overview.swift */,
+				66E72F7D23CE6815004F3C43 /* Overview2.swift */,
+				66E72F7723CE4B1F004F3C43 /* OverviewTable.swift */,
+				66E72F7B23CE4FBF004F3C43 /* OverviewSection.swift */,
+				66E72F7923CE4C0F004F3C43 /* OverviewCell.swift */,
 				66E72F6423CD135A004F3C43 /* Footer.swift */,
 				66E72F7123CD6ADF004F3C43 /* Menu.swift */,
 			);
@@ -543,6 +555,8 @@
 				66E72F6A23CD17CF004F3C43 /* Sizing.swift in Sources */,
 				66E72F7223CD6ADF004F3C43 /* Menu.swift in Sources */,
 				66E72F6523CD135A004F3C43 /* Footer.swift in Sources */,
+				66E72F7823CE4B1F004F3C43 /* OverviewTable.swift in Sources */,
+				66E72F7A23CE4C0F004F3C43 /* OverviewCell.swift in Sources */,
 				66C4C5FE23ABDF1C00DEDF6D /* Extension.swift in Sources */,
 				66DCB72823BA387F007AAF78 /* Data_Firebase.swift in Sources */,
 				66FD8A7E239AD18E00B90C69 /* Max_Sergent.xcdatamodeld in Sources */,
@@ -550,7 +564,9 @@
 				66E72F6123CD1323004F3C43 /* Header.swift in Sources */,
 				66E72F6823CD1382004F3C43 /* Constraints.swift in Sources */,
 				66DCB72A23BA54D5007AAF78 /* Reachability.swift in Sources */,
+				66E72F7C23CE4FBF004F3C43 /* OverviewSection.swift in Sources */,
 				66C4C60823B14BB300DEDF6D /* Data.swift in Sources */,
+				66E72F7E23CE6815004F3C43 /* Overview2.swift in Sources */,
 				66FD8A7B239AD18E00B90C69 /* SceneDelegate.swift in Sources */,
 				66DCB72623BA3872007AAF78 /* Data_CoreData.swift in Sources */,
 			);

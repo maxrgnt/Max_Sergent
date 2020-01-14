@@ -11,6 +11,20 @@ import UIKit
 
 struct Fonts {
     
+    static func calculateLabelHeight(for text: String,
+                                     withFont font: UIFont,
+                                     withWidth width: CGFloat,
+                                     numberOfLines: Int) -> CGFloat {
+        let max = CGFloat.greatestFiniteMagnitude
+        let label: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: max))
+        label.numberOfLines = numberOfLines
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = font
+        label.text = text
+        label.sizeToFit()
+        return label.frame.height
+    }
+    
     static let arvo              = "Arvo"
     static let arvoBold          = "Arvo-Bold"
     static let openSans          = "OpenSans-Regular"
@@ -37,8 +51,8 @@ struct Fonts {
     }
     
     struct Overview {
-        static let boxTitle = UIFont(name: openSansSemiBold, size: Size.primaryText)
-        static let boxContent = UIFont(name: openSans, size: Size.secondaryText)
+        static let title = UIFont(name: openSansSemiBold, size: Size.primaryText)
+        static let content = UIFont(name: openSans, size: Size.secondaryText)
     }
     
     struct Footer {

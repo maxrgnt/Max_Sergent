@@ -69,8 +69,7 @@ struct Sizing {
                 box2Height = contactHeight + padding
                 box3Height = contactHeight + padding
             }
-        }
-
+        }        
     }
     
     struct Footer {

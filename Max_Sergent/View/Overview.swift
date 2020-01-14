@@ -78,7 +78,7 @@ class Overview: UIView {
             title.textAlignment   = .left
             title.backgroundColor = .clear
             title.lineBreakMode   = .byWordWrapping
-            title.font            = Fonts.Overview.boxTitle
+            title.font            = Fonts.Overview.title
             title.text            = Constants.Overview.titles[i]
             title.textColor       = Colors.Overview.boxTitle
         }
@@ -88,7 +88,7 @@ class Overview: UIView {
         objective.textAlignment   = .left
         objective.backgroundColor = .clear
         objective.lineBreakMode   = .byWordWrapping
-        objective.font            = Fonts.Overview.boxContent
+        objective.font            = Fonts.Overview.content
         objective.text            = Constants.Overview.objective
         objective.textColor       = Colors.Overview.boxContent
         
@@ -103,7 +103,7 @@ class Overview: UIView {
         emailText.textAlignment   = .left
         emailText.backgroundColor = .clear
         emailText.lineBreakMode   = .byWordWrapping
-        emailText.font            = Fonts.Overview.boxContent
+        emailText.font            = Fonts.Overview.content
         emailText.text            = Constants.Overview.contactText[0]
         emailText.textColor       = Colors.Overview.boxContent
         
@@ -118,7 +118,7 @@ class Overview: UIView {
         locationText.textAlignment   = .left
         locationText.backgroundColor = .clear
         locationText.lineBreakMode   = .byWordWrapping
-        locationText.font            = Fonts.Overview.boxContent
+        locationText.font            = Fonts.Overview.content
         locationText.text            = Constants.Overview.contactText[1]
         locationText.textColor       = Colors.Overview.boxContent
         
