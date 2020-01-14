@@ -104,10 +104,11 @@ extension Overview {
 extension OverviewSection {
     
     func constraints() {
+        titleTop = title.topAnchor.constraint(equalTo: topAnchor, constant: 0.0)
         titleHeight = title.heightAnchor.constraint(equalToConstant: 0.0)
         title.translatesAutoresizingMaskIntoConstraints                                                                 = false
         title.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                 = true
-        title.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                                 = true
+        titleTop.isActive                                                                                               = true
         title.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxPaddedWidth).isActive                          = true
         titleHeight.isActive                                                                                            = true
     }

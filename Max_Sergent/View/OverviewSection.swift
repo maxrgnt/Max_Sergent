@@ -13,6 +13,7 @@ class OverviewSection: UIView {
     //MARK: Definitions
     // Delegates
     // Constraints
+    var titleTop   :   NSLayoutConstraint!
     var titleHeight:   NSLayoutConstraint!
     // Objects
     var title   = UILabel()
@@ -49,8 +50,9 @@ class OverviewSection: UIView {
         return titleFrame.height
     }
     
-    func setTitleHeight() {
-        titleHeight.constant = calcTitleHeight()
+    func resize(forSection section: Int) {
+        titleTop.constant = (section == 0) ? Sizing.padding/2 : 0.0
+        titleHeight.constant = (section == 0) ? calcTitleHeight() + Sizing.padding/2 : calcTitleHeight()
         layoutIfNeeded()
     }
     

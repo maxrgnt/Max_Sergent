@@ -21,7 +21,7 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     var customDelegate: ScrollDelegate!
     // Constraints
     // Objects
-    var page1 = Overview()
+    var page1 = OverviewTable()
     var page2 = UIView()
     var page3 = UIView()
     lazy var pages = [page1,page2,page3]
@@ -58,9 +58,9 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         addSubview(page1)
         page1.roundCorners(corners: [.topLeft], radius: Sizing.Scroll.radius)
         page1.backgroundColor = .darkGray
-        page1.setup() {
-            page1.constraints()
-        }
+        page1.setup()// {
+//            page1.constraints()
+//        }
         addSubview(page2)
         page2.backgroundColor = .darkGray
 //        page2.roundCorners(corners: [.topLeft,.topRight], radius: Sizing.Scroll.radius)

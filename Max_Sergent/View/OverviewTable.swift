@@ -35,7 +35,6 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     //MARK: Setup
     func setup() {
         
-        backgroundColor = .clear
         register(OverviewCell.self, forCellReuseIdentifier: Constants.Overview.cellReuseId)
         delegate                        = self
         dataSource                      = self
@@ -76,7 +75,7 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
             tempSection.constraints()
         }
         tempSection.title.text = data[section].title
-        tempSection.setTitleHeight()
+        tempSection.resize(forSection: section)
         
         return tempSection
     }
@@ -87,7 +86,9 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
                                                         withFont: Fonts.Overview.title!,
                                                         withWidth: Sizing.Overview.boxPaddedWidth,
                                                         numberOfLines: 1)
-        let heightForSection = heightForLabel + Sizing.Overview.padding
+        let heightForSection = (section == 0)
+            ? heightForLabel + Sizing.Overview.padding
+            : heightForLabel //+ Sizing.Overview.padding/2
         return heightForSection
     }
     
