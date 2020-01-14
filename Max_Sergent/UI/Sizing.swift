@@ -26,7 +26,7 @@ struct Sizing {
                 Scroll.height = Sizing.height * scroll
             }
         }
-        static let footer:          CGFloat = 0.15
+        static let footer:          CGFloat = 0.10
     }
     
     struct Header {
@@ -47,12 +47,12 @@ struct Sizing {
     struct Scroll {
         static var height = Sizing.height * Ratio.scroll
         static var limit = Header.nameHeight + Header.nameBottom
-        static let radius = 0.094 * min(width, height)
+        static let radius: CGFloat = min(0.094 * min(width, height), 39.0)
     }
     
     struct Footer {
         static let height = Sizing.height * Ratio.footer - padding
-        static let radius = 0.188 * min(width, height)
+        static let radius: CGFloat = 0.188 * min(width, height)
     }
     
     struct Menu {

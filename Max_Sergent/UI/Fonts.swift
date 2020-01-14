@@ -41,8 +41,8 @@ struct Fonts {
     }
     
     struct Menu {
-        static let selected = UIFont(name: openSansBold, size: Size.button)
-        static let normal   = UIFont(name: openSans,     size: Size.button)
+        static let selected = UIFont(name: openSansBold, size: Size.secondaryText)
+        static let normal   = UIFont(name: openSans,     size: Size.secondaryText)
     }
     
 }

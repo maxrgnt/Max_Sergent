@@ -69,7 +69,8 @@ class Header: UIView {
         gradient.colors    = [Colors.Header.gradient.withAlphaComponent(0.0).cgColor,
                               Colors.Header.gradient.withAlphaComponent(1.0).cgColor]
         // Set locations of where gradient will transition
-        gradient.locations = [0.0,NSNumber(value: Constants.Header.gradientLocation)]
+        gradient.locations = [Constants.Header.gradientStart,
+                              Constants.Header.gradientEnd]
         // Add gradient as bottom layer in sublayer array
         self.layer.insertSublayer(gradient, at: 1)
     }
