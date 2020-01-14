@@ -51,6 +51,18 @@ class Overview: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // Registered with first touch on menu bar
+        guard let touch = touches.first else {
+            return
+        }
+        let touchPosition = touch.location(in: self)
+        box2.frame.contains(touchPosition) ? print("box2") : nil
+        box3.frame.contains(touchPosition) ? print("box3") : nil
+        // If just a tap, change page as if button
+//        setNewPage(atPoint: touchPosition)
+    }
+    
     //MARK: Settings
     func setup(closure: () -> Void) {
         
