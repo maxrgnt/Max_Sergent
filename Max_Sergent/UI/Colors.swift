@@ -38,7 +38,7 @@ struct Colors {
     struct Overview {
         static let box = tertiaryBackground
         static let boxTitle = primaryFontColor
-        static let objectiveText = primaryFontColor
+        static let boxContent = primaryFontColor
     }
     
     struct Footer {

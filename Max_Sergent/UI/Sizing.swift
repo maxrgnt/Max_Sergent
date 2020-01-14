@@ -51,16 +51,26 @@ struct Sizing {
     }
     
     struct Overview {
+        static let padding = Header.nameBottom
         static let height = Sizing.height - Header.expandedHeight - Footer.height - padding
-        static var box1Height = objectiveHeight + Header.nameBottom
         static let boxWidth = paddedWidth
         static let boxRadius: CGFloat = min(0.047 * min(width, height), 39.0)
+        static let boxPaddedWidth = boxWidth - padding
+        static var box1Height = objectiveHeight + padding
         static var objectiveHeight = height * 0.6 {
             didSet {
-                box1Height = objectiveHeight + Header.nameBottom
+                box1Height = objectiveHeight + padding
             }
         }
-        static let boxPaddedWidth = boxWidth - Header.nameBottom
+        static var box2Height: CGFloat = contactHeight + padding
+        static var box3Height: CGFloat = contactHeight + padding
+        static var contactHeight: CGFloat = 0.0 {
+            didSet {
+                box2Height = contactHeight + padding
+                box3Height = contactHeight + padding
+            }
+        }
+
     }
     
     struct Footer {

@@ -20,7 +20,9 @@ struct Constants {
     
     struct Overview {
         static let titles = ["Objective", "Contact"]
-        static let objective = "Join an organization that understands the value of continued learning, intentional design, and selfless collaboration using skills acquired through the design and development of iOS applications in my spare time."
+        static let objective = "Join an organization that understands the value of continued learning, intentional design, and selfless collaboration using skills acquired through the design and development of perrsonal iOS applications."
+        static let contactIcons = ["email","location"]
+        static let contactText = ["maxrgnt@umich.edu","Washington, D.C."]
     }
     
     struct Menu {
