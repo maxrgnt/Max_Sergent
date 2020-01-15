@@ -75,7 +75,8 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
             tempSection.constraints()
         }
         tempSection.title.text = data[section].title
-        tempSection.resize(forSection: section)
+        tempSection.titleCenterY.constant = (section == 0) ? Sizing.padding/2 : 0.0
+        tempSection.resize()
         
         return tempSection
     }
@@ -86,9 +87,10 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
                                                         withFont: Fonts.Overview.title!,
                                                         withWidth: Sizing.Overview.boxPaddedWidth,
                                                         numberOfLines: 1)
+        
         let heightForSection = (section == 0)
             ? heightForLabel + Sizing.Overview.padding
-            : heightForLabel //+ Sizing.Overview.padding/2
+            : heightForLabel
         return heightForSection
     }
     
@@ -106,7 +108,8 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
                                                         withFont: Fonts.Overview.content!,
                                                         withWidth: Sizing.Overview.boxPaddedWidth,
                                                         numberOfLines: 0)
-        let heightForRow = heightForLabel + Sizing.Overview.padding*2
+        let multiplier: CGFloat = (indexPath.row == 0) ? 2.0 : 1.5
+        let heightForRow = heightForLabel + (Sizing.Overview.padding * multiplier)
         return heightForRow
     }
     

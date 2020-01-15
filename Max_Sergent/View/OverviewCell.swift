@@ -80,7 +80,6 @@ class OverviewCell: UITableViewCell {
         iconWidth.constant      = (includeIcon) ? calcHeight : 0.0
         contentLeading.constant = (includeIcon) ? Sizing.Overview.padding/2 : 0.0
         boxHeight.constant      = calcHeight + Sizing.Overview.padding
-        //height.constant        = calcHeight + (Sizing.Overview.padding * 2)
         layoutIfNeeded()
     }
     

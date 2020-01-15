@@ -87,28 +87,15 @@ extension Scroll {
     
 }
 
-//MARK: Overview
-extension Overview {
-    
-    func constraints() {
-        table.translatesAutoresizingMaskIntoConstraints                                                                 = false
-        table.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                 = true
-        table.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.Overview.padding/2).isActive                    = true
-        table.widthAnchor.constraint(equalToConstant: Sizing.paddedWidth).isActive                                      = true
-        table.heightAnchor.constraint(equalToConstant: Sizing.Overview.height).isActive                                 = true
-    }
-    
-}
-
 //MARK: OverviewSection
 extension OverviewSection {
     
     func constraints() {
-        titleTop = title.topAnchor.constraint(equalTo: topAnchor, constant: 0.0)
+        titleCenterY = title.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0.0)
         titleHeight = title.heightAnchor.constraint(equalToConstant: 0.0)
         title.translatesAutoresizingMaskIntoConstraints                                                                 = false
         title.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                 = true
-        titleTop.isActive                                                                                               = true
+        titleCenterY.isActive                                                                                           = true
         title.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxPaddedWidth).isActive                          = true
         titleHeight.isActive                                                                                            = true
     }
