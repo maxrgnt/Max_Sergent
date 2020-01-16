@@ -48,6 +48,12 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         showsVerticalScrollIndicator    = false
         showsHorizontalScrollIndicator  = false
         
+        refreshControl = UIRefreshControl()
+        refreshControl?.backgroundColor = Colors.Timeline.background
+        refreshControl?.tintColor = .white
+        refreshControl?.attributedTitle = NSAttributedString(string: "What am I, psychic?")
+        refreshControl?.addTarget(self, action: #selector(findNewJob), for: .valueChanged)
+        
     }
     
     // MARK: TableView Delegate
@@ -126,5 +132,23 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         return true
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print(contentOffset.x)
+//        contentOffset.x = (contentOffset.x < 0.0) ? 0.0 : contentOffset.x
+    }
+
+    @objc func findNewJob() {
+        //isUserInteractionEnabled = false
+        print("searching...")
+
+        self.perform(#selector(finishRefreshing), with: nil, afterDelay: 3.0)
+    }
+    
+    @objc func finishRefreshing() {
+        refreshControl!.endRefreshing()
+        //isUserInteractionEnabled = true
+    }
+    
 }
+
 
