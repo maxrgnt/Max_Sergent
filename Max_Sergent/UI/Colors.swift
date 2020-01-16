@@ -43,6 +43,13 @@ struct Colors {
         static let boxContent = primaryFontColor
     }
     
+    struct Timeline {
+        static let background = secondaryBackground
+        static let title = primaryFontColor
+        static let node = primaryFontColor
+        static let line = primaryFontColor
+    }
+    
     struct Footer {
         
     }

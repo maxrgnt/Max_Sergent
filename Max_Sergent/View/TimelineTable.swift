@@ -1,33 +1,33 @@
 //
-//  Overview2.swift
+//  TimelineTable.swift
 //  Max_Sergent
 //
-//  Created by Max Sergent on 1/14/20.
+//  Created by Max Sergent on 1/15/20.
 //  Copyright © 2020 Max Sergent. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-protocol OverviewDelegate {
+protocol TimelineDelegate {
     func openMaps()
     func sendEmail()
     func openLinkedIn()
 }
 
-class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
+class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         
     //MARK: Definitions
     // Delegates
     var customDelegate: OverviewDelegate!
     // Constraints
     // Objects
-    let data = Constants.Overview.clusters
+    let data = Constants.Timeline.clusters
     
     //MARK: - Initialization
     override init (frame: CGRect, style: UITableView.Style) {
         // Initialize views frame prior to setting constraints
-        super.init(frame: frame, style: style)
+        super.init(frame: frame, style: .plain)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -36,14 +36,15 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: Setup
     func setup() {
-        
-        register(OverviewCell.self, forCellReuseIdentifier: Constants.Overview.cellReuseId)
+    
+        register(TimelineCell.self, forCellReuseIdentifier: Constants.Timeline.cellReuseId)
         delegate                        = self
         dataSource                      = self
         tableHeaderView                 = nil
+        
         separatorStyle                  = .none
         alwaysBounceHorizontal          = false
-        alwaysBounceVertical            = false
+        alwaysBounceVertical            = true
         showsVerticalScrollIndicator    = false
         showsHorizontalScrollIndicator  = false
         
@@ -51,8 +52,8 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: TableView Delegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let id = Constants.Overview.cellReuseId
-        let cell: OverviewCell = tableView.dequeueReusableCell(withIdentifier: id) as! OverviewCell
+        let id = Constants.Timeline.cellReuseId
+        let cell: TimelineCell = tableView.dequeueReusableCell(withIdentifier: id) as! TimelineCell
         
         cell.setup() {
             cell.constraints()
@@ -72,14 +73,12 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let tempSection = OverviewSection()
+        let tempSection = TimelineSection()
         tempSection.setup() {
             tempSection.constraints()
         }
         tempSection.title.text = data[section].title
-        tempSection.titleCenterY.constant = (section == 0) ? Sizing.padding/2 : 0.0
         tempSection.resize()
-        
         return tempSection
     }
     
@@ -89,10 +88,7 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
                                                         withFont: Fonts.Overview.title!,
                                                         withWidth: Sizing.Overview.boxPaddedWidth,
                                                         numberOfLines: 1)
-        
-        let heightForSection = (section == 0)
-            ? heightForLabel + Sizing.Overview.padding
-            : heightForLabel
+        let heightForSection = heightForLabel + Sizing.Overview.padding
         return heightForSection
     }
     

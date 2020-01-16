@@ -8,13 +8,17 @@
 
 import Foundation
 import UIKit
+import MessageUI
+import MapKit
 
-class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
+class ViewController: UIViewController, ScrollDelegate, OverviewDelegate, MenuDelegate, MFMailComposeViewControllerDelegate {
     
     let watermark = UILabel()
     let header = Header()
     let scroll = Scroll()
     let footer = Footer()
+    
+    let mailComposerVC = MFMailComposeViewController()
     
     override func viewDidLoad() {
         print("Hello World!")
@@ -53,6 +57,7 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
             scroll.resetContentInset()
         }
         scroll.customDelegate = self
+        scroll.page1.customDelegate = self
         view.addSubview(footer)
         footer.setup() {
             footer.constraints()
@@ -81,6 +86,8 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
     }
     
     func calculateRatio(for contentOffset: CGFloat) {
+        // If contentOffset negative, do not let menu interaction occur
+        footer.isUserInteractionEnabled = (contentOffset < 0.0) ? false : true
         // The scale factor is inversely related to the ratio of the currentOffset.x to Scroll.width
         // If the scrollview has been offset 20% the scale factor should be 80%
         // As the scrollview moves right the scale factor shrinks the header
@@ -94,4 +101,53 @@ class ViewController: UIViewController, ScrollDelegate, MenuDelegate {
         scroll.scaleInversely(with: inverseScalar)
     }
     
+    func openMaps() {
+        let myAddress = "Washington,+DC+USA"
+        if let url = URL(string:"http://maps.apple.com/?address=\(myAddress)") {
+            UIApplication.shared.open(url)
+        } else {
+            let hapticFeedback = UINotificationFeedbackGenerator()
+            hapticFeedback.notificationOccurred(.error)
+        }
+    }
+    
+    func sendEmail() {
+        let email = "maxrgnt@umich.edu"
+        let subject = "Hello World!"
+        let bodyText = "I saw Max Sergent on the App Store!"
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients([email])
+            mail.setSubject(subject)
+            mail.setMessageBody(bodyText, isHTML: true)
+            present(mail, animated: true)
+        } else {
+            let coded = "mailto:\(email)?subject=\(subject)&body=\(bodyText)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            if let emailURL = URL(string: coded!) {
+              if UIApplication.shared.canOpenURL(emailURL) {
+                  UIApplication.shared.open(emailURL, options: [:], completionHandler: { (result) in
+                      if !result {
+                          let hapticFeedback = UINotificationFeedbackGenerator()
+                          hapticFeedback.notificationOccurred(.error)
+                      }
+                  })
+              }
+            }
+        }
+    }
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
+    
+    func openLinkedIn() {
+        let webURL = URL(string: "https://www.linkedin.com/in/max-sergent")!
+        let appURL = URL(string: "linkedin://profile/max-sergent")!
+        if UIApplication.shared.canOpenURL(appURL) {
+            UIApplication.shared.open(appURL, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.open(webURL, options: [:], completionHandler: nil)
+        }
+    }
 }

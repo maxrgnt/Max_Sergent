@@ -55,6 +55,10 @@ struct Fonts {
         static let content = UIFont(name: openSans, size: Size.secondaryText)
     }
     
+    struct Timeline {
+        static let title = UIFont(name: openSansSemiBold, size: Size.title)
+    }
+    
     struct Footer {
         
     }

@@ -32,6 +32,9 @@
 		66E72F7823CE4B1F004F3C43 /* OverviewTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F7723CE4B1F004F3C43 /* OverviewTable.swift */; };
 		66E72F7A23CE4C0F004F3C43 /* OverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F7923CE4C0F004F3C43 /* OverviewCell.swift */; };
 		66E72F7C23CE4FBF004F3C43 /* OverviewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F7B23CE4FBF004F3C43 /* OverviewSection.swift */; };
+		66E72F8023CFDCC8004F3C43 /* TimelineTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F7F23CFDCC8004F3C43 /* TimelineTable.swift */; };
+		66E72F8223CFDE03004F3C43 /* TimelineSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F8123CFDE03004F3C43 /* TimelineSection.swift */; };
+		66E72F8423CFEDB5004F3C43 /* TimelineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F8323CFEDB5004F3C43 /* TimelineCell.swift */; };
 		66FD8A79239AD18E00B90C69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A78239AD18E00B90C69 /* AppDelegate.swift */; };
 		66FD8A7B239AD18E00B90C69 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */; };
 		66FD8A7E239AD18E00B90C69 /* Max_Sergent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A7C239AD18E00B90C69 /* Max_Sergent.xcdatamodeld */; };
@@ -91,6 +94,9 @@
 		66E72F7723CE4B1F004F3C43 /* OverviewTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewTable.swift; sourceTree = "<group>"; };
 		66E72F7923CE4C0F004F3C43 /* OverviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewCell.swift; sourceTree = "<group>"; };
 		66E72F7B23CE4FBF004F3C43 /* OverviewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewSection.swift; sourceTree = "<group>"; };
+		66E72F7F23CFDCC8004F3C43 /* TimelineTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTable.swift; sourceTree = "<group>"; };
+		66E72F8123CFDE03004F3C43 /* TimelineSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineSection.swift; sourceTree = "<group>"; };
+		66E72F8323CFEDB5004F3C43 /* TimelineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineCell.swift; sourceTree = "<group>"; };
 		66FD8A75239AD18E00B90C69 /* Max Sergent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Max Sergent.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FD8A78239AD18E00B90C69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +172,9 @@
 				66E72F7723CE4B1F004F3C43 /* OverviewTable.swift */,
 				66E72F7B23CE4FBF004F3C43 /* OverviewSection.swift */,
 				66E72F7923CE4C0F004F3C43 /* OverviewCell.swift */,
+				66E72F7F23CFDCC8004F3C43 /* TimelineTable.swift */,
+				66E72F8123CFDE03004F3C43 /* TimelineSection.swift */,
+				66E72F8323CFEDB5004F3C43 /* TimelineCell.swift */,
 				66E72F6423CD135A004F3C43 /* Footer.swift */,
 				66E72F7123CD6ADF004F3C43 /* Menu.swift */,
 			);
@@ -543,6 +552,7 @@
 				66E72F5F23CD12FA004F3C43 /* ViewController.swift in Sources */,
 				66E72F7023CD1EA5004F3C43 /* Constants.swift in Sources */,
 				66E72F6C23CD180B004F3C43 /* Fonts.swift in Sources */,
+				66E72F8223CFDE03004F3C43 /* TimelineSection.swift in Sources */,
 				66FD8A79239AD18E00B90C69 /* AppDelegate.swift in Sources */,
 				66E72F6323CD133F004F3C43 /* Scroll.swift in Sources */,
 				66E72F6A23CD17CF004F3C43 /* Sizing.swift in Sources */,
@@ -551,6 +561,7 @@
 				66E72F7823CE4B1F004F3C43 /* OverviewTable.swift in Sources */,
 				66E72F7A23CE4C0F004F3C43 /* OverviewCell.swift in Sources */,
 				66C4C5FE23ABDF1C00DEDF6D /* Extension.swift in Sources */,
+				66E72F8423CFEDB5004F3C43 /* TimelineCell.swift in Sources */,
 				66DCB72823BA387F007AAF78 /* Data_Firebase.swift in Sources */,
 				66FD8A7E239AD18E00B90C69 /* Max_Sergent.xcdatamodeld in Sources */,
 				66E72F6E23CD181E004F3C43 /* Colors.swift in Sources */,
@@ -559,6 +570,7 @@
 				66DCB72A23BA54D5007AAF78 /* Reachability.swift in Sources */,
 				66E72F7C23CE4FBF004F3C43 /* OverviewSection.swift in Sources */,
 				66C4C60823B14BB300DEDF6D /* Data.swift in Sources */,
+				66E72F8023CFDCC8004F3C43 /* TimelineTable.swift in Sources */,
 				66FD8A7B239AD18E00B90C69 /* SceneDelegate.swift in Sources */,
 				66DCB72623BA3872007AAF78 /* Data_CoreData.swift in Sources */,
 			);

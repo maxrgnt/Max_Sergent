@@ -1,14 +1,14 @@
 //
-//  OverviewCell.swift
+//  TimelineCell.swift
 //  Max_Sergent
 //
-//  Created by Max Sergent on 1/14/20.
+//  Created by Max Sergent on 1/15/20.
 //  Copyright © 2020 Max Sergent. All rights reserved.
 //
 
 import UIKit
 
-class OverviewCell: UITableViewCell {
+class TimelineCell: UITableViewCell {
 
     //MARK: Definitions
     // Delegates
@@ -20,6 +20,7 @@ class OverviewCell: UITableViewCell {
     var contentHeight:  NSLayoutConstraint!
     var contentLeading: NSLayoutConstraint!
     // Objects
+    var line    = UILabel()
     var title   = UILabel()
     var box     = UIView()
     var icon    = UIImageView()
@@ -29,7 +30,7 @@ class OverviewCell: UITableViewCell {
     
     //MARK: Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: Constants.Overview.cellReuseId)
+        super.init(style: style, reuseIdentifier: Constants.Timeline.cellReuseId)
 //        setup() {
 //            constraints()
 //        }
@@ -43,7 +44,10 @@ class OverviewCell: UITableViewCell {
     func setup(closure: () -> Void) {
         
         selectionStyle = .none
-        backgroundColor = .clear
+        backgroundColor = Colors.Timeline.background
+        
+        addSubview(line)
+        line.backgroundColor = Colors.Timeline.line
         
         addSubview(box)
         box.backgroundColor = Colors.Overview.box

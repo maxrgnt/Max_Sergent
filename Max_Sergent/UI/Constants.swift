@@ -35,6 +35,21 @@ struct Constants {
         ]
     }
     
+    struct Timeline {
+        static let cellReuseId = "TimelineCell"
+        static let contactIcons = ["location","email","linkedin"]
+        static let contactText = ["Washington, D.C.","maxrgnt@umich.edu","www.linkedin.com/in/max-sergent"]
+        static let clusters = [
+            (title: "2019", boxes: [(icon: contactIcons[0], content: contactText[0]),
+                                    (icon: contactIcons[1], content: contactText[1])]),
+            (title: "2018", boxes: [(icon: contactIcons[0], content: contactText[0]),
+                                    (icon: contactIcons[1], content: contactText[1]),
+                                    (icon: contactIcons[2], content: contactText[2]),
+                                    (icon: contactIcons[2], content: contactText[2])]),
+            (title: "2017", boxes: [(icon: contactIcons[0], content: contactText[0])]),
+        ]
+    }
+    
     struct Menu {
         static let pages = ["Overview","Timeline","Details"]
     }

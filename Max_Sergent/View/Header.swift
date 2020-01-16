@@ -63,7 +63,7 @@ class Header: UIView {
         // Set origin of gradient (top left of screen)
         let gradientOrigin = CGPoint(x: 0, y: 0.0)
         // Set frame of gradient (header height, because status bar will be solid color)
-        let gradientSize   = CGSize(width: Sizing.width, height: Sizing.Header.expandedHeight)
+        let gradientSize   = CGSize(width: Sizing.width, height: Sizing.Header.expandedHeight + 10.0)
         gradient.frame     = CGRect(origin: gradientOrigin, size: gradientSize)
         // Set color progression for gradient, alphaComponent of zero important for color shifting to
         gradient.colors    = [Colors.Header.gradient.withAlphaComponent(0.0).cgColor,

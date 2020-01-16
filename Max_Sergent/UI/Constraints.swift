@@ -116,8 +116,74 @@ extension OverviewCell {
         box.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxWidth).isActive                                  = true
         boxHeight.isActive                                                                                              = true
         
-        iconHeight = icon.heightAnchor.constraint(equalToConstant: Sizing.Overview.contactHeight)
-        iconWidth = icon.widthAnchor.constraint(equalToConstant: Sizing.Overview.contactHeight)
+        iconHeight = icon.heightAnchor.constraint(equalToConstant: 0.0)
+        iconWidth = icon.widthAnchor.constraint(equalToConstant: 0.0)
+        icon.translatesAutoresizingMaskIntoConstraints                                                                  = false
+        icon.leadingAnchor.constraint(equalTo: box.leadingAnchor, constant: padding).isActive                           = true
+        icon.centerYAnchor.constraint(equalTo: box.centerYAnchor).isActive                                              = true
+        iconWidth.isActive                                                                                              = true
+        iconHeight.isActive                                                                                             = true
+        
+        contentHeight = content.heightAnchor.constraint(equalToConstant: 0.0)
+        contentLeading = content.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: padding)
+        content.translatesAutoresizingMaskIntoConstraints                                                               = false
+        contentLeading.isActive                                                                                         = true
+        content.centerYAnchor.constraint(equalTo: box.centerYAnchor).isActive                                           = true
+        content.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxPaddedWidth).isActive                        = true
+        contentHeight.isActive                                                                                          = true
+    }
+    
+}
+
+//MARK: TimelineSection
+extension TimelineSection {
+    
+    func constraints() {
+        titleCenterY = title.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0.0)
+        titleHeight = title.heightAnchor.constraint(equalToConstant: 0.0)
+        title.translatesAutoresizingMaskIntoConstraints                                                                 = false
+        title.leadingAnchor.constraint(equalTo: node.trailingAnchor, constant: Sizing.padding/2).isActive                 = true
+        titleCenterY.isActive                                                                                           = true
+        title.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxPaddedWidth).isActive                          = true
+        titleHeight.isActive                                                                                            = true
+        
+        line.translatesAutoresizingMaskIntoConstraints                                                                  = false
+        line.centerXAnchor.constraint(equalTo: node.centerXAnchor).isActive                                             = true
+        line.centerYAnchor.constraint(equalTo: title.centerYAnchor).isActive                                            = true
+        line.widthAnchor.constraint(equalToConstant: Sizing.Timeline.lineWidth).isActive                                = true
+        line.heightAnchor.constraint(equalTo: heightAnchor).isActive                                                    = true
+        
+        node.translatesAutoresizingMaskIntoConstraints                                                                  = false
+        node.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Sizing.padding).isActive                        = true
+        node.centerYAnchor.constraint(equalTo: title.centerYAnchor).isActive                                            = true
+        node.widthAnchor.constraint(equalToConstant: Sizing.Timeline.nodeDiameter).isActive                             = true
+        node.heightAnchor.constraint(equalToConstant: Sizing.Timeline.nodeDiameter).isActive                            = true
+    }
+    
+}
+
+//MARK: TimelineCell
+extension TimelineCell {
+    
+    func constraints() {
+        let padding = Sizing.Overview.padding/2
+        
+        line.translatesAutoresizingMaskIntoConstraints                                                                  = false
+        line.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Sizing.Timeline.leadingCell).isActive           = true
+        line.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                                  = true
+        line.widthAnchor.constraint(equalToConstant: Sizing.Timeline.lineWidth).isActive                                = true
+        line.heightAnchor.constraint(equalTo: heightAnchor).isActive                                                    = true
+    
+        boxHeight = box.heightAnchor.constraint(equalToConstant: 0.0)
+        boxTop = box.topAnchor.constraint(equalTo: topAnchor, constant: padding)
+        box.translatesAutoresizingMaskIntoConstraints                                                                   = false
+        box.leadingAnchor.constraint(equalTo: line.trailingAnchor, constant: Sizing.padding/2).isActive                 = true
+        boxTop.isActive                                                                                                 = true
+        box.widthAnchor.constraint(equalToConstant: Sizing.Timeline.boxWidth).isActive                                  = true
+        boxHeight.isActive                                                                                              = true
+        
+        iconHeight = icon.heightAnchor.constraint(equalToConstant: 0.0)
+        iconWidth = icon.widthAnchor.constraint(equalToConstant: 0.0)
         icon.translatesAutoresizingMaskIntoConstraints                                                                  = false
         icon.leadingAnchor.constraint(equalTo: box.leadingAnchor, constant: padding).isActive                           = true
         icon.centerYAnchor.constraint(equalTo: box.centerYAnchor).isActive                                              = true

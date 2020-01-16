@@ -58,20 +58,14 @@ struct Sizing {
         static let boxWidth = paddedWidth
         static let boxRadius: CGFloat = min(0.047 * min(width, height), 39.0)
         static let boxPaddedWidth = boxWidth - padding
-        static var box1Height = objectiveHeight + padding
-        static var objectiveHeight = height * 0.6 {
-            didSet {
-                box1Height = objectiveHeight + padding
-            }
-        }
-        static var box2Height: CGFloat = contactHeight + padding
-        static var box3Height: CGFloat = contactHeight + padding
-        static var contactHeight: CGFloat = 0.0 {
-            didSet {
-                box2Height = contactHeight + padding
-                box3Height = contactHeight + padding
-            }
-        }        
+    }
+    
+    struct Timeline {
+        static let lineWidth = Sizing.paddedWidth/50
+        static let nodeDiameter = lineWidth*3
+        static let nodeRadius = nodeDiameter/2
+        static let leadingCell = nodeRadius + Sizing.padding - lineWidth/2
+        static let boxWidth = paddedWidth - lineWidth - Sizing.padding
     }
     
     struct Footer {
