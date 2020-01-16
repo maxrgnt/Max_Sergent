@@ -78,7 +78,7 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
             tempSection.constraints()
         }
         tempSection.title.text = data[section].title
-        //tempSection.titleCenterY.constant = (section == 0) ? Sizing.padding/2 : 0.0
+        tempSection.titleCenterY.constant = (section == 0) ? Sizing.padding/4 : 0.0
         tempSection.resize()
         return tempSection
     }
