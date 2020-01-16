@@ -90,7 +90,7 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
                                                         withWidth: Sizing.Overview.boxPaddedWidth,
                                                         numberOfLines: 1)
         let heightForSection = (section == 0 )
-            ? heightForLabel + Sizing.Overview.padding // * (3/2)
+            ? heightForLabel + Sizing.Overview.padding * (3/2)
             : heightForLabel + Sizing.Overview.padding
         return heightForSection
     }
