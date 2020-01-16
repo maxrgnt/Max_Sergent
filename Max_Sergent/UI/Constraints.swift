@@ -149,7 +149,7 @@ extension TimelineSection {
         
         line.translatesAutoresizingMaskIntoConstraints                                                                  = false
         line.centerXAnchor.constraint(equalTo: node.centerXAnchor).isActive                                             = true
-        line.centerYAnchor.constraint(equalTo: title.centerYAnchor).isActive                                            = true
+        line.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                            = true
         line.widthAnchor.constraint(equalToConstant: Sizing.Timeline.lineWidth).isActive                                = true
         line.heightAnchor.constraint(equalTo: heightAnchor).isActive                                                    = true
         

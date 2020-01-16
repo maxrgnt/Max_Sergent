@@ -78,6 +78,7 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
             tempSection.constraints()
         }
         tempSection.title.text = data[section].title
+        //tempSection.titleCenterY.constant = (section == 0) ? Sizing.padding/2 : 0.0
         tempSection.resize()
         return tempSection
     }
@@ -88,7 +89,9 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
                                                         withFont: Fonts.Overview.title!,
                                                         withWidth: Sizing.Overview.boxPaddedWidth,
                                                         numberOfLines: 1)
-        let heightForSection = heightForLabel + Sizing.Overview.padding
+        let heightForSection = (section == 0 )
+            ? heightForLabel + Sizing.Overview.padding // * (3/2)
+            : heightForLabel + Sizing.Overview.padding
         return heightForSection
     }
     
