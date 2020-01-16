@@ -36,6 +36,7 @@ struct Constants {
     }
     
     struct Timeline {
+        static let refreshTitle = "2020"
         static let cellReuseId = "TimelineCell"
         static let contactIcons = ["location","email","linkedin"]
         static let contactText = ["Washington, D.C.","maxrgnt@umich.edu","www.linkedin.com/in/max-sergent"]

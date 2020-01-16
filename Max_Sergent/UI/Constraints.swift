@@ -135,6 +135,39 @@ extension OverviewCell {
     
 }
 
+//MARK: 
+
+//MARK: TimelineRefresh
+extension TimelineRefresh {
+    
+    func constraints() {
+        title.translatesAutoresizingMaskIntoConstraints                                                                 = false
+        title.leadingAnchor.constraint(equalTo: node.trailingAnchor, constant: Sizing.padding/2).isActive               = true
+        title.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0.0).isActive                                  = true
+        title.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxPaddedWidth).isActive                          = true
+        title.heightAnchor.constraint(equalToConstant: Fonts.Timeline.title!.pointSize).isActive                        = true
+        
+        line.translatesAutoresizingMaskIntoConstraints                                                                  = false
+        line.centerXAnchor.constraint(equalTo: node.centerXAnchor).isActive                                             = true
+        line.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 10.0).isActive                                    = true
+        line.widthAnchor.constraint(equalToConstant: Sizing.Timeline.lineWidth).isActive                                = true
+        line.topAnchor.constraint(equalTo: topAnchor).isActive                                                          = true
+        
+        icon.translatesAutoresizingMaskIntoConstraints                                                                  = false
+        icon.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                  = true
+        icon.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                                  = true
+        icon.widthAnchor.constraint(equalTo: heightAnchor, multiplier: 0.45).isActive                                   = true
+        icon.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.45).isActive                                  = true
+        
+        node.translatesAutoresizingMaskIntoConstraints                                                                  = false
+        node.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Sizing.padding).isActive                        = true
+        node.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                                  = true
+        node.widthAnchor.constraint(equalToConstant: Sizing.Timeline.nodeDiameter).isActive                             = true
+        node.heightAnchor.constraint(equalToConstant: Sizing.Timeline.nodeDiameter).isActive                            = true
+    }
+    
+}
+
 //MARK: TimelineSection
 extension TimelineSection {
     
@@ -142,14 +175,14 @@ extension TimelineSection {
         titleCenterY = title.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0.0)
         titleHeight = title.heightAnchor.constraint(equalToConstant: 0.0)
         title.translatesAutoresizingMaskIntoConstraints                                                                 = false
-        title.leadingAnchor.constraint(equalTo: node.trailingAnchor, constant: Sizing.padding/2).isActive                 = true
+        title.leadingAnchor.constraint(equalTo: node.trailingAnchor, constant: Sizing.padding/2).isActive               = true
         titleCenterY.isActive                                                                                           = true
         title.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxPaddedWidth).isActive                          = true
         titleHeight.isActive                                                                                            = true
         
         line.translatesAutoresizingMaskIntoConstraints                                                                  = false
         line.centerXAnchor.constraint(equalTo: node.centerXAnchor).isActive                                             = true
-        line.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                            = true
+        line.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                                  = true
         line.widthAnchor.constraint(equalToConstant: Sizing.Timeline.lineWidth).isActive                                = true
         line.heightAnchor.constraint(equalTo: heightAnchor).isActive                                                    = true
         

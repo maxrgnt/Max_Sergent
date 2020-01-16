@@ -35,6 +35,7 @@
 		66E72F8023CFDCC8004F3C43 /* TimelineTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F7F23CFDCC8004F3C43 /* TimelineTable.swift */; };
 		66E72F8223CFDE03004F3C43 /* TimelineSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F8123CFDE03004F3C43 /* TimelineSection.swift */; };
 		66E72F8423CFEDB5004F3C43 /* TimelineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F8323CFEDB5004F3C43 /* TimelineCell.swift */; };
+		66E72F8623D0F8C9004F3C43 /* TimelineRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72F8523D0F8C8004F3C43 /* TimelineRefresh.swift */; };
 		66FD8A79239AD18E00B90C69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A78239AD18E00B90C69 /* AppDelegate.swift */; };
 		66FD8A7B239AD18E00B90C69 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */; };
 		66FD8A7E239AD18E00B90C69 /* Max_Sergent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66FD8A7C239AD18E00B90C69 /* Max_Sergent.xcdatamodeld */; };
@@ -97,6 +98,7 @@
 		66E72F7F23CFDCC8004F3C43 /* TimelineTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTable.swift; sourceTree = "<group>"; };
 		66E72F8123CFDE03004F3C43 /* TimelineSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineSection.swift; sourceTree = "<group>"; };
 		66E72F8323CFEDB5004F3C43 /* TimelineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineCell.swift; sourceTree = "<group>"; };
+		66E72F8523D0F8C8004F3C43 /* TimelineRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineRefresh.swift; sourceTree = "<group>"; };
 		66FD8A75239AD18E00B90C69 /* Max Sergent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Max Sergent.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FD8A78239AD18E00B90C69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66FD8A7A239AD18E00B90C69 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				66E72F7B23CE4FBF004F3C43 /* OverviewSection.swift */,
 				66E72F7923CE4C0F004F3C43 /* OverviewCell.swift */,
 				66E72F7F23CFDCC8004F3C43 /* TimelineTable.swift */,
+				66E72F8523D0F8C8004F3C43 /* TimelineRefresh.swift */,
 				66E72F8123CFDE03004F3C43 /* TimelineSection.swift */,
 				66E72F8323CFEDB5004F3C43 /* TimelineCell.swift */,
 				66E72F6423CD135A004F3C43 /* Footer.swift */,
@@ -553,6 +556,7 @@
 				66E72F7023CD1EA5004F3C43 /* Constants.swift in Sources */,
 				66E72F6C23CD180B004F3C43 /* Fonts.swift in Sources */,
 				66E72F8223CFDE03004F3C43 /* TimelineSection.swift in Sources */,
+				66E72F8623D0F8C9004F3C43 /* TimelineRefresh.swift in Sources */,
 				66FD8A79239AD18E00B90C69 /* AppDelegate.swift in Sources */,
 				66E72F6323CD133F004F3C43 /* Scroll.swift in Sources */,
 				66E72F6A23CD17CF004F3C43 /* Sizing.swift in Sources */,

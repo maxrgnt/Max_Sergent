@@ -22,6 +22,7 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     var customDelegate: OverviewDelegate!
     // Constraints
     // Objects
+    var timelineRefresh = TimelineRefresh()
     let data = Constants.Timeline.clusters
     
     //MARK: - Initialization
@@ -50,9 +51,19 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         
         refreshControl = UIRefreshControl()
         refreshControl?.backgroundColor = Colors.Timeline.background
-        refreshControl?.tintColor = .white
-        refreshControl?.attributedTitle = NSAttributedString(string: "What am I, psychic?")
+//        refreshControl?.tintColor = .white
+//        refreshControl?.attributedTitle = NSAttributedString(string: "What am I, psychic?")
         refreshControl?.addTarget(self, action: #selector(findNewJob), for: .valueChanged)
+        
+        refreshControl?.addSubview(timelineRefresh)
+        timelineRefresh.translatesAutoresizingMaskIntoConstraints                                                        = false
+        timelineRefresh.leadingAnchor.constraint(equalTo: refreshControl!.leadingAnchor).isActive                        = true
+        timelineRefresh.trailingAnchor.constraint(equalTo: refreshControl!.trailingAnchor).isActive                      = true
+        timelineRefresh.topAnchor.constraint(equalTo: refreshControl!.topAnchor).isActive                                = true
+        timelineRefresh.bottomAnchor.constraint(equalTo: refreshControl!.bottomAnchor).isActive                          = true
+        timelineRefresh.setup {
+            timelineRefresh.constraints()
+        }
         
     }
     
@@ -133,20 +144,19 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(contentOffset.x)
 //        contentOffset.x = (contentOffset.x < 0.0) ? 0.0 : contentOffset.x
     }
 
     @objc func findNewJob() {
-        //isUserInteractionEnabled = false
         print("searching...")
-
+        timelineRefresh.isAnimating = true
+        timelineRefresh.animateIcon(toAlpha: 1.0)
         self.perform(#selector(finishRefreshing), with: nil, afterDelay: 3.0)
     }
     
     @objc func finishRefreshing() {
         refreshControl!.endRefreshing()
-        //isUserInteractionEnabled = true
+        timelineRefresh.nukeAnimations()
     }
     
 }
