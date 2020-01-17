@@ -98,7 +98,7 @@ class TimelineCell: UITableViewCell {
                                                          font: distinction.font!,
                                                          numberOfLines: 1)
         distinctionWidth.constant = distinctionFrame.width + Sizing.padding/2
-        let radius = 0.094 * min(distinctionFrame.width, distinctionFrame.height)
+        let radius = 0.188 * min(distinctionFrame.width, distinctionFrame.height)
         distinction.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: radius)
     }
     
@@ -119,7 +119,7 @@ class TimelineCell: UITableViewCell {
                                                         withFont: Fonts.Timeline.boxContent!,
                                                         withWidth: Sizing.Timeline.contentWidth,
                                                         numberOfLines: 0)
-        boxHeight.constant = heightForHeader + heightForDistinction + heightForContent + Sizing.padding
+        boxHeight.constant = heightForHeader + heightForDistinction + heightForContent + Sizing.padding * 1.75
         layoutIfNeeded()
     }
 
