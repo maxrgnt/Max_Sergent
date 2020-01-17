@@ -11,7 +11,7 @@ import UIKit
 import MessageUI
 import MapKit
 
-class ViewController: UIViewController, ScrollDelegate, OverviewDelegate, MenuDelegate, MFMailComposeViewControllerDelegate {
+class ViewController: UIViewController, HeaderDelegate, ScrollDelegate, OverviewDelegate, MenuDelegate, MFMailComposeViewControllerDelegate {
     
     let watermark = UILabel()
     let header = Header()
@@ -51,6 +51,7 @@ class ViewController: UIViewController, ScrollDelegate, OverviewDelegate, MenuDe
             header.constraints()
             header.resetNameHeight()
         }
+        header.customDelegate = self
         view.addSubview(scroll)
         scroll.setup() {
             scroll.constraints()

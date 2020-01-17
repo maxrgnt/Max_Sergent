@@ -17,7 +17,7 @@ struct Constants {
         static let photo = "profile.jpg"
         static let name = "Max\nSergent"
         static let gradientStart: NSNumber = 0.0
-        static let gradientEnd: NSNumber = 0.85
+        static let gradientEnd: NSNumber = 0.90
     }
     
     struct Overview {

@@ -9,10 +9,15 @@
 import Foundation
 import UIKit
 
+protocol HeaderDelegate {
+    func calculateRatio(for: CGFloat)
+}
+
 class Header: UIView {
     
     //MARK: Definitions
     // Delegates
+    var customDelegate: HeaderDelegate!
     // Constraints
     var height:     NSLayoutConstraint!
     var nameHeight: NSLayoutConstraint!
@@ -56,6 +61,9 @@ class Header: UIView {
         name.textColor                 = Colors.Header.name
         name.text                      = Constants.Header.name
         
+        let daniela = UIPanGestureRecognizer(target: self, action: #selector(reactToPanGesture(_:)))
+        addGestureRecognizer(daniela)
+        
         closure()
     }
     
@@ -91,7 +99,7 @@ class Header: UIView {
     }
     
     func scaleInversely(with scalar: CGFloat) {
-        (scalar < 0.0) ? hideName(with: scalar) : nil
+        (scalar <= 0.0) ? hideName(with: scalar) : nil
     }
     
     func resetHeight(with scalar: CGFloat) {
@@ -136,5 +144,14 @@ class Header: UIView {
         gradient.frame = CGRect(origin: gradientOrigin, size: gradientSize)
     }
 
+    @objc func reactToPanGesture(_ sender: UIPanGestureRecognizer) {
+        // Move view up/down
+        let translation = sender.translation(in: self)
+        let offset = (translation.y > Sizing.Scroll.limit) ? Sizing.Scroll.limit : translation.y
+        offset > 0.0 ? self.customDelegate.calculateRatio(for: -offset) : nil
+        if sender.state == UIGestureRecognizer.State.ended {
+            self.customDelegate.calculateRatio(for: 0.0)
+        }
+    }
     
 }
