@@ -48,6 +48,8 @@ struct Colors {
         static let title = primaryFontColor
         static let node = primaryFontColor
         static let line = primaryFontColor
+        static let boxHeader = primaryFontColor
+        static let boxContent = primaryFontColor
     }
     
     struct Footer {

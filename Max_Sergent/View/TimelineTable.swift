@@ -76,7 +76,8 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         let id = Constants.Timeline.cellReuseId
         let cell: TimelineCell = tableView.dequeueReusableCell(withIdentifier: id) as! TimelineCell
         
-        cell.setIcon(withName: data[indexPath.section].boxes[indexPath.row].icon)
+        cell.icon.image = UIImage(named: data[indexPath.section].boxes[indexPath.row].icon)
+        cell.header.text = data[indexPath.section].boxes[indexPath.row].header
         cell.content.text  = data[indexPath.section].boxes[indexPath.row].content
         
         if indexPath.section == data.count-1 && indexPath.row == data[indexPath.section].boxes.count-1 {
@@ -114,8 +115,8 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
                                                         withWidth: Sizing.Overview.boxPaddedWidth,
                                                         numberOfLines: 1)
         let heightForSection = (section == 0 )
-            ? heightForLabel + Sizing.Overview.padding * (3/2)
-            : heightForLabel + Sizing.Overview.padding
+            ? heightForLabel + Sizing.padding * (3/2)
+            : heightForLabel + Sizing.padding
         return heightForSection
     }
     
@@ -128,13 +129,18 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let header = data[indexPath.section].boxes[indexPath.row].header
+        let heightForHeader = Fonts.calculateLabelHeight(for: header,
+                                                        withFont: Fonts.Timeline.boxHeader!,
+                                                        withWidth: Sizing.Timeline.contentWidth,
+                                                        numberOfLines: 1)
         let content = data[indexPath.section].boxes[indexPath.row].content
-        let heightForLabel = Fonts.calculateLabelHeight(for: content,
-                                                        withFont: Fonts.Overview.content!,
-                                                        withWidth: Sizing.Overview.boxPaddedWidth,
+        let heightForContent = Fonts.calculateLabelHeight(for: content,
+                                                        withFont: Fonts.Timeline.boxContent!,
+                                                        withWidth: Sizing.Timeline.contentWidth,
                                                         numberOfLines: 0)
         let multiplier: CGFloat = (indexPath.row == 0) ? 2.0 : 1.5
-        let heightForRow = heightForLabel + (Sizing.Overview.padding * multiplier)
+        let heightForRow = heightForHeader + heightForContent + (Sizing.padding * multiplier)
         return heightForRow
     }
     

@@ -56,7 +56,9 @@ struct Fonts {
     }
     
     struct Timeline {
-        static let title = UIFont(name: openSansSemiBold, size: Size.title)
+        static let title = UIFont(name: openSansBold, size: Size.title)
+        static let boxHeader = UIFont(name: openSansSemiBold, size: Size.primaryText)
+        static let boxContent = UIFont(name: openSans, size: Size.secondaryText)
     }
     
     struct Footer {

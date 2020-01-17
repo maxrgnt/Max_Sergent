@@ -38,18 +38,19 @@ struct Constants {
     struct Timeline {
         static let refreshTitle = "2020"
         static let cellReuseId = "TimelineCell"
-        static let contactIcons = ["location","email","linkedin"]
-        static let contactText = ["Test test test test test test test test test test test test test test test test test test test test test test test test test test.","maxrgnt@umich.edu","www.linkedin.com/in/max-sergent"]
+        static let icons = ["bea","umich","ga"]
+        static let headers = ["Bureau of Economic Analysis", "University of Michigan", "General Assembly"]
+        static let content = ["Test test test test test test test test test test test test test test test test test test test test test test test test test test.","Improved profits by 1,000% while slashing costs by 99%. Truly an exceptional feat. Hire me and I may do the same for you.","Read every textbook backwards while translating to Czech. Retained 99.99% of content. Alternatively, when tasked with coloring inside the lines I deviated less than 69% of the time."]
         static let clusters = [
-            (title: "2019", boxes: [(icon: contactIcons[0], content: contactText[0]),
-                                    (icon: contactIcons[1], content: contactText[1])]),
-            (title: "2018", boxes: [(icon: contactIcons[0], content: contactText[0]),
-                                    (icon: contactIcons[1], content: contactText[1]),
-                                    (icon: contactIcons[2], content: contactText[2]),
-                                    (icon: contactIcons[2], content: contactText[2])]),
-            (title: "2017", boxes: [(icon: contactIcons[0], content: contactText[0]),
-                                    (icon: contactIcons[2], content: contactText[2]),
-                                    (icon: contactIcons[2], content: contactText[2])]),
+            (title: "2019", boxes: [(icon: icons[0], header: headers[0], content: content[0]),
+                                    (icon: icons[1], header: headers[1], content: content[1])]),
+            (title: "2018", boxes: [(icon: icons[0], header: headers[0], content: content[0]),
+                                    (icon: icons[1], header: headers[1], content: content[1]),
+                                    (icon: icons[2], header: headers[2], content: content[2]),
+                                    (icon: icons[2], header: headers[2], content: content[2])]),
+            (title: "2017", boxes: [(icon: icons[0], header: headers[0], content: content[0]),
+                                    (icon: icons[2], header: headers[2], content: content[2]),
+                                    (icon: icons[2], header: headers[2], content: content[2])]),
         ]
     }
     

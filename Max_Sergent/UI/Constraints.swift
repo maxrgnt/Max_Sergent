@@ -184,7 +184,8 @@ extension TimelineSection {
         line.centerXAnchor.constraint(equalTo: node.centerXAnchor).isActive                                             = true
         line.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                                  = true
         line.widthAnchor.constraint(equalToConstant: Sizing.Timeline.lineWidth).isActive                                = true
-        line.heightAnchor.constraint(equalTo: heightAnchor).isActive                                                    = true
+        line.topAnchor.constraint(equalTo: topAnchor, constant: -10.0).isActive                                         = true
+        line.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 10.0).isActive                                    = true
         
         node.translatesAutoresizingMaskIntoConstraints                                                                  = false
         node.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Sizing.padding).isActive                        = true
@@ -215,21 +216,26 @@ extension TimelineCell {
         box.widthAnchor.constraint(equalToConstant: Sizing.Timeline.boxWidth).isActive                                  = true
         boxHeight.isActive                                                                                              = true
         
-        iconHeight = icon.heightAnchor.constraint(equalToConstant: 0.0)
-        iconWidth = icon.widthAnchor.constraint(equalToConstant: 0.0)
+        iconHeight = icon.heightAnchor.constraint(equalToConstant: Sizing.Timeline.iconDiameter)
+        iconWidth = icon.widthAnchor.constraint(equalToConstant: Sizing.Timeline.iconDiameter)
         icon.translatesAutoresizingMaskIntoConstraints                                                                  = false
         icon.leadingAnchor.constraint(equalTo: box.leadingAnchor, constant: padding).isActive                           = true
-        icon.centerYAnchor.constraint(equalTo: box.centerYAnchor).isActive                                              = true
+        icon.topAnchor.constraint(equalTo: box.topAnchor, constant: padding).isActive                                   = true
         iconWidth.isActive                                                                                              = true
         iconHeight.isActive                                                                                             = true
         
+        header.translatesAutoresizingMaskIntoConstraints                                                                = false
+        header.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: padding).isActive                       = true
+        header.topAnchor.constraint(equalTo: icon.topAnchor).isActive                                                   = true
+        header.widthAnchor.constraint(equalToConstant: Sizing.Timeline.contentWidth).isActive                           = true
+        header.heightAnchor.constraint(equalToConstant: Fonts.Timeline.boxHeader!.pointSize).isActive                   = true
+        
         contentHeight = content.heightAnchor.constraint(equalToConstant: 0.0)
         contentLeading = content.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: padding)
-        contentWidth = content.widthAnchor.constraint(equalToConstant: 0.0)
         content.translatesAutoresizingMaskIntoConstraints                                                               = false
         contentLeading.isActive                                                                                         = true
-        content.centerYAnchor.constraint(equalTo: box.centerYAnchor).isActive                                           = true
-        contentWidth.isActive                                                                                           = true
+        content.topAnchor.constraint(equalTo: header.bottomAnchor, constant: padding/2).isActive                          = true
+        content.widthAnchor.constraint(equalToConstant: Sizing.Timeline.contentWidth).isActive                          = true
         contentHeight.isActive                                                                                          = true
     }
     

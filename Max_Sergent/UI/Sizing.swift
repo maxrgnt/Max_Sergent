@@ -65,7 +65,9 @@ struct Sizing {
         static let nodeDiameter = lineWidth*3
         static let nodeRadius = nodeDiameter/2
         static let leadingCell = nodeRadius + Sizing.padding - lineWidth/2
+        static let iconDiameter: CGFloat = 34.0
         static let boxWidth = paddedWidth - lineWidth - Sizing.padding
+        static let contentWidth = boxWidth - iconDiameter - Sizing.padding*(3/2)
     }
     
     struct Footer {
