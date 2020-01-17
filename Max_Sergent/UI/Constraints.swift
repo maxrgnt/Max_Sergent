@@ -228,12 +228,12 @@ extension TimelineCell {
         header.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: padding).isActive                       = true
         header.topAnchor.constraint(equalTo: icon.topAnchor).isActive                                                   = true
         header.widthAnchor.constraint(equalToConstant: Sizing.Timeline.contentWidth).isActive                           = true
-        header.heightAnchor.constraint(equalToConstant: Fonts.Timeline.boxHeader!.pointSize + padding/2).isActive                   = true
+        header.heightAnchor.constraint(equalToConstant: Fonts.Timeline.boxHeader!.pointSize).isActive                   = true
         
         distinctionWidth = distinction.widthAnchor.constraint(equalToConstant: 0.0)
         distinction.translatesAutoresizingMaskIntoConstraints                                                           = false
         distinction.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: padding).isActive                  = true
-        distinction.topAnchor.constraint(equalTo: header.bottomAnchor, constant: padding/4).isActive                    = true
+        distinction.topAnchor.constraint(equalTo: header.bottomAnchor, constant: padding/2).isActive                    = true
         distinctionWidth.isActive                                                                                       = true
         distinction.heightAnchor.constraint(equalToConstant: Fonts.Timeline.boxDistinction!.pointSize + padding/2).isActive         = true
         
@@ -241,7 +241,7 @@ extension TimelineCell {
         contentLeading = content.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: padding)
         content.translatesAutoresizingMaskIntoConstraints                                                               = false
         contentLeading.isActive                                                                                         = true
-        content.topAnchor.constraint(equalTo: distinction.bottomAnchor, constant: padding/4).isActive                   = true
+        content.topAnchor.constraint(equalTo: distinction.bottomAnchor, constant: padding/2).isActive                   = true
         content.widthAnchor.constraint(equalToConstant: Sizing.Timeline.contentWidth).isActive                          = true
         contentHeight.isActive                                                                                          = true
     }

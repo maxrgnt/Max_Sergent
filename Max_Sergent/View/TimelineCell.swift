@@ -119,7 +119,7 @@ class TimelineCell: UITableViewCell {
                                                         withFont: Fonts.Timeline.boxContent!,
                                                         withWidth: Sizing.Timeline.contentWidth,
                                                         numberOfLines: 0)
-        boxHeight.constant = heightForHeader + heightForDistinction + heightForContent + Sizing.padding * 1.75
+        boxHeight.constant = heightForHeader + heightForDistinction + heightForContent + Sizing.padding * 1.25
         layoutIfNeeded()
     }
 
