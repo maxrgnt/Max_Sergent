@@ -83,7 +83,7 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         
         let distinction = data[indexPath.section].boxes[indexPath.row].distinction
         cell.distinction.backgroundColor = (distinction == "work") ? .blue : cell.distinction.backgroundColor
-        cell.distinction.backgroundColor = (distinction == "school") ? .green : cell.distinction.backgroundColor
+        cell.distinction.backgroundColor = (distinction == "school") ? .brown : cell.distinction.backgroundColor
         cell.distinction.backgroundColor = (distinction == "hobby") ? .red : cell.distinction.backgroundColor
         
         if indexPath.section == data.count-1 && indexPath.row == data[indexPath.section].boxes.count-1 {
@@ -150,7 +150,7 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
                                                         withFont: Fonts.Timeline.boxContent!,
                                                         withWidth: Sizing.Timeline.contentWidth,
                                                         numberOfLines: 0)
-        let multiplier: CGFloat = (indexPath.row == 0) ? 2.75 : 2.25
+        let multiplier: CGFloat = (indexPath.row == 0) ? 2.5 : 2
         let heightForRow = heightForHeader + heightForDistinction + heightForContent + (Sizing.padding * multiplier)
         return heightForRow
     }

@@ -228,7 +228,7 @@ extension TimelineCell {
         header.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: padding).isActive                       = true
         header.topAnchor.constraint(equalTo: icon.topAnchor).isActive                                                   = true
         header.widthAnchor.constraint(equalToConstant: Sizing.Timeline.contentWidth).isActive                           = true
-        header.heightAnchor.constraint(equalToConstant: Fonts.Timeline.boxHeader!.pointSize + padding).isActive                   = true
+        header.heightAnchor.constraint(equalToConstant: Fonts.Timeline.boxHeader!.pointSize + padding/2).isActive                   = true
         
         distinctionWidth = distinction.widthAnchor.constraint(equalToConstant: 0.0)
         distinction.translatesAutoresizingMaskIntoConstraints                                                           = false
