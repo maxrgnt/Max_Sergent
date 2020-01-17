@@ -97,8 +97,8 @@ class TimelineCell: UITableViewCell {
         let distinctionFrame = distinction.frameForLabel(text: distinction.text!,
                                                          font: distinction.font!,
                                                          numberOfLines: 1)
-        distinctionWidth.constant = distinctionFrame.width
-        let radius = 0.047 * min(distinctionFrame.width, distinctionFrame.height)
+        distinctionWidth.constant = distinctionFrame.width + Sizing.padding/2
+        let radius = 0.094 * min(distinctionFrame.width, distinctionFrame.height)
         distinction.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: radius)
     }
     
