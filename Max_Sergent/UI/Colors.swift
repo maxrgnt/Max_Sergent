@@ -49,6 +49,8 @@ struct Colors {
         static let node = primaryFontColor
         static let line = primaryFontColor
         static let boxHeader = primaryFontColor
+        static let boxDistinctionBackground = primaryBackground
+        static let boxDistinctionText = primaryFontColor
         static let boxContent = primaryFontColor
     }
     

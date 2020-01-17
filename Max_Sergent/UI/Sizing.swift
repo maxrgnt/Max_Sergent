@@ -67,6 +67,7 @@ struct Sizing {
         static let leadingCell = nodeRadius + Sizing.padding - lineWidth/2
         static let iconDiameter: CGFloat = 34.0
         static let boxWidth = paddedWidth - lineWidth - Sizing.padding
+        static let boxRadius: CGFloat = min(0.047 * min(width, height), 39.0)
         static let contentWidth = boxWidth - iconDiameter - Sizing.padding*(3/2)
     }
     

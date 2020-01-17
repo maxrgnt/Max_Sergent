@@ -17,6 +17,7 @@ class TimelineCell: UITableViewCell {
     var boxHeight:      NSLayoutConstraint!
     var iconHeight:     NSLayoutConstraint!
     var iconWidth:      NSLayoutConstraint!
+    var distinctionWidth: NSLayoutConstraint!
     var contentHeight:  NSLayoutConstraint!
     var contentLeading: NSLayoutConstraint!
     // Objects
@@ -24,6 +25,7 @@ class TimelineCell: UITableViewCell {
     var box     = UIView()
     var icon    = UIImageView()
     var header  = UILabel()
+    var distinction = UILabel()
     var content = UILabel()
     // Variables
     var includeIcon = false
@@ -51,7 +53,7 @@ class TimelineCell: UITableViewCell {
         
         addSubview(box)
         box.backgroundColor = Colors.Overview.box
-        box.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: Sizing.Overview.boxRadius)
+        box.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: Sizing.Timeline.boxRadius)
         
         box.addSubview(icon)
         icon.clipsToBounds       = true
@@ -64,6 +66,13 @@ class TimelineCell: UITableViewCell {
         header.backgroundColor = .clear
         header.font            = Fonts.Timeline.boxHeader
         header.textColor       = Colors.Timeline.boxHeader
+        
+        box.addSubview(distinction)
+        distinction.numberOfLines   = 1
+        distinction.textAlignment   = .center
+        distinction.backgroundColor = Colors.Timeline.boxDistinctionBackground
+        distinction.font            = Fonts.Timeline.boxDistinction
+        distinction.textColor       = Colors.Timeline.boxDistinctionText
         
         box.addSubview(content)
         content.numberOfLines   = 0
@@ -84,19 +93,33 @@ class TimelineCell: UITableViewCell {
         return contentFrame.height
     }
     
+    func calcDistinctionWidth() {
+        let distinctionFrame = distinction.frameForLabel(text: distinction.text!,
+                                                         font: distinction.font!,
+                                                         numberOfLines: 1)
+        distinctionWidth.constant = distinctionFrame.width
+        let radius = 0.047 * min(distinctionFrame.width, distinctionFrame.height)
+        distinction.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: radius)
+    }
+    
     func resize(forIndex index: Int) {
         let calcHeight = calcHeights()
         boxTop.constant         = (index == 0) ? Sizing.padding/2 : 0.0
         contentHeight.constant  = calcHeight
+        calcDistinctionWidth()
         let heightForHeader = Fonts.calculateLabelHeight(for: header.text!,
                                                         withFont: Fonts.Timeline.boxHeader!,
                                                         withWidth: Sizing.Timeline.contentWidth,
+                                                        numberOfLines: 1)
+        let heightForDistinction = Fonts.calculateLabelHeight(for: distinction.text!,
+                                                        withFont: Fonts.Timeline.boxDistinction!,
+                                                        withWidth: distinctionWidth.constant,
                                                         numberOfLines: 1)
         let heightForContent = Fonts.calculateLabelHeight(for: content.text!,
                                                         withFont: Fonts.Timeline.boxContent!,
                                                         withWidth: Sizing.Timeline.contentWidth,
                                                         numberOfLines: 0)
-        boxHeight.constant = heightForHeader + heightForContent + Sizing.padding
+        boxHeight.constant = heightForHeader + heightForDistinction + heightForContent + Sizing.padding
         layoutIfNeeded()
     }
 

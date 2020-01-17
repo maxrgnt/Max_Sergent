@@ -78,6 +78,7 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         
         cell.icon.image = UIImage(named: data[indexPath.section].boxes[indexPath.row].icon)
         cell.header.text = data[indexPath.section].boxes[indexPath.row].header
+        cell.distinction.text = data[indexPath.section].boxes[indexPath.row].distinction
         cell.content.text  = data[indexPath.section].boxes[indexPath.row].content
         
         if indexPath.section == data.count-1 && indexPath.row == data[indexPath.section].boxes.count-1 {
@@ -134,13 +135,19 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
                                                         withFont: Fonts.Timeline.boxHeader!,
                                                         withWidth: Sizing.Timeline.contentWidth,
                                                         numberOfLines: 1)
+        let distinction = data[indexPath.section].boxes[indexPath.row].distinction
+        let heightForDistinction = Fonts.calculateLabelHeight(for: distinction,
+                                                              withFont: Fonts.Timeline.boxDistinction!,
+                                                              withWidth: Sizing.Timeline.contentWidth,
+                                                              numberOfLines: 1)
         let content = data[indexPath.section].boxes[indexPath.row].content
         let heightForContent = Fonts.calculateLabelHeight(for: content,
                                                         withFont: Fonts.Timeline.boxContent!,
                                                         withWidth: Sizing.Timeline.contentWidth,
                                                         numberOfLines: 0)
         let multiplier: CGFloat = (indexPath.row == 0) ? 2.0 : 1.5
-        let heightForRow = heightForHeader + heightForContent + (Sizing.padding * multiplier)
+        let heightForRow = heightForHeader + heightForDistinction + heightForContent + (Sizing.padding * multiplier)
+    
         return heightForRow
     }
     
