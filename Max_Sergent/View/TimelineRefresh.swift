@@ -43,6 +43,7 @@ class TimelineRefresh: UIView {
         addSubview(node)
         node.backgroundColor = Colors.Timeline.node
         node.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: Sizing.Timeline.nodeRadius)
+        node.alpha = 0.0
         
         addSubview(title)
         title.numberOfLines   = 1
@@ -52,6 +53,7 @@ class TimelineRefresh: UIView {
         title.font            = Fonts.Timeline.title
         title.textColor       = Colors.Timeline.title
         title.text            = Constants.Timeline.refreshTitle
+        title.alpha = 0.0
         
         addSubview(icon)
         icon.clipsToBounds       = true
@@ -61,6 +63,17 @@ class TimelineRefresh: UIView {
         self.icon.image = UIImage(named: icons[0])
         
         closure()
+    }
+    
+    func refreshAlpha(to newAlpha: CGFloat) {
+        UIView.animate(withDuration: 0.33, delay: 0.0, options: [.curveLinear],
+                   animations: {
+                    self.node.alpha = newAlpha
+                    self.title.alpha = newAlpha
+               }, completion: { (done: Bool) in
+                   // pass
+                   }
+               )
     }
         
     func animateIcon(toAlpha newAlpha: CGFloat) {
@@ -83,6 +96,7 @@ class TimelineRefresh: UIView {
         subviews.forEach({$0.layer.removeAllAnimations()})
         layer.removeAllAnimations()
         isAnimating = false
+        refreshAlpha(to: 0.0)
     }
     
 }

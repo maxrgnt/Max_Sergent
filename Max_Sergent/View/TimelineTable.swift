@@ -51,8 +51,8 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         
         refreshControl = UIRefreshControl()
         refreshControl?.backgroundColor = Colors.Timeline.background
-//        refreshControl?.tintColor = .white
-//        refreshControl?.attributedTitle = NSAttributedString(string: "What am I, psychic?")
+        //refreshControl?.tintColor = .white
+        //refreshControl?.attributedTitle = NSAttributedString(string: "What am I, psychic?")
         refreshControl?.addTarget(self, action: #selector(findNewJob), for: .valueChanged)
         
         refreshControl?.addSubview(timelineRefresh)
@@ -150,6 +150,7 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     @objc func findNewJob() {
         print("searching...")
         timelineRefresh.isAnimating = true
+        timelineRefresh.refreshAlpha(to: 1.0)
         timelineRefresh.animateIcon(toAlpha: 1.0)
         self.perform(#selector(finishRefreshing), with: nil, afterDelay: 3.0)
     }
