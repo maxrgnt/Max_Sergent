@@ -40,7 +40,7 @@ struct Constants {
         static let cellReuseId = "TimelineCell"
         static let icons = ["bea","umich","ga"]
         static let headers = ["Bureau of Economic Analysis", "University of Michigan", "General Assembly"]
-        static let content = ["Test test test test test test test test test test test test test test test test test test test test test test test test test test.","Improved profits by 1,000% while slashing costs by 99%. Truly an exceptional feat. Hire me and I may do the same for you.","Read every textbook backwards while translating to Czech. Retained 99.99% of content. Alternatively, when tasked with coloring inside the lines I deviated less than 69% of the time."]
+        static let content = ["Improved profits by 1,000% while slashing costs by 99%. Truly an exceptional feat. Hire me and I may do the same for you.","Read every textbook backwards while translating to Czech. Retained 99.99% of content. Alternatively, when tasked with coloring inside the lines I deviated less than 69% of the time.","Took control of the classroom on Day 1. The bootcamp instructor was eating out of my hand by the end of class as he ended up doing my project for me while I graded all other projects. I am Python. Matlab is trash. My roommate is a deviant."]
         static let clusters = [
             (title: "2019", boxes: [(icon: icons[0], header: headers[0], content: content[0]),
                                     (icon: icons[1], header: headers[1], content: content[1])]),
