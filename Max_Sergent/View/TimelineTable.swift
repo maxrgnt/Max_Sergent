@@ -76,13 +76,8 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         let id = Constants.Timeline.cellReuseId
         let cell: TimelineCell = tableView.dequeueReusableCell(withIdentifier: id) as! TimelineCell
         
-        cell.setup() {
-            cell.constraints()
-        }
-        
         cell.setIcon(withName: data[indexPath.section].boxes[indexPath.row].icon)
         cell.content.text  = data[indexPath.section].boxes[indexPath.row].content
-        
         
         if indexPath.section == data.count-1 && indexPath.row == data[indexPath.section].boxes.count-1 {
             cell.line.roundCorners(corners: [.bottomLeft,.bottomRight], radius: Sizing.Timeline.lineWidth/2)
