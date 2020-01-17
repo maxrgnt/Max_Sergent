@@ -18,6 +18,7 @@ class TimelineCell: UITableViewCell {
     var iconHeight:     NSLayoutConstraint!
     var iconWidth:      NSLayoutConstraint!
     var contentHeight:  NSLayoutConstraint!
+    var contentWidth:   NSLayoutConstraint!
     var contentLeading: NSLayoutConstraint!
     // Objects
     var line    = UILabel()
@@ -81,6 +82,7 @@ class TimelineCell: UITableViewCell {
         let calcHeight = calcHeights()
         boxTop.constant         = (index == 0) ? Sizing.Overview.padding/2 : 0.0
         contentHeight.constant  = calcHeight
+        contentWidth.constant   = Sizing.Overview.boxPaddedWidth - calcHeight - Sizing.padding
         iconHeight.constant     = calcHeight
         iconWidth.constant      = (includeIcon) ? calcHeight : 0.0
         contentLeading.constant = (includeIcon) ? Sizing.Overview.padding/2 : 0.0

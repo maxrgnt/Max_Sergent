@@ -225,10 +225,11 @@ extension TimelineCell {
         
         contentHeight = content.heightAnchor.constraint(equalToConstant: 0.0)
         contentLeading = content.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: padding)
+        contentWidth = content.widthAnchor.constraint(equalToConstant: 0.0)
         content.translatesAutoresizingMaskIntoConstraints                                                               = false
         contentLeading.isActive                                                                                         = true
         content.centerYAnchor.constraint(equalTo: box.centerYAnchor).isActive                                           = true
-        content.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxPaddedWidth).isActive                        = true
+        contentWidth.isActive                                                                                           = true
         contentHeight.isActive                                                                                          = true
     }
     

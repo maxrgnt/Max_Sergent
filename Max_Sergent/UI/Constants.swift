@@ -39,7 +39,7 @@ struct Constants {
         static let refreshTitle = "2020"
         static let cellReuseId = "TimelineCell"
         static let contactIcons = ["location","email","linkedin"]
-        static let contactText = ["Washington, D.C.","maxrgnt@umich.edu","www.linkedin.com/in/max-sergent"]
+        static let contactText = ["Test test test test test test test test test test test test test test test test test test test test test test test test test test.","maxrgnt@umich.edu","www.linkedin.com/in/max-sergent"]
         static let clusters = [
             (title: "2019", boxes: [(icon: contactIcons[0], content: contactText[0]),
                                     (icon: contactIcons[1], content: contactText[1])]),
@@ -47,7 +47,9 @@ struct Constants {
                                     (icon: contactIcons[1], content: contactText[1]),
                                     (icon: contactIcons[2], content: contactText[2]),
                                     (icon: contactIcons[2], content: contactText[2])]),
-            (title: "2017", boxes: [(icon: contactIcons[0], content: contactText[0])]),
+            (title: "2017", boxes: [(icon: contactIcons[0], content: contactText[0]),
+                                    (icon: contactIcons[2], content: contactText[2]),
+                                    (icon: contactIcons[2], content: contactText[2])]),
         ]
     }
     

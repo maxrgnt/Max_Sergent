@@ -49,6 +49,10 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         showsVerticalScrollIndicator    = false
         showsHorizontalScrollIndicator  = false
         
+        let footer = UIView(frame: CGRect(x: 0, y: 0, width: Sizing.width, height: Sizing.Footer.height + Sizing.padding/2))
+        footer.backgroundColor = Colors.Timeline.background
+        tableFooterView = footer
+        
         refreshControl = UIRefreshControl()
         refreshControl?.backgroundColor = Colors.Timeline.background
         //refreshControl?.tintColor = .white
@@ -78,6 +82,14 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         
         cell.setIcon(withName: data[indexPath.section].boxes[indexPath.row].icon)
         cell.content.text  = data[indexPath.section].boxes[indexPath.row].content
+        
+        
+        if indexPath.section == data.count-1 && indexPath.row == data[indexPath.section].boxes.count-1 {
+            cell.line.roundCorners(corners: [.bottomLeft,.bottomRight], radius: Sizing.Timeline.lineWidth/2)
+        }
+        else {
+            cell.line.roundCorners(corners: [], radius: 0.0)
+        }
         
         cell.resize(forIndex: indexPath.row)
         
