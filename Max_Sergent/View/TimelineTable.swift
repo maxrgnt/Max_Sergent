@@ -80,11 +80,11 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         cell.header.text = data[indexPath.section].boxes[indexPath.row].header
         cell.distinction.text = data[indexPath.section].boxes[indexPath.row].distinction
         cell.content.text  = data[indexPath.section].boxes[indexPath.row].content
-        
+                
         let distinction = data[indexPath.section].boxes[indexPath.row].distinction
         cell.distinction.backgroundColor = (distinction == "experience") ? .blue : cell.distinction.backgroundColor
-        cell.distinction.backgroundColor = (distinction == "education") ? .brown : cell.distinction.backgroundColor
-        cell.distinction.backgroundColor = (distinction == "project") ? .red : cell.distinction.backgroundColor
+        cell.distinction.backgroundColor = (distinction == "education") ? .purple : cell.distinction.backgroundColor
+        cell.distinction.backgroundColor = (distinction == "project") ? .darkGray : cell.distinction.backgroundColor
         
         if indexPath.section == data.count-1 && indexPath.row == data[indexPath.section].boxes.count-1 {
             cell.line.roundCorners(corners: [.bottomLeft,.bottomRight], radius: Sizing.Timeline.lineWidth/2)
@@ -109,7 +109,7 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
             tempSection.constraints()
         }
         tempSection.title.text = data[section].title
-        tempSection.titleCenterY.constant = (section == 0) ? Sizing.padding/4 : 0.0
+        tempSection.titleCenterY.constant = (section == 0) ? Sizing.padding/4 : Sizing.padding/4 // 0.0
         tempSection.resize()
         return tempSection
     }
