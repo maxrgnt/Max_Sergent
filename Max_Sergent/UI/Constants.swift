@@ -38,17 +38,17 @@ struct Constants {
     struct Timeline {
         static let refreshTitle = "2020"
         static let cellReuseId = "TimelineCell"
-        static let icons = ["bea","umich","ga"]
-        static let headers = ["Bureau of Economic Analysis", "University of Michigan", "General Assembly"]
-        static let distinctions = ["experience","education","project"]
-        static let content = ["Improved profits by 1,000% while slashing costs by 99%. Truly an exceptional feat. Hire me and I may do the same for you.","Read every textbook backwards while translating to Czech. Retained 99.99% of content. Alternatively, when tasked with coloring inside the lines I deviated less than 69% of the time.","Took control of the classroom on Day 1. The bootcamp instructor was eating out of my hand by the end of class as he ended up doing my project for me while I graded all other projects. I am Python. Matlab is trash. My roommate is a deviant."]
+        static let icons = ["bea","umich","ga","alculate"]
+        static let headers = ["Bureau of Economic Analysis", "University of Michigan", "General Assembly","Alculate"]
+        static let distinctions = ["experience","education","education","project"]
+        static let content = ["Improved profits by 1,000% while slashing costs by 99%. Truly an exceptional feat. Hire me and I may do the same for you.","Read every textbook backwards while translating to Czech. Retained 99.99% of content. Alternatively, when tasked with coloring inside the lines I deviated less than 69% of the time.","Took control of the classroom on Day 1. The bootcamp instructor was eating out of my hand by the end of class as he ended up doing my project for me while I graded all other projects. I am Python. Matlab is trash. My roommate is a deviant.","Who loves drinking but hates spending money? Me too. Alculate let's you have your cake and eat it too. Drink it too? Cheers."]
         static let clusters = [
             (title: "2019", boxes: [(icon: icons[0], distinction: distinctions[0], header: headers[0], content: content[0]),
                                     (icon: icons[1], distinction: distinctions[1], header: headers[1], content: content[1])]),
             (title: "2018", boxes: [(icon: icons[0], distinction: distinctions[0], header: headers[0], content: content[0]),
                                     (icon: icons[1], distinction: distinctions[1], header: headers[1], content: content[1]),
                                     (icon: icons[2], distinction: distinctions[2], header: headers[2], content: content[2]),
-                                    (icon: icons[2], distinction: distinctions[2], header: headers[2], content: content[2])]),
+                                    (icon: icons[3], distinction: distinctions[3], header: headers[3], content: content[3])]),
             (title: "2017", boxes: [(icon: icons[0], distinction: distinctions[0], header: headers[0], content: content[0]),
                                     (icon: icons[2], distinction: distinctions[2], header: headers[2], content: content[2]),
                                     (icon: icons[2], distinction: distinctions[2], header: headers[2], content: content[2])]),
