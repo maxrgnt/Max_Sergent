@@ -69,6 +69,17 @@ struct Sizing {
         static let boxWidth = paddedWidth - lineWidth - Sizing.padding
         static let boxRadius: CGFloat = min(0.047 * min(width, height), 39.0)
         static let contentWidth = boxWidth - iconDiameter - Sizing.padding*(3/2)
+        static let boxLeading = Sizing.padding/2
+        static let distinctionHeight = Fonts.Timeline.boxDistinction!.pointSize + Sizing.padding/2
+        static let extraForFirstRow = Sizing.padding/2
+        
+        struct vert {
+            static let boxTop = Sizing.padding/2
+            static let iconTop = Sizing.padding/2
+            static let distinctionTop = Sizing.padding/4
+            static let contentTop = distinctionTop
+            static let contentBottom = boxTop
+        }
     }
     
     struct Footer {

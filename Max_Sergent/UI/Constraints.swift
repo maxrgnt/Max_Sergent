@@ -209,9 +209,9 @@ extension TimelineCell {
         line.heightAnchor.constraint(equalTo: heightAnchor).isActive                                                    = true
     
         boxHeight = box.heightAnchor.constraint(equalToConstant: 0.0)
-        boxTop = box.topAnchor.constraint(equalTo: topAnchor, constant: padding)
+        boxTop = box.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.Timeline.vert.boxTop)
         box.translatesAutoresizingMaskIntoConstraints                                                                   = false
-        box.leadingAnchor.constraint(equalTo: line.trailingAnchor, constant: Sizing.padding/2).isActive                 = true
+        box.leadingAnchor.constraint(equalTo: line.trailingAnchor, constant: padding).isActive                 = true
         boxTop.isActive                                                                                                 = true
         box.widthAnchor.constraint(equalToConstant: Sizing.Timeline.boxWidth).isActive                                  = true
         boxHeight.isActive                                                                                              = true
@@ -220,28 +220,31 @@ extension TimelineCell {
         iconWidth = icon.widthAnchor.constraint(equalToConstant: Sizing.Timeline.iconDiameter)
         icon.translatesAutoresizingMaskIntoConstraints                                                                  = false
         icon.leadingAnchor.constraint(equalTo: box.leadingAnchor, constant: padding).isActive                           = true
-        icon.topAnchor.constraint(equalTo: box.topAnchor, constant: padding).isActive                                   = true
+        icon.topAnchor.constraint(equalTo: box.topAnchor, constant: Sizing.Timeline.vert.iconTop).isActive              = true
         iconWidth.isActive                                                                                              = true
         iconHeight.isActive                                                                                             = true
         
+        headerHeight = header.heightAnchor.constraint(equalToConstant: 0.0)
         header.translatesAutoresizingMaskIntoConstraints                                                                = false
         header.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: padding).isActive                       = true
         header.topAnchor.constraint(equalTo: icon.topAnchor).isActive                                                   = true
         header.widthAnchor.constraint(equalToConstant: Sizing.Timeline.contentWidth).isActive                           = true
-        header.heightAnchor.constraint(equalToConstant: Fonts.Timeline.boxHeader!.pointSize).isActive                   = true
+        headerHeight.isActive                                                                                           = true
+        
+        let vert = Sizing.Timeline.vert.distinctionTop
         
         distinctionWidth = distinction.widthAnchor.constraint(equalToConstant: 0.0)
         distinction.translatesAutoresizingMaskIntoConstraints                                                           = false
         distinction.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: padding).isActive                  = true
-        distinction.topAnchor.constraint(equalTo: header.bottomAnchor, constant: padding/2).isActive                    = true
+        distinction.topAnchor.constraint(equalTo: header.bottomAnchor, constant: vert).isActive                         = true
         distinctionWidth.isActive                                                                                       = true
-        distinction.heightAnchor.constraint(equalToConstant: Fonts.Timeline.boxDistinction!.pointSize + padding/2).isActive         = true
+        distinction.heightAnchor.constraint(equalToConstant: Sizing.Timeline.distinctionHeight).isActive                = true
         
         contentHeight = content.heightAnchor.constraint(equalToConstant: 0.0)
         contentLeading = content.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: padding)
         content.translatesAutoresizingMaskIntoConstraints                                                               = false
         contentLeading.isActive                                                                                         = true
-        content.topAnchor.constraint(equalTo: distinction.bottomAnchor, constant: padding/2).isActive                   = true
+        content.topAnchor.constraint(equalTo: distinction.bottomAnchor, constant: vert).isActive                        = true
         content.widthAnchor.constraint(equalToConstant: Sizing.Timeline.contentWidth).isActive                          = true
         contentHeight.isActive                                                                                          = true
     }

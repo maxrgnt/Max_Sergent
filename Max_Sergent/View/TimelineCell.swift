@@ -17,6 +17,7 @@ class TimelineCell: UITableViewCell {
     var boxHeight:      NSLayoutConstraint!
     var iconHeight:     NSLayoutConstraint!
     var iconWidth:      NSLayoutConstraint!
+    var headerHeight:   NSLayoutConstraint!
     var distinctionWidth: NSLayoutConstraint!
     var contentHeight:  NSLayoutConstraint!
     var contentLeading: NSLayoutConstraint!
@@ -85,14 +86,6 @@ class TimelineCell: UITableViewCell {
         closure()
     }
     
-    func calcHeights() -> CGFloat {
-        let contentFrame = content.frameForLabel(text: content.text!,
-                                                 font: content.font!,
-                                                 numberOfLines: content.numberOfLines,
-                                                 width: Sizing.Timeline.contentWidth)
-        return contentFrame.height
-    }
-    
     func calcDistinctionWidth() {
         let distinctionFrame = distinction.frameForLabel(text: distinction.text!,
                                                          font: distinction.font!,
@@ -103,9 +96,6 @@ class TimelineCell: UITableViewCell {
     }
     
     func resize(forIndex index: Int) {
-        let calcHeight = calcHeights()
-        boxTop.constant         = (index == 0) ? Sizing.padding/2 : 0.0
-        contentHeight.constant  = calcHeight
         calcDistinctionWidth()
         let heightForHeader = Fonts.calculateLabelHeight(for: header.text!,
                                                         withFont: Fonts.Timeline.boxHeader!,
@@ -119,7 +109,10 @@ class TimelineCell: UITableViewCell {
                                                         withFont: Fonts.Timeline.boxContent!,
                                                         withWidth: Sizing.Timeline.contentWidth,
                                                         numberOfLines: 0)
-        boxHeight.constant = heightForHeader + heightForDistinction + heightForContent + Sizing.padding * 1.25
+        //boxTop.constant         = (index == 0) ? Sizing.Timeline.extraForFirstRow : 0.0
+        headerHeight.constant   = heightForHeader
+        contentHeight.constant  = heightForContent
+        boxHeight.constant      = heightForHeader + heightForDistinction + heightForContent + Sizing.Timeline.vert.iconTop + Sizing.Timeline.vert.distinctionTop + Sizing.Timeline.vert.contentTop + Sizing.Timeline.vert.contentBottom
         layoutIfNeeded()
     }
 
