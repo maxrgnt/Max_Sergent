@@ -81,8 +81,6 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         cell.distinction.text = data[indexPath.section].boxes[indexPath.row].distinction
         cell.content.text  = data[indexPath.section].boxes[indexPath.row].content
         
-        cell.backgroundColor = .blue
-        
         let distinction = data[indexPath.section].boxes[indexPath.row].distinction
         cell.distinction.backgroundColor = (distinction == "experience") ? .blue : cell.distinction.backgroundColor
         cell.distinction.backgroundColor = (distinction == "education") ? .brown : cell.distinction.backgroundColor

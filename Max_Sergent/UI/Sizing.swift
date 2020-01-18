@@ -18,6 +18,7 @@ struct Sizing {
     static let padding     = statusBar.height/2
     static let paddedWidth = width-statusBar.height
     static let watermarkHeight = (height * Ratio.watermark) - padding
+    static let verticalLabelOffset: CGFloat = -5.0
     
     struct Ratio {
         static let expandedHeader:  CGFloat = 0.42
@@ -78,7 +79,7 @@ struct Sizing {
             static let iconTop = Sizing.padding/2
             static let distinctionTop = Sizing.padding/4
             static let contentTop = distinctionTop
-            static let contentBottom = boxTop
+            static let contentBottom = boxTop*1.5
         }
     }
     

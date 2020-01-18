@@ -227,7 +227,7 @@ extension TimelineCell {
         headerHeight = header.heightAnchor.constraint(equalToConstant: 0.0)
         header.translatesAutoresizingMaskIntoConstraints                                                                = false
         header.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: padding).isActive                       = true
-        header.topAnchor.constraint(equalTo: icon.topAnchor).isActive                                                   = true
+        header.topAnchor.constraint(equalTo: icon.topAnchor, constant: Sizing.verticalLabelOffset).isActive             = true
         header.widthAnchor.constraint(equalToConstant: Sizing.Timeline.contentWidth).isActive                           = true
         headerHeight.isActive                                                                                           = true
         
