@@ -23,7 +23,7 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     // Objects
     var page1 = OverviewTable()
     var page2 = TimelineTable()
-    var page3 = UIView()
+    var page3 = Details()
     lazy var pages = [page1,page2,page3]
     var scrollingFromMenu = false
     
@@ -64,9 +64,10 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
 //        page2.roundCorners(corners: [.topLeft,.topRight], radius: Sizing.Scroll.radius)
         page2.setup()
         addSubview(page3)
-        page3.backgroundColor = .darkGray
         page3.roundCorners(corners: [.topRight], radius: Sizing.Scroll.radius)
-        //page3.setup()
+        page3.setup() {
+            page3.constraints()
+        }
         
         closure()
     }

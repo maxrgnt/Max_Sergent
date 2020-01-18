@@ -251,6 +251,15 @@ extension TimelineCell {
     
 }
 
+//MARK: Details
+extension Details {
+    
+    func constraints() {
+        
+    }
+    
+}
+
 //MARK: Footer
 extension Footer {
     
