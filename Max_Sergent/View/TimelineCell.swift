@@ -15,6 +15,7 @@ class TimelineCell: UITableViewCell {
     // Constraints
     var boxTop:         NSLayoutConstraint!
     var boxHeight:      NSLayoutConstraint!
+    var boxHeaderHeight: NSLayoutConstraint!
     var iconHeight:     NSLayoutConstraint!
     var iconWidth:      NSLayoutConstraint!
     var headerHeight:   NSLayoutConstraint!
@@ -24,6 +25,7 @@ class TimelineCell: UITableViewCell {
     // Objects
     var line    = UILabel()
     var box     = UIView()
+    var boxHeader = UILabel()
     var icon    = UIImageView()
     var header  = UILabel()
     var distinction = UILabel()
@@ -52,6 +54,9 @@ class TimelineCell: UITableViewCell {
         addSubview(line)
         line.backgroundColor = Colors.Timeline.line
         
+        addSubview(boxHeader)
+        boxHeader.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: Sizing.Timeline.boxRadius)
+        
         addSubview(box)
         box.backgroundColor = Colors.Overview.box
         box.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: Sizing.Timeline.boxRadius)
@@ -61,14 +66,14 @@ class TimelineCell: UITableViewCell {
         icon.layer.masksToBounds = true
         icon.contentMode         = .scaleAspectFill
         
-        box.addSubview(header)
+        addSubview(header)
         header.numberOfLines   = 1
         header.textAlignment   = .left
         header.backgroundColor = .clear
         header.font            = Fonts.Timeline.boxHeader
         header.textColor       = Colors.Timeline.boxHeader
         
-        box.addSubview(distinction)
+        addSubview(distinction)
         distinction.numberOfLines   = 1
         distinction.textAlignment   = .center
         distinction.backgroundColor = Colors.Timeline.boxDistinctionBackground
@@ -101,10 +106,6 @@ class TimelineCell: UITableViewCell {
                                                         withFont: Fonts.Timeline.boxHeader!,
                                                         withWidth: Sizing.Timeline.contentWidth,
                                                         numberOfLines: 1)
-        let heightForDistinction = Fonts.calculateLabelHeight(for: distinction.text!,
-                                                        withFont: Fonts.Timeline.boxDistinction!,
-                                                        withWidth: distinctionWidth.constant,
-                                                        numberOfLines: 1)
         let heightForContent = Fonts.calculateLabelHeight(for: content.text!,
                                                         withFont: Fonts.Timeline.boxContent!,
                                                         withWidth: Sizing.Timeline.contentWidth,
@@ -112,7 +113,8 @@ class TimelineCell: UITableViewCell {
         //boxTop.constant         = (index == 0) ? Sizing.Timeline.extraForFirstRow : 0.0
         headerHeight.constant   = heightForHeader
         contentHeight.constant  = heightForContent
-        boxHeight.constant      = heightForHeader + heightForDistinction + heightForContent + Sizing.Timeline.vert.iconTop + Sizing.Timeline.vert.distinctionTop + Sizing.Timeline.vert.contentTop + Sizing.Timeline.vert.contentBottom
+        boxHeight.constant      = heightForContent + Sizing.padding
+        boxHeaderHeight.constant = heightForHeader + Sizing.padding + boxHeight.constant
         layoutIfNeeded()
     }
 

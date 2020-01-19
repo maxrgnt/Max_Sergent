@@ -82,9 +82,9 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         cell.content.text  = data[indexPath.section].boxes[indexPath.row].content
                 
         let distinction = data[indexPath.section].boxes[indexPath.row].distinction
-        cell.distinction.backgroundColor = (distinction == "experience") ? .blue : cell.distinction.backgroundColor
-        cell.distinction.backgroundColor = (distinction == "education") ? .purple : cell.distinction.backgroundColor
-        cell.distinction.backgroundColor = (distinction == "project") ? .darkGray : cell.distinction.backgroundColor
+        cell.boxHeader.backgroundColor = (distinction == ".exp") ? .blue : cell.boxHeader.backgroundColor
+        cell.boxHeader.backgroundColor = (distinction == ".edu") ? .purple : cell.boxHeader.backgroundColor
+        cell.boxHeader.backgroundColor = (distinction == ".proj") ? .black : cell.boxHeader.backgroundColor
         
         if indexPath.section == data.count-1 && indexPath.row == data[indexPath.section].boxes.count-1 {
             cell.line.roundCorners(corners: [.bottomLeft,.bottomRight], radius: Sizing.Timeline.lineWidth/2)
@@ -136,22 +136,16 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let header = data[indexPath.section].boxes[indexPath.row].header
-        let distinction = data[indexPath.section].boxes[indexPath.row].distinction
         let content = data[indexPath.section].boxes[indexPath.row].content
         let heightForHeader = Fonts.calculateLabelHeight(for: header,
                                                         withFont: Fonts.Timeline.boxHeader!,
-                                                        withWidth: Sizing.Timeline.contentWidth,
-                                                        numberOfLines: 1)
-        let heightForDistinction = Fonts.calculateLabelHeight(for: distinction,
-                                                        withFont: Fonts.Timeline.boxDistinction!,
                                                         withWidth: Sizing.Timeline.contentWidth,
                                                         numberOfLines: 1)
         let heightForContent = Fonts.calculateLabelHeight(for: content,
                                                         withFont: Fonts.Timeline.boxContent!,
                                                         withWidth: Sizing.Timeline.contentWidth,
                                                         numberOfLines: 0)
-        let heightForRow = heightForHeader + heightForDistinction + heightForContent + Sizing.Timeline.vert.iconTop + Sizing.Timeline.vert.distinctionTop + Sizing.Timeline.vert.contentTop + Sizing.Timeline.vert.contentBottom + Sizing.Timeline.vert.boxTop
-        
+        let heightForRow = heightForHeader + heightForContent + Sizing.padding*3
         return heightForRow
     }
     

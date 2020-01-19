@@ -58,7 +58,7 @@ struct Fonts {
     struct Timeline {
         static let title = UIFont(name: openSansBold, size: Size.title)
         static let boxHeader = UIFont(name: openSansSemiBold, size: Size.primaryText)
-        static let boxDistinction = UIFont(name: openSans, size: Size.tertiaryText)
+        static let boxDistinction = UIFont(name: openSans, size: Size.actionBar)
         static let boxContent = UIFont(name: openSans, size: Size.secondaryText)
     }
     

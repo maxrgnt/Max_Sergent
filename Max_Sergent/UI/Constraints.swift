@@ -209,12 +209,26 @@ extension TimelineCell {
         line.heightAnchor.constraint(equalTo: heightAnchor).isActive                                                    = true
     
         boxHeight = box.heightAnchor.constraint(equalToConstant: 0.0)
-        boxTop = box.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.Timeline.vert.boxTop)
+        boxTop = box.topAnchor.constraint(equalTo: header.bottomAnchor, constant: padding)
         box.translatesAutoresizingMaskIntoConstraints                                                                   = false
-        box.leadingAnchor.constraint(equalTo: line.trailingAnchor, constant: padding).isActive                 = true
+        box.leadingAnchor.constraint(equalTo: line.trailingAnchor, constant: padding).isActive                          = true
         boxTop.isActive                                                                                                 = true
         box.widthAnchor.constraint(equalToConstant: Sizing.Timeline.boxWidth).isActive                                  = true
         boxHeight.isActive                                                                                              = true
+    
+        headerHeight = header.heightAnchor.constraint(equalToConstant: 0.0)
+        header.translatesAutoresizingMaskIntoConstraints                                                                = false
+        header.leadingAnchor.constraint(equalTo: icon.leadingAnchor).isActive                                           = true
+        header.topAnchor.constraint(equalTo: topAnchor, constant: padding).isActive                                     = true
+        header.widthAnchor.constraint(equalToConstant: Sizing.Timeline.contentWidth).isActive                           = true
+        headerHeight.isActive                                                                                           = true
+        
+        boxHeaderHeight = boxHeader.heightAnchor.constraint(equalToConstant: 0.0)
+        boxHeader.translatesAutoresizingMaskIntoConstraints                                                             = false
+        boxHeader.leadingAnchor.constraint(equalTo: icon.leadingAnchor).isActive                                        = true
+        boxHeader.topAnchor.constraint(equalTo: topAnchor, constant: padding).isActive                                  = true
+        boxHeader.widthAnchor.constraint(equalToConstant: Sizing.Timeline.contentWidth).isActive                        = true
+        boxHeaderHeight.isActive                                                                                        = true
         
         iconHeight = icon.heightAnchor.constraint(equalToConstant: Sizing.Timeline.iconDiameter)
         iconWidth = icon.widthAnchor.constraint(equalToConstant: Sizing.Timeline.iconDiameter)
@@ -224,19 +238,10 @@ extension TimelineCell {
         iconWidth.isActive                                                                                              = true
         iconHeight.isActive                                                                                             = true
         
-        headerHeight = header.heightAnchor.constraint(equalToConstant: 0.0)
-        header.translatesAutoresizingMaskIntoConstraints                                                                = false
-        header.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: padding).isActive                       = true
-        header.topAnchor.constraint(equalTo: icon.topAnchor, constant: Sizing.verticalLabelOffset).isActive             = true
-        header.widthAnchor.constraint(equalToConstant: Sizing.Timeline.contentWidth).isActive                           = true
-        headerHeight.isActive                                                                                           = true
-        
-        let vert = Sizing.Timeline.vert.distinctionTop
-        
         distinctionWidth = distinction.widthAnchor.constraint(equalToConstant: 0.0)
         distinction.translatesAutoresizingMaskIntoConstraints                                                           = false
-        distinction.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: padding).isActive                  = true
-        distinction.topAnchor.constraint(equalTo: header.bottomAnchor, constant: vert).isActive                         = true
+        distinction.trailingAnchor.constraint(equalTo: box.trailingAnchor, constant: -padding).isActive                 = true
+        distinction.centerYAnchor.constraint(equalTo: header.centerYAnchor).isActive                                    = true
         distinctionWidth.isActive                                                                                       = true
         distinction.heightAnchor.constraint(equalToConstant: Sizing.Timeline.distinctionHeight).isActive                = true
         
@@ -244,7 +249,7 @@ extension TimelineCell {
         contentLeading = content.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: padding)
         content.translatesAutoresizingMaskIntoConstraints                                                               = false
         contentLeading.isActive                                                                                         = true
-        content.topAnchor.constraint(equalTo: distinction.bottomAnchor, constant: vert).isActive                        = true
+        content.topAnchor.constraint(equalTo: icon.topAnchor, constant: Sizing.verticalLabelOffset).isActive            = true
         content.widthAnchor.constraint(equalToConstant: Sizing.Timeline.contentWidth).isActive                          = true
         contentHeight.isActive                                                                                          = true
     }
