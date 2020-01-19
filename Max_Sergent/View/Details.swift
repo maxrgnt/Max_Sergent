@@ -20,6 +20,7 @@ class Details: UIScrollView, UIScrollViewDelegate {
     var customDelegate: DetailsDelegate!
     // Constraints
     // Objects
+    var pie = Pie()
     
     //MARK: Initialization
     init() {
@@ -46,7 +47,10 @@ class Details: UIScrollView, UIScrollViewDelegate {
         contentSize   = CGSize(width: Sizing.width, height: CGFloat(100.0))
         contentInset  = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
-        backgroundColor = .blue
+        addSubview(pie)
+        pie.setup {
+            pie.constraints()
+        }
         
         //roundCorners(corners: [.topLeft,.topRight], radius: Sizing.Scroll.radius)
         

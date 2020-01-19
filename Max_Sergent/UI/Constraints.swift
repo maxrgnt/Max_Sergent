@@ -260,6 +260,19 @@ extension TimelineCell {
 extension Details {
     
     func constraints() {
+        pie.translatesAutoresizingMaskIntoConstraints                                                                   = false
+        pie.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                   = true
+        pie.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                                   = true
+        pie.widthAnchor.constraint(equalToConstant: Sizing.Pie.diameter).isActive                                       = true
+        pie.heightAnchor.constraint(equalToConstant: Sizing.Pie.diameter).isActive                                      = true
+    }
+    
+}
+
+//MARK: Pie
+extension Pie {
+    
+    func constraints() {
         
     }
     

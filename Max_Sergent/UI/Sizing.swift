@@ -83,6 +83,17 @@ struct Sizing {
         }
     }
     
+    struct Details {
+        
+    }
+    
+    struct Pie {
+        static let diameter = Sizing.paddedWidth
+        static let radius = diameter/2 - lineWidth/2
+        static let center = CGPoint(x: diameter/2, y: diameter/2)
+        static let lineWidth = diameter/10
+    }
+    
     struct Footer {
         static let height = Sizing.height * Ratio.footer - padding
         static let radius: CGFloat = 0.047 * width// min(width, height) // 0.188
