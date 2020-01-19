@@ -76,7 +76,6 @@ class TimelineCell: UITableViewCell {
         addSubview(distinction)
         distinction.numberOfLines   = 1
         distinction.textAlignment   = .center
-        distinction.backgroundColor = Colors.Timeline.boxDistinctionBackground
         distinction.font            = Fonts.Timeline.boxDistinction
         distinction.textColor       = Colors.Timeline.boxDistinctionText
         
@@ -114,7 +113,7 @@ class TimelineCell: UITableViewCell {
         headerHeight.constant   = heightForHeader
         contentHeight.constant  = heightForContent
         boxHeight.constant      = heightForContent + Sizing.padding
-        boxHeaderHeight.constant = heightForHeader + Sizing.padding + boxHeight.constant
+        boxHeaderHeight.constant = heightForHeader + Sizing.padding/2 + boxHeight.constant
         layoutIfNeeded()
     }
 

@@ -80,7 +80,7 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         cell.header.text = data[indexPath.section].boxes[indexPath.row].header
         cell.distinction.text = data[indexPath.section].boxes[indexPath.row].distinction
         cell.content.text  = data[indexPath.section].boxes[indexPath.row].content
-                
+
         let distinction = data[indexPath.section].boxes[indexPath.row].distinction
         cell.boxHeader.backgroundColor = (distinction == ".exp") ? .blue : cell.boxHeader.backgroundColor
         cell.boxHeader.backgroundColor = (distinction == ".edu") ? .purple : cell.boxHeader.backgroundColor
@@ -145,7 +145,7 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
                                                         withFont: Fonts.Timeline.boxContent!,
                                                         withWidth: Sizing.Timeline.contentWidth,
                                                         numberOfLines: 0)
-        let heightForRow = heightForHeader + heightForContent + Sizing.padding*3
+        let heightForRow = heightForHeader + heightForContent + Sizing.padding*2.5
         return heightForRow
     }
     
