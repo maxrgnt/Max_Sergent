@@ -87,7 +87,6 @@ extension UIColor {
     }
 }
 
-
 //    UIView.animate(withDuration: 0.55, delay: 0.0,
 //        // 1.0 is smooth, 0.0 is bouncy
 //        usingSpringWithDamping: 0.7,

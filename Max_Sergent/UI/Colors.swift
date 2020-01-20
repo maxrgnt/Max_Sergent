@@ -54,6 +54,10 @@ struct Colors {
         static let boxContent = primaryFontColor
     }
     
+    struct Pie {
+        static let legend = primaryFontColor
+    }
+    
     struct Footer {
         
     }

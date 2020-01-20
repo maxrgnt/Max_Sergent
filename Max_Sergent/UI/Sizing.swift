@@ -89,9 +89,11 @@ struct Sizing {
     
     struct Pie {
         static let diameter = Sizing.paddedWidth
-        static let radius = diameter/2 - lineWidth/2
+        static let circleRadius = diameter/2 - lineWidth/2
+        static let textRadius = circleRadius - lineWidth
         static let center = CGPoint(x: diameter/2, y: diameter/2)
         static let lineWidth = diameter/10
+        static let lineGap = 10.0
     }
     
     struct Footer {
