@@ -10,13 +10,41 @@ import Foundation
 import UIKit
 
 struct Sizing {
+
+    init() {
+        print("Setting Sizing")
+    }
     
-    static let height      = UIScreen.main.bounds.height
+    // 667.0    iPhone 6 / iPhone 7 / iPhone 8
+    //
+    
+    static var height      = UIScreen.main.bounds.height
+    static var offsetForShorterScreens: CGFloat = 0.0 {
+        didSet {
+            Header.expandedHeight      = (Sizing.height * Ratio.expandedHeader) + offsetForShorterScreens
+            Header.minimizedHeight     = (Sizing.height * Ratio.minimizedHeader) + offsetForShorterScreens
+            Header.heightAdjustment    = Header.expandedHeight - Header.minimizedHeight
+            Header.nameHeight          = Header.expandedHeight/2
+        }
+    }
     static let width       = UIScreen.main.bounds.width
     static let keyWindow   = UIApplication.shared.windows[0]
     static let statusBar   = keyWindow.windowScene!.statusBarManager!.statusBarFrame
-    static let padding     = statusBar.height/2
-    static let paddedWidth = width-statusBar.height
+    static var padding     = statusBar.height/2 {
+        didSet {
+            print("setting padding")
+            Header.padding = padding
+            Overview.padding = padding
+            Timeline.padding = padding
+            Details.padding = padding
+            Pie.padding = padding
+            Concepts.padding = padding
+            Footer.padding = padding
+            Menu.padding = padding
+            paddedWidth = width - padding*2
+        }
+    }
+    static var paddedWidth = width-statusBar.height
     static let watermarkHeight = (height * Ratio.watermark) - padding
     static let verticalLabelOffset: CGFloat = -5.0
     
@@ -33,13 +61,14 @@ struct Sizing {
     }
     
     struct Header {
-        static let expandedHeight      = Sizing.height * Ratio.expandedHeader
-        static var minimizedHeight     = Sizing.height * Ratio.minimizedHeader
+        static var padding = Sizing.padding
+        static var expandedHeight      = Sizing.height * Ratio.expandedHeader + offsetForShorterScreens
+        static var minimizedHeight     = Sizing.height * Ratio.minimizedHeader + offsetForShorterScreens
         static var heightAdjustment    = expandedHeight - minimizedHeight
         static var nameHeight          = expandedHeight/2 {
             didSet {
                 Scroll.limit = nameHeight + nameBottom
-                minimizedHeight = nameHeight + statusBar.height + padding
+                minimizedHeight = nameHeight + padding*2 + padding
                 heightAdjustment = expandedHeight - minimizedHeight
                 Ratio.scroll = 1 - minimizedHeight/Sizing.height
             }
@@ -54,7 +83,7 @@ struct Sizing {
     }
     
     struct Overview {
-        static let padding = Header.nameBottom
+        static var padding = Header.nameBottom
         static let height = Sizing.height - Header.expandedHeight - Footer.height - padding
         static let boxWidth = paddedWidth
         static let boxRadius: CGFloat = min(0.047 * min(width, height), 39.0)
@@ -62,32 +91,34 @@ struct Sizing {
     }
     
     struct Timeline {
+        static var padding = Sizing.padding
         static let lineWidth = Sizing.paddedWidth/50
         static let nodeDiameter = lineWidth*3
         static let nodeRadius = nodeDiameter/2
-        static let leadingCell = nodeRadius + Sizing.padding - lineWidth/2
+        static let leadingCell = nodeRadius + padding - lineWidth/2
         static let iconDiameter: CGFloat = 34.0
-        static let boxWidth = paddedWidth - lineWidth - Sizing.padding
+        static let boxWidth = paddedWidth - lineWidth - padding
         static let boxRadius: CGFloat = min(0.047 * min(width, height), 39.0)
-        static let contentWidth = boxWidth - iconDiameter - Sizing.padding*(3/2)
-        static let boxLeading = Sizing.padding/2
-        static let distinctionHeight = Fonts.Timeline.boxDistinction!.pointSize + Sizing.padding/2
-        static let extraForFirstRow = Sizing.padding/2
+        static let contentWidth = boxWidth - iconDiameter - padding*(3/2)
+        static let boxLeading = padding/2
+        static let distinctionHeight = Fonts.Timeline.boxDistinction!.pointSize + padding/2
+        static let extraForFirstRow = padding/2
         
         struct vert {
-            static let boxTop = Sizing.padding/2
-            static let iconTop = Sizing.padding/2
-            static let distinctionTop = Sizing.padding/4
+            static let boxTop = padding/2
+            static let iconTop = padding/2
+            static let distinctionTop = padding/4
             static let contentTop = distinctionTop
             static let contentBottom = boxTop*1.5
         }
     }
     
     struct Details {
-        
+        static var padding = Sizing.padding
     }
     
     struct Pie {
+        static var padding = Sizing.padding
         static let boxRadius: CGFloat = min(0.047 * paddedWidth, 39.0)
         static let diameter = Sizing.paddedWidth - padding
         static let circleRadius = diameter/2 - lineWidth/2 - lineWidth
@@ -98,6 +129,7 @@ struct Sizing {
     }
     
     struct Concepts {
+        static var padding = Sizing.padding
         static let cellWidth: CGFloat = (paddedWidth-padding*3)/Constants.Concepts.objectsPerRow
         static var cellHeight: CGFloat = cellWidth + padding*(3/2) + titleHeight // label margin
         static let contentWidth = cellWidth - padding/2
@@ -110,15 +142,17 @@ struct Sizing {
     }
     
     struct Footer {
+        static var padding = Sizing.padding
         static let height = Sizing.height * Ratio.footer - padding
         static let radius: CGFloat = 0.047 * width// min(width, height) // 0.188
     }
     
     struct Menu {
+        static var padding = Sizing.padding
         static let iconDiameter = Footer.height * (2/3) - padding
         static let textHeight = Footer.height * (1/3)
         static let textWidth = (paddedWidth-(padding*3))/3
-        static let scrollOffset = Sizing.Footer.height + Sizing.padding/2
+        static let scrollOffset = Sizing.Footer.height + padding/2
     }
     
 }

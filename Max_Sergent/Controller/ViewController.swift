@@ -22,6 +22,11 @@ class ViewController: UIViewController, HeaderDelegate, ScrollDelegate, Overview
     
     override func viewDidLoad() {
         print("Hello World!")
+        print("statusBarHeight: \(Sizing.statusBar.height)")
+        print("screenHeight: \(Sizing.height)")
+        Sizing.padding = Sizing.padding < 22.0 ? 22.0 : Sizing.padding
+        Sizing.offsetForShorterScreens = Sizing.height <= 736.0 ? -66.0 : 0.0
+        
         view.backgroundColor = Colors.ViewController.background
         setup() {
             constraints()

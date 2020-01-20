@@ -109,7 +109,7 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
             tempSection.constraints()
         }
         tempSection.title.text = data[section].title
-        tempSection.titleCenterY.constant = (section == 0) ? Sizing.padding/4 : Sizing.padding/4 // 0.0
+        tempSection.titleCenterY.constant = (section == 0) ? Sizing.Timeline.padding/4 : Sizing.Timeline.padding/4 // 0.0
         tempSection.resize()
         return tempSection
     }
@@ -121,8 +121,8 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
                                                         withWidth: Sizing.Overview.boxPaddedWidth,
                                                         numberOfLines: 1)
         let heightForSection = (section == 0 )
-            ? heightForLabel + Sizing.padding * (3/2)
-            : heightForLabel + Sizing.padding
+            ? heightForLabel + Sizing.Timeline.padding * (3/2)
+            : heightForLabel + Sizing.Timeline.padding
         return heightForSection
     }
     
@@ -145,16 +145,12 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
                                                         withFont: Fonts.Timeline.boxContent!,
                                                         withWidth: Sizing.Timeline.contentWidth,
                                                         numberOfLines: 0)
-        let heightForRow = heightForHeader + heightForContent + Sizing.padding*2.5
+        let heightForRow = heightForHeader + heightForContent + Sizing.Timeline.padding*2.5
         return heightForRow
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
-            indexPath.row == 0 ? self.customDelegate.openMaps() : nil
-            indexPath.row == 1 ? self.customDelegate.sendEmail() : nil
-            indexPath.row == 2 ? self.customDelegate.openLinkedIn() : nil
-        }
+        
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

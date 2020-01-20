@@ -149,8 +149,8 @@ class Details: UIScrollView, UIScrollViewDelegate {
         layoutIfNeeded()
         
         let numberOfRows = ceil(CGFloat(Constants.Concepts.list.count)/Constants.Concepts.objectsPerRow)
-        let collectionHeight = (numberOfRows * Sizing.Concepts.cellHeight) + ((numberOfRows-1) * Sizing.padding)
-        conceptsHeight.constant = collectionHeight + concepts.headerHeight.constant + Sizing.padding
+        let collectionHeight = (numberOfRows * Sizing.Concepts.cellHeight) + ((numberOfRows-1) * Sizing.Timeline.padding)
+        conceptsHeight.constant = collectionHeight + concepts.headerHeight.constant + Sizing.Timeline.padding
         let contentHeight: CGFloat = headerHeight.constant + Sizing.paddedWidth + conceptsHeight.constant + Sizing.Menu.scrollOffset
         contentSize   = CGSize(width: Sizing.width, height: contentHeight)
         print(Sizing.Scroll.height, contentHeight)

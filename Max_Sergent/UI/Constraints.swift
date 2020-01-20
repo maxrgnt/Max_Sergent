@@ -34,7 +34,7 @@ extension ViewController {
         
         footer.translatesAutoresizingMaskIntoConstraints                                                                = false
         footer.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive                                      = true
-        footer.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -Sizing.padding).isActive             = true
+        footer.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -Sizing.Footer.padding).isActive      = true
         footer.widthAnchor.constraint(equalToConstant: Sizing.paddedWidth).isActive                                     = true
         footer.heightAnchor.constraint(equalToConstant: Sizing.Footer.height).isActive                                  = true
     }
@@ -142,7 +142,7 @@ extension TimelineRefresh {
     
     func constraints() {
         title.translatesAutoresizingMaskIntoConstraints                                                                 = false
-        title.leadingAnchor.constraint(equalTo: node.trailingAnchor, constant: Sizing.padding/2).isActive               = true
+        title.leadingAnchor.constraint(equalTo: node.trailingAnchor, constant: Sizing.Timeline.padding/2).isActive      = true
         title.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0.0).isActive                                  = true
         title.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxPaddedWidth).isActive                          = true
         title.heightAnchor.constraint(equalToConstant: Fonts.Timeline.title!.pointSize).isActive                        = true
@@ -160,7 +160,7 @@ extension TimelineRefresh {
         icon.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.45).isActive                                  = true
         
         node.translatesAutoresizingMaskIntoConstraints                                                                  = false
-        node.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Sizing.padding).isActive                        = true
+        node.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Sizing.Timeline.padding).isActive               = true
         node.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                                  = true
         node.widthAnchor.constraint(equalToConstant: Sizing.Timeline.nodeDiameter).isActive                             = true
         node.heightAnchor.constraint(equalToConstant: Sizing.Timeline.nodeDiameter).isActive                            = true
@@ -175,7 +175,7 @@ extension TimelineSection {
         titleCenterY = title.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0.0)
         titleHeight = title.heightAnchor.constraint(equalToConstant: 0.0)
         title.translatesAutoresizingMaskIntoConstraints                                                                 = false
-        title.leadingAnchor.constraint(equalTo: node.trailingAnchor, constant: Sizing.padding/2).isActive               = true
+        title.leadingAnchor.constraint(equalTo: node.trailingAnchor, constant: Sizing.Timeline.padding/2).isActive      = true
         titleCenterY.isActive                                                                                           = true
         title.widthAnchor.constraint(equalToConstant: Sizing.Overview.boxPaddedWidth).isActive                          = true
         titleHeight.isActive                                                                                            = true
@@ -188,7 +188,7 @@ extension TimelineSection {
         line.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 10.0).isActive                                    = true
         
         node.translatesAutoresizingMaskIntoConstraints                                                                  = false
-        node.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Sizing.padding).isActive                        = true
+        node.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Sizing.Timeline.padding).isActive               = true
         node.centerYAnchor.constraint(equalTo: title.centerYAnchor).isActive                                            = true
         node.widthAnchor.constraint(equalToConstant: Sizing.Timeline.nodeDiameter).isActive                             = true
         node.heightAnchor.constraint(equalToConstant: Sizing.Timeline.nodeDiameter).isActive                            = true
@@ -262,16 +262,16 @@ extension Details {
     func constraints() {
         headerHeight = header.heightAnchor.constraint(equalToConstant: 0.0)
         header.translatesAutoresizingMaskIntoConstraints                                                                = false
-        header.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.padding).isActive                            = true
+        header.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.Details.padding).isActive                      = true
         header.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                = true
         header.widthAnchor.constraint(equalToConstant: Sizing.paddedWidth).isActive                                     = true
         headerHeight.isActive                                                                                           = true
         
         pie.translatesAutoresizingMaskIntoConstraints                                                                   = false
         pie.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                   = true
-        pie.topAnchor.constraint(equalTo: header.bottomAnchor, constant: Sizing.padding/2).isActive               = true
-        pie.widthAnchor.constraint(equalToConstant: Sizing.paddedWidth).isActive                                       = true
-        pie.heightAnchor.constraint(equalToConstant: Sizing.paddedWidth).isActive                                      = true
+        pie.topAnchor.constraint(equalTo: header.bottomAnchor, constant: Sizing.Details.padding/2).isActive             = true
+        pie.widthAnchor.constraint(equalToConstant: Sizing.paddedWidth).isActive                                        = true
+        pie.heightAnchor.constraint(equalToConstant: Sizing.paddedWidth).isActive                                       = true
 
         pieText.translatesAutoresizingMaskIntoConstraints                                                               = false
         pieText.centerXAnchor.constraint(equalTo: pie.centerXAnchor).isActive                                           = true
@@ -297,7 +297,7 @@ extension Details {
         
         conceptsHeight = concepts.heightAnchor.constraint(equalToConstant: 0.0)
         concepts.translatesAutoresizingMaskIntoConstraints                                                              = false
-        concepts.topAnchor.constraint(equalTo: pie.bottomAnchor, constant: Sizing.padding/2).isActive                   = true
+        concepts.topAnchor.constraint(equalTo: pie.bottomAnchor, constant: Sizing.Details.padding/2).isActive           = true
         concepts.centerXAnchor.constraint(equalTo: pie.centerXAnchor).isActive                                          = true
         concepts.widthAnchor.constraint(equalToConstant: Sizing.paddedWidth).isActive                                   = true
         conceptsHeight.isActive                                                                                         = true
@@ -330,14 +330,14 @@ extension Concepts {
     func constraints() {
         headerHeight = header.heightAnchor.constraint(equalToConstant: 0.0)
         header.translatesAutoresizingMaskIntoConstraints                                                                = false
-        header.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.padding/2).isActive                            = true
+        header.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.Concepts.padding/2).isActive                   = true
         header.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                = true
         header.widthAnchor.constraint(equalToConstant: Sizing.paddedWidth).isActive                                     = true
         headerHeight.isActive                                                                                           = true
         
         collectionHeight = collection.heightAnchor.constraint(equalToConstant: 0.0)
         collection.translatesAutoresizingMaskIntoConstraints                                                            = false
-        collection.topAnchor.constraint(equalTo: header.bottomAnchor, constant: Sizing.padding/2).isActive              = true
+        collection.topAnchor.constraint(equalTo: header.bottomAnchor, constant: Sizing.Concepts.padding/2).isActive     = true
         collection.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                            = true
         collection.widthAnchor.constraint(equalToConstant: Sizing.paddedWidth).isActive                                 = true
         collectionHeight.isActive                                                                                       = true
@@ -356,14 +356,14 @@ extension ConceptCell {
         box.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive                                         = true
         
         icon.translatesAutoresizingMaskIntoConstraints                                                                  = false
-        icon.topAnchor.constraint(equalTo: box.topAnchor, constant: Sizing.padding/2).isActive                          = true
+        icon.topAnchor.constraint(equalTo: box.topAnchor, constant: Sizing.Concepts.padding/2).isActive                 = true
         icon.centerXAnchor.constraint(equalTo: box.centerXAnchor).isActive                                              = true
         icon.widthAnchor.constraint(equalToConstant: Sizing.Concepts.contentWidth).isActive                             = true
         icon.heightAnchor.constraint(equalToConstant: Sizing.Concepts.contentWidth).isActive                            = true
         
         titleHeight = title.heightAnchor.constraint(equalToConstant: 0.0)
         title.translatesAutoresizingMaskIntoConstraints                                                                 = false
-        title.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: Sizing.padding/2).isActive                     = true
+        title.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: Sizing.Concepts.padding/2).isActive            = true
         title.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                 = true
         title.widthAnchor.constraint(equalToConstant: Sizing.Concepts.contentWidth).isActive                            = true
         titleHeight.isActive                                                                                            = true
@@ -402,19 +402,19 @@ extension Menu {
     func constraints() {
         icon1.translatesAutoresizingMaskIntoConstraints                                                                 = false
         icon1.centerXAnchor.constraint(equalTo: label1.centerXAnchor).isActive                                          = true
-        icon1.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.padding/2).isActive                             = true
+        icon1.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.Menu.padding/2).isActive                        = true
         icon1.widthAnchor.constraint(equalToConstant: Sizing.Menu.iconDiameter).isActive                                = true
         icon1.heightAnchor.constraint(equalToConstant: Sizing.Menu.iconDiameter).isActive                               = true
         
         label1.translatesAutoresizingMaskIntoConstraints                                                                = false
-        label1.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Sizing.padding/2).isActive                    = true
+        label1.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Sizing.Menu.padding/2).isActive               = true
         label1.topAnchor.constraint(equalTo: icon1.bottomAnchor).isActive                                               = true
         label1.widthAnchor.constraint(equalToConstant: Sizing.Menu.textWidth).isActive                                  = true
         label1.heightAnchor.constraint(equalToConstant: Sizing.Menu.textHeight).isActive                                = true
         
         icon2.translatesAutoresizingMaskIntoConstraints                                                                 = false
         icon2.centerXAnchor.constraint(equalTo: label2.centerXAnchor).isActive                                          = true
-        icon2.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.padding/2).isActive                             = true
+        icon2.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.Menu.padding/2).isActive                        = true
         icon2.widthAnchor.constraint(equalToConstant: Sizing.Menu.iconDiameter).isActive                                = true
         icon2.heightAnchor.constraint(equalToConstant: Sizing.Menu.iconDiameter).isActive                               = true
         
@@ -426,12 +426,12 @@ extension Menu {
         
         icon3.translatesAutoresizingMaskIntoConstraints                                                                 = false
         icon3.centerXAnchor.constraint(equalTo: label3.centerXAnchor).isActive                                          = true
-        icon3.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.padding/2).isActive                             = true
+        icon3.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.Menu.padding/2).isActive                        = true
         icon3.widthAnchor.constraint(equalToConstant: Sizing.Menu.iconDiameter).isActive                                = true
         icon3.heightAnchor.constraint(equalToConstant: Sizing.Menu.iconDiameter).isActive                               = true
     
         label3.translatesAutoresizingMaskIntoConstraints                                                                = false
-        label3.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Sizing.padding/2).isActive                 = true
+        label3.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Sizing.Menu.padding/2).isActive            = true
         label3.topAnchor.constraint(equalTo: icon3.bottomAnchor).isActive                                               = true
         label3.widthAnchor.constraint(equalToConstant: Sizing.Menu.textWidth).isActive                                  = true
         label3.heightAnchor.constraint(equalToConstant: Sizing.Menu.textHeight).isActive                                = true

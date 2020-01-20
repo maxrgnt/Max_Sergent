@@ -50,12 +50,12 @@ class Concepts: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
         let layout = UICollectionViewFlowLayout()
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         let flow = collection.collectionViewLayout as! UICollectionViewFlowLayout
-        let itemSpacing: CGFloat = Sizing.padding
+        let itemSpacing: CGFloat = Sizing.Concepts.padding
         flow.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         let width = Sizing.paddedWidth - itemSpacing * CGFloat(Constants.Concepts.objectsPerRow - 1)
         flow.itemSize = CGSize(width: floor(width/Constants.Concepts.objectsPerRow), height: Sizing.Concepts.cellHeight)
-        flow.minimumInteritemSpacing = Sizing.padding
-        flow.minimumLineSpacing = Sizing.padding
+        flow.minimumInteritemSpacing = Sizing.Concepts.padding
+        flow.minimumLineSpacing = Sizing.Concepts.padding
         collection.setCollectionViewLayout(flow, animated: false)
         layout.scrollDirection = .vertical
         collection.alwaysBounceVertical = false
@@ -91,7 +91,7 @@ class Concepts: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
                                                width: Sizing.paddedWidth)
         headerHeight.constant = headerFrame.height
         let numberOfRows = ceil(CGFloat(Constants.Concepts.list.count)/Constants.Concepts.objectsPerRow)
-        collectionHeight.constant = (numberOfRows * Sizing.Concepts.cellHeight) + ((numberOfRows-1) * Sizing.padding)
+        collectionHeight.constant = (numberOfRows * Sizing.Concepts.cellHeight) + ((numberOfRows-1) * Sizing.Concepts.padding)
         collection.contentSize = CGSize(width: Sizing.paddedWidth, height: collectionHeight.constant)
         layoutIfNeeded()
     }
