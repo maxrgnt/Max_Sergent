@@ -49,6 +49,7 @@ struct Colors {
         static let node = primaryFontColor
         static let line = primaryFontColor
         static let boxHeader = primaryFontColor
+        static let boxBackground = tertiaryBackground
         static let boxDistinctionBackground = primaryBackground
         static let boxDistinctionText = primaryFontColor
         static let boxContent = primaryFontColor
@@ -59,6 +60,7 @@ struct Colors {
     }
     
     struct Pie {
+        static let boxBackground = tertiaryBackground
         static let header = primaryFontColor
         static let asOf = primaryFontColor
         static let originDate = primaryFontColor

@@ -262,16 +262,16 @@ extension Details {
     func constraints() {
         headerHeight = header.heightAnchor.constraint(equalToConstant: 0.0)
         header.translatesAutoresizingMaskIntoConstraints                                                                = false
-        header.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.padding/2).isActive                            = true
+        header.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.padding).isActive                            = true
         header.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                = true
         header.widthAnchor.constraint(equalToConstant: Sizing.paddedWidth).isActive                                     = true
         headerHeight.isActive                                                                                           = true
         
         pie.translatesAutoresizingMaskIntoConstraints                                                                   = false
         pie.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                   = true
-        pie.topAnchor.constraint(equalTo: header.topAnchor, constant: Sizing.padding/2).isActive                        = true
-        pie.widthAnchor.constraint(equalToConstant: Sizing.Pie.diameter).isActive                                       = true
-        pie.heightAnchor.constraint(equalToConstant: Sizing.Pie.diameter).isActive                                      = true
+        pie.topAnchor.constraint(equalTo: header.bottomAnchor, constant: Sizing.padding/2).isActive               = true
+        pie.widthAnchor.constraint(equalToConstant: Sizing.paddedWidth).isActive                                       = true
+        pie.heightAnchor.constraint(equalToConstant: Sizing.paddedWidth).isActive                                      = true
 
         pieText.translatesAutoresizingMaskIntoConstraints                                                               = false
         pieText.centerXAnchor.constraint(equalTo: pie.centerXAnchor).isActive                                           = true

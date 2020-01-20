@@ -58,7 +58,7 @@ class TimelineCell: UITableViewCell {
         boxHeader.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: Sizing.Timeline.boxRadius)
         
         addSubview(box)
-        box.backgroundColor = Colors.Overview.box
+        box.backgroundColor = Colors.Timeline.boxBackground
         box.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: Sizing.Timeline.boxRadius)
         
         box.addSubview(icon)

@@ -67,15 +67,15 @@ struct Fonts {
     }
     
     struct Pie {
-        static let header = UIFont(name: openSansSemiBold, size: Size.title)
+        static let header = UIFont(name: openSansSemiBold, size: Size.primaryText)
         static let asOf = UIFont(name: openSansBold, size: Size.secondaryText)
         static let originDate = UIFont(name: arvoBold, size: Size.title)
-        static let legend = UIFont(name: openSansSemiBold, size: Size.secondaryText)
+        static let legend = UIFont(name: openSans, size: Size.secondaryText)
         static let percent = UIFont(name: openSansBold, size: Size.secondaryText)
     }
     
     struct Concepts {
-        static let header = UIFont(name: openSansSemiBold, size: Size.title)
+        static let header = UIFont(name: openSansSemiBold, size: Size.primaryText)
     }
     
     struct Footer {

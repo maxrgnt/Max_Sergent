@@ -29,8 +29,11 @@ class Pie: UIView {
     
     func setup(closure: () -> Void) {
                 
+        backgroundColor = Colors.Pie.boxBackground
+        roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: Sizing.Pie.boxRadius)
+        
         let pieces: [CGFloat] = [0.2,0.1,0.1,0.1,0.1,0.1,0.1,0.2]
-        let colors: [UIColor] = [.red, .green, .blue, .yellow, .brown, .purple, .gray, .cyan]
+        let colors: [UIColor] = [.red, .green, .blue, .yellow, .brown, .purple, .lightGray, .cyan]
         let gap: CGFloat = 0.01
         let circleWithGaps = 2*CGFloat.pi*(1.0-(gap*CGFloat(pieces.count)))
         
