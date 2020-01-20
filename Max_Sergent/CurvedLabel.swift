@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension Pie {
+extension PieText {
     
     func centreArcPerpendicular(text str: String, context: CGContext, radius r: CGFloat, angle theta: CGFloat, colour c: UIColor, font: UIFont, clockwise: Bool){
         // *******************************************************

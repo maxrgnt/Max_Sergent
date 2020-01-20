@@ -89,8 +89,8 @@ struct Sizing {
     
     struct Pie {
         static let diameter = Sizing.paddedWidth
-        static let circleRadius = diameter/2 - lineWidth/2
-        static let textRadius = circleRadius - lineWidth
+        static let circleRadius = diameter/2 - lineWidth/2 - lineWidth
+        static let textRadius = diameter/2 - lineWidth/2
         static let center = CGPoint(x: diameter/2, y: diameter/2)
         static let lineWidth = diameter/10
         static let lineGap = 10.0

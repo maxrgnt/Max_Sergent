@@ -67,6 +67,7 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         page3.roundCorners(corners: [.topRight], radius: Sizing.Scroll.radius)
         page3.setup() {
             page3.constraints()
+            page3.resize()
         }
         
         closure()

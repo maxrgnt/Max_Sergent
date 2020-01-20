@@ -50,6 +50,11 @@ struct Constants {
         ]
     }
     
+    struct Details {
+        static let asOf = "as of:"
+        static let originDate = "Jan\n01\n2019"
+    }
+    
     struct Menu {
         static let pages = ["Overview","Timeline","Details"]
     }

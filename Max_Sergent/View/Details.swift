@@ -19,8 +19,15 @@ class Details: UIScrollView, UIScrollViewDelegate {
     // Delegates
     var customDelegate: DetailsDelegate!
     // Constraints
+    var asOfHeight: NSLayoutConstraint!
+    var originDateHeight: NSLayoutConstraint!
+    var originDateWidth: NSLayoutConstraint!
+    var originDateCenterY: NSLayoutConstraint!
     // Objects
     var pie = Pie()
+    var pieText = PieText()
+    var asOf = UILabel()
+    var originDate = UILabel()
     
     //MARK: Initialization
     init() {
@@ -34,6 +41,9 @@ class Details: UIScrollView, UIScrollViewDelegate {
     
     //MARK: Setup
     func setup(closure: () -> Void) {
+        
+        backgroundColor = Colors.Details.background
+        
         delegate                                  = self
         isPagingEnabled                           = true
         isUserInteractionEnabled                  = true
@@ -42,7 +52,6 @@ class Details: UIScrollView, UIScrollViewDelegate {
         showsVerticalScrollIndicator              = false
         showsHorizontalScrollIndicator            = false
         automaticallyAdjustsScrollIndicatorInsets = false
-        backgroundColor                           = Colors.Scroll.background
         
         contentSize   = CGSize(width: Sizing.width, height: CGFloat(100.0))
         contentInset  = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -51,6 +60,28 @@ class Details: UIScrollView, UIScrollViewDelegate {
         pie.setup {
             pie.constraints()
         }
+        addSubview(pieText)
+        pieText.setup {
+            pieText.constraints()
+        }
+        
+        addSubview(asOf)
+        asOf.numberOfLines   = 1
+        asOf.textAlignment   = .left
+        asOf.backgroundColor = .clear
+        asOf.lineBreakMode   = .byWordWrapping
+        asOf.text            = Constants.Details.asOf
+        asOf.font            = Fonts.Details.asOf
+        asOf.textColor       = Colors.Details.asOf
+        
+        addSubview(originDate)
+        originDate.numberOfLines   = 3
+        originDate.textAlignment   = .left
+        originDate.backgroundColor = .clear
+        originDate.lineBreakMode   = .byWordWrapping
+        originDate.text            = Constants.Details.originDate
+        originDate.font            = Fonts.Details.originDate
+        originDate.textColor       = Colors.Details.originDate
         
         //roundCorners(corners: [.topLeft,.topRight], radius: Sizing.Scroll.radius)
         
@@ -79,5 +110,20 @@ class Details: UIScrollView, UIScrollViewDelegate {
     }
     
     //MARK: Adjusting State
-
+    func resize() {
+        let asOfFrame = asOf.frameForLabel(text: asOf.text!,
+                                           font: asOf.font!,
+                                           numberOfLines: asOf.numberOfLines,
+                                           width: Sizing.Pie.circleRadius)
+        let originDateFrame = originDate.frameForLabel(text: originDate.text!,
+                                                       font: originDate.font!,
+                                                       numberOfLines: originDate.numberOfLines,
+                                                       width: Sizing.Pie.circleRadius)
+        asOfHeight.constant        = asOfFrame.height
+        originDateWidth.constant   = originDateFrame.width
+        originDateHeight.constant  = originDateFrame.height
+        originDateCenterY.constant = asOfFrame.height/2
+        layoutIfNeeded()
+    }
+    
 }

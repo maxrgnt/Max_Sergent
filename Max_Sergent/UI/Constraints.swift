@@ -262,15 +262,46 @@ extension Details {
     func constraints() {
         pie.translatesAutoresizingMaskIntoConstraints                                                                   = false
         pie.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                   = true
-        pie.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                                   = true
+        pie.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.padding).isActive                                 = true
         pie.widthAnchor.constraint(equalToConstant: Sizing.Pie.diameter).isActive                                       = true
         pie.heightAnchor.constraint(equalToConstant: Sizing.Pie.diameter).isActive                                      = true
+
+        pieText.translatesAutoresizingMaskIntoConstraints                                                               = false
+        pieText.centerXAnchor.constraint(equalTo: pie.centerXAnchor).isActive                                           = true
+        pieText.centerYAnchor.constraint(equalTo: pie.centerYAnchor).isActive                                           = true
+        pieText.widthAnchor.constraint(equalToConstant: Sizing.Pie.diameter).isActive                                   = true
+        pieText.heightAnchor.constraint(equalToConstant: Sizing.Pie.diameter).isActive                                  = true
+        
+        asOfHeight = asOf.heightAnchor.constraint(equalToConstant: 0.0)
+        asOf.translatesAutoresizingMaskIntoConstraints                                                                  = false
+        asOf.bottomAnchor.constraint(equalTo: originDate.topAnchor).isActive                                            = true
+        asOf.centerXAnchor.constraint(equalTo: originDate.centerXAnchor).isActive                                       = true
+        asOf.widthAnchor.constraint(equalTo: originDate.widthAnchor).isActive                                           = true
+        asOfHeight.isActive                                                                                             = true
+    
+        originDateCenterY = originDate.centerYAnchor.constraint(equalTo: pie.centerYAnchor)
+        originDateHeight = originDate.heightAnchor.constraint(equalToConstant: 0.0)
+        originDateWidth = originDate.widthAnchor.constraint(equalToConstant: 0.0)
+        originDate.translatesAutoresizingMaskIntoConstraints                                                            = false
+        originDate.centerXAnchor.constraint(equalTo: pie.centerXAnchor).isActive                                        = true
+        originDateCenterY.isActive                                                                                      = true
+        originDateWidth.isActive                                                                                        = true
+        originDateHeight.isActive                                                                                       = true
     }
     
 }
 
 //MARK: Pie
 extension Pie {
+    
+    func constraints() {
+        
+    }
+    
+}
+
+//MARK: PieText
+extension PieText {
     
     func constraints() {
         
