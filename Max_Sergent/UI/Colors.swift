@@ -56,14 +56,18 @@ struct Colors {
     
     struct Details {
         static let background = secondaryBackground
-        static let asOf = primaryFontColor
-        static let originDate = primaryFontColor
     }
     
     struct Pie {
-        static let background = secondaryBackground
+        static let header = primaryFontColor
+        static let asOf = primaryFontColor
+        static let originDate = primaryFontColor
         static let percent = primaryBackground
         static let legend = primaryFontColor
+    }
+    
+    struct Concepts {
+        static let header = primaryFontColor
     }
     
     struct Footer {

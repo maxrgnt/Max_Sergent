@@ -19,15 +19,19 @@ class Details: UIScrollView, UIScrollViewDelegate {
     // Delegates
     var customDelegate: DetailsDelegate!
     // Constraints
+    var headerHeight: NSLayoutConstraint!
     var asOfHeight: NSLayoutConstraint!
     var originDateHeight: NSLayoutConstraint!
     var originDateWidth: NSLayoutConstraint!
     var originDateCenterY: NSLayoutConstraint!
+    var conceptsHeight: NSLayoutConstraint!
     // Objects
     var pie = Pie()
     var pieText = PieText()
+    var header = UILabel()
     var asOf = UILabel()
     var originDate = UILabel()
+    var concepts = Concepts()
     
     //MARK: Initialization
     init() {
@@ -53,8 +57,17 @@ class Details: UIScrollView, UIScrollViewDelegate {
         showsHorizontalScrollIndicator            = false
         automaticallyAdjustsScrollIndicatorInsets = false
         
-        contentSize   = CGSize(width: Sizing.width, height: CGFloat(100.0))
+        contentSize   = CGSize(width: Sizing.width, height: CGFloat(500.0))
         contentInset  = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        addSubview(header)
+        header.numberOfLines   = 1
+        header.textAlignment   = .left
+        header.backgroundColor = .clear
+        header.lineBreakMode   = .byWordWrapping
+        header.text            = Constants.Pie.header
+        header.font            = Fonts.Pie.header
+        header.textColor       = Colors.Pie.header
         
         addSubview(pie)
         pie.setup {
@@ -70,18 +83,24 @@ class Details: UIScrollView, UIScrollViewDelegate {
         asOf.textAlignment   = .left
         asOf.backgroundColor = .clear
         asOf.lineBreakMode   = .byWordWrapping
-        asOf.text            = Constants.Details.asOf
-        asOf.font            = Fonts.Details.asOf
-        asOf.textColor       = Colors.Details.asOf
+        asOf.text            = Constants.Pie.asOf
+        asOf.font            = Fonts.Pie.asOf
+        asOf.textColor       = Colors.Pie.asOf
         
         addSubview(originDate)
         originDate.numberOfLines   = 3
         originDate.textAlignment   = .left
         originDate.backgroundColor = .clear
         originDate.lineBreakMode   = .byWordWrapping
-        originDate.text            = Constants.Details.originDate
-        originDate.font            = Fonts.Details.originDate
-        originDate.textColor       = Colors.Details.originDate
+        originDate.text            = Constants.Pie.originDate
+        originDate.font            = Fonts.Pie.originDate
+        originDate.textColor       = Colors.Pie.originDate
+        
+        addSubview(concepts)
+        concepts.setup {
+            concepts.constraints()
+            concepts.resize()
+        }
         
         //roundCorners(corners: [.topLeft,.topRight], radius: Sizing.Scroll.radius)
         
@@ -111,6 +130,10 @@ class Details: UIScrollView, UIScrollViewDelegate {
     
     //MARK: Adjusting State
     func resize() {
+        let headerFrame = header.frameForLabel(text: header.text!,
+                                               font: header.font!,
+                                               numberOfLines: header.numberOfLines,
+                                               width: Sizing.paddedWidth)
         let asOfFrame = asOf.frameForLabel(text: asOf.text!,
                                            font: asOf.font!,
                                            numberOfLines: asOf.numberOfLines,
@@ -119,6 +142,7 @@ class Details: UIScrollView, UIScrollViewDelegate {
                                                        font: originDate.font!,
                                                        numberOfLines: originDate.numberOfLines,
                                                        width: Sizing.Pie.circleRadius)
+        headerHeight.constant      = headerFrame.height
         asOfHeight.constant        = asOfFrame.height
         originDateWidth.constant   = originDateFrame.width
         originDateHeight.constant  = originDateFrame.height

@@ -260,9 +260,16 @@ extension TimelineCell {
 extension Details {
     
     func constraints() {
+        headerHeight = header.heightAnchor.constraint(equalToConstant: 0.0)
+        header.translatesAutoresizingMaskIntoConstraints                                                                = false
+        header.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.padding/2).isActive                            = true
+        header.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                = true
+        header.widthAnchor.constraint(equalToConstant: Sizing.paddedWidth).isActive                                     = true
+        headerHeight.isActive                                                                                           = true
+        
         pie.translatesAutoresizingMaskIntoConstraints                                                                   = false
         pie.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                   = true
-        pie.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.padding).isActive                                 = true
+        pie.topAnchor.constraint(equalTo: header.topAnchor, constant: Sizing.padding/2).isActive                        = true
         pie.widthAnchor.constraint(equalToConstant: Sizing.Pie.diameter).isActive                                       = true
         pie.heightAnchor.constraint(equalToConstant: Sizing.Pie.diameter).isActive                                      = true
 
@@ -287,6 +294,14 @@ extension Details {
         originDateCenterY.isActive                                                                                      = true
         originDateWidth.isActive                                                                                        = true
         originDateHeight.isActive                                                                                       = true
+        
+        conceptsHeight = concepts.heightAnchor.constraint(equalToConstant: 300.0)
+        concepts.translatesAutoresizingMaskIntoConstraints                                                              = false
+        concepts.topAnchor.constraint(equalTo: pie.bottomAnchor, constant: Sizing.padding/2).isActive                   = true
+        concepts.centerXAnchor.constraint(equalTo: pie.centerXAnchor).isActive                                          = true
+        concepts.widthAnchor.constraint(equalToConstant: Sizing.paddedWidth).isActive                                   = true
+        conceptsHeight.isActive                                                                                         = true
+        
     }
     
 }
@@ -305,6 +320,20 @@ extension PieText {
     
     func constraints() {
         
+    }
+    
+}
+
+//MARK: Concepts
+extension Concepts {
+    
+    func constraints() {
+        headerHeight = header.heightAnchor.constraint(equalToConstant: 0.0)
+        header.translatesAutoresizingMaskIntoConstraints                                                                = false
+        header.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.padding/2).isActive                            = true
+        header.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                = true
+        header.widthAnchor.constraint(equalToConstant: Sizing.paddedWidth).isActive                                     = true
+        headerHeight.isActive                                                                                           = true
     }
     
 }

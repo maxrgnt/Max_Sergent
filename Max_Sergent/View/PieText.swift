@@ -16,7 +16,6 @@ class PieText: UIView {
     // Constraints
     // Objects
     
-    
     //MARK: Initialization
     init() {
         // Initialize frame of view
@@ -64,7 +63,6 @@ class PieText: UIView {
         for (i, piece) in pieces.enumerated() {
             let width = circleWithGaps*piece
             let angle = oldEndAngle - width/2
-            print(angle, -CGFloat.pi*(1.75), -3*CGFloat.pi, vals[i])
             let clockwise = (angle < -CGFloat.pi*(1.75) && angle >= -3*CGFloat.pi) ? false : true
             centreArcPerpendicular(text: vals[i],
                                    context: context,

@@ -50,9 +50,14 @@ struct Constants {
         ]
     }
     
-    struct Details {
+    struct Pie {
+        static let header = "Daily breakdown:"
         static let asOf = "as of:"
         static let originDate = "Jan\n01\n2019"
+    }
+    
+    struct Concepts {
+        static let header = "iOS Concepts:"
     }
     
     struct Menu {

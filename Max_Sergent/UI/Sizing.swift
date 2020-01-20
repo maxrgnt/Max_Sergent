@@ -96,6 +96,10 @@ struct Sizing {
         static let lineGap = 10.0
     }
     
+    struct Concepts {
+        
+    }
+    
     struct Footer {
         static let height = Sizing.height * Ratio.footer - padding
         static let radius: CGFloat = 0.047 * width// min(width, height) // 0.188
