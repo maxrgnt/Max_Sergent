@@ -295,7 +295,7 @@ extension Details {
         originDateWidth.isActive                                                                                        = true
         originDateHeight.isActive                                                                                       = true
         
-        conceptsHeight = concepts.heightAnchor.constraint(equalToConstant: 300.0)
+        conceptsHeight = concepts.heightAnchor.constraint(equalToConstant: 0.0)
         concepts.translatesAutoresizingMaskIntoConstraints                                                              = false
         concepts.topAnchor.constraint(equalTo: pie.bottomAnchor, constant: Sizing.padding/2).isActive                   = true
         concepts.centerXAnchor.constraint(equalTo: pie.centerXAnchor).isActive                                          = true
@@ -334,6 +334,39 @@ extension Concepts {
         header.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                = true
         header.widthAnchor.constraint(equalToConstant: Sizing.paddedWidth).isActive                                     = true
         headerHeight.isActive                                                                                           = true
+        
+        collectionHeight = collection.heightAnchor.constraint(equalToConstant: 0.0)
+        collection.translatesAutoresizingMaskIntoConstraints                                                            = false
+        collection.topAnchor.constraint(equalTo: header.bottomAnchor, constant: Sizing.padding/2).isActive              = true
+        collection.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                            = true
+        collection.widthAnchor.constraint(equalToConstant: Sizing.paddedWidth).isActive                                 = true
+        collectionHeight.isActive                                                                                       = true
+    }
+    
+}
+
+//MARK: ConceptCell
+extension ConceptCell {
+    
+    func constraints() {
+        box.translatesAutoresizingMaskIntoConstraints                                                                   = false
+        box.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive                                       = true
+        box.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive                                       = true
+        box.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive                                           = true
+        box.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive                                         = true
+        
+        icon.translatesAutoresizingMaskIntoConstraints                                                                  = false
+        icon.topAnchor.constraint(equalTo: box.topAnchor, constant: Sizing.padding/2).isActive                          = true
+        icon.centerXAnchor.constraint(equalTo: box.centerXAnchor).isActive                                              = true
+        icon.widthAnchor.constraint(equalToConstant: Sizing.Concepts.contentWidth).isActive                             = true
+        icon.heightAnchor.constraint(equalToConstant: Sizing.Concepts.contentWidth).isActive                            = true
+        
+        titleHeight = title.heightAnchor.constraint(equalToConstant: 0.0)
+        title.translatesAutoresizingMaskIntoConstraints                                                                 = false
+        title.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: Sizing.padding/2).isActive                     = true
+        title.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                 = true
+        title.widthAnchor.constraint(equalToConstant: Sizing.Concepts.contentWidth).isActive                            = true
+        titleHeight.isActive                                                                                            = true
     }
     
 }

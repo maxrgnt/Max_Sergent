@@ -69,7 +69,8 @@ struct Colors {
     }
     
     struct Concepts {
-        static let header = primaryFontColor
+        static let title = primaryFontColor
+        static let cellBackground = primaryBackground
     }
     
     struct Footer {

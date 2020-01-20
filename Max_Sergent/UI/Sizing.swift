@@ -98,7 +98,15 @@ struct Sizing {
     }
     
     struct Concepts {
-        
+        static let cellWidth: CGFloat = (paddedWidth-padding*3)/Constants.Concepts.objectsPerRow
+        static var cellHeight: CGFloat = cellWidth + padding*(3/2) + titleHeight // label margin
+        static let contentWidth = cellWidth - padding/2
+        static let boxRadius: CGFloat = min(0.047 * paddedWidth, 39.0)
+        static var titleHeight: CGFloat = Fonts.Concepts.title!.pointSize * 2 {
+            didSet {
+                cellHeight = cellWidth + titleHeight + padding*(3/2)
+            }
+        }
     }
     
     struct Footer {
@@ -110,6 +118,7 @@ struct Sizing {
         static let iconDiameter = Footer.height * (2/3) - padding
         static let textHeight = Footer.height * (1/3)
         static let textWidth = (paddedWidth-(padding*3))/3
+        static let scrollOffset = Sizing.Footer.height + Sizing.padding/2
     }
     
 }

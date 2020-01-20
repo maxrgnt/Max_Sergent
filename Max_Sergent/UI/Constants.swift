@@ -57,7 +57,20 @@ struct Constants {
     }
     
     struct Concepts {
+        static let cellReuseId = "ConceptsCell"
+        static let objectsPerRow: CGFloat = 3.0
         static let header = "iOS Concepts:"
+        static let list = [(icon: "email", title: "Programmatic\nUI"),
+                           (icon: "email", title: "Programmatic\nUI"),
+                           (icon: "email", title: "Programmatic\nUI"),
+                           (icon: "email", title: "Programmatic\nUI"),
+                           (icon: "email", title: "Programmatic\nUI"),
+                           (icon: "email", title: "Programmatic\nUI"),
+                           (icon: "email", title: "Programmatic\nUI"),
+                           (icon: "email", title: "Programmatic\nUI"),
+                           (icon: "email", title: "Programmatic\nUI"),
+                           (icon: "email", title: "Programmatic\nUI"),
+                           (icon: "email", title: "Programmatic\nUI")]
     }
     
     struct Menu {

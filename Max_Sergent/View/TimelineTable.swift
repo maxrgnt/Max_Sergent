@@ -49,7 +49,7 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         showsVerticalScrollIndicator    = false
         showsHorizontalScrollIndicator  = false
         
-        let footer = UIView(frame: CGRect(x: 0, y: 0, width: Sizing.width, height: Sizing.Footer.height + Sizing.padding/2))
+        let footer = UIView(frame: CGRect(x: 0, y: 0, width: Sizing.width, height: Sizing.Menu.scrollOffset))
         footer.backgroundColor = Colors.Timeline.background
         tableFooterView = footer
         

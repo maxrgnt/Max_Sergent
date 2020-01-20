@@ -76,6 +76,7 @@ struct Fonts {
     
     struct Concepts {
         static let header = UIFont(name: openSansSemiBold, size: Size.primaryText)
+        static let title = UIFont(name: openSans, size: Size.tertiaryText)
     }
     
     struct Footer {

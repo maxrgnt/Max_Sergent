@@ -49,15 +49,14 @@ class Details: UIScrollView, UIScrollViewDelegate {
         backgroundColor = Colors.Details.background
         
         delegate                                  = self
-        isPagingEnabled                           = true
+        isPagingEnabled                           = false
         isUserInteractionEnabled                  = true
-        alwaysBounceVertical                      = false
+        alwaysBounceVertical                      = true
         alwaysBounceHorizontal                    = false
         showsVerticalScrollIndicator              = false
         showsHorizontalScrollIndicator            = false
         automaticallyAdjustsScrollIndicatorInsets = false
         
-        contentSize   = CGSize(width: Sizing.width, height: CGFloat(500.0))
         contentInset  = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         addSubview(header)
@@ -148,6 +147,13 @@ class Details: UIScrollView, UIScrollViewDelegate {
         originDateHeight.constant  = originDateFrame.height
         originDateCenterY.constant = asOfFrame.height/2
         layoutIfNeeded()
+        
+        let numberOfRows = ceil(CGFloat(Constants.Concepts.list.count)/Constants.Concepts.objectsPerRow)
+        let collectionHeight = (numberOfRows * Sizing.Concepts.cellHeight) + ((numberOfRows-1) * Sizing.padding)
+        conceptsHeight.constant = collectionHeight + concepts.headerHeight.constant + Sizing.padding
+        let contentHeight: CGFloat = headerHeight.constant + Sizing.paddedWidth + conceptsHeight.constant + Sizing.Menu.scrollOffset
+        contentSize   = CGSize(width: Sizing.width, height: contentHeight)
+        print(Sizing.Scroll.height, contentHeight)
     }
     
 }
