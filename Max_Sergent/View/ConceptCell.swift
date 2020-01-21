@@ -42,7 +42,7 @@ class ConceptCell: UICollectionViewCell {
         box.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: Sizing.Concepts.boxRadius)
         
         box.addSubview(icon)
-        icon.backgroundColor     = .black
+        icon.backgroundColor     = .clear
         icon.clipsToBounds       = true
         icon.layer.masksToBounds = true
         icon.contentMode         = .scaleAspectFill
@@ -62,7 +62,6 @@ class ConceptCell: UICollectionViewCell {
                                                         withFont: Fonts.Concepts.title!,
                                                         withWidth: Sizing.Concepts.contentWidth,
                                                         numberOfLines: title.numberOfLines)
-        print(heightForTitle)
         titleHeight.constant = heightForTitle
         Sizing.Concepts.titleHeight = heightForTitle
         layoutIfNeeded()

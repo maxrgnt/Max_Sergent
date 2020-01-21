@@ -77,7 +77,17 @@ class Concepts: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Concepts.cellReuseId, for: indexPath) as! ConceptCell
         
-        cell.icon.image = UIImage(named: Data.concepts[indexPath.row][Constants.Data_Key.iconName] as! String)
+        guard let dir = try?
+            FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else
+        {
+            return cell
+        }
+
+        let iconName = Data.concepts[indexPath.row][Constants.Data_Key.iconName] as! String
+        let urlFromCoreData = URL(fileURLWithPath: dir.absoluteString).appendingPathComponent("\(iconName).png")
+        let photo = UIImage(contentsOfFile: urlFromCoreData.path)!
+
+        cell.icon.image = photo
         cell.title.text = (Data.concepts[indexPath.row][Constants.Data_Key.title] as! String)
         cell.resize()
         
@@ -91,7 +101,6 @@ class Concepts: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
                                                width: Sizing.paddedWidth)
         headerHeight.constant = headerFrame.height
         let numberOfRows = ceil(CGFloat(Data.concepts.count)/Constants.Concepts.objectsPerRow)
-        print("concept resize: \(numberOfRows)")
         let verticalPadding = (numberOfRows == 0) ? 0.0 : ((numberOfRows-1) * Sizing.Concepts.padding)
         collectionHeight.constant = (numberOfRows * Sizing.Concepts.cellHeight) + verticalPadding
         collection.contentSize = CGSize(width: Sizing.paddedWidth, height: collectionHeight.constant)

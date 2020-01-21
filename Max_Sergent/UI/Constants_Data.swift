@@ -51,6 +51,7 @@ extension Constants {
         static let title            = "title"
         static let details          = "details"
         static let iconName         = "iconName"
+        static let iconURL          = "iconURL"
         static let index            = "index"
         static let type             = "type"
         static let key              = "key"

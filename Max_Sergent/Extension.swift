@@ -49,6 +49,7 @@ extension UILabel {
 
 extension UIImage {
     func saveImage(as fileName: String) -> Bool {
+        print(fileName)
         guard let data = self.jpegData(compressionQuality: 1) ?? self.pngData() else {
             return false
         }

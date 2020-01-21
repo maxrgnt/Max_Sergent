@@ -48,6 +48,7 @@ extension Data {
             }
             // If CoreData has been populated already, first delete what is saved before saving new data
             deleteCoreData(forEntity: Constants.CoreData_Entity.appInfo)
+            print(photoURL)
             let storageRef = Storage.storage().reference(forURL: photoURL)
             storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
                 if let error = error {
@@ -173,20 +174,60 @@ extension Data {
                 return
             }
             concepts = []
-            values.keys.forEach { key in
+            let keys = values.keys.sorted()
+            keys.forEach { key in
                 guard   let title    = values[key]![Constants.Data_Key.title]    as? String,
-                        let iconName = values[key]![Constants.Data_Key.iconName] as? String else
+                        let iconName = values[key]![Constants.Data_Key.iconName] as? String,
+                        let iconURL  = values[key]![Constants.Data_Key.iconURL]  as? String else
                 {
                     print("Error: firebaseConcepts - value objects not convertible")
                     return
                 }
                 concepts.append([Constants.Data_Key.title:    title,
                                  Constants.Data_Key.iconName: iconName])
+                let storageRef = Storage.storage().reference(forURL: iconURL)
+                storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                    if let error = error {
+                        print(error)
+                    }
+                    else {
+                        if UIImage(data: data!)!.saveImage(as: iconName) {
+                            if key == keys.last! {
+                                firebaseCheckForConceptIcons()
+                            }
+                            
+                        }
+                        else {
+
+                        }
+                    }
+                }
             }
-            // If CoreData has been populated already, first delete what is saved before saving new data
-            deleteCoreData(forEntity: Constants.CoreData_Entity.concepts)
-            setConcepts()
         })
+    }
+    
+    static func firebaseCheckForConceptIcons() {
+        do {
+            let documentsURL = try FileManager.default.url(for: .documentDirectory,
+                                                           in: .userDomainMask,
+                                                           appropriateFor: nil,
+                                                           create: false)
+            let docs = try FileManager.default.contentsOfDirectory(at: documentsURL,
+                                                                   includingPropertiesForKeys: [],
+                                                                   options:  [.skipsHiddenFiles, .skipsSubdirectoryDescendants])
+            if docs.count < concepts.count {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    firebaseCheckForConceptIcons()
+                }
+            }
+            else {
+                // If CoreData has been populated already, first delete what is saved before saving new data
+                deleteCoreData(forEntity: Constants.CoreData_Entity.concepts)
+                setConcepts()
+            }
+        } catch {
+            print(error)
+        }
     }
     
 }
