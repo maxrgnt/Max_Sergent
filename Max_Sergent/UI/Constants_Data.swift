@@ -19,6 +19,7 @@ extension Constants {
         static let reset            = "1_reset"
         static let appInfo          = "2_appInfo"
         static let overview         = "3_overview"
+        static let timeline         = "4_timeline"
     }
     
     struct CoreData_Entity {
@@ -43,6 +44,15 @@ extension Constants {
         static let locationBackEnd  = "locationBackEnd"
         static let locationFrontEnd = "locationFrontEnd"
         static let objective        = "objective"
+        static let organization     = "organization"
+        static let year             = "year"
+        static let title            = "title"
+        static let details          = "details"
+        static let iconName         = "iconName"
+        static let index            = "index"
+        static let type             = "type"
+        static let key              = "key"
+        static let events           = "events"
     }
     
     struct Placeholder {

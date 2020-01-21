@@ -51,11 +51,11 @@ extension Data {
                                                                 includingPropertiesForKeys: [],
                                                                 options:  [.skipsHiddenFiles, .skipsSubdirectoryDescendants])
                     print(docs)
+                    loadAppInfo()
                 } catch {
                     print(error)
                 }
             }
-            loadAppInfo()
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
@@ -73,7 +73,7 @@ extension Data {
                 let userName  = object.userName,
                 let watermark = object.watermark else
         {
-            print("Error: loadProfile - [object, name, picture] not found in ProfileData")
+            print("Error: loadProfile - coreData not found")
             return
         }
 
@@ -140,10 +140,9 @@ extension Data {
                 let locationFrontEnd = object.locationFrontEnd,
                 let objective        = object.objective else
         {
-            print("Error: loadProfile - [object, name, picture] not found in ProfileData")
+            print("Error: loadOverview - coreData not found")
             return
         }
-
         overview = [Constants.Data_Key.email:            email,
                     Constants.Data_Key.email_subject:    email_subject,
                     Constants.Data_Key.email_body:       email_body,
@@ -155,5 +154,59 @@ extension Data {
         self.customDelegate.resetOverview()
     }
     
+    //MARK: Timeline
+    static func setTimeline() {
+        // Boiler-plate
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        timeline.keys.forEach { key in
+            // Starts to differ here
+            let entity = NSEntityDescription.entity(forEntityName: Constants.CoreData_Entity.timeline, in: managedContext)!
+            let object = NSManagedObject(entity: entity, insertInto: managedContext)
+            // Entity specific here
+            object.setValue(timeline[key]![Constants.Data_Key.organization]!, forKeyPath: Constants.Data_Key.organization)
+            object.setValue(timeline[key]![Constants.Data_Key.year]!,         forKeyPath: Constants.Data_Key.year)
+            object.setValue(timeline[key]![Constants.Data_Key.index]!,        forKeyPath: Constants.Data_Key.index)
+            object.setValue(timeline[key]![Constants.Data_Key.details]!,      forKeyPath: Constants.Data_Key.details)
+            object.setValue(timeline[key]![Constants.Data_Key.iconName]!,     forKeyPath: Constants.Data_Key.iconName)
+            object.setValue(timeline[key]![Constants.Data_Key.type]!,         forKeyPath: Constants.Data_Key.type)
+            object.setValue(key,                                              forKeyPath: Constants.Data_Key.key)
+        }
+        do {
+            try managedContext.save()
+            loadTimeline()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    static func loadTimeline() {
+        // Boiler-plate
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        // Starts to differ here
+        let entity = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.CoreData_Entity.timeline)
+        let fetch  = try! managedContext.fetch(entity) as! [Timeline]
+        // Entity specific here
+        timeline = [:]
+        fetch.forEach { object in
+            guard   let organization = object.organization,
+                    let details      = object.details,
+                    let iconName     = object.iconName,
+                    let type         = object.type,
+                    let key          = object.key else
+            {
+                print("Error: loadTimeline - coreData not found")
+                return
+            }
+            timeline[key] = [Constants.Data_Key.organization: organization,
+                             Constants.Data_Key.year:         object.year,
+                             Constants.Data_Key.index:        object.index,
+                             Constants.Data_Key.details:      details,
+                             Constants.Data_Key.iconName:     iconName,
+                             Constants.Data_Key.type:         type] as AnyObject
+        }
+        self.customDelegate.resetTimeline()
+    }
     
 }

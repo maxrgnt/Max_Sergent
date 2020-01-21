@@ -181,6 +181,36 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
                                        (icon: Constants.Overview.contactIcons[2],
                                         content: Data.overview[Constants.Data_Key.linkedinWebURL]!)])]
         scroll.page1.reloadData()
-        print(Data.overview)
+    }
+    
+    func resetTimeline() {
+        var years: [Int] = []
+        Data.timeline.keys.forEach { key in
+            let year = Data.timeline[key]![Constants.Data_Key.year]
+            !years.contains(year as! Int) ? years.append(year as! Int) : nil
+        }
+        years = years.sorted().reversed()
+        years.forEach { year in
+            var events: [[String: Any]] = []
+            Data.timeline.keys.forEach { key in
+                let data = Data.timeline[key]!
+                if data[Constants.Data_Key.year] as! Int == year {
+                    events.append([Constants.Data_Key.organization: data[Constants.Data_Key.organization] as! String,
+                                   Constants.Data_Key.details: data[Constants.Data_Key.details] as! String,
+                                   Constants.Data_Key.type: data[Constants.Data_Key.type] as! String,
+                                   Constants.Data_Key.iconName: data[Constants.Data_Key.iconName] as! String,
+                                   Constants.Data_Key.index: data[Constants.Data_Key.index] as! Int])
+                }
+            }
+            Data.timelineTable.append([Constants.Data_Key.year: String(describing: year),
+                                       Constants.Data_Key.events: events])
+        }
+        for (i, object) in Data.timelineTable.enumerated() {
+            let key = Constants.Data_Key.index
+            let unsorted = object[Constants.Data_Key.events]
+            let sorted = (unsorted as! NSArray).sortedArray(using: [NSSortDescriptor(key: key, ascending: false)]) as! [[String:AnyObject]]
+            Data.timelineTable[i][Constants.Data_Key.events] = sorted
+        }
+        scroll.page2.reloadData()
     }
 }

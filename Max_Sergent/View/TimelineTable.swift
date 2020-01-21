@@ -23,7 +23,6 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     // Constraints
     // Objects
     var timelineRefresh = TimelineRefresh()
-    let data = Constants.Timeline.clusters
     
     //MARK: - Initialization
     override init (frame: CGRect, style: UITableView.Style) {
@@ -76,17 +75,22 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         let id = Constants.Timeline.cellReuseId
         let cell: TimelineCell = tableView.dequeueReusableCell(withIdentifier: id) as! TimelineCell
         
-        cell.icon.image = UIImage(named: data[indexPath.section].boxes[indexPath.row].icon)
-        cell.header.text = data[indexPath.section].boxes[indexPath.row].header
-        cell.distinction.text = data[indexPath.section].boxes[indexPath.row].distinction
-        cell.content.text  = data[indexPath.section].boxes[indexPath.row].content
-
-        let distinction = data[indexPath.section].boxes[indexPath.row].distinction
-        cell.boxHeader.backgroundColor = (distinction == ".exp") ? .blue : cell.boxHeader.backgroundColor
-        cell.boxHeader.backgroundColor = (distinction == ".edu") ? .purple : cell.boxHeader.backgroundColor
-        cell.boxHeader.backgroundColor = (distinction == ".proj") ? .black : cell.boxHeader.backgroundColor
+        let data = Data.timelineTable[indexPath.section][Constants.Data_Key.events] as! [[String: Any]]
         
-        if indexPath.section == data.count-1 && indexPath.row == data[indexPath.section].boxes.count-1 {
+        cell.icon.image = UIImage(named: data[indexPath.row][Constants.Data_Key.iconName] as! String)
+        cell.header.text = data[indexPath.row][Constants.Data_Key.organization] as? String
+        cell.distinction.text = data[indexPath.row][Constants.Data_Key.type] as? String
+        cell.content.text  = data[indexPath.row][Constants.Data_Key.details] as? String
+
+        let distinction = data[indexPath.row][Constants.Data_Key.type] as? String
+        cell.boxHeader.backgroundColor = (distinction == "exp") ? .blue : cell.boxHeader.backgroundColor
+        cell.boxHeader.backgroundColor = (distinction == "edu") ? .purple : cell.boxHeader.backgroundColor
+        cell.boxHeader.backgroundColor = (distinction == "proj") ? .black : cell.boxHeader.backgroundColor
+        
+        let maxSection = Data.timelineTable.count-1
+        let events = Data.timelineTable[maxSection][Constants.Data_Key.events] as! [[String: Any]]
+        let maxRow = events.count-1
+        if indexPath.section == maxSection && indexPath.row == maxRow {
             cell.line.roundCorners(corners: [.bottomLeft,.bottomRight], radius: Sizing.Timeline.lineWidth/2)
         }
         else {
@@ -108,15 +112,15 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         tempSection.setup() {
             tempSection.constraints()
         }
-        tempSection.title.text = data[section].title
+        tempSection.title.text = Data.timelineTable[section][Constants.Data_Key.year] as? String
         tempSection.titleCenterY.constant = (section == 0) ? Sizing.Timeline.padding/4 : Sizing.Timeline.padding/4 // 0.0
         tempSection.resize()
         return tempSection
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let title = data[section].title
-        let heightForLabel = Fonts.calculateLabelHeight(for: title,
+        let title = Data.timelineTable[section][Constants.Data_Key.year] as? String
+        let heightForLabel = Fonts.calculateLabelHeight(for: title!,
                                                         withFont: Fonts.Overview.title!,
                                                         withWidth: Sizing.Overview.boxPaddedWidth,
                                                         numberOfLines: 1)
@@ -127,21 +131,23 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return data.count
+        return Data.timelineTable.count
     }
  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data[section].boxes.count
+        let events = Data.timelineTable[section][Constants.Data_Key.events] as! [[String: Any]]
+        return events.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let header = data[indexPath.section].boxes[indexPath.row].header
-        let content = data[indexPath.section].boxes[indexPath.row].content
-        let heightForHeader = Fonts.calculateLabelHeight(for: header,
+        let data = Data.timelineTable[indexPath.section][Constants.Data_Key.events] as! [[String: Any]]
+        let header = data[indexPath.row][Constants.Data_Key.organization] as? String
+        let content = data[indexPath.row][Constants.Data_Key.details] as? String
+        let heightForHeader = Fonts.calculateLabelHeight(for: header!,
                                                         withFont: Fonts.Timeline.boxHeader!,
                                                         withWidth: Sizing.Timeline.contentWidth,
                                                         numberOfLines: 1)
-        let heightForContent = Fonts.calculateLabelHeight(for: content,
+        let heightForContent = Fonts.calculateLabelHeight(for: content!,
                                                         withFont: Fonts.Timeline.boxContent!,
                                                         withWidth: Sizing.Timeline.contentWidth,
                                                         numberOfLines: 0)

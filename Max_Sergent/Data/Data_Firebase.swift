@@ -94,4 +94,37 @@ extension Data {
         })
     }
     
+    //MARK: Firebase Timeline
+    static func firebaseTimeline() {
+        let ref = Database.database().reference(withPath: Constants.Firebase_Path.timeline)
+        ref.observeSingleEvent(of: .value, with: { snapshot in
+            guard let values = snapshot.value as? [String: AnyObject] else {
+                print("Error: firebaseTimeline - snapshot.value not convertible to [String: AnyObject]")
+                return
+            }
+            values.keys.forEach { key in
+                guard   let organization = values[key]![Constants.Data_Key.organization] as? String,
+                        let year         = values[key]![Constants.Data_Key.year]         as? Int,
+                        let details      = values[key]![Constants.Data_Key.details]      as? String,
+                        let index        = values[key]![Constants.Data_Key.index]        as? Int,
+                        let iconName     = values[key]![Constants.Data_Key.iconName]     as? String,
+                        let type         = values[key]![Constants.Data_Key.type]         as? String else
+                {
+                    print("Error: firebaseTimeline - value objects not convertible")
+                    return
+                }
+                timeline[key] = [Constants.Data_Key.organization: organization,
+                                 Constants.Data_Key.year:         year,
+                                 Constants.Data_Key.index:        index,
+                                 Constants.Data_Key.details:      details,
+                                 Constants.Data_Key.iconName:     iconName,
+                                 Constants.Data_Key.type:         type] as AnyObject
+            }
+            
+            // If CoreData has been populated already, first delete what is saved before saving new data
+            deleteCoreData(forEntity: Constants.CoreData_Entity.timeline)
+            setTimeline()
+        })
+    }
+    
 }

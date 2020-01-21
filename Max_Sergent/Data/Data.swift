@@ -15,6 +15,7 @@ import FirebaseStorage
 protocol DataDelegate {
     func resetAppInfo()
     func resetOverview()
+    func resetTimeline()
 }
 
 struct Data {
@@ -26,12 +27,15 @@ struct Data {
     static var appInfo:         [String: AnyObject] = [:]
     static var overview:        [String: String] = [:]
     static var overviewTable:   [(title: String, boxes: [(icon: String, content: String)])] = []
+    static var timeline:        [String: AnyObject] = [:]
+    static var timelineTable:   [[String: Any]] = []
 
     // MARK: Clear Testing
     static func clearAllDataForTesting(){
         // Delete core data entities
         deleteCoreData(forEntity: Constants.CoreData_Entity.appInfo)
         deleteCoreData(forEntity: Constants.CoreData_Entity.overview)
+        deleteCoreData(forEntity: Constants.CoreData_Entity.timeline)
         // Delete onboarding/keyboard/userAgreement user default data
         let domain = Bundle.main.bundleIdentifier!
         UserDefaults.standard.removePersistentDomain(forName: domain)
@@ -60,6 +64,7 @@ struct Data {
             print("Load from CoreData")
             loadAppInfo()
             loadOverview()
+            loadTimeline()
         }
         else {
             print("Load from Firebase")
@@ -73,6 +78,7 @@ struct Data {
     static func firebaseAll(completion:@escaping () -> Void) {
         firebaseAppInfo()
         firebaseOverview()
+        firebaseTimeline()
         completion()
     }
 
