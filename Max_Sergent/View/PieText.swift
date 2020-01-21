@@ -67,7 +67,7 @@ class PieText: UIView {
         for (i, piece) in days.enumerated() {
             let width = circleWithGaps*piece
             let angle = oldEndAngle - width/2
-            let clockwise = (angle < CGFloat.pi/3 && angle >= -CGFloat.pi) ? false : true
+            let clockwise = (angle < 0.0 /*CGFloat.pi/6*/ && angle >= -CGFloat.pi) ? false : true
             centreArcPerpendicular(text: keys[i],
                                    context: context,
                                    radius: Sizing.Pie.textRadius,
@@ -81,7 +81,7 @@ class PieText: UIView {
         for (i, piece) in days.enumerated() {
             let width = circleWithGaps*piece
             let angle = oldEndAngle - width/2
-            let clockwise = (angle < -CGFloat.pi*(1.75) && angle >= -3*CGFloat.pi) ? false : true
+            let clockwise = (angle < -CGFloat.pi*(2.0) && angle >= -3*CGFloat.pi) ? false : true
             centreArcPerpendicular(text: vals[i],
                                    context: context,
                                    radius: Sizing.Pie.circleRadius,
