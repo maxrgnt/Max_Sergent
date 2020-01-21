@@ -52,11 +52,7 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let id = Constants.Overview.cellReuseId
         let cell: OverviewCell = tableView.dequeueReusableCell(withIdentifier: id) as! OverviewCell
-        
-        cell.setup() {
-            cell.constraints()
-        }
-        
+    
         cell.setIcon(withName: Data.overviewTable[indexPath.section].boxes[indexPath.row].icon)
         cell.content.text  = Data.overviewTable[indexPath.section].boxes[indexPath.row].content
         

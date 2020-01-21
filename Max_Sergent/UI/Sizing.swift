@@ -134,11 +134,7 @@ struct Sizing {
         static let contentWidth = cellWidth - padding/2
         static let iconDiameter = contentWidth - padding
         static let boxRadius: CGFloat = min(0.047 * paddedWidth, 39.0)
-        static var titleHeight: CGFloat = Fonts.Concepts.title!.pointSize * 2 {
-            didSet {
-                cellHeight = iconDiameter + titleHeight + padding*(3/2)
-            }
-        }
+        static var titleHeight: CGFloat = Fonts.Concepts.title!.pointSize * 2 
     }
     
     struct Footer {

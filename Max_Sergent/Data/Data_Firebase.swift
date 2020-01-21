@@ -253,7 +253,7 @@ extension Data {
                 }
             }
             else {
-                print(conceptIconsSavedInMemory)
+                //print(conceptIconsSavedInMemory)
                 // If CoreData has been populated already, first delete what is saved before saving new data
                 deleteCoreData(forEntity: Constants.CoreData_Entity.concepts)
                 setConcepts()

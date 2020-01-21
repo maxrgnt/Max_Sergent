@@ -30,9 +30,9 @@ class OverviewCell: UITableViewCell {
     //MARK: Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: Constants.Overview.cellReuseId)
-//        setup() {
-//            constraints()
-//        }
+        setup() {
+            constraints()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

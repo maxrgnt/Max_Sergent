@@ -191,7 +191,6 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     }
     
     func resetColorScheme() {
-        print(Data.colorScheme)
         scroll.page2.eduColor  = UIColor(hexFromString: Data.colorScheme[Constants.Data_Key.edu]!,  alpha: 1.0)
         scroll.page2.expColor  = UIColor(hexFromString: Data.colorScheme[Constants.Data_Key.exp]!,  alpha: 1.0)
         scroll.page2.projColor = UIColor(hexFromString: Data.colorScheme[Constants.Data_Key.proj]!, alpha: 1.0)
@@ -260,7 +259,6 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         let unsorted = Data.concepts
         let sorted = (unsorted as NSArray).sortedArray(using: [NSSortDescriptor(key: key, ascending: true)]) as! [[String:AnyObject]]
         Data.concepts = sorted
-        print(Data.concepts)
         scroll.page3.concepts.collection.reloadData()
         scroll.page3.concepts.resize()
         scroll.page3.resize()
