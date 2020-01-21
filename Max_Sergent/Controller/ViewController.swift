@@ -20,6 +20,7 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     let footer = Footer()
     
     let mailComposerVC = MFMailComposeViewController()
+    var statusBarStyle: UIStatusBarStyle = .darkContent
     
     override func viewDidLoad() {
         print("Hello World!")
@@ -36,7 +37,7 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         // App background color is light, whether in light or dark mode make status bar dark.
-        return .darkContent
+        return self.statusBarStyle
     }
 
     //MARK: Settings
@@ -107,6 +108,8 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         header.isUserInteractionEnabled = (scroll.contentOffset.x == 0.0) ? true : false
         (page != 1) ? scroll.page2.setContentOffset(CGPoint.zero, animated:true) : nil
         (page != 2) ? scroll.page3.setContentOffset(CGPoint.zero, animated:true) : nil
+        self.statusBarStyle = (page == 0) ? .darkContent : .lightContent
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     func calculateRatio(for contentOffset: CGFloat) {
