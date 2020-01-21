@@ -32,7 +32,6 @@ struct Sizing {
     static let statusBar   = keyWindow.windowScene!.statusBarManager!.statusBarFrame
     static var padding     = statusBar.height/2 {
         didSet {
-            print("setting padding")
             Header.padding = padding
             Overview.padding = padding
             Timeline.padding = padding

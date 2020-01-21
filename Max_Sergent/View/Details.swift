@@ -153,7 +153,6 @@ class Details: UIScrollView, UIScrollViewDelegate {
         conceptsHeight.constant = collectionHeight + concepts.headerHeight.constant + Sizing.Timeline.padding
         let contentHeight: CGFloat = headerHeight.constant + Sizing.paddedWidth + conceptsHeight.constant + Sizing.Menu.scrollOffset
         contentSize   = CGSize(width: Sizing.width, height: contentHeight)
-        print(Sizing.Scroll.height, contentHeight)
     }
     
 }
