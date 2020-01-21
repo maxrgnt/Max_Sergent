@@ -23,6 +23,7 @@ extension Constants {
         static let timeline         = "4_timeline"
         static let pie              = "5_pie"
         static let concepts         = "6_concepts"
+        static let colorScheme      = "7_colorScheme"
     }
     
     struct CoreData_Entity {
@@ -31,6 +32,7 @@ extension Constants {
         static let timeline         = "Timeline"
         static let pie              = "PieData"
         static let concepts         = "ConceptData"
+        static let colorScheme      = "ColorScheme"
     }
 
     struct Data_Key {
@@ -61,6 +63,10 @@ extension Constants {
         static let days             = "days"
         static let piece            = "piece"
         static let originDate       = "_originDate"
+        static let timeline         = "timeline"
+        static let exp              = "exp"
+        static let edu              = "edu"
+        static let proj             = "proj"
     }
     
     struct Image_Prefix {

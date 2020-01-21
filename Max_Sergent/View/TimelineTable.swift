@@ -23,6 +23,9 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     // Constraints
     // Objects
     var timelineRefresh = TimelineRefresh()
+    var eduColor: UIColor = .black
+    var expColor: UIColor = .black
+    var projColor: UIColor = .black
     
     //MARK: - Initialization
     override init (frame: CGRect, style: UITableView.Style) {
@@ -83,9 +86,12 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         cell.content.text  = data[indexPath.row][Constants.Data_Key.details] as? String
 
         let distinction = data[indexPath.row][Constants.Data_Key.type] as? String
-        cell.boxHeader.backgroundColor = (distinction == "exp") ? .blue : cell.boxHeader.backgroundColor
-        cell.boxHeader.backgroundColor = (distinction == "edu") ? .purple : cell.boxHeader.backgroundColor
-        cell.boxHeader.backgroundColor = (distinction == "proj") ? .black : cell.boxHeader.backgroundColor
+        cell.boxHeader.backgroundColor = (distinction == Constants.Data_Key.exp)
+            ? expColor : cell.boxHeader.backgroundColor
+        cell.boxHeader.backgroundColor = (distinction == Constants.Data_Key.edu)
+            ? eduColor : cell.boxHeader.backgroundColor
+        cell.boxHeader.backgroundColor = (distinction == Constants.Data_Key.proj)
+            ? projColor : cell.boxHeader.backgroundColor
         
         let maxSection = Data.timelineTable.count-1
         let events = Data.timelineTable[maxSection][Constants.Data_Key.events] as! [[String: Any]]

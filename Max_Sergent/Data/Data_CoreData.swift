@@ -93,6 +93,49 @@ extension Data {
         self.customDelegate.resetAppInfo()
     }
     
+    //MARK: Color Scheme
+    static func setColorScheme() {
+        // Boiler-plate
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        // Starts to differ here
+        let entity = NSEntityDescription.entity(forEntityName: Constants.CoreData_Entity.colorScheme, in: managedContext)!
+        let object = NSManagedObject(entity: entity, insertInto: managedContext)
+        // Entity specific here
+        let data = colorScheme[Constants.Data_Key.timeline]!
+        object.setValue(data[Constants.Data_Key.edu] as! String,  forKeyPath: Constants.Data_Key.edu)
+        object.setValue(data[Constants.Data_Key.exp] as! String,  forKeyPath: Constants.Data_Key.exp)
+        object.setValue(data[Constants.Data_Key.proj] as! String, forKeyPath: Constants.Data_Key.proj)
+        do {
+            try managedContext.save()
+            loadColorScheme()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    static func loadColorScheme() {
+        // Boiler-plate
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        // Starts to differ here
+        let entity = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.CoreData_Entity.colorScheme)
+        let fetch  = try! managedContext.fetch(entity) as! [ColorScheme]
+        // Entity specific here
+        guard   let object = fetch.first,
+                let edu    = object.edu,
+                let exp    = object.exp,
+                let proj   = object.proj else
+        {
+            print("Error: loadOverview - coreData not found")
+            return
+        }
+        colorScheme[Constants.Data_Key.timeline] = [Constants.Data_Key.exp:  exp,
+                                                    Constants.Data_Key.edu:  edu,
+                                                    Constants.Data_Key.proj: proj] as AnyObject
+        self.customDelegate.resetColorScheme()
+    }
+    
     //MARK: Overview
     static func setOverview(email: String,           email_subject: String,    email_body: String,
                             linkedinAppURL: String,  linkedinWebURL: String,

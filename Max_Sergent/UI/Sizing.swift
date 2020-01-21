@@ -124,7 +124,7 @@ struct Sizing {
         static let textRadius = diameter/2 - lineWidth/2
         static let center = CGPoint(x: paddedWidth/2, y: paddedWidth/2)
         static let lineWidth = diameter/10
-        static let lineGap = 10.0
+        static let lineGap: CGFloat = 0.005 // Percentage of circle
     }
     
     struct Concepts {

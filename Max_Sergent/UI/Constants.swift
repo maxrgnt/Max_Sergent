@@ -29,9 +29,6 @@ struct Constants {
     struct Timeline {
         static let refreshTitle = "2020"
         static let cellReuseId = "TimelineCell"
-        static let icons = ["bea","umich","ga","alculate"]
-        static let headers = ["Bureau of Economic Analysis", "University of Michigan", "General Assembly","Alculate"]
-        static let distinctions = [".exp",".edu",".edu",".proj"]
     }
     
     struct Pie {

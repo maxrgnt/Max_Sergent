@@ -14,6 +14,7 @@ import FirebaseStorage
 
 protocol DataDelegate {
     func resetAppInfo()
+    func resetColorScheme()
     func resetOverview()
     func resetTimeline()
     func resetPieData()
@@ -28,6 +29,7 @@ struct Data {
     // Objects
     static var lastUpdate:                  String = ""
     static var appInfo:                     [String: AnyObject] = [:]
+    static var colorScheme:                 [String: AnyObject] = [:]
     static var overview:                    [String: String] = [:]
     static var overviewTable:               [(title: String, boxes: [(icon: String, content: String)])] = []
     static var timeline:                    [String: AnyObject] = [:]
@@ -41,6 +43,7 @@ struct Data {
     static func clearAllDataForTesting(){
         // Delete core data entities
         deleteCoreData(forEntity: Constants.CoreData_Entity.appInfo)
+        deleteCoreData(forEntity: Constants.CoreData_Entity.colorScheme)
         deleteCoreData(forEntity: Constants.CoreData_Entity.overview)
         deleteCoreData(forEntity: Constants.CoreData_Entity.timeline)
         deleteCoreData(forEntity: Constants.CoreData_Entity.pie)
@@ -72,6 +75,7 @@ struct Data {
         if !reset && coreDataPopulated() {
             print("Load from CoreData")
             loadAppInfo()
+            loadColorScheme()
             loadOverview()
             loadTimeline()
             loadPieData()
@@ -94,6 +98,7 @@ struct Data {
     //MARK: Firebase All
     static func firebaseAll(completion:@escaping () -> Void) {
         firebaseAppInfo()
+        firebaseColorScheme()
         firebaseOverview()
         firebaseTimeline()
         firebasePieData()

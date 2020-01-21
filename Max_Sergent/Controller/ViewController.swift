@@ -187,6 +187,14 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         header.photo.image = (Data.appInfo[Constants.Data_Key.appInfoPhoto]  as! UIImage)
     }
     
+    func resetColorScheme() {
+        let data = Data.colorScheme[Constants.Data_Key.timeline]!
+        scroll.page2.eduColor  = UIColor(hexFromString: data[Constants.Data_Key.edu]  as! String, alpha: 1.0)
+        scroll.page2.expColor  = UIColor(hexFromString: data[Constants.Data_Key.exp]  as! String, alpha: 1.0)
+        scroll.page2.projColor = UIColor(hexFromString: data[Constants.Data_Key.proj] as! String, alpha: 1.0)
+        scroll.page2.reloadData()
+    }
+    
     func resetOverview() {
         Data.overviewTable = [(title: Constants.Overview.titles[0],
                                boxes: [(icon: "",

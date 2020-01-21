@@ -79,7 +79,7 @@ class Pie: UIView {
             colors.append(color)
         }
         
-        let gap: CGFloat = 0.01
+        let gap = Sizing.Pie.lineGap
         let circleWithGaps = 2*CGFloat.pi*(1.0-(gap*CGFloat(days.count)))
         
         var oldEndAngle: CGFloat = -CGFloat.pi/2
