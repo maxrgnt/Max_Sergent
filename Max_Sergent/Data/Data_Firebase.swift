@@ -35,24 +35,20 @@ extension Data {
     static func firebaseColorScheme() {
         let ref = Database.database().reference(withPath: Constants.Firebase_Path.colorScheme)
         ref.observeSingleEvent(of: .value, with: { snapshot in
-            guard let values = snapshot.value as? [String: AnyObject] else {
+            guard let value = snapshot.value as? [String: AnyObject] else {
                 print("Error: firebaseColorScheme - snapshot.value not convertible to [String: AnyObject]")
                 return
             }
-            values.keys.forEach { key in
-                if values[key]![Constants.Data_Key.key] as! String == Constants.Data_Key.timeline {
-                    guard   let exp  = values[key]![Constants.Data_Key.exp]  as? String,
-                            let edu  = values[key]![Constants.Data_Key.edu]  as? String,
-                            let proj = values[key]![Constants.Data_Key.proj] as? String else
-                    {
-                        print("Error: firebaseColorScheme - value objects not convertible")
-                        return
-                    }
-                    colorScheme[Constants.Data_Key.timeline] = [Constants.Data_Key.exp:  exp,
-                                                                Constants.Data_Key.edu:  edu,
-                                                                Constants.Data_Key.proj: proj] as AnyObject
-                }
+            guard   let exp  = value[Constants.Data_Key.exp]  as? String,
+                    let edu  = value[Constants.Data_Key.edu]  as? String,
+                    let proj = value[Constants.Data_Key.proj] as? String else
+            {
+                print("Error: firebaseColorScheme - value objects not convertible")
+                return
             }
+            colorScheme = [Constants.Data_Key.exp:  exp,
+                           Constants.Data_Key.edu:  edu,
+                           Constants.Data_Key.proj: proj]
             // If CoreData has been populated already, first delete what is saved before saving new data
             deleteCoreData(forEntity: Constants.CoreData_Entity.colorScheme)
             setColorScheme()

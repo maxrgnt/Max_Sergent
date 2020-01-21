@@ -102,10 +102,9 @@ extension Data {
         let entity = NSEntityDescription.entity(forEntityName: Constants.CoreData_Entity.colorScheme, in: managedContext)!
         let object = NSManagedObject(entity: entity, insertInto: managedContext)
         // Entity specific here
-        let data = colorScheme[Constants.Data_Key.timeline]!
-        object.setValue(data[Constants.Data_Key.edu] as! String,  forKeyPath: Constants.Data_Key.edu)
-        object.setValue(data[Constants.Data_Key.exp] as! String,  forKeyPath: Constants.Data_Key.exp)
-        object.setValue(data[Constants.Data_Key.proj] as! String, forKeyPath: Constants.Data_Key.proj)
+        object.setValue(colorScheme[Constants.Data_Key.edu],  forKeyPath: Constants.Data_Key.edu)
+        object.setValue(colorScheme[Constants.Data_Key.exp],  forKeyPath: Constants.Data_Key.exp)
+        object.setValue(colorScheme[Constants.Data_Key.proj], forKeyPath: Constants.Data_Key.proj)
         do {
             try managedContext.save()
             loadColorScheme()
@@ -122,17 +121,17 @@ extension Data {
         let entity = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.CoreData_Entity.colorScheme)
         let fetch  = try! managedContext.fetch(entity) as! [ColorScheme]
         // Entity specific here
-        guard   let object = fetch.first,
-                let edu    = object.edu,
-                let exp    = object.exp,
-                let proj   = object.proj else
+        guard let object = fetch.first,
+              let edu    = object.timeline_edu,
+              let exp    = object.timeline_exp,
+              let proj   = object.timeline_proj else
         {
             print("Error: loadOverview - coreData not found")
             return
         }
-        colorScheme[Constants.Data_Key.timeline] = [Constants.Data_Key.exp:  exp,
-                                                    Constants.Data_Key.edu:  edu,
-                                                    Constants.Data_Key.proj: proj] as AnyObject
+        colorScheme = [Constants.Data_Key.exp:  exp,
+                       Constants.Data_Key.edu:  edu,
+                       Constants.Data_Key.proj: proj]
         self.customDelegate.resetColorScheme()
     }
     

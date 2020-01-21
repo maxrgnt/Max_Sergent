@@ -188,10 +188,10 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     }
     
     func resetColorScheme() {
-        let data = Data.colorScheme[Constants.Data_Key.timeline]!
-        scroll.page2.eduColor  = UIColor(hexFromString: data[Constants.Data_Key.edu]  as! String, alpha: 1.0)
-        scroll.page2.expColor  = UIColor(hexFromString: data[Constants.Data_Key.exp]  as! String, alpha: 1.0)
-        scroll.page2.projColor = UIColor(hexFromString: data[Constants.Data_Key.proj] as! String, alpha: 1.0)
+        print(Data.colorScheme)
+        scroll.page2.eduColor  = UIColor(hexFromString: Data.colorScheme[Constants.Data_Key.edu]!,  alpha: 1.0)
+        scroll.page2.expColor  = UIColor(hexFromString: Data.colorScheme[Constants.Data_Key.exp]!,  alpha: 1.0)
+        scroll.page2.projColor = UIColor(hexFromString: Data.colorScheme[Constants.Data_Key.proj]!, alpha: 1.0)
         scroll.page2.reloadData()
     }
     

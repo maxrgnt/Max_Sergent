@@ -29,7 +29,7 @@ struct Data {
     // Objects
     static var lastUpdate:                  String = ""
     static var appInfo:                     [String: AnyObject] = [:]
-    static var colorScheme:                 [String: AnyObject] = [:]
+    static var colorScheme:                 [String: String] = [:]
     static var overview:                    [String: String] = [:]
     static var overviewTable:               [(title: String, boxes: [(icon: String, content: String)])] = []
     static var timeline:                    [String: AnyObject] = [:]

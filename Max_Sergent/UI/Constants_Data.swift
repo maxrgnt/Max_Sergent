@@ -63,10 +63,9 @@ extension Constants {
         static let days             = "days"
         static let piece            = "piece"
         static let originDate       = "_originDate"
-        static let timeline         = "timeline"
-        static let exp              = "exp"
-        static let edu              = "edu"
-        static let proj             = "proj"
+        static let exp              = "timeline_exp"
+        static let edu              = "timeline_edu"
+        static let proj             = "timeline_proj"
     }
     
     struct Image_Prefix {

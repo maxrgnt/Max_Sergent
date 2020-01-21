@@ -82,15 +82,15 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         
         cell.icon.image = UIImage(named: data[indexPath.row][Constants.Data_Key.iconName] as! String)
         cell.header.text = data[indexPath.row][Constants.Data_Key.organization] as? String
-        cell.distinction.text = data[indexPath.row][Constants.Data_Key.type] as? String
+        cell.distinction.text = "+"+(data[indexPath.row][Constants.Data_Key.type] as? String)!
         cell.content.text  = data[indexPath.row][Constants.Data_Key.details] as? String
 
         let distinction = data[indexPath.row][Constants.Data_Key.type] as? String
-        cell.boxHeader.backgroundColor = (distinction == Constants.Data_Key.exp)
+        cell.boxHeader.backgroundColor = (Constants.Data_Key.exp.hasSuffix(distinction!))
             ? expColor : cell.boxHeader.backgroundColor
-        cell.boxHeader.backgroundColor = (distinction == Constants.Data_Key.edu)
+        cell.boxHeader.backgroundColor = (Constants.Data_Key.edu.hasSuffix(distinction!))
             ? eduColor : cell.boxHeader.backgroundColor
-        cell.boxHeader.backgroundColor = (distinction == Constants.Data_Key.proj)
+        cell.boxHeader.backgroundColor = (Constants.Data_Key.proj.hasSuffix(distinction!))
             ? projColor : cell.boxHeader.backgroundColor
         
         let maxSection = Data.timelineTable.count-1
