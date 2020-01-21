@@ -4,6 +4,10 @@
         <attribute name="userName" optional="YES" attributeType="String"/>
         <attribute name="watermark" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="ConceptData" representedClassName="ConceptData" syncable="YES" codeGenerationType="class">
+        <attribute name="iconName" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Overview" representedClassName="Overview" syncable="YES" codeGenerationType="class">
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="email_body" optional="YES" attributeType="String"/>
@@ -34,5 +38,6 @@
         <element name="AppInfo" positionX="-45" positionY="99" width="128" height="73"/>
         <element name="Timeline" positionX="-36" positionY="81" width="128" height="148"/>
         <element name="PieData" positionX="-27" positionY="117" width="128" height="103"/>
+        <element name="ConceptData" positionX="-9" positionY="126" width="128" height="73"/>
     </elements>
 </model>

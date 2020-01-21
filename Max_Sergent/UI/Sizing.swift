@@ -130,12 +130,13 @@ struct Sizing {
     struct Concepts {
         static var padding = Sizing.padding
         static let cellWidth: CGFloat = (paddedWidth-padding*3)/Constants.Concepts.objectsPerRow
-        static var cellHeight: CGFloat = cellWidth + padding*(3/2) + titleHeight // label margin
+        static var cellHeight: CGFloat = iconDiameter + padding*(3/2) + 33.0 // hard coded boo // label margin
         static let contentWidth = cellWidth - padding/2
+        static let iconDiameter = contentWidth - padding
         static let boxRadius: CGFloat = min(0.047 * paddedWidth, 39.0)
         static var titleHeight: CGFloat = Fonts.Concepts.title!.pointSize * 2 {
             didSet {
-                cellHeight = cellWidth + titleHeight + padding*(3/2)
+                cellHeight = iconDiameter + titleHeight + padding*(3/2)
             }
         }
     }

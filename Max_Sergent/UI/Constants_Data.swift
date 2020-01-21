@@ -21,6 +21,7 @@ extension Constants {
         static let overview         = "3_overview"
         static let timeline         = "4_timeline"
         static let pie              = "5_pie"
+        static let concepts         = "6_concepts"
     }
     
     struct CoreData_Entity {
@@ -28,7 +29,7 @@ extension Constants {
         static let overview         = "Overview"
         static let timeline         = "Timeline"
         static let pie              = "PieData"
-        static let concept          = "Concept"
+        static let concepts         = "ConceptData"
     }
 
     struct Data_Key {

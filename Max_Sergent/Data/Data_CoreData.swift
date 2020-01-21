@@ -256,4 +256,47 @@ extension Data {
         self.customDelegate.resetPieData()
     }
     
+    //MARK: Concepts
+    static func setConcepts() {
+        // Boiler-plate
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        concepts.forEach { piece in
+            // Starts to differ here
+            let entity = NSEntityDescription.entity(forEntityName: Constants.CoreData_Entity.concepts, in: managedContext)!
+            let object = NSManagedObject(entity: entity, insertInto: managedContext)
+            // Entity specific here
+            object.setValue(piece[Constants.Data_Key.title]!,    forKeyPath: Constants.Data_Key.title)
+            object.setValue(piece[Constants.Data_Key.iconName]!, forKeyPath: Constants.Data_Key.iconName)
+        }
+        do {
+            try managedContext.save()
+            loadConcepts()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    static func loadConcepts() {
+        // Boiler-plate
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        // Starts to differ here
+        let entity = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.CoreData_Entity.concepts)
+        let fetch  = try! managedContext.fetch(entity) as! [ConceptData]
+        // Entity specific here
+        concepts = []
+        fetch.forEach { object in
+            guard   let title    = object.title,
+                    let iconName = object.iconName else
+            {
+                print("Error: loadConcepts - coreData not found")
+                return
+            }
+            concepts.append([Constants.Data_Key.title:    title,
+                             Constants.Data_Key.iconName: iconName])
+        }
+        self.customDelegate.resetConcepts()
+    }
+    
 }

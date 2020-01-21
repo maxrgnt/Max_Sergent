@@ -106,10 +106,6 @@ class Details: UIScrollView, UIScrollViewDelegate {
         closure()
     }
     
-    func resetContentInset() {
-        contentInset = UIEdgeInsets(top: 0, left: Sizing.Scroll.limit, bottom: 0, right: 0)
-    }
-    
     //MARK: Scroll Delegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
@@ -148,9 +144,8 @@ class Details: UIScrollView, UIScrollViewDelegate {
         originDateCenterY.constant = asOfFrame.height/2
         layoutIfNeeded()
         
-        let numberOfRows = ceil(CGFloat(Constants.Concepts.list.count)/Constants.Concepts.objectsPerRow)
-        let collectionHeight = (numberOfRows * Sizing.Concepts.cellHeight) + ((numberOfRows-1) * Sizing.Timeline.padding)
-        conceptsHeight.constant = collectionHeight + concepts.headerHeight.constant + Sizing.Timeline.padding
+        let verticalPadding = Sizing.Concepts.padding*2 + Sizing.Details.padding/2
+        conceptsHeight.constant = concepts.collectionHeight.constant + concepts.headerHeight.constant + verticalPadding
         let contentHeight: CGFloat = headerHeight.constant + Sizing.paddedWidth + conceptsHeight.constant + Sizing.Menu.scrollOffset
         contentSize   = CGSize(width: Sizing.width, height: contentHeight)
     }

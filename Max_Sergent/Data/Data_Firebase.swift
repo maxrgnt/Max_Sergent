@@ -164,4 +164,29 @@ extension Data {
         })
     }
     
+    //MARK: Firebase Concepts
+    static func firebaseConcepts() {
+        let ref = Database.database().reference(withPath: Constants.Firebase_Path.concepts)
+        ref.observeSingleEvent(of: .value, with: { snapshot in
+            guard let values = snapshot.value as? [String: AnyObject] else {
+                print("Error: firebasePie - snapshot.value not convertible to [String: AnyObject]")
+                return
+            }
+            concepts = []
+            values.keys.forEach { key in
+                guard   let title    = values[key]![Constants.Data_Key.title]    as? String,
+                        let iconName = values[key]![Constants.Data_Key.iconName] as? String else
+                {
+                    print("Error: firebaseConcepts - value objects not convertible")
+                    return
+                }
+                concepts.append([Constants.Data_Key.title:    title,
+                                 Constants.Data_Key.iconName: iconName])
+            }
+            // If CoreData has been populated already, first delete what is saved before saving new data
+            deleteCoreData(forEntity: Constants.CoreData_Entity.concepts)
+            setConcepts()
+        })
+    }
+    
 }

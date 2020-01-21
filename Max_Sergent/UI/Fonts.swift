@@ -38,6 +38,7 @@ struct Fonts {
         static let secondaryText: CGFloat = 15.0
         static let tertiaryText:  CGFloat = 13.0
         static let button:        CGFloat = 17.0
+        static let concepts:      CGFloat = 12.0
         static let actionBar:     CGFloat = 10.0
     }
     
@@ -76,7 +77,7 @@ struct Fonts {
     
     struct Concepts {
         static let header = UIFont(name: openSansSemiBold, size: Size.primaryText)
-        static let title = UIFont(name: openSans, size: Size.actionBar)
+        static let title = UIFont(name: openSans, size: Size.concepts) // this is hard coded over in SIZING
     }
     
     struct Footer {

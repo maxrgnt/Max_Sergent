@@ -219,15 +219,15 @@ extension TimelineCell {
         headerHeight = header.heightAnchor.constraint(equalToConstant: 0.0)
         header.translatesAutoresizingMaskIntoConstraints                                                                = false
         header.leadingAnchor.constraint(equalTo: icon.leadingAnchor).isActive                                           = true
-        header.topAnchor.constraint(equalTo: topAnchor, constant: padding*1.5).isActive                                     = true
+        header.topAnchor.constraint(equalTo: topAnchor, constant: padding*1.5).isActive                                 = true
         header.widthAnchor.constraint(equalToConstant: Sizing.Timeline.contentWidth).isActive                           = true
         headerHeight.isActive                                                                                           = true
         
         boxHeaderHeight = boxHeader.heightAnchor.constraint(equalToConstant: 0.0)
         boxHeader.translatesAutoresizingMaskIntoConstraints                                                             = false
-        boxHeader.leadingAnchor.constraint(equalTo: box.leadingAnchor).isActive                                        = true
+        boxHeader.leadingAnchor.constraint(equalTo: box.leadingAnchor).isActive                                         = true
         boxHeader.topAnchor.constraint(equalTo: topAnchor, constant: padding).isActive                                  = true
-        boxHeader.widthAnchor.constraint(equalToConstant: Sizing.Timeline.boxWidth).isActive                        = true
+        boxHeader.widthAnchor.constraint(equalToConstant: Sizing.Timeline.boxWidth).isActive                            = true
         boxHeaderHeight.isActive                                                                                        = true
         
         iconHeight = icon.heightAnchor.constraint(equalToConstant: Sizing.Timeline.iconDiameter)
@@ -358,8 +358,8 @@ extension ConceptCell {
         icon.translatesAutoresizingMaskIntoConstraints                                                                  = false
         icon.topAnchor.constraint(equalTo: box.topAnchor, constant: Sizing.Concepts.padding/2).isActive                 = true
         icon.centerXAnchor.constraint(equalTo: box.centerXAnchor).isActive                                              = true
-        icon.widthAnchor.constraint(equalToConstant: Sizing.Concepts.contentWidth).isActive                             = true
-        icon.heightAnchor.constraint(equalToConstant: Sizing.Concepts.contentWidth).isActive                            = true
+        icon.widthAnchor.constraint(equalToConstant: Sizing.Concepts.iconDiameter).isActive                             = true
+        icon.heightAnchor.constraint(equalToConstant: Sizing.Concepts.iconDiameter).isActive                            = true
         
         titleHeight = title.heightAnchor.constraint(equalToConstant: 0.0)
         title.translatesAutoresizingMaskIntoConstraints                                                                 = false

@@ -71,14 +71,14 @@ class Concepts: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Constants.Concepts.list.count
+        return Data.concepts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Concepts.cellReuseId, for: indexPath) as! ConceptCell
         
-        cell.icon.image = UIImage(named: Constants.Concepts.list[indexPath.row].icon)
-        cell.title.text = Constants.Concepts.list[indexPath.row].title
+        cell.icon.image = UIImage(named: Data.concepts[indexPath.row][Constants.Data_Key.iconName] as! String)
+        cell.title.text = (Data.concepts[indexPath.row][Constants.Data_Key.title] as! String)
         cell.resize()
         
         return cell
@@ -90,8 +90,10 @@ class Concepts: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
                                                numberOfLines: header.numberOfLines,
                                                width: Sizing.paddedWidth)
         headerHeight.constant = headerFrame.height
-        let numberOfRows = ceil(CGFloat(Constants.Concepts.list.count)/Constants.Concepts.objectsPerRow)
-        collectionHeight.constant = (numberOfRows * Sizing.Concepts.cellHeight) + ((numberOfRows-1) * Sizing.Concepts.padding)
+        let numberOfRows = ceil(CGFloat(Data.concepts.count)/Constants.Concepts.objectsPerRow)
+        print("concept resize: \(numberOfRows)")
+        let verticalPadding = (numberOfRows == 0) ? 0.0 : ((numberOfRows-1) * Sizing.Concepts.padding)
+        collectionHeight.constant = (numberOfRows * Sizing.Concepts.cellHeight) + verticalPadding
         collection.contentSize = CGSize(width: Sizing.paddedWidth, height: collectionHeight.constant)
         layoutIfNeeded()
     }

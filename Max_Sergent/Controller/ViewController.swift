@@ -226,4 +226,15 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         scroll.page3.pieText.setNeedsDisplay()
     }
     
+    func resetConcepts() {
+        let key = Constants.Data_Key.title
+        let unsorted = Data.concepts
+        let sorted = (unsorted as NSArray).sortedArray(using: [NSSortDescriptor(key: key, ascending: true)]) as! [[String:AnyObject]]
+        Data.concepts = sorted
+        print(Data.concepts)
+        scroll.page3.concepts.collection.reloadData()
+        scroll.page3.concepts.resize()
+        scroll.page3.resize()
+    }
+    
 }

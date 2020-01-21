@@ -50,7 +50,7 @@ class ConceptCell: UICollectionViewCell {
         addSubview(title)
         title.numberOfLines   = 2
         title.textAlignment   = .center
-        title.backgroundColor = .red
+        title.backgroundColor = .clear //.red
         title.font            = Fonts.Concepts.title
         title.textColor       = Colors.Concepts.title
         
@@ -62,6 +62,7 @@ class ConceptCell: UICollectionViewCell {
                                                         withFont: Fonts.Concepts.title!,
                                                         withWidth: Sizing.Concepts.contentWidth,
                                                         numberOfLines: title.numberOfLines)
+        print(heightForTitle)
         titleHeight.constant = heightForTitle
         Sizing.Concepts.titleHeight = heightForTitle
         layoutIfNeeded()
