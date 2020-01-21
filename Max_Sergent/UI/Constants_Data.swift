@@ -20,13 +20,14 @@ extension Constants {
         static let appInfo          = "2_appInfo"
         static let overview         = "3_overview"
         static let timeline         = "4_timeline"
+        static let pie              = "5_pie"
     }
     
     struct CoreData_Entity {
         static let appInfo          = "AppInfo"
         static let overview         = "Overview"
         static let timeline         = "Timeline"
-        static let habit            = "Habit"
+        static let pie              = "PieData"
         static let concept          = "Concept"
     }
 
@@ -53,6 +54,10 @@ extension Constants {
         static let type             = "type"
         static let key              = "key"
         static let events           = "events"
+        static let color            = "color"
+        static let days             = "days"
+        static let piece            = "piece"
+        static let originDate       = "_originDate"
     }
     
     struct Placeholder {

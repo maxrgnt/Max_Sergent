@@ -213,4 +213,17 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         }
         scroll.page2.reloadData()
     }
+    
+    func resetPieData() {
+        let key = Constants.Data_Key.index
+        let unsorted = Data.pie
+        let sorted = (unsorted as NSArray).sortedArray(using: [NSSortDescriptor(key: key, ascending: true)]) as! [[String:AnyObject]]
+        Data.pie = sorted
+        scroll.page3.pie.resetPieData()
+        let datePieces = Data.pieOriginDate.split(separator: " ")
+        scroll.page3.originDate.text = "\(datePieces[0])\n\(datePieces[1])\n\(datePieces[2])"
+        // Calls the overided draw function
+        scroll.page3.pieText.setNeedsDisplay()
+    }
+    
 }

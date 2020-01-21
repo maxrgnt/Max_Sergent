@@ -209,4 +209,51 @@ extension Data {
         self.customDelegate.resetTimeline()
     }
     
+    //MARK: Pie
+    static func setPieData() {
+        // Boiler-plate
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        pie.forEach { piece in
+            // Starts to differ here
+            let entity = NSEntityDescription.entity(forEntityName: Constants.CoreData_Entity.pie, in: managedContext)!
+            let object = NSManagedObject(entity: entity, insertInto: managedContext)
+            // Entity specific here
+            object.setValue(piece[Constants.Data_Key.color]!, forKeyPath: Constants.Data_Key.color)
+            object.setValue(piece[Constants.Data_Key.piece]!, forKeyPath: Constants.Data_Key.piece)
+            object.setValue(piece[Constants.Data_Key.index]!, forKeyPath: Constants.Data_Key.index)
+            object.setValue(piece[Constants.Data_Key.days]!,  forKeyPath: Constants.Data_Key.days)
+        }
+        do {
+            try managedContext.save()
+            loadPieData()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    static func loadPieData() {
+        // Boiler-plate
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        // Starts to differ here
+        let entity = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.CoreData_Entity.pie)
+        let fetch  = try! managedContext.fetch(entity) as! [PieData]
+        // Entity specific here
+        pie = []
+        fetch.forEach { object in
+            guard   let color = object.color,
+                    let piece = object.piece else
+            {
+                print("Error: loadPieData - coreData not found")
+                return
+            }
+            pie.append([Constants.Data_Key.color: color,
+                        Constants.Data_Key.piece: piece,
+                        Constants.Data_Key.index: object.index,
+                        Constants.Data_Key.days:  object.days])
+        }
+        self.customDelegate.resetPieData()
+    }
+    
 }

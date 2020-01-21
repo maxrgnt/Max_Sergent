@@ -64,7 +64,7 @@ struct Colors {
         static let header = primaryFontColor
         static let asOf = primaryFontColor
         static let originDate = primaryFontColor
-        static let percent = primaryBackground
+        static let percent = primaryFontColor
         static let legend = primaryFontColor
     }
     

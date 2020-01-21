@@ -14,6 +14,12 @@
         <attribute name="locationFrontEnd" optional="YES" attributeType="String"/>
         <attribute name="objective" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="PieData" representedClassName="PieData" syncable="YES" codeGenerationType="class">
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="days" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="piece" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Timeline" representedClassName="Timeline" syncable="YES" codeGenerationType="class">
         <attribute name="details" optional="YES" attributeType="String"/>
         <attribute name="iconName" optional="YES" attributeType="String"/>
@@ -27,5 +33,6 @@
         <element name="Overview" positionX="-54" positionY="9" width="128" height="163"/>
         <element name="AppInfo" positionX="-45" positionY="99" width="128" height="73"/>
         <element name="Timeline" positionX="-36" positionY="81" width="128" height="148"/>
+        <element name="PieData" positionX="-27" positionY="117" width="128" height="103"/>
     </elements>
 </model>

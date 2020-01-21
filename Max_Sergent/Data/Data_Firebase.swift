@@ -102,6 +102,7 @@ extension Data {
                 print("Error: firebaseTimeline - snapshot.value not convertible to [String: AnyObject]")
                 return
             }
+            timeline = [:]
             values.keys.forEach { key in
                 guard   let organization = values[key]![Constants.Data_Key.organization] as? String,
                         let year         = values[key]![Constants.Data_Key.year]         as? Int,
@@ -124,6 +125,42 @@ extension Data {
             // If CoreData has been populated already, first delete what is saved before saving new data
             deleteCoreData(forEntity: Constants.CoreData_Entity.timeline)
             setTimeline()
+        })
+    }
+    
+    //MARK: Firebase Pie
+    static func firebasePieData() {
+        let ref = Database.database().reference(withPath: Constants.Firebase_Path.pie)
+        ref.observeSingleEvent(of: .value, with: { snapshot in
+            guard let values = snapshot.value as? [String: AnyObject] else {
+                print("Error: firebasePie - snapshot.value not convertible to [String: AnyObject]")
+                return
+            }
+            guard let originDate = values[Constants.Data_Key.originDate] as? String else
+            {
+                print("Error: firebasePie - value objects (1) not convertible")
+                return
+            }
+            pie = []
+            let keys = values.keys.sorted().dropFirst()
+            keys.forEach { key in
+                guard   let color = values[key]![Constants.Data_Key.color] as? String,
+                        let piece = values[key]![Constants.Data_Key.piece] as? String,
+                        let days  = values[key]![Constants.Data_Key.days]  as? Int,
+                        let index = values[key]![Constants.Data_Key.index] as? Int else
+                {
+                    print("Error: firebasePie - value objects (2) not convertible")
+                    return
+                }
+                pie.append([Constants.Data_Key.color: color,
+                            Constants.Data_Key.piece: piece,
+                            Constants.Data_Key.days:  days,
+                            Constants.Data_Key.index: index])
+            }
+            pieOriginDate = originDate
+            // If CoreData has been populated already, first delete what is saved before saving new data
+            deleteCoreData(forEntity: Constants.CoreData_Entity.pie)
+            setPieData()
         })
     }
     

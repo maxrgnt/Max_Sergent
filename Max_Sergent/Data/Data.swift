@@ -16,6 +16,7 @@ protocol DataDelegate {
     func resetAppInfo()
     func resetOverview()
     func resetTimeline()
+    func resetPieData()
 }
 
 struct Data {
@@ -29,13 +30,16 @@ struct Data {
     static var overviewTable:   [(title: String, boxes: [(icon: String, content: String)])] = []
     static var timeline:        [String: AnyObject] = [:]
     static var timelineTable:   [[String: Any]] = []
-
+    static var pieOriginDate:   String = ""
+    static var pie:             [[String: Any]] = []
+    
     // MARK: Clear Testing
     static func clearAllDataForTesting(){
         // Delete core data entities
         deleteCoreData(forEntity: Constants.CoreData_Entity.appInfo)
         deleteCoreData(forEntity: Constants.CoreData_Entity.overview)
         deleteCoreData(forEntity: Constants.CoreData_Entity.timeline)
+        deleteCoreData(forEntity: Constants.CoreData_Entity.pie)
         // Delete onboarding/keyboard/userAgreement user default data
         let domain = Bundle.main.bundleIdentifier!
         UserDefaults.standard.removePersistentDomain(forName: domain)
@@ -65,6 +69,7 @@ struct Data {
             loadAppInfo()
             loadOverview()
             loadTimeline()
+            loadPieData()
         }
         else {
             print("Load from Firebase")
@@ -79,6 +84,7 @@ struct Data {
         firebaseAppInfo()
         firebaseOverview()
         firebaseTimeline()
+        firebasePieData()
         completion()
     }
 

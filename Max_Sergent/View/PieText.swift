@@ -39,17 +39,35 @@ class PieText: UIView {
         context.translateBy (x: size.width / 2, y: size.height / 2)
         context.scaleBy (x: 1, y: -1)
 
-        let pieces: [CGFloat] = [0.2,0.1,0.1,0.1,0.1,0.1,0.1,0.2]
-        let keys: [String] = ["Coding","Reading","Running","Coffee","Outside","Travel","Gaming","Bikeshare"]
-        let vals: [String] = ["20%","10%","10%","10%","10%","10%","10%","20%"]
+        var days:     [CGFloat] = []
+        var vals:     [String]  = []
+        var colors:   [UIColor] = []
+        var keys:     [String]  = []
+        var totalDays: CGFloat  = 0.0
+        
+        Data.pie.forEach { object in
+            let day = CGFloat(object[Constants.Data_Key.days] as! Int64)
+            totalDays += day
+        }
+        
+        Data.pie.forEach { object in
+            let day = CGFloat(object[Constants.Data_Key.days] as! Int64)
+            days.append(day/totalDays)
+            vals.append(String(describing: Int(day)))
+            let color = UIColor(hexFromString: object[Constants.Data_Key.color] as! String, alpha: 1.0)
+            colors.append(color)
+            let key = object[Constants.Data_Key.piece] as! String
+            keys.append(key)
+        }
+        
         let gap: CGFloat = 0.01
-        let circleWithGaps = 2*CGFloat.pi*(1.0-(gap*CGFloat(pieces.count)))
+        let circleWithGaps = 2*CGFloat.pi*(1.0-(gap*CGFloat(days.count)))
         var oldEndAngle: CGFloat = CGFloat.pi/2
 
-        for (i, piece) in pieces.enumerated() {
+        for (i, piece) in days.enumerated() {
             let width = circleWithGaps*piece
             let angle = oldEndAngle - width/2
-            let clockwise = (angle < CGFloat.pi/4 && angle >= -CGFloat.pi) ? false : true
+            let clockwise = (angle < CGFloat.pi/3 && angle >= -CGFloat.pi) ? false : true
             centreArcPerpendicular(text: keys[i],
                                    context: context,
                                    radius: Sizing.Pie.textRadius,
@@ -60,7 +78,7 @@ class PieText: UIView {
             oldEndAngle -= width + (2*CGFloat.pi*gap)
         }
         
-        for (i, piece) in pieces.enumerated() {
+        for (i, piece) in days.enumerated() {
             let width = circleWithGaps*piece
             let angle = oldEndAngle - width/2
             let clockwise = (angle < -CGFloat.pi*(1.75) && angle >= -3*CGFloat.pi) ? false : true
