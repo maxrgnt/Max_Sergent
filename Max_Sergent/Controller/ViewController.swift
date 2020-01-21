@@ -14,6 +14,7 @@ import MapKit
 class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDelegate, OverviewDelegate, MenuDelegate, MFMailComposeViewControllerDelegate {
     
     let watermark = UILabel()
+    static let lastUpdate = UILabel()
     let header = Header()
     let scroll = Scroll()
     let footer = Footer()
@@ -53,6 +54,15 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         watermark.textColor        = Colors.ViewController.watermark
         watermark.text             = Constants.watermark
         
+        view.addSubview(ViewController.lastUpdate)
+        ViewController.lastUpdate.alpha           = 0.7
+        ViewController.lastUpdate.numberOfLines   = 2
+        ViewController.lastUpdate.textAlignment   = .center
+        ViewController.lastUpdate.backgroundColor = .clear
+        ViewController.lastUpdate.lineBreakMode   = .byClipping
+        ViewController.lastUpdate.font            = Fonts.Overview.title
+        ViewController.lastUpdate.textColor       = Colors.ViewController.watermark
+        
         view.addSubview(header)
         header.setup() {
             header.constraints()
@@ -77,6 +87,7 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     
     //MARK: Custom Delegates
     func scrollSet(toPage page: Int) {
+        updateForChange(toPage: page)
         if footer.menu.currentPage != page {
             footer.menu.currentPage = page
             footer.menu.setAlphaForPage()
@@ -85,10 +96,17 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     }
     
     func menuSet(toPage page: Int) {
+        updateForChange(toPage: page)
         footer.menu.canSetFromMenu = false
         let newX = Sizing.width * CGFloat(page)
         let newOffset = CGPoint(x: newX, y: 0.0)
         scroll.setContentOffset(newOffset, animated: true)
+    }
+    
+    func updateForChange(toPage page: Int) {
+        header.isUserInteractionEnabled = (scroll.contentOffset.x == 0.0) ? true : false
+        (page != 1) ? scroll.page2.setContentOffset(CGPoint.zero, animated:true) : nil
+        (page != 2) ? scroll.page3.setContentOffset(CGPoint.zero, animated:true) : nil
     }
     
     func calculateRatio(for contentOffset: CGFloat) {

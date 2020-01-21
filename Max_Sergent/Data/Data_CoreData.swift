@@ -50,7 +50,7 @@ extension Data {
                         FileManager.default.contentsOfDirectory(at: documentsURL,
                                                                 includingPropertiesForKeys: [],
                                                                 options:  [.skipsHiddenFiles, .skipsSubdirectoryDescendants])
-                    print(docs)
+//                    print(docs)
                     loadAppInfo()
                 } catch {
                     print(error)

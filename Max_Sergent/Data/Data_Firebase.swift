@@ -174,6 +174,7 @@ extension Data {
                 return
             }
             concepts = []
+            conceptIconsSavedInMemory = []
             let keys = values.keys.sorted()
             keys.forEach { key in
                 guard   let title    = values[key]![Constants.Data_Key.title]    as? String,
@@ -184,18 +185,17 @@ extension Data {
                     return
                 }
                 concepts.append([Constants.Data_Key.title:    title,
-                                 Constants.Data_Key.iconName: iconName])
+                                 Constants.Data_Key.iconName: Constants.Image_Prefix.concept+iconName])
                 let storageRef = Storage.storage().reference(forURL: iconURL)
                 storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
                     if let error = error {
                         print(error)
                     }
                     else {
-                        if UIImage(data: data!)!.saveImage(as: iconName) {
+                        if UIImage(data: data!)!.saveImage(as: Constants.Image_Prefix.concept+iconName) {
                             if key == keys.last! {
                                 firebaseCheckForConceptIcons()
                             }
-                            
                         }
                         else {
 
@@ -215,12 +215,21 @@ extension Data {
             let docs = try FileManager.default.contentsOfDirectory(at: documentsURL,
                                                                    includingPropertiesForKeys: [],
                                                                    options:  [.skipsHiddenFiles, .skipsSubdirectoryDescendants])
-            if docs.count < concepts.count {
+            if conceptIconsSavedInMemory.count < concepts.count {
+                docs.forEach { doc in
+                    let docString = String(describing: doc)
+                    let splitFileName = docString.split(separator:"/")
+                    let imageName = String(describing: splitFileName.last!)
+                    if imageName.hasPrefix(Constants.Image_Prefix.concept) && !conceptIconsSavedInMemory.contains(imageName) {
+                        conceptIconsSavedInMemory.append(imageName)
+                    }
+                }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     firebaseCheckForConceptIcons()
                 }
             }
             else {
+                print(conceptIconsSavedInMemory)
                 // If CoreData has been populated already, first delete what is saved before saving new data
                 deleteCoreData(forEntity: Constants.CoreData_Entity.concepts)
                 setConcepts()

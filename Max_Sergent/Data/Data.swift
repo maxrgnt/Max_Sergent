@@ -26,14 +26,16 @@ struct Data {
     // Delegates
     static var customDelegate : DataDelegate!
     // Objects
-    static var appInfo:         [String: AnyObject] = [:]
-    static var overview:        [String: String] = [:]
-    static var overviewTable:   [(title: String, boxes: [(icon: String, content: String)])] = []
-    static var timeline:        [String: AnyObject] = [:]
-    static var timelineTable:   [[String: Any]] = []
-    static var pieOriginDate:   String = ""
-    static var pie:             [[String: Any]] = []
-    static var concepts:        [[String: Any]] = []
+    static var lastUpdate:                  String = ""
+    static var appInfo:                     [String: AnyObject] = [:]
+    static var overview:                    [String: String] = [:]
+    static var overviewTable:               [(title: String, boxes: [(icon: String, content: String)])] = []
+    static var timeline:                    [String: AnyObject] = [:]
+    static var timelineTable:               [[String: Any]] = []
+    static var pieOriginDate:               String = ""
+    static var pie:                         [[String: Any]] = []
+    static var concepts:                    [[String: Any]] = []
+    static var conceptIconsSavedInMemory:   [String] = []
     
     // MARK: Clear Testing
     static func clearAllDataForTesting(){
@@ -74,11 +76,17 @@ struct Data {
             loadTimeline()
             loadPieData()
             loadConcepts()
+            lastUpdate = UserDefaults.standard.string(forKey: Constants.UserDefaults.lastUpdate)!
+            ViewController.lastUpdate.text = "last updated:\n\(lastUpdate)"
         }
         else {
             print("Load from Firebase")
             firebaseAll {
                 //UserDefaults.standard.set(true, forKey: Constants.UserDefaults.coreData)
+                let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .none)
+                UserDefaults.standard.set(timestamp, forKey: Constants.UserDefaults.lastUpdate)
+                lastUpdate = UserDefaults.standard.string(forKey: Constants.UserDefaults.lastUpdate)!
+                ViewController.lastUpdate.text = "last updated:\n\(lastUpdate)"
             }
         }
     }

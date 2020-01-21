@@ -44,6 +44,7 @@ class PieText: UIView {
         var colors:   [UIColor] = []
         var keys:     [String]  = []
         var totalDays: CGFloat  = 0.0
+        var percentageOff: Int  = 100
         
         Data.pie.forEach { object in
             let day = CGFloat(object[Constants.Data_Key.days] as! Int64)
@@ -52,8 +53,16 @@ class PieText: UIView {
         
         Data.pie.forEach { object in
             let day = CGFloat(object[Constants.Data_Key.days] as! Int64)
+            let x = Int(round((Double(day/totalDays)*100.0)))
+            percentageOff -= x
+        }
+        
+        Data.pie.forEach { object in
+            let day = CGFloat(object[Constants.Data_Key.days] as! Int64)
             days.append(day/totalDays)
-            vals.append(String(describing: Int(day)))
+            let x = Int(round((Double(day/totalDays)*100.0)))
+            vals.append(String(describing: x + percentageOff)+"%")
+            percentageOff += -percentageOff
             let color = UIColor(hexFromString: object[Constants.Data_Key.color] as! String, alpha: 1.0)
             colors.append(color)
             let key = object[Constants.Data_Key.piece] as! String
