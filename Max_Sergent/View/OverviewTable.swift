@@ -22,7 +22,6 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     var customDelegate: OverviewDelegate!
     // Constraints
     // Objects
-    let data = Constants.Overview.clusters
     
     //MARK: - Initialization
     override init (frame: CGRect, style: UITableView.Style) {
@@ -58,8 +57,8 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
             cell.constraints()
         }
         
-        cell.setIcon(withName: data[indexPath.section].boxes[indexPath.row].icon)
-        cell.content.text  = data[indexPath.section].boxes[indexPath.row].content
+        cell.setIcon(withName: Data.overviewTable[indexPath.section].boxes[indexPath.row].icon)
+        cell.content.text  = Data.overviewTable[indexPath.section].boxes[indexPath.row].content
         
         cell.resize(forIndex: indexPath.row)
         
@@ -76,7 +75,7 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         tempSection.setup() {
             tempSection.constraints()
         }
-        tempSection.title.text = data[section].title
+        tempSection.title.text = Data.overviewTable[section].title
         tempSection.titleCenterY.constant = (section == 0) ? Sizing.Overview.padding/2 : 0.0
         tempSection.resize()
         
@@ -84,7 +83,7 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let title = data[section].title
+        let title = Data.overviewTable[section].title
         let heightForLabel = Fonts.calculateLabelHeight(for: title,
                                                         withFont: Fonts.Overview.title!,
                                                         withWidth: Sizing.Overview.boxPaddedWidth,
@@ -97,15 +96,15 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return data.count
+        return Data.overviewTable.count
     }
  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data[section].boxes.count
+        return Data.overviewTable[section].boxes.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let content = data[indexPath.section].boxes[indexPath.row].content
+        let content = Data.overviewTable[indexPath.section].boxes[indexPath.row].content
         let heightForLabel = Fonts.calculateLabelHeight(for: content,
                                                         withFont: Fonts.Overview.content!,
                                                         withWidth: Sizing.Overview.boxPaddedWidth,

@@ -11,7 +11,7 @@ import UIKit
 import MessageUI
 import MapKit
 
-class ViewController: UIViewController, HeaderDelegate, ScrollDelegate, OverviewDelegate, MenuDelegate, MFMailComposeViewControllerDelegate {
+class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDelegate, OverviewDelegate, MenuDelegate, MFMailComposeViewControllerDelegate {
     
     let watermark = UILabel()
     let header = Header()
@@ -22,14 +22,14 @@ class ViewController: UIViewController, HeaderDelegate, ScrollDelegate, Overview
     
     override func viewDidLoad() {
         print("Hello World!")
-        print("statusBarHeight: \(Sizing.statusBar.height)")
-        print("screenHeight: \(Sizing.height)")
         Sizing.padding = Sizing.padding < 22.0 ? 22.0 : Sizing.padding
         Sizing.offsetForShorterScreens = Sizing.height <= 736.0 ? -66.0 : 0.0
         
         view.backgroundColor = Colors.ViewController.background
         setup() {
             constraints()
+            Data.clearAllDataForTesting()
+            Data.checkFirebaseForReset()
         }
     }
     
@@ -40,6 +40,8 @@ class ViewController: UIViewController, HeaderDelegate, ScrollDelegate, Overview
 
     //MARK: Settings
     func setup(closure: () -> Void) {
+        
+        Data.customDelegate = self
         
         view.addSubview(watermark)
         watermark.alpha            = 0.7
@@ -72,8 +74,6 @@ class ViewController: UIViewController, HeaderDelegate, ScrollDelegate, Overview
         
         closure()
     }
-    
-    //MARK: Functionality
     
     //MARK: Custom Delegates
     func scrollSet(toPage page: Int) {
@@ -108,7 +108,7 @@ class ViewController: UIViewController, HeaderDelegate, ScrollDelegate, Overview
     }
     
     func openMaps() {
-        let myAddress = "Washington,+DC+USA"
+        let myAddress = Data.overview[Constants.Data_Key.locationBackEnd]!
         if let url = URL(string:"http://maps.apple.com/?address=\(myAddress)") {
             UIApplication.shared.open(url)
         } else {
@@ -117,10 +117,11 @@ class ViewController: UIViewController, HeaderDelegate, ScrollDelegate, Overview
         }
     }
     
+    //MARK: Third-Party Navigators
     func sendEmail() {
-        let email = "maxrgnt@umich.edu"
-        let subject = "Hello World!"
-        let bodyText = "I saw Max Sergent on the App Store!"
+        let email = Data.overview[Constants.Data_Key.email]!
+        let subject = Data.overview[Constants.Data_Key.email_subject]!
+        let bodyText = Data.overview[Constants.Data_Key.email_body]!
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
@@ -148,12 +149,38 @@ class ViewController: UIViewController, HeaderDelegate, ScrollDelegate, Overview
     }
     
     func openLinkedIn() {
-        let webURL = URL(string: "https://www.linkedin.com/in/max-sergent")!
-        let appURL = URL(string: "linkedin://profile/max-sergent")!
+        let webURL = URL(string: Data.overview[Constants.Data_Key.linkedinWebURL]!)!
+        let appURL = URL(string: Data.overview[Constants.Data_Key.linkedinAppURL]!)!
         if UIApplication.shared.canOpenURL(appURL) {
             UIApplication.shared.open(appURL, options: [:], completionHandler: nil)
         } else {
             UIApplication.shared.open(webURL, options: [:], completionHandler: nil)
         }
+    }
+    
+    //MARK: Data Logic
+    func resetAppInfo() {
+        let watermarkList  = (Data.appInfo[Constants.Data_Key.watermark] as! String).split(separator: " ")
+        let watermarkStr   = "\(watermarkList[0])\n\(watermarkList[1])"
+        watermark.text     = watermarkStr
+        let userNameList   = (Data.appInfo[Constants.Data_Key.userName]  as! String).split(separator: " ")
+        let userName       = "\(userNameList[0])\n\(userNameList[1])"
+        header.name.text   = userName
+        header.photo.image = (Data.appInfo[Constants.Data_Key.appInfoPhoto]  as! UIImage)
+    }
+    
+    func resetOverview() {
+        Data.overviewTable = [(title: Constants.Overview.titles[0],
+                               boxes: [(icon: "",
+                                        content: Data.overview[Constants.Data_Key.objective]!)]),
+                              (title: Constants.Overview.titles[1],
+                               boxes: [(icon: Constants.Overview.contactIcons[0],
+                                        content: Data.overview[Constants.Data_Key.locationFrontEnd]!),
+                                       (icon: Constants.Overview.contactIcons[1],
+                                        content: Data.overview[Constants.Data_Key.email]!),
+                                       (icon: Constants.Overview.contactIcons[2],
+                                        content: Data.overview[Constants.Data_Key.linkedinWebURL]!)])]
+        scroll.page1.reloadData()
+        print(Data.overview)
     }
 }
