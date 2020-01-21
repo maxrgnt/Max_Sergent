@@ -49,8 +49,8 @@ extension UILabel {
 
 extension UIImage {
     func saveImage(as fileName: String) -> Bool {
-        print(fileName)
-        guard let data = self.jpegData(compressionQuality: 1) ?? self.pngData() else {
+        //guard let data = self.jpegData(compressionQuality: 1) ?? self.pngData() else {
+        guard let data = self.pngData() else {
             return false
         }
         guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) as NSURL else {
