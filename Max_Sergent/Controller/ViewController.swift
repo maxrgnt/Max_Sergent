@@ -41,7 +41,7 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         print(Date())
         setup() {
             constraints()
-            Data.clearAllDataForTesting()
+            //Data.clearAllDataForTesting()
         }
     }
     

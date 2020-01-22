@@ -150,7 +150,7 @@ struct Sizing {
         static let textHeight = Footer.height * (1/3)
         static let textWidth = (paddedWidth-(padding*3))/3
         static let buttonWidth = paddedWidth/3
-        static let scrollOffset = Sizing.Footer.height + padding
+        static let scrollOffset = Sizing.Footer.height + padding*2.5
     }
     
 }
