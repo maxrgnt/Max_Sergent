@@ -112,6 +112,18 @@ extension Scroll {
         page3.topAnchor.constraint(equalTo: topAnchor).isActive                                                         = true
         page3.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                     = true
         page3.heightAnchor.constraint(equalTo: heightAnchor).isActive                                                   = true
+        
+        page3blur.translatesAutoresizingMaskIntoConstraints                                                             = false
+        page3blur.leadingAnchor.constraint(equalTo: page2.trailingAnchor).isActive                                      = true
+        page3blur.topAnchor.constraint(equalTo: topAnchor).isActive                                               = true
+        page3blur.widthAnchor.constraint(equalTo: widthAnchor).isActive                                           = true
+        page3blur.heightAnchor.constraint(equalToConstant: Sizing.Details.padding*2).isActive                             = true
+        
+        page3vibrancy.translatesAutoresizingMaskIntoConstraints                                                         = false
+        page3vibrancy.leadingAnchor.constraint(equalTo: page2.trailingAnchor).isActive                                  = true
+        page3vibrancy.topAnchor.constraint(equalTo: page3.topAnchor).isActive                                           = true
+        page3vibrancy.widthAnchor.constraint(equalTo: page3.widthAnchor).isActive                                       = true
+        page3vibrancy.heightAnchor.constraint(equalToConstant: Sizing.Details.padding*2).isActive                         = true
     }
     
 }

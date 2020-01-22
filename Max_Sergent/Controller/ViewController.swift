@@ -235,6 +235,7 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         resetColorScheme()
         resetOverview()
         resetTimeline()
+        resetTimelineb()
         resetConcepts()
         resetPieData()
         UIView.animate(withDuration: 0.55, delay: 0.0,
@@ -312,6 +313,10 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
             Data.timelineTable[i][Constants.Data_Key.events] = sorted
         }
         scroll.page2.reloadData()
+    }
+    
+    func resetTimelineb() {
+        (scroll.page2.refreshControl?.subviews[1] as! TimelineRefresh).icons = Data.timelineb
     }
     
     func resetPieData() {

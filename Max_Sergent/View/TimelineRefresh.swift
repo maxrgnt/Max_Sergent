@@ -20,7 +20,7 @@ class TimelineRefresh: UIView {
     var node = UILabel()
     var isAnimating = false
     var iconIndex = 0
-    let icons = ["capitalOne","apple","amazon"]
+    var icons: [String] = []
     
     //MARK: Initialization
     init() {
@@ -56,7 +56,6 @@ class TimelineRefresh: UIView {
         icon.layer.masksToBounds = true
         icon.contentMode         = .scaleAspectFill
         icon.alpha = 0
-        self.icon.image = UIImage(named: icons[0])
         
         closure()
     }
@@ -80,7 +79,18 @@ class TimelineRefresh: UIView {
             if newAlpha == 0.0 {
                 self.iconIndex += 1
                 self.iconIndex = (self.iconIndex == self.icons.count) ? 0 : self.iconIndex
-                self.icon.image = UIImage(named: self.icons[self.iconIndex])
+                guard let dir = try?
+                    FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else
+                {
+                    return
+                }
+                let iconName = self.icons[self.iconIndex]
+                let urlFromCoreData = URL(fileURLWithPath: dir.absoluteString).appendingPathComponent("\(iconName).png")
+                print(iconName, urlFromCoreData)
+                let photo = UIImage(contentsOfFile: urlFromCoreData.path)!
+                //let scaledPhoto = resizeImage(image: photo, newHeight: Sizing.Timeline.iconDiameter)
+                
+                self.icon.image = photo
             }
             let nextAlpha: CGFloat = (newAlpha == 0.0) ? 1.0 : 0.0
             self.isAnimating ? self.animateIcon(toAlpha: nextAlpha) : nil

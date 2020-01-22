@@ -14,7 +14,7 @@ protocol ScrollDelegate {
     func calculateRatio(for: CGFloat)
 }
 
-class Scroll: UIScrollView, UIScrollViewDelegate {
+class Scroll: UIScrollView, UIScrollViewDelegate, DetailsDelegate {    
     
     //MARK: Definitions
     // Delegates
@@ -24,6 +24,8 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     var page1 = OverviewTable()
     var page2 = TimelineTable()
     var page3 = Details()
+    var page3blur = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+    var page3vibrancy = UIVisualEffectView(effect: UIVibrancyEffect(blurEffect: UIBlurEffect(style: .light)))
     lazy var pages = [page1,page2,page3]
     var scrollingFromMenu = false
     
@@ -39,6 +41,7 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     
     //MARK: Setup
     func setup(closure: () -> Void) {
+        
         delegate                                  = self
         isPagingEnabled                           = true
         isUserInteractionEnabled                  = true
@@ -64,6 +67,15 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
             page3.constraints()
             page3.resize()
         }
+        page3.customDelegate = self
+        // Blur object settings
+        addSubview(page3blur)
+        page3blur.roundCorners(corners: [.topRight], radius: Sizing.Scroll.radius)
+        page3blur.alpha = 0.0
+        page3blur.clipsToBounds = true
+        // Vibrancy object settings
+        page3blur.contentView.addSubview(page3vibrancy)
+        page3vibrancy.alpha = 0.0
         
         closure()
     }
@@ -111,6 +123,29 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
     
     func scaleInversely(with scalar: CGFloat) {
         alpha = (scalar < 0.0) ? 1+scalar : 1.0
+    }
+    
+    func setBlurAlpha(toAlpha: CGFloat) {
+        if page3blur.alpha != toAlpha {
+            UIView.animate(withDuration: 0.55, delay: 0.0,
+                // 1.0 is smooth, 0.0 is bouncy
+                usingSpringWithDamping: 0.7,
+                // 1.0 corresponds to the total animation distance traversed in one second
+                // distance/seconds, 1.0 = total animation distance traversed in one second
+                initialSpringVelocity: 1.0,
+                options: [.curveEaseInOut],
+                // [autoReverse, curveEaseIn, curveEaseOut, curveEaseInOut, curveLinear]
+                animations: {
+                    //Do all animations here
+                    self.page3blur.alpha = toAlpha
+                    self.page3vibrancy.alpha = toAlpha
+            }, completion: {
+                   //Code to run after animating
+                    (value: Bool) in
+            })
+        }
+        print("alpha: ",page3blur.alpha)
+        print("alpha: ",page3vibrancy.alpha)
     }
 
 

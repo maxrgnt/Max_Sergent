@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol DetailsDelegate {
-    
+    func setBlurAlpha(toAlpha: CGFloat)
 }
 
 class Details: UIScrollView, UIScrollViewDelegate {
@@ -105,7 +105,8 @@ class Details: UIScrollView, UIScrollViewDelegate {
     
     //MARK: Scroll Delegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
+        print("scroll",contentOffset.y)
+        contentOffset.y > 0.0 ? self.customDelegate.setBlurAlpha(toAlpha: 1.0) : self.customDelegate.setBlurAlpha(toAlpha: 0.0)
     }
     
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {

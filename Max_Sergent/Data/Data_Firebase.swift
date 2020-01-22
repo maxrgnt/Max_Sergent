@@ -219,6 +219,77 @@ extension Data {
         }
     }
     
+    //MARK: Firebase TimelineB
+    static func firebaseTimelineB() {
+        let ref = Database.database().reference(withPath: Constants.Firebase_Path.timelineb)
+        ref.observeSingleEvent(of: .value, with: { snapshot in
+            guard let values = snapshot.value as? [String: AnyObject] else {
+                print("Error: firebaseTimeline - snapshot.value not convertible to [String: AnyObject]")
+                return
+            }
+            timelinebIconsSavedInMemory = []
+            let keys = values.keys.sorted()
+            keys.forEach { key in
+                guard   let iconName     = values[key]![Constants.Data_Key.iconName]     as? String,
+                        let iconURL      = values[key]![Constants.Data_Key.iconURL]      as? String else
+                {
+                    print("Error: firebaseTimeline - value objects not convertible")
+                    return
+                }
+                timelineb.append(Constants.Image_Prefix.timelineb+iconName)
+                let storageRef = Storage.storage().reference(forURL: iconURL)
+                storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                    if let error = error {
+                        print(error)
+                    }
+                    else {
+                        if UIImage(data: data!)!.saveImage(as: Constants.Image_Prefix.timelineb+iconName) {
+                            if key == keys.last! {
+                                firebaseCheckForTimelinebIcons()
+                            }
+                        }
+                        else {
+
+                        }
+                    }
+                }
+            }
+        })
+    }
+    
+    static func firebaseCheckForTimelinebIcons() {
+        do {
+            let documentsURL = try FileManager.default.url(for: .documentDirectory,
+                                                           in: .userDomainMask,
+                                                           appropriateFor: nil,
+                                                           create: false)
+            let docs = try FileManager.default.contentsOfDirectory(at: documentsURL,
+                                                                   includingPropertiesForKeys: [],
+                                                                   options:  [.skipsHiddenFiles, .skipsSubdirectoryDescendants])
+            if timelinebIconsSavedInMemory.count < timelineb.count {
+                docs.forEach { doc in
+                    let docString = String(describing: doc)
+                    let splitFileName = docString.split(separator:"/")
+                    let imageName = String(describing: splitFileName.last!)
+                    if imageName.hasPrefix(Constants.Image_Prefix.timelineb) {
+                        timelinebIconsSavedInMemory.append(imageName)
+                    }
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    firebaseCheckForTimelinebIcons()
+                }
+            }
+            else {
+                //print(conceptIconsSavedInMemory)
+                // If CoreData has been populated already, first delete what is saved before saving new data
+                deleteCoreData(forEntity: Constants.CoreData_Entity.timelineb)
+                setTimelineb()
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
     //MARK: Firebase Pie
     static func firebasePieData() {
         let ref = Database.database().reference(withPath: Constants.Firebase_Path.pie)

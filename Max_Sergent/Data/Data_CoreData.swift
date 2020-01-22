@@ -270,6 +270,46 @@ extension Data {
         timelineLoaded = true
     }
     
+    //MARK: TimelineB
+    static func setTimelineb() {
+        // Boiler-plate
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        timelineb.forEach { iconName in
+            // Starts to differ here
+            let entity = NSEntityDescription.entity(forEntityName: Constants.CoreData_Entity.timelineb, in: managedContext)!
+            let object = NSManagedObject(entity: entity, insertInto: managedContext)
+            // Entity specific here
+            object.setValue(iconName, forKeyPath: Constants.Data_Key.iconName)
+        }
+        do {
+            try managedContext.save()
+            loadTimelineb()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    static func loadTimelineb() {
+        // Boiler-plate
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let managedContext = appDelegate.persistentContainer.viewContext
+        // Starts to differ here
+        let entity = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.CoreData_Entity.timelineb)
+        let fetch  = try! managedContext.fetch(entity) as! [TimelineB]
+        // Entity specific here
+        timelineb = []
+        fetch.forEach { object in
+            guard let iconName = object.iconName else
+            {
+                print("Error: loadTimeline - coreData not found")
+                return
+            }
+            timelineb.append(iconName)
+        }
+        timelinebLoaded = true
+    }
+    
     //MARK: Pie
     static func setPieData() {
         // Boiler-plate
