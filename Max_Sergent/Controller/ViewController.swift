@@ -317,6 +317,7 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     }
     
     func resetTimelineb() {
+        print(Data.timelineb)
         (scroll.page2.refreshControl?.subviews[1] as! TimelineRefresh).icons = Data.timelineb
     }
     

@@ -305,6 +305,7 @@ extension Data {
                 print("Error: loadTimeline - coreData not found")
                 return
             }
+            print(iconName)
             timelineb.append(iconName)
         }
         timelinebLoaded = true

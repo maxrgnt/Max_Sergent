@@ -72,7 +72,7 @@ class TimelineRefresh: UIView {
     }
         
     func animateIcon(toAlpha newAlpha: CGFloat) {
-        UIView.animate(withDuration: 0.33, delay: 0.0, options: [.curveLinear],
+        UIView.animate(withDuration: 0.33,
             animations: {
                 self.icon.alpha = newAlpha
         }, completion: { (done: Bool) in
@@ -86,10 +86,8 @@ class TimelineRefresh: UIView {
                 }
                 let iconName = self.icons[self.iconIndex]
                 let urlFromCoreData = URL(fileURLWithPath: dir.absoluteString).appendingPathComponent("\(iconName).png")
-                print(iconName, urlFromCoreData)
                 let photo = UIImage(contentsOfFile: urlFromCoreData.path)!
                 //let scaledPhoto = resizeImage(image: photo, newHeight: Sizing.Timeline.iconDiameter)
-                
                 self.icon.image = photo
             }
             let nextAlpha: CGFloat = (newAlpha == 0.0) ? 1.0 : 0.0

@@ -99,7 +99,7 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         cell.header.text = data[indexPath.row][Constants.Data_Key.organization] as? String
         cell.distinction.text = data[indexPath.row][Constants.Data_Key.type] as? String
         cell.content.text  = data[indexPath.row][Constants.Data_Key.details] as? String
-        
+         
         cell.content.textColor     = contentTextColor
         cell.distinction.textColor = contentTextColor
         cell.header.textColor      = contentTextColor
@@ -144,7 +144,7 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         tempSection.line.backgroundColor    = lineColor
         tempSection.title.textColor         = titleTextColor
         tempSection.title.text = Data.timelineTable[section][Constants.Data_Key.year] as? String
-        tempSection.titleCenterY.constant = (section == 0) ? Sizing.Timeline.padding/4 : Sizing.Timeline.padding/4 // 0.0
+        tempSection.titleCenterY.constant = (section == 0) ? Sizing.Timeline.padding/4 : 0.0
         tempSection.resize()
         return tempSection
     }
@@ -152,7 +152,7 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let title = Data.timelineTable[section][Constants.Data_Key.year] as? String
         let heightForLabel = Fonts.calculateLabelHeight(for: title!,
-                                                        withFont: Fonts.Overview.title!,
+                                                        withFont: Fonts.Timeline.title!,
                                                         withWidth: Sizing.Overview.boxPaddedWidth,
                                                         numberOfLines: 1)
         let heightForSection = (section == 0 )
