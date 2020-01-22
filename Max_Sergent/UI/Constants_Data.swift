@@ -66,6 +66,11 @@ extension Constants {
         static let exp              = "timeline_exp"
         static let edu              = "timeline_edu"
         static let proj             = "timeline_proj"
+        static let background1      = "background1"
+        static let background2      = "background2"
+        static let background3      = "background3"
+        static let effectStyle      = "effectStyle"
+        static let font             = "font"
     }
     
     struct Image_Prefix {

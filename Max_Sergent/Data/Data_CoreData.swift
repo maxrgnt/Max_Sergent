@@ -102,9 +102,14 @@ extension Data {
         let entity = NSEntityDescription.entity(forEntityName: Constants.CoreData_Entity.colorScheme, in: managedContext)!
         let object = NSManagedObject(entity: entity, insertInto: managedContext)
         // Entity specific here
-        object.setValue(colorScheme[Constants.Data_Key.edu],  forKeyPath: Constants.Data_Key.edu)
-        object.setValue(colorScheme[Constants.Data_Key.exp],  forKeyPath: Constants.Data_Key.exp)
-        object.setValue(colorScheme[Constants.Data_Key.proj], forKeyPath: Constants.Data_Key.proj)
+        object.setValue(colorScheme[Constants.Data_Key.edu],         forKeyPath: Constants.Data_Key.edu)
+        object.setValue(colorScheme[Constants.Data_Key.exp],         forKeyPath: Constants.Data_Key.exp)
+        object.setValue(colorScheme[Constants.Data_Key.proj],        forKeyPath: Constants.Data_Key.proj)
+        object.setValue(colorScheme[Constants.Data_Key.background1], forKeyPath: Constants.Data_Key.background1)
+        object.setValue(colorScheme[Constants.Data_Key.background2], forKeyPath: Constants.Data_Key.background2)
+        object.setValue(colorScheme[Constants.Data_Key.background3], forKeyPath: Constants.Data_Key.background3)
+        object.setValue(colorScheme[Constants.Data_Key.font],        forKeyPath: Constants.Data_Key.font)
+        object.setValue(colorScheme[Constants.Data_Key.effectStyle], forKeyPath: Constants.Data_Key.effectStyle)
         do {
             try managedContext.save()
             loadColorScheme()
@@ -121,17 +126,27 @@ extension Data {
         let entity = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.CoreData_Entity.colorScheme)
         let fetch  = try! managedContext.fetch(entity) as! [ColorScheme]
         // Entity specific here
-        guard let object = fetch.first,
-              let edu    = object.timeline_edu,
-              let exp    = object.timeline_exp,
-              let proj   = object.timeline_proj else
+        guard let object      = fetch.first,
+              let edu         = object.timeline_edu,
+              let exp         = object.timeline_exp,
+              let proj        = object.timeline_proj,
+              let background1 = object.background1,
+              let background2 = object.background2,
+              let background3 = object.background3,
+              let font        = object.font,
+              let effectStyle = object.effectStyle else
         {
             print("Error: loadOverview - coreData not found")
             return
         }
-        colorScheme = [Constants.Data_Key.exp:  exp,
-                       Constants.Data_Key.edu:  edu,
-                       Constants.Data_Key.proj: proj]
+        colorScheme = [Constants.Data_Key.exp:         exp,
+                       Constants.Data_Key.edu:         edu,
+                       Constants.Data_Key.proj:        proj,
+                       Constants.Data_Key.background1: background1,
+                       Constants.Data_Key.background2: background2,
+                       Constants.Data_Key.background3: background3,
+                       Constants.Data_Key.font:        font,
+                       Constants.Data_Key.effectStyle: effectStyle]
         self.customDelegate.resetColorScheme()
     }
     
