@@ -108,10 +108,10 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     //MARK: Custom Delegates
     func scrollSet(toPage page: Int) {
         if footer.menu.currentPage != page {
-            updateForChange(toPage: page)
             footer.menu.currentPage = page
             footer.menu.setAlphaForPage()
             footer.menu.canSetFromMenu = true
+            updateForChange(toPage: page)
         }
     }
     

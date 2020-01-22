@@ -52,18 +52,31 @@ class Splash: UIView {
             // 1.0 corresponds to the total animation distance traversed in one second
             // distance/seconds, 1.0 = total animation distance traversed in one second
             initialSpringVelocity: 1.0,
-            options: [.curveEaseInOut, .repeat, .autoreverse],
+            options: [.curveEaseInOut],
             // [autoReverse, curveEaseIn, curveEaseOut, curveEaseInOut, curveLinear]
             animations: {
                 //Do all animations here
-                self.photoHeight.constant = Sizing.width/2
-                self.photoWidth.constant = Sizing.width/2
+                self.photoHeight.constant = Sizing.width*0.85
+                self.photoWidth.constant = Sizing.width*0.85
                 self.layoutIfNeeded()
         }, completion: {
                //Code to run after animating
                 (value: Bool) in
-            }
-        )
-    }
+            UIView.animate(withDuration: 0.55, delay: 0.0,
+                // 1.0 is smooth, 0.0 is bouncy
+                usingSpringWithDamping: 0.7,
+                // 1.0 corresponds to the total animation distance traversed in one second
+                // distance/seconds, 1.0 = total animation distance traversed in one second
+                initialSpringVelocity: 1.0,
+                options: [.curveEaseInOut, .repeat, .autoreverse],
+                // [autoReverse, curveEaseIn, curveEaseOut, curveEaseInOut, curveLinear]
+                animations: {
+                    //Do all animations here
+                    self.photoHeight.constant = Sizing.width/2
+                    self.photoWidth.constant = Sizing.width/2
+                    self.layoutIfNeeded()
+            })
+        }
+    )}
 
 }
