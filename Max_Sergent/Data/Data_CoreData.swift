@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 
 extension Data {
-    
+        
     //MARK: CoreData Delete
     static func deleteCoreData(forEntity entity: String) {
         let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
@@ -84,13 +84,13 @@ extension Data {
         }
 
         let urlFromCoreData = URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(Constants.Data_Key.appInfoPhoto)
-        let photo = UIImage(contentsOfFile: urlFromCoreData.path)!
+        let photo = UIImage(contentsOfFile: urlFromCoreData.path) ?? UIImage(named: Constants.Placeholder.photoURL)
 
         appInfo = [Constants.Data_Key.watermark:    watermark as AnyObject,
                    Constants.Data_Key.userName:     userName  as AnyObject,
-                   Constants.Data_Key.appInfoPhoto: photo]
+                   Constants.Data_Key.appInfoPhoto: photo!]
         
-        self.customDelegate.resetAppInfo()
+        appInfoLoaded = true
     }
     
     //MARK: Color Scheme
@@ -150,7 +150,8 @@ extension Data {
                        Constants.Data_Key.font1:       font1,
                        Constants.Data_Key.font2:       font2,
                        Constants.Data_Key.effectStyle: effectStyle]
-        self.customDelegate.resetColorScheme()
+        
+        colorSchemeLoaded = true
     }
     
     //MARK: Overview
@@ -211,7 +212,7 @@ extension Data {
                     Constants.Data_Key.locationBackEnd:  locationBackEnd,
                     Constants.Data_Key.locationFrontEnd: locationFrontEnd,
                     Constants.Data_Key.objective:        objective]
-        self.customDelegate.resetOverview()
+        overviewLoaded = true
     }
     
     //MARK: Timeline
@@ -266,7 +267,7 @@ extension Data {
                              Constants.Data_Key.iconName:     iconName,
                              Constants.Data_Key.type:         type] as AnyObject
         }
-        self.customDelegate.resetTimeline()
+        timelineLoaded = true
     }
     
     //MARK: Pie
@@ -313,7 +314,7 @@ extension Data {
                         Constants.Data_Key.index: object.index,
                         Constants.Data_Key.days:  object.days])
         }
-        self.customDelegate.resetPieData()
+        pieLoaded = true
     }
     
     //MARK: Concepts
@@ -356,7 +357,7 @@ extension Data {
             concepts.append([Constants.Data_Key.title:    title,
                              Constants.Data_Key.iconName: iconName])
         }
-        self.customDelegate.resetConcepts()
+        conceptsLoaded = true
     }
     
 }

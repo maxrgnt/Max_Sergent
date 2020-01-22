@@ -27,6 +27,12 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         Sizing.padding = Sizing.padding < 22.0 ? 22.0 : Sizing.padding
         Sizing.offsetForShorterScreens = Sizing.height <= 736.0 ? -66.0 : 0.0
         
+        print(Date())
+        let backgroundQueue = DispatchQueue(label: "com.app.queue", qos: .background)
+        backgroundQueue.async {
+            print("Run on background thread")
+            Data.dataLoadTracker()
+        }
         setup() {
             constraints()
             Data.clearAllDataForTesting()
@@ -177,6 +183,15 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     }
     
     //MARK: Data Logic
+    func allDataLoaded() {
+        resetAppInfo()
+        resetColorScheme()
+        resetOverview()
+        resetTimeline()
+        resetConcepts()
+        resetPieData()
+    }
+    
     func resetAppInfo() {
         let watermarkList  = (Data.appInfo[Constants.Data_Key.watermark] as! String).split(separator: " ")
         let watermarkStr   = "\(watermarkList[0])\n\(watermarkList[1])"

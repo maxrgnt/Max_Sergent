@@ -13,12 +13,7 @@ import Firebase
 import FirebaseStorage
 
 protocol DataDelegate {
-    func resetAppInfo()
-    func resetColorScheme()
-    func resetOverview()
-    func resetTimeline()
-    func resetPieData()
-    func resetConcepts()
+    func allDataLoaded()
 }
 
 struct Data {
@@ -39,7 +34,37 @@ struct Data {
     static var concepts:                    [[String: Any]] = []
     static var conceptIconsSavedInMemory:   [String] = []
     
-    // MARK: Clear Testing
+    //MARK: Data Load Tracking
+    static var colorSchemeLoaded = false
+    static var appInfoLoaded     = false
+    static var overviewLoaded    = false
+    static var timelineLoaded    = false
+    static var pieLoaded         = false
+    static var conceptsLoaded    = false
+    
+    static func dataLoadTracker() {
+        print("tracking..")
+        var overall = false
+        for check in [colorSchemeLoaded,appInfoLoaded,overviewLoaded,timelineLoaded,pieLoaded,conceptsLoaded] {
+            overall = check
+            if !check {
+                break
+            }
+        }
+        print([colorSchemeLoaded,appInfoLoaded,overviewLoaded,timelineLoaded,pieLoaded,conceptsLoaded])
+        if !overall {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                dataLoadTracker()
+            }
+        }
+        else {
+            print("DONE!")
+            print(Date())
+            self.customDelegate.allDataLoaded()
+        }
+    }
+    
+    //MARK: Clear Testing
     static func clearAllDataForTesting(){
         // Delete core data entities
         deleteCoreData(forEntity: Constants.CoreData_Entity.appInfo)
