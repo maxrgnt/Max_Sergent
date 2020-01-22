@@ -107,8 +107,8 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     
     //MARK: Custom Delegates
     func scrollSet(toPage page: Int) {
-        updateForChange(toPage: page)
         if footer.menu.currentPage != page {
+            updateForChange(toPage: page)
             footer.menu.currentPage = page
             footer.menu.setAlphaForPage()
             footer.menu.canSetFromMenu = true
@@ -116,7 +116,6 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     }
     
     func menuSet(toPage page: Int) {
-        updateForChange(toPage: page)
         footer.menu.canSetFromMenu = false
         let newX = Sizing.width * CGFloat(page)
         let newOffset = CGPoint(x: newX, y: 0.0)
