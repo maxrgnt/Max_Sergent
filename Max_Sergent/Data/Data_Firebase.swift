@@ -145,12 +145,15 @@ extension Data {
                 return
             }
             timeline = [:]
-            values.keys.forEach { key in
+            timelineIconsSavedInMemory = []
+            let keys = values.keys.sorted()
+            keys.forEach { key in
                 guard   let organization = values[key]![Constants.Data_Key.organization] as? String,
                         let year         = values[key]![Constants.Data_Key.year]         as? Int,
                         let details      = values[key]![Constants.Data_Key.details]      as? String,
                         let index        = values[key]![Constants.Data_Key.index]        as? Int,
                         let iconName     = values[key]![Constants.Data_Key.iconName]     as? String,
+                        let iconURL      = values[key]![Constants.Data_Key.iconURL]      as? String,
                         let type         = values[key]![Constants.Data_Key.type]         as? String else
                 {
                     print("Error: firebaseTimeline - value objects not convertible")
@@ -160,14 +163,60 @@ extension Data {
                                  Constants.Data_Key.year:         year,
                                  Constants.Data_Key.index:        index,
                                  Constants.Data_Key.details:      details,
-                                 Constants.Data_Key.iconName:     iconName,
+                                 Constants.Data_Key.iconName:     Constants.Image_Prefix.timeline+iconName,
+                                 Constants.Data_Key.iconURL:      iconURL,
                                  Constants.Data_Key.type:         type] as AnyObject
+                let storageRef = Storage.storage().reference(forURL: iconURL)
+                storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                    if let error = error {
+                        print(error)
+                    }
+                    else {
+                        if UIImage(data: data!)!.saveImage(as: Constants.Image_Prefix.timeline+iconName) {
+                            if key == keys.last! {
+                                firebaseCheckForTimelineIcons()
+                            }
+                        }
+                        else {
+
+                        }
+                    }
+                }
             }
-            
-            // If CoreData has been populated already, first delete what is saved before saving new data
-            deleteCoreData(forEntity: Constants.CoreData_Entity.timeline)
-            setTimeline()
         })
+    }
+    
+    static func firebaseCheckForTimelineIcons() {
+        do {
+            let documentsURL = try FileManager.default.url(for: .documentDirectory,
+                                                           in: .userDomainMask,
+                                                           appropriateFor: nil,
+                                                           create: false)
+            let docs = try FileManager.default.contentsOfDirectory(at: documentsURL,
+                                                                   includingPropertiesForKeys: [],
+                                                                   options:  [.skipsHiddenFiles, .skipsSubdirectoryDescendants])
+            if timelineIconsSavedInMemory.count < timeline.keys.count {
+                docs.forEach { doc in
+                    let docString = String(describing: doc)
+                    let splitFileName = docString.split(separator:"/")
+                    let imageName = String(describing: splitFileName.last!)
+                    if imageName.hasPrefix(Constants.Image_Prefix.timeline) { //&& !conceptIconsSavedInMemory.contains(imageName) {
+                        timelineIconsSavedInMemory.append(imageName)
+                    }
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    firebaseCheckForTimelineIcons()
+                }
+            }
+            else {
+                //print(conceptIconsSavedInMemory)
+                // If CoreData has been populated already, first delete what is saved before saving new data
+                deleteCoreData(forEntity: Constants.CoreData_Entity.timeline)
+                setTimeline()
+            }
+        } catch {
+            print(error)
+        }
     }
     
     //MARK: Firebase Pie

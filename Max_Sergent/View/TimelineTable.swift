@@ -83,13 +83,22 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         let id = Constants.Timeline.cellReuseId
         let cell: TimelineCell = tableView.dequeueReusableCell(withIdentifier: id) as! TimelineCell
         
-        let data = Data.timelineTable[indexPath.section][Constants.Data_Key.events] as! [[String: Any]]
+        let data = dataForRow(inSection: indexPath.section)
         
-        cell.icon.image = UIImage(named: data[indexPath.row][Constants.Data_Key.iconName] as! String)
+        guard let dir = try?
+            FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else
+        {
+            return cell
+        }
+        let iconName = data[indexPath.row][Constants.Data_Key.iconName] as! String
+        let urlFromCoreData = URL(fileURLWithPath: dir.absoluteString).appendingPathComponent("\(iconName).png")
+        let photo = UIImage(contentsOfFile: urlFromCoreData.path)!
+        
+        cell.icon.image = photo
         cell.header.text = data[indexPath.row][Constants.Data_Key.organization] as? String
         cell.distinction.text = "+"+(data[indexPath.row][Constants.Data_Key.type] as? String)!
         cell.content.text  = data[indexPath.row][Constants.Data_Key.details] as? String
-
+        
         cell.content.textColor     = contentTextColor
         cell.distinction.textColor = contentTextColor
         cell.header.textColor      = contentTextColor
@@ -199,6 +208,10 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     @objc func finishRefreshing() {
         refreshControl!.endRefreshing()
         timelineRefresh.nukeAnimations()
+    }
+    
+    func dataForRow(inSection section: Int) -> [[String: Any]] {
+        return Data.timelineTable[section][Constants.Data_Key.events] as! [[String: Any]]
     }
     
 }

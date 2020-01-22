@@ -24,8 +24,7 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     var statusBarStyle: UIStatusBarStyle = .darkContent
     
     override func viewDidLoad() {
-        
-        print(view.subviews)
+        Data.customDelegate = self
         
         view.addSubview(splash)
         splashConstraints()
@@ -33,25 +32,17 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
             splash.constraints()
             splash.animate()
         }
-        splash.tag = 100
+        Data.checkFirebaseForReset()
         
         print("Hello World!")
         Sizing.padding = Sizing.padding < 22.0 ? 22.0 : Sizing.padding
         Sizing.offsetForShorterScreens = Sizing.height <= 736.0 ? -66.0 : 0.0
         
         print(Date())
-        let backgroundQueue = DispatchQueue(label: "com.app.queue", qos: .background)
-        backgroundQueue.async {
-            print("Run on background thread")
-            Data.dataLoadTracker()
-        }
         setup() {
             constraints()
-            Data.clearAllDataForTesting()
-            Data.checkFirebaseForReset()
+            //Data.clearAllDataForTesting()
         }
-        
-        print(view.subviews)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -61,8 +52,6 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
 
     //MARK: Settings
     func setup(closure: () -> Void) {
-        
-        Data.customDelegate = self
         
         view.insertSubview(watermark, belowSubview: splash)
         watermark.alpha            = 0.7
@@ -198,6 +187,49 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     }
     
     //MARK: Data Logic
+    func reloadingFirebase() {
+        self.view.bringSubviewToFront(self.splash)
+        UIView.animate(withDuration: 0.55, delay: 0.0,
+            // 1.0 is smooth, 0.0 is bouncy
+            usingSpringWithDamping: 0.7,
+            // 1.0 corresponds to the total animation distance traversed in one second
+            // distance/seconds, 1.0 = total animation distance traversed in one second
+            initialSpringVelocity: 1.0,
+            options: [.curveEaseInOut],
+            // [autoReverse, curveEaseIn, curveEaseOut, curveEaseInOut, curveLinear]
+            animations: {
+                //Do all animations here
+                self.splash.alpha = 1
+        }, completion: {
+               //Code to run after animating
+                (value: Bool) in
+            self.splash.animate()
+            }
+        )
+        let backgroundQueue = DispatchQueue(label: "com.app.queue", qos: .background)
+        backgroundQueue.async {
+            print("Run on background thread")
+            Data.dataLoadTracker()
+        }
+        DispatchQueue.main.async {
+            self.checkIfAllDataLoaded()
+            print("This is run on the main queue, after the previous code in outer block")
+        }
+    }
+    
+    func checkIfAllDataLoaded() {
+        print("VC checking with Data if all data loaded...")
+        if Data.allDataLoaded {
+            print("All data has been loaded, reset views!")
+            allDataLoaded()
+        }
+        else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { // Change `2.0` to the desired number of seconds.
+                self.checkIfAllDataLoaded()
+            }
+        }
+    }
+    
     func allDataLoaded() {
         resetAppInfo()
         resetColorScheme()
@@ -219,7 +251,9 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         }, completion: {
                //Code to run after animating
                 (value: Bool) in
-            self.splash.removeFromSuperview()
+            self.view.subviews.forEach({$0.layer.removeAllAnimations()})
+            self.view.layer.removeAllAnimations()
+            self.splash.sendSubviewToBack(self.splash)
             }
         )
     }
@@ -249,6 +283,7 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     }
     
     func resetTimeline() {
+        Data.timelineTable = []
         var years: [Int] = []
         Data.timeline.keys.forEach { key in
             let year = Data.timeline[key]![Constants.Data_Key.year]

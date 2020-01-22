@@ -26,7 +26,10 @@ class Menu: UIView {
     var icon1 = UIImageView()
     var icon2 = UIImageView()
     var icon3 = UIImageView()
-    lazy var pages: [AnyObject] = [label1, icon1, label2, icon2, label3, icon3]
+    var button1 = UIButton()
+    var button2 = UIButton()
+    var button3 = UIButton()
+    lazy var pages: [UIButton] = [button1,button2,button3]
     lazy var labels: [UILabel] = [label1, label2, label3]
     lazy var icons: [UIImageView] = [icon1, icon2, icon3]
     // Default to first page
@@ -46,6 +49,8 @@ class Menu: UIView {
     
     func setup(closure: () -> Void) {
         
+        clipsToBounds = true
+        
         for (i, label) in labels.enumerated() {
             addSubview(label)
             label.textAlignment = .center
@@ -64,6 +69,14 @@ class Menu: UIView {
             icon.layer.masksToBounds = true
             icon.contentMode         = .scaleAspectFill
             icon.image               = UIImage(named: Constants.Menu.pages[i])
+        }
+        
+        for (i, button) in pages.enumerated() {
+            addSubview(button)
+            // Essential for touches began to begin and pan gesture to work below
+            // We want the touch in the view not the touch in the button
+            button.isUserInteractionEnabled = false
+            button.tag = i
         }
         
         labels[0].alpha = 1.0

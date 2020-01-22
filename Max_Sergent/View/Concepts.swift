@@ -83,7 +83,6 @@ class Concepts: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
         {
             return cell
         }
-
         let iconName = Data.concepts[indexPath.row][Constants.Data_Key.iconName] as! String
         let urlFromCoreData = URL(fileURLWithPath: dir.absoluteString).appendingPathComponent("\(iconName).png")
         let photo = UIImage(contentsOfFile: urlFromCoreData.path)!

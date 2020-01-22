@@ -13,14 +13,16 @@ import Firebase
 import FirebaseStorage
 
 protocol DataDelegate {
-    func allDataLoaded()
+    func reloadingFirebase()
+    func checkIfAllDataLoaded()
 }
 
 struct Data {
     
+    static var customDelegate: DataDelegate!
+    
     //MARK: Definitions
     // Delegates
-    static var customDelegate : DataDelegate!
     // Objects
     static var lastUpdate:                  String = ""
     static var appInfo:                     [String: AnyObject] = [:]
@@ -29,6 +31,7 @@ struct Data {
     static var overviewTable:               [(title: String, boxes: [(icon: String, content: String)])] = []
     static var timeline:                    [String: AnyObject] = [:]
     static var timelineTable:               [[String: Any]] = []
+    static var timelineIconsSavedInMemory:  [String] = []
     static var pieOriginDate:               String = ""
     static var pie:                         [[String: Any]] = []
     static var concepts:                    [[String: Any]] = []
@@ -41,6 +44,7 @@ struct Data {
     static var timelineLoaded    = false
     static var pieLoaded         = false
     static var conceptsLoaded    = false
+    static var allDataLoaded     = false
     
     static func dataLoadTracker() {
         print("tracking..")
@@ -59,8 +63,8 @@ struct Data {
         }
         else {
             print("DONE!")
+            allDataLoaded = true
             print(Date())
-            self.customDelegate.allDataLoaded()
         }
     }
     
@@ -111,8 +115,14 @@ struct Data {
     }
 
     static func populateData(from reset: Bool) {
+        let backgroundQueue = DispatchQueue(label: "com.app.queue", qos: .background)
+        backgroundQueue.async {
+             print("Run on background thread")
+             dataLoadTracker()
+        }
         if !reset && coreDataPopulated() {
             print("Load from CoreData")
+            self.customDelegate.checkIfAllDataLoaded()
             loadAppInfo()
             loadColorScheme()
             loadOverview()
@@ -124,6 +134,17 @@ struct Data {
         }
         else {
             print("Load from Firebase")
+            colorSchemeLoaded = false
+            appInfoLoaded     = false
+            overviewLoaded    = false
+            timelineLoaded    = false
+            pieLoaded         = false
+            conceptsLoaded    = false
+            allDataLoaded     = false
+            DispatchQueue.main.async {
+                print("This is run on the main queue, after the previous code in outer block")
+                self.customDelegate.reloadingFirebase()
+            }
             firebaseAll {
                 UserDefaults.standard.set(true, forKey: Constants.UserDefaults.coreData)
                 let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .none)

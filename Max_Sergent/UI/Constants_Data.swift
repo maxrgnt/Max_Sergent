@@ -14,6 +14,7 @@ extension Constants {
     struct UserDefaults {
         static let coreData         = "CoreData"
         static let lastUpdate       = "lastUpdate"
+        static let pieOriginDate    = "pieOriginDate"
     }
     
     struct Firebase_Path {
@@ -79,6 +80,7 @@ extension Constants {
     
     struct Image_Prefix {
         static let concept          = "concept_"
+        static let timeline         = "timeline_"
     }
     
     struct Placeholder {

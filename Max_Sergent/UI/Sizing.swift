@@ -148,6 +148,7 @@ struct Sizing {
         static let iconDiameter = Footer.height * (2/3) - padding
         static let textHeight = Footer.height * (1/3)
         static let textWidth = (paddedWidth-(padding*3))/3
+        static let buttonWidth = paddedWidth/3
         static let scrollOffset = Sizing.Footer.height + padding
     }
     

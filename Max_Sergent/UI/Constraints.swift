@@ -429,6 +429,25 @@ extension Footer {
 extension Menu {
     
     func constraints() {
+        
+        button1.translatesAutoresizingMaskIntoConstraints                                                               = false
+        button1.leadingAnchor.constraint(equalTo: leadingAnchor).isActive                                               = true
+        button1.topAnchor.constraint(equalTo: topAnchor).isActive                                                       = true
+        button1.widthAnchor.constraint(equalToConstant: Sizing.Menu.buttonWidth).isActive                               = true
+        button1.heightAnchor.constraint(equalToConstant: Sizing.Footer.height).isActive                                 = true
+        
+        button2.translatesAutoresizingMaskIntoConstraints                                                               = false
+        button2.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                               = true
+        button2.topAnchor.constraint(equalTo: topAnchor).isActive                                                       = true
+        button2.widthAnchor.constraint(equalToConstant: Sizing.Menu.buttonWidth).isActive                               = true
+        button2.heightAnchor.constraint(equalToConstant: Sizing.Footer.height).isActive                                 = true
+        
+        button3.translatesAutoresizingMaskIntoConstraints                                                               = false
+        button3.trailingAnchor.constraint(equalTo: trailingAnchor).isActive                                             = true
+        button3.topAnchor.constraint(equalTo: topAnchor).isActive                                                       = true
+        button3.widthAnchor.constraint(equalToConstant: Sizing.Menu.buttonWidth).isActive                               = true
+        button3.heightAnchor.constraint(equalToConstant: Sizing.Footer.height).isActive                                 = true
+        
         icon1.translatesAutoresizingMaskIntoConstraints                                                                 = false
         icon1.centerXAnchor.constraint(equalTo: label1.centerXAnchor).isActive                                          = true
         icon1.topAnchor.constraint(equalTo: topAnchor, constant: Sizing.Menu.padding/2).isActive                        = true

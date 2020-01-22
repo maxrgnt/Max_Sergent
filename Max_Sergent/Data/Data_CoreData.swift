@@ -287,6 +287,7 @@ extension Data {
         }
         do {
             try managedContext.save()
+            UserDefaults.standard.set(pieOriginDate, forKey: Constants.UserDefaults.pieOriginDate)
             loadPieData()
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
@@ -314,6 +315,7 @@ extension Data {
                         Constants.Data_Key.index: object.index,
                         Constants.Data_Key.days:  object.days])
         }
+        pieOriginDate = UserDefaults.standard.string(forKey: Constants.UserDefaults.pieOriginDate)!
         pieLoaded = true
     }
     
