@@ -14,10 +14,10 @@ extension ViewController {
     
     func splashConstraints() {
         splash.translatesAutoresizingMaskIntoConstraints                                                                = false
-        splash.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive                                        = true
-        splash.topAnchor.constraint(equalTo: view.topAnchor).isActive                                              = true
-        splash.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive                                      = true
-        splash.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive                                    = true
+        splash.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive                                             = true
+        splash.topAnchor.constraint(equalTo: view.topAnchor).isActive                                                   = true
+        splash.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive                                           = true
+        splash.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive                                         = true
     }
     
     func constraints() {
@@ -59,13 +59,20 @@ extension ViewController {
 extension Splash {
     
     func constraints() {
-        photoWidth  = photo.widthAnchor.constraint(equalToConstant: Sizing.width*0.75)
-        photoHeight = photo.heightAnchor.constraint(equalToConstant: Sizing.width*0.75)
-        photo.translatesAutoresizingMaskIntoConstraints                                                                = false
-        photo.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                = true
-        photo.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                                = true
-        photoWidth.isActive                                                                                            = true
-        photoHeight.isActive                                                                                           = true
+        photoWidth  = photo.widthAnchor.constraint(equalToConstant: Sizing.width*Constants.splashNormal)
+        photoHeight = photo.heightAnchor.constraint(equalToConstant: Sizing.width*Constants.splashNormal)
+        photo.translatesAutoresizingMaskIntoConstraints                                                                 = false
+        photo.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                 = true
+        photo.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                                 = true
+        photoWidth.isActive                                                                                             = true
+        photoHeight.isActive                                                                                            = true
+        
+        let titleConstant = Sizing.width*Constants.splashNormal/2
+        title.translatesAutoresizingMaskIntoConstraints                                                                 = false
+        title.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                     = true
+        title.leadingAnchor.constraint(equalTo: leadingAnchor).isActive                                                 = true
+        title.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -titleConstant).isActive                         = true
+        title.heightAnchor.constraint(equalToConstant: titleConstant).isActive                                          = true
     }
     
 }
@@ -115,15 +122,15 @@ extension Scroll {
         
         page3blur.translatesAutoresizingMaskIntoConstraints                                                             = false
         page3blur.leadingAnchor.constraint(equalTo: page2.trailingAnchor).isActive                                      = true
-        page3blur.topAnchor.constraint(equalTo: topAnchor).isActive                                               = true
-        page3blur.widthAnchor.constraint(equalTo: widthAnchor).isActive                                           = true
-        page3blur.heightAnchor.constraint(equalToConstant: Sizing.Details.padding*2).isActive                             = true
+        page3blur.topAnchor.constraint(equalTo: topAnchor).isActive                                                     = true
+        page3blur.widthAnchor.constraint(equalTo: widthAnchor).isActive                                                 = true
+        page3blur.heightAnchor.constraint(equalToConstant: Sizing.Details.padding*2).isActive                           = true
         
         page3vibrancy.translatesAutoresizingMaskIntoConstraints                                                         = false
         page3vibrancy.leadingAnchor.constraint(equalTo: page2.trailingAnchor).isActive                                  = true
         page3vibrancy.topAnchor.constraint(equalTo: page3.topAnchor).isActive                                           = true
         page3vibrancy.widthAnchor.constraint(equalTo: page3.widthAnchor).isActive                                       = true
-        page3vibrancy.heightAnchor.constraint(equalToConstant: Sizing.Details.padding*2).isActive                         = true
+        page3vibrancy.heightAnchor.constraint(equalToConstant: Sizing.Details.padding*2).isActive                       = true
     }
     
 }

@@ -54,16 +54,15 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     func setup(closure: () -> Void) {
         
         view.insertSubview(watermark, belowSubview: splash)
-        watermark.alpha            = 0.7
+        watermark.alpha            = 1.0
         watermark.numberOfLines    = 2
         watermark.textAlignment    = .center
         watermark.backgroundColor  = .clear
         watermark.lineBreakMode    = .byClipping
         watermark.font             = Fonts.Header.name
-        watermark.text             = Constants.watermark
         
         view.insertSubview(ViewController.lastUpdate, belowSubview: splash)
-        ViewController.lastUpdate.alpha           = 0.7
+        ViewController.lastUpdate.alpha           = 1.0
         ViewController.lastUpdate.numberOfLines   = 2
         ViewController.lastUpdate.textAlignment   = .center
         ViewController.lastUpdate.backgroundColor = .clear
@@ -255,6 +254,7 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
             self.view.subviews.forEach({$0.layer.removeAllAnimations()})
             self.view.layer.removeAllAnimations()
             self.splash.sendSubviewToBack(self.splash)
+            self.splash.title.alpha = 0.0
             }
         )
     }
@@ -267,6 +267,7 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         let userName       = "\(userNameList[0])\n\(userNameList[1])"
         header.name.text   = userName
         header.photo.image = (Data.appInfo[Constants.Data_Key.appInfoPhoto]  as! UIImage)
+        header.resetNameHeight()
     }
     
     func resetOverview() {

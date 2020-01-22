@@ -64,7 +64,8 @@ class OverviewCell: UITableViewCell {
     }
     
     func calcHeights() -> CGFloat {
-        let contentFrame = content.frameForLabel(text: content.text!,
+        let labelText =  (content.text ?? Constants.placeholder)!
+        let contentFrame = content.frameForLabel(text: labelText,
                                                  font: content.font!,
                                                  numberOfLines: content.numberOfLines,
                                                  width: Sizing.Overview.boxPaddedWidth)

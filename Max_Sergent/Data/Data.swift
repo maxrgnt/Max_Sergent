@@ -135,7 +135,7 @@ struct Data {
             loadPieData()
             loadConcepts()
             lastUpdate = UserDefaults.standard.string(forKey: Constants.UserDefaults.lastUpdate)!
-            ViewController.lastUpdate.text = "last updated:\n\(lastUpdate)"
+            ViewController.lastUpdate.text = "\(Constants.watermarkLastSync)\n\(lastUpdate)"
         }
         else {
             print("Load from Firebase")
@@ -155,7 +155,7 @@ struct Data {
                 let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .none)
                 UserDefaults.standard.set(timestamp, forKey: Constants.UserDefaults.lastUpdate)
                 lastUpdate = UserDefaults.standard.string(forKey: Constants.UserDefaults.lastUpdate)!
-                ViewController.lastUpdate.text = "last updated:\n\(lastUpdate)"
+                ViewController.lastUpdate.text = "\(Constants.watermarkLastSync)\n\(lastUpdate)"
             }
         }
     }

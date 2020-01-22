@@ -10,12 +10,16 @@ import Foundation
 import UIKit
 
 struct Constants {
+        
+    static let splashTitle = "syncing with database"
+    static let watermarkLastSync = "last update sent:"
+    static let placeholder = "The quick brown foxy"
     
-    static let watermark = "max\nrgnt"
+    static let splashSmall: CGFloat = 0.6
+    static let splashNormal: CGFloat = 0.7
+    static let splashLarge: CGFloat = 0.75
     
     struct Header {
-        static let photo = "profile.jpg"
-        static let name = "Max\nSergent"
         static let gradientStart: NSNumber = 0.40
         static let gradientEnd: NSNumber   = 0.90
     }
@@ -34,7 +38,6 @@ struct Constants {
     struct Pie {
         static let header = "How I spend my days:"
         static let asOf = "as of:"
-        static let originDate = "Jan\n01\n2019"
     }
     
     struct Concepts {

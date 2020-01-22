@@ -73,6 +73,7 @@ struct Sizing {
             }
         }
         static let nameBottom          = padding
+        static let boxRadius: CGFloat = min(0.094 * min(width, height), 39.0)
     }
     
     struct Scroll {

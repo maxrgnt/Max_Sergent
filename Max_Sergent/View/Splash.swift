@@ -18,6 +18,7 @@ class Splash: UIView {
     var photoWidth: NSLayoutConstraint!
     // Objects
     var photo = UIImageView()
+    var title = UILabel()
     
     //MARK: Initialization
     init() {
@@ -41,6 +42,16 @@ class Splash: UIView {
         photo.contentMode         = .scaleAspectFill
         photo.image               = UIImage(named: Constants.Placeholder.photoURL)
         
+        addSubview(title)
+        title.numberOfLines   = 1
+        title.textAlignment   = .center
+        title.backgroundColor = .clear
+        title.lineBreakMode   = .byClipping
+        title.font            = Fonts.Splash.title
+        title.text            = Constants.splashTitle
+        title.textColor       = .black
+        title.alpha           = 0.0
+        
         closure()
     }
     
@@ -56,12 +67,18 @@ class Splash: UIView {
             // [autoReverse, curveEaseIn, curveEaseOut, curveEaseInOut, curveLinear]
             animations: {
                 //Do all animations here
-                self.photoHeight.constant = Sizing.width*0.85
-                self.photoWidth.constant = Sizing.width*0.85
+                self.photoHeight.constant = Sizing.width*Constants.splashLarge
+                self.photoWidth.constant = Sizing.width*Constants.splashLarge
                 self.layoutIfNeeded()
         }, completion: {
                //Code to run after animating
                 (value: Bool) in
+            // SHOW TITLE
+            UIView.animate(withDuration: 0.55,
+                animations: {
+                    self.title.alpha = 1.0
+            })
+            // BEGIN REPEATING GESTATION
             UIView.animate(withDuration: 0.55, delay: 0.0,
                 // 1.0 is smooth, 0.0 is bouncy
                 usingSpringWithDamping: 0.7,
@@ -72,8 +89,8 @@ class Splash: UIView {
                 // [autoReverse, curveEaseIn, curveEaseOut, curveEaseInOut, curveLinear]
                 animations: {
                     //Do all animations here
-                    self.photoHeight.constant = Sizing.width/2
-                    self.photoWidth.constant = Sizing.width/2
+                    self.photoHeight.constant = Sizing.width*Constants.splashSmall
+                    self.photoWidth.constant = Sizing.width*Constants.splashSmall
                     self.layoutIfNeeded()
             })
         }

@@ -54,9 +54,10 @@ class ConceptCell: UICollectionViewCell {
         
         closure()
     }
-    
+     
     func resize() {
-        let heightForTitle = Fonts.calculateLabelHeight(for: title.text!,
+        let labelText =  (title.text ?? Constants.placeholder)!
+        let heightForTitle = Fonts.calculateLabelHeight(for: labelText,
                                                         withFont: Fonts.Concepts.title!,
                                                         withWidth: Sizing.Concepts.contentWidth,
                                                         numberOfLines: title.numberOfLines)

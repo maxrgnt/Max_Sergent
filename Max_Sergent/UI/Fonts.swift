@@ -42,6 +42,10 @@ struct Fonts {
         static let actionBar:     CGFloat = 10.0
     }
     
+    struct Splash {
+        static let title = UIFont(name: openSansSemiBold, size: Size.primaryText)
+    }
+    
     struct Header {
         static let name = UIFont(name: arvoBold, size: Size.title)
         static let smallName = UIFont(name: arvo, size: Size.title)

@@ -42,11 +42,12 @@ class Header: UIView {
         backgroundColor = .clear
         clipsToBounds   = true
         
+        roundCorners(corners: [.bottomLeft,.bottomRight], radius: Sizing.Header.boxRadius)
+        
         addSubview(photo)
         photo.clipsToBounds       = true
         photo.layer.masksToBounds = true
         photo.contentMode         = .scaleAspectFill
-        photo.image               = UIImage(named: Constants.Header.photo)
         
         buildGradient()
         
@@ -58,7 +59,6 @@ class Header: UIView {
         //name.minimumScaleFactor        = 0.1
         //name.adjustsFontSizeToFitWidth = true
         name.font                      = Fonts.Header.name
-        name.text                      = Constants.Header.name
         
         let daniela = UIPanGestureRecognizer(target: self, action: #selector(reactToPanGesture(_:)))
         addGestureRecognizer(daniela)
@@ -82,7 +82,8 @@ class Header: UIView {
     }
     
     func resetNameHeight() {
-        let frame = name.frameForLabel(text: name.text!, font: name.font!, numberOfLines: name.numberOfLines)
+        let labelText =  (name.text ?? Constants.placeholder)!
+        let frame = name.frameForLabel(text: labelText, font: name.font!, numberOfLines: name.numberOfLines)
         Sizing.Header.nameHeight = frame.height
         nameHeight.constant      = frame.height
         layoutIfNeeded()

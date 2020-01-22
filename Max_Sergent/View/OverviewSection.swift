@@ -42,7 +42,8 @@ class OverviewSection: UIView {
     }
     
     func calcTitleHeight() -> CGFloat {
-        let titleFrame = title.frameForLabel(text: title.text!,
+        let labelText =  (title.text ?? Constants.placeholder)!
+        let titleFrame = title.frameForLabel(text: labelText,
                                              font: title.font!,
                                              numberOfLines: title.numberOfLines,
                                              width: Sizing.Overview.boxPaddedWidth)

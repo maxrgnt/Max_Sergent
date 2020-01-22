@@ -85,7 +85,8 @@ class TimelineCell: UITableViewCell {
     }
     
     func calcDistinctionWidth() {
-        let distinctionFrame = distinction.frameForLabel(text: distinction.text!,
+        let labelText =  (distinction.text ?? Constants.placeholder)!
+        let distinctionFrame = distinction.frameForLabel(text: labelText,
                                                          font: distinction.font!,
                                                          numberOfLines: 1)
         distinctionWidth.constant = distinctionFrame.width + Sizing.Timeline.padding/2
@@ -95,11 +96,13 @@ class TimelineCell: UITableViewCell {
     
     func resize(forIndex index: Int) {
         calcDistinctionWidth()
-        let heightForHeader = Fonts.calculateLabelHeight(for: header.text!,
+        var labelText =  (header.text ?? Constants.placeholder)!
+        let heightForHeader = Fonts.calculateLabelHeight(for: labelText,
                                                         withFont: Fonts.Timeline.boxHeader!,
                                                         withWidth: Sizing.Timeline.contentWidth,
                                                         numberOfLines: 1)
-        let heightForContent = Fonts.calculateLabelHeight(for: content.text!,
+        labelText =  (content.text ?? Constants.placeholder)!
+        let heightForContent = Fonts.calculateLabelHeight(for: labelText,
                                                         withFont: Fonts.Timeline.boxContent!,
                                                         withWidth: Sizing.Timeline.contentWidth,
                                                         numberOfLines: 0)

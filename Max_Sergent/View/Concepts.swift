@@ -98,7 +98,8 @@ class Concepts: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
     }
     
     func resize() {
-        let headerFrame = header.frameForLabel(text: header.text!,
+        let labelText =  (header.text ?? Constants.placeholder)!
+        let headerFrame = header.frameForLabel(text: labelText,
                                                font: header.font!,
                                                numberOfLines: header.numberOfLines,
                                                width: Sizing.paddedWidth)

@@ -89,7 +89,6 @@ class Details: UIScrollView, UIScrollViewDelegate {
         originDate.textAlignment   = .left
         originDate.backgroundColor = .clear
         originDate.lineBreakMode   = .byWordWrapping
-        originDate.text            = Constants.Pie.originDate
         originDate.font            = Fonts.Pie.originDate
         
         addSubview(concepts)
@@ -123,15 +122,18 @@ class Details: UIScrollView, UIScrollViewDelegate {
     
     //MARK: Adjusting State
     func resize() {
-        let headerFrame = header.frameForLabel(text: header.text!,
+        var labelText =  (header.text ?? Constants.placeholder)!
+        let headerFrame = header.frameForLabel(text: labelText,
                                                font: header.font!,
                                                numberOfLines: header.numberOfLines,
                                                width: Sizing.paddedWidth)
-        let asOfFrame = asOf.frameForLabel(text: asOf.text!,
+        labelText =  (asOf.text ?? Constants.placeholder)!
+        let asOfFrame = asOf.frameForLabel(text: labelText,
                                            font: asOf.font!,
                                            numberOfLines: asOf.numberOfLines,
                                            width: Sizing.Pie.circleRadius)
-        let originDateFrame = originDate.frameForLabel(text: originDate.text!,
+        labelText =  (originDate.text ?? Constants.placeholder)!
+        let originDateFrame = originDate.frameForLabel(text: labelText,
                                                        font: originDate.font!,
                                                        numberOfLines: originDate.numberOfLines,
                                                        width: Sizing.Pie.circleRadius)
