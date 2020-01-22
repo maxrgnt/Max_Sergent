@@ -12,11 +12,12 @@ import UIKit
 struct Colors {
     
     /* Alter color scheme here  */
-    static var primaryBackground   = UIColor.black
-    static var secondaryBackground = UIColor.darkGray
-    static var tertiaryBackground  = UIColor.gray
-    static var primaryFontColor    = UIColor.white
-    static var footerEffectStyle   = "dark"
+    static var primaryBackground:   UIColor!
+    static var secondaryBackground: UIColor!
+    static var tertiaryBackground:  UIColor!
+    static var primaryFontColor:    UIColor!
+    static var secondaryFontColor:  UIColor!
+    static var footerEffectStyle:   String!
     /****************************/
     
 }
@@ -24,18 +25,19 @@ struct Colors {
 extension ViewController {
     
     func resetColorScheme() {
-        print("resetColorScheme!")
 
         let primaryBackground   = Data.colorScheme[Constants.Data_Key.background1]!
         let secondaryBackground = Data.colorScheme[Constants.Data_Key.background2]!
         let tertiaryBackground  = Data.colorScheme[Constants.Data_Key.background3]!
-        let primaryFontColor    = Data.colorScheme[Constants.Data_Key.font]!
+        let primaryFontColor    = Data.colorScheme[Constants.Data_Key.font1]!
+        let secondaryFontColor  = Data.colorScheme[Constants.Data_Key.font2]!
         let footerEffectStyle   = Data.colorScheme[Constants.Data_Key.effectStyle]!
 
         Colors.primaryBackground   = UIColor(hexFromString: primaryBackground,   alpha: 1.0)
         Colors.secondaryBackground = UIColor(hexFromString: secondaryBackground, alpha: 1.0)
         Colors.tertiaryBackground  = UIColor(hexFromString: tertiaryBackground,  alpha: 1.0)
         Colors.primaryFontColor    = UIColor(hexFromString: primaryFontColor,    alpha: 1.0)
+        Colors.secondaryFontColor  = UIColor(hexFromString: secondaryFontColor,  alpha: 1.0)
         Colors.footerEffectStyle   = footerEffectStyle
         
         //ViewController
@@ -53,7 +55,7 @@ extension ViewController {
         }
         //Overview
         scroll.page1.titleTextColor                         = Colors.primaryFontColor
-        scroll.page1.contentTextColor                       = Colors.primaryFontColor
+        scroll.page1.contentTextColor                       = Colors.secondaryFontColor
         scroll.page1.boxBackgroundColor                     = Colors.tertiaryBackground
         scroll.page1.reloadData()
         //Timeline
@@ -69,19 +71,19 @@ extension ViewController {
         scroll.page2.eduColor                               = UIColor(hexFromString: edu,  alpha: 1.0)
         scroll.page2.expColor                               = UIColor(hexFromString: exp,  alpha: 1.0)
         scroll.page2.projColor                              = UIColor(hexFromString: proj, alpha: 1.0)
-        scroll.page2.contentTextColor                       = Colors.primaryFontColor
+        scroll.page2.contentTextColor                       = Colors.secondaryFontColor
         scroll.page2.boxColor                               = Colors.tertiaryBackground
         scroll.page2.reloadData()
         //Details
-        scroll.page3.originDate.textColor                   = Colors.primaryFontColor
-        scroll.page3.asOf.textColor                         = Colors.primaryFontColor
+        scroll.page3.originDate.textColor                   = Colors.secondaryFontColor
+        scroll.page3.asOf.textColor                         = Colors.secondaryFontColor
         scroll.page3.header.textColor                       = Colors.primaryFontColor
         scroll.page3.pie.backgroundColor                    = Colors.tertiaryBackground
         scroll.page3.pieText.percentTextColor               = Colors.primaryFontColor
-        scroll.page3.pieText.legendTextColor                = Colors.primaryFontColor
+        scroll.page3.pieText.legendTextColor                = Colors.secondaryFontColor
         scroll.page3.pieText.setNeedsDisplay()
         scroll.page3.concepts.boxBackgroundColor            = Colors.tertiaryBackground
-        scroll.page3.concepts.titleTextColor                = Colors.primaryFontColor
+        scroll.page3.concepts.titleTextColor                = Colors.secondaryFontColor
         scroll.page3.concepts.header.textColor              = Colors.primaryFontColor
         scroll.page3.concepts.collection.reloadData()
         //Footer

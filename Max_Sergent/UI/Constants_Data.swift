@@ -70,7 +70,9 @@ extension Constants {
         static let background2      = "background2"
         static let background3      = "background3"
         static let effectStyle      = "effectStyle"
-        static let font             = "font"
+        static let font1            = "font1"
+        static let font2            = "font2"
+        static let active           = "active"
     }
     
     struct Image_Prefix {

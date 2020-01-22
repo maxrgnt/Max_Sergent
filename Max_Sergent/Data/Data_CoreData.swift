@@ -108,7 +108,8 @@ extension Data {
         object.setValue(colorScheme[Constants.Data_Key.background1], forKeyPath: Constants.Data_Key.background1)
         object.setValue(colorScheme[Constants.Data_Key.background2], forKeyPath: Constants.Data_Key.background2)
         object.setValue(colorScheme[Constants.Data_Key.background3], forKeyPath: Constants.Data_Key.background3)
-        object.setValue(colorScheme[Constants.Data_Key.font],        forKeyPath: Constants.Data_Key.font)
+        object.setValue(colorScheme[Constants.Data_Key.font1],       forKeyPath: Constants.Data_Key.font1)
+        object.setValue(colorScheme[Constants.Data_Key.font2],       forKeyPath: Constants.Data_Key.font2)
         object.setValue(colorScheme[Constants.Data_Key.effectStyle], forKeyPath: Constants.Data_Key.effectStyle)
         do {
             try managedContext.save()
@@ -133,7 +134,8 @@ extension Data {
               let background1 = object.background1,
               let background2 = object.background2,
               let background3 = object.background3,
-              let font        = object.font,
+              let font1       = object.font1,
+              let font2       = object.font2,
               let effectStyle = object.effectStyle else
         {
             print("Error: loadOverview - coreData not found")
@@ -145,7 +147,8 @@ extension Data {
                        Constants.Data_Key.background1: background1,
                        Constants.Data_Key.background2: background2,
                        Constants.Data_Key.background3: background3,
-                       Constants.Data_Key.font:        font,
+                       Constants.Data_Key.font1:       font1,
+                       Constants.Data_Key.font2:       font2,
                        Constants.Data_Key.effectStyle: effectStyle]
         self.customDelegate.resetColorScheme()
     }

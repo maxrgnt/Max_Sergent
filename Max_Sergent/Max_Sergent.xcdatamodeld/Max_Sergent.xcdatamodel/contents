@@ -9,7 +9,8 @@
         <attribute name="background2" optional="YES" attributeType="String"/>
         <attribute name="background3" optional="YES" attributeType="String"/>
         <attribute name="effectStyle" optional="YES" attributeType="String"/>
-        <attribute name="font" optional="YES" attributeType="String"/>
+        <attribute name="font1" optional="YES" attributeType="String"/>
+        <attribute name="font2" optional="YES" attributeType="String"/>
         <attribute name="timeline_edu" optional="YES" attributeType="String"/>
         <attribute name="timeline_exp" optional="YES" attributeType="String"/>
         <attribute name="timeline_proj" optional="YES" attributeType="String"/>
@@ -45,7 +46,7 @@
     </entity>
     <elements>
         <element name="AppInfo" positionX="-45" positionY="99" width="128" height="73"/>
-        <element name="ColorScheme" positionX="9" positionY="135" width="128" height="163"/>
+        <element name="ColorScheme" positionX="9" positionY="135" width="128" height="178"/>
         <element name="ConceptData" positionX="-9" positionY="126" width="128" height="73"/>
         <element name="Overview" positionX="-54" positionY="9" width="128" height="163"/>
         <element name="PieData" positionX="-27" positionY="117" width="128" height="103"/>

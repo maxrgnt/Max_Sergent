@@ -35,33 +35,41 @@ extension Data {
     static func firebaseColorScheme() {
         let ref = Database.database().reference(withPath: Constants.Firebase_Path.colorScheme)
         ref.observeSingleEvent(of: .value, with: { snapshot in
-            guard let value = snapshot.value as? [String: AnyObject] else {
+            guard let values = snapshot.value as? [String: AnyObject] else {
                 print("Error: firebaseColorScheme - snapshot.value not convertible to [String: AnyObject]")
                 return
             }
-            guard   let exp         = value[Constants.Data_Key.exp]         as? String,
-                    let edu         = value[Constants.Data_Key.edu]         as? String,
-                    let proj        = value[Constants.Data_Key.proj]        as? String,
-                    let background1 = value[Constants.Data_Key.background1] as? String,
-                    let background2 = value[Constants.Data_Key.background2] as? String,
-                    let background3 = value[Constants.Data_Key.background3] as? String,
-                    let font        = value[Constants.Data_Key.font]        as? String,
-                    let effectStyle = value[Constants.Data_Key.effectStyle] as? String else
-            {
-                print("Error: firebaseColorScheme - value objects not convertible")
-                return
+            values.keys.forEach { key in
+                if values[key]![Constants.Data_Key.active] as! Bool == true {
+                    let value = values[key]!
+                    guard   let exp         = value[Constants.Data_Key.exp]         as? String,
+                            let edu         = value[Constants.Data_Key.edu]         as? String,
+                            let proj        = value[Constants.Data_Key.proj]        as? String,
+                            let background1 = value[Constants.Data_Key.background1] as? String,
+                            let background2 = value[Constants.Data_Key.background2] as? String,
+                            let background3 = value[Constants.Data_Key.background3] as? String,
+                            let font1       = value[Constants.Data_Key.font1]       as? String,
+                            let font2       = value[Constants.Data_Key.font2]       as? String,
+                            let effectStyle = value[Constants.Data_Key.effectStyle] as? String else
+                    {
+                        print("Error: firebaseColorScheme - value objects not convertible")
+                        return
+                    }
+                    colorScheme = [Constants.Data_Key.exp:         exp,
+                                   Constants.Data_Key.edu:         edu,
+                                   Constants.Data_Key.proj:        proj,
+                                   Constants.Data_Key.background1: background1,
+                                   Constants.Data_Key.background2: background2,
+                                   Constants.Data_Key.background3: background3,
+                                   Constants.Data_Key.font1:       font1,
+                                   Constants.Data_Key.font2:       font2,
+                                   Constants.Data_Key.effectStyle: effectStyle]
+                    // If CoreData has been populated already, first delete what is saved before saving new data
+                    deleteCoreData(forEntity: Constants.CoreData_Entity.colorScheme)
+                    setColorScheme()
+                    return
+                }
             }
-            colorScheme = [Constants.Data_Key.exp:         exp,
-                           Constants.Data_Key.edu:         edu,
-                           Constants.Data_Key.proj:        proj,
-                           Constants.Data_Key.background1: background1,
-                           Constants.Data_Key.background2: background2,
-                           Constants.Data_Key.background3: background3,
-                           Constants.Data_Key.font:        font,
-                           Constants.Data_Key.effectStyle: effectStyle]
-            // If CoreData has been populated already, first delete what is saved before saving new data
-            deleteCoreData(forEntity: Constants.CoreData_Entity.colorScheme)
-            setColorScheme()
         })
     }
     
