@@ -11,6 +11,7 @@ import UIKit
 
 struct Constants {
         
+    static let splashIcon  = "maxrgnt"
     static let splashTitle = "syncing with database"
     static let watermarkLastSync = "last update sent:"
     static let placeholder = "The quick brown foxy"

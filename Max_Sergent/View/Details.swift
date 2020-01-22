@@ -122,17 +122,21 @@ class Details: UIScrollView, UIScrollViewDelegate {
     
     //MARK: Adjusting State
     func resize() {
+        print("details readjusting")
         var labelText =  (header.text ?? Constants.placeholder)!
+        print(labelText)
         let headerFrame = header.frameForLabel(text: labelText,
                                                font: header.font!,
                                                numberOfLines: header.numberOfLines,
                                                width: Sizing.paddedWidth)
         labelText =  (asOf.text ?? Constants.placeholder)!
+        print(labelText)
         let asOfFrame = asOf.frameForLabel(text: labelText,
                                            font: asOf.font!,
                                            numberOfLines: asOf.numberOfLines,
                                            width: Sizing.Pie.circleRadius)
         labelText =  (originDate.text ?? Constants.placeholder)!
+        print(labelText)
         let originDateFrame = originDate.frameForLabel(text: labelText,
                                                        font: originDate.font!,
                                                        numberOfLines: originDate.numberOfLines,

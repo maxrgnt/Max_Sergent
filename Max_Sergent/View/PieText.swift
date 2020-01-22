@@ -98,7 +98,7 @@ class PieText: UIView {
                                    context: context,
                                    radius: Sizing.Pie.circleRadius,
                                    angle: angle,
-                                   colour: percentTextColor,
+                                   colour: legendTextColor,
                                    font: Fonts.Pie.percent!,
                                    clockwise: clockwise)
             oldEndAngle -= width + (2*CGFloat.pi*gap)

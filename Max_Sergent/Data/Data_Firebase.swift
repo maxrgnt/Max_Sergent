@@ -82,26 +82,36 @@ extension Data {
             }
             guard   let userName  = value[Constants.Data_Key.userName]        as? String,
                     let watermark = value[Constants.Data_Key.watermark]       as? String,
-                    let photoURL  = value[Constants.Data_Key.appInfoPhotoURL] as? String else
+                    let photoURL  = value[Constants.Data_Key.appInfoPhotoURL] as? String,
+                    let splashURL = value[Constants.Data_Key.splashURL]       as? String else
             {
                 print("Error: firebaseAppInfo - value objects not convertible")
                 return
             }
             // If CoreData has been populated already, first delete what is saved before saving new data
             deleteCoreData(forEntity: Constants.CoreData_Entity.appInfo)
-            print(photoURL)
-            let storageRef = Storage.storage().reference(forURL: photoURL)
+            let storageRef = Storage.storage().reference(forURL: splashURL)
             storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
                 if let error = error {
                     print(error)
-                    setAppInfo(userName:  userName,
-                               watermark: watermark,
-                               photo:     UIImage(named: Constants.Placeholder.photoURL)!)
                 }
                 else {
-                    setAppInfo(userName:  userName,
-                               watermark: watermark,
-                               photo:     UIImage(data: data!)!)
+                    if UIImage(data: data!)!.saveImage(as: Constants.Data_Key.splashURL) {
+                        let storageRef = Storage.storage().reference(forURL: photoURL)
+                        storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                            if let error = error {
+                                print(error)
+                                setAppInfo(userName:  userName,
+                                           watermark: watermark,
+                                           photo:     UIImage(named: Constants.Placeholder.photoURL)!)
+                            }
+                            else {
+                                setAppInfo(userName:  userName,
+                                           watermark: watermark,
+                                           photo:     UIImage(data: data!)!)
+                            }
+                        }
+                    }
                 }
             }
         })

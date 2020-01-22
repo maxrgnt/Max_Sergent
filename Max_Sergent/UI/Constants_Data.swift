@@ -81,6 +81,7 @@ extension Constants {
         static let gradientEnd      = "gradientEnd"
         static let future           = "future"
         static let futureYear       = "_year"
+        static let splashURL        = "splashURL"
     }
     
     struct Image_Prefix {

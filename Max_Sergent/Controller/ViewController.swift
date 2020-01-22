@@ -268,6 +268,16 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         header.name.text   = userName
         header.photo.image = (Data.appInfo[Constants.Data_Key.appInfoPhoto]  as! UIImage)
         header.resetNameHeight()
+        
+        guard let dir = try?
+            FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else
+        {
+            return
+        }
+        let iconName = Constants.Data_Key.splashURL
+        let urlFromCoreData = URL(fileURLWithPath: dir.absoluteString).appendingPathComponent("\(iconName).png")
+        let photo = UIImage(contentsOfFile: urlFromCoreData.path)!
+        splash.photo.image = photo
     }
     
     func resetOverview() {
@@ -333,6 +343,7 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         scroll.page3.originDate.text = "\(datePieces[0])\n\(datePieces[1])\n\(datePieces[2])"
         // Calls the overided draw function
         scroll.page3.pieText.setNeedsDisplay()
+        scroll.page3.resize()
     }
     
     func resetConcepts() {

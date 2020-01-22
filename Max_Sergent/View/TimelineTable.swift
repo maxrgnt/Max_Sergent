@@ -102,7 +102,7 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
          
         cell.content.textColor     = contentTextColor
         cell.distinction.textColor = contentTextColor
-        cell.header.textColor      = contentTextColor
+        cell.header.textColor      = titleTextColor
         cell.box.backgroundColor   = boxColor
         cell.line.backgroundColor  = lineColor
         
