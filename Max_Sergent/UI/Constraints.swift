@@ -12,12 +12,20 @@ import UIKit
 //MARK: ViewController
 extension ViewController {
     
+    func splashConstraints() {
+        splash.translatesAutoresizingMaskIntoConstraints                                                                = false
+        splash.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive                                        = true
+        splash.topAnchor.constraint(equalTo: view.topAnchor).isActive                                              = true
+        splash.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive                                      = true
+        splash.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive                                    = true
+    }
+    
     func constraints() {
         watermark.translatesAutoresizingMaskIntoConstraints                                                             = false
         watermark.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive                                   = true
         watermark.topAnchor.constraint(equalTo: header.bottomAnchor).isActive                                           = true
         watermark.widthAnchor.constraint(equalToConstant: Sizing.width).isActive                                        = true
-        watermark.heightAnchor.constraint(equalToConstant: Sizing.watermarkHeight*(2/3)).isActive                           = true
+        watermark.heightAnchor.constraint(equalToConstant: Sizing.watermarkHeight*(2/3)).isActive                       = true
         
         ViewController.lastUpdate.translatesAutoresizingMaskIntoConstraints                                             = false
         ViewController.lastUpdate.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive                   = true
@@ -43,6 +51,21 @@ extension ViewController {
         footer.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -Sizing.Footer.padding).isActive      = true
         footer.widthAnchor.constraint(equalToConstant: Sizing.paddedWidth).isActive                                     = true
         footer.heightAnchor.constraint(equalToConstant: Sizing.Footer.height).isActive                                  = true
+    }
+    
+}
+
+//MARK: Splash
+extension Splash {
+    
+    func constraints() {
+        photoWidth  = photo.widthAnchor.constraint(equalToConstant: Sizing.width*0.75)
+        photoHeight = photo.heightAnchor.constraint(equalToConstant: Sizing.width*0.75)
+        photo.translatesAutoresizingMaskIntoConstraints                                                                = false
+        photo.centerXAnchor.constraint(equalTo: centerXAnchor).isActive                                                = true
+        photo.centerYAnchor.constraint(equalTo: centerYAnchor).isActive                                                = true
+        photoWidth.isActive                                                                                            = true
+        photoHeight.isActive                                                                                           = true
     }
     
 }

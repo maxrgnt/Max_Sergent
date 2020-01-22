@@ -13,6 +13,7 @@ import MapKit
 
 class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDelegate, OverviewDelegate, MenuDelegate, MFMailComposeViewControllerDelegate {
     
+    let splash = Splash()
     let watermark = UILabel()
     static let lastUpdate = UILabel()
     let header = Header()
@@ -23,6 +24,17 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     var statusBarStyle: UIStatusBarStyle = .darkContent
     
     override func viewDidLoad() {
+        
+        print(view.subviews)
+        
+        view.addSubview(splash)
+        splashConstraints()
+        splash.setup() {
+            splash.constraints()
+            splash.animate()
+        }
+        splash.tag = 100
+        
         print("Hello World!")
         Sizing.padding = Sizing.padding < 22.0 ? 22.0 : Sizing.padding
         Sizing.offsetForShorterScreens = Sizing.height <= 736.0 ? -66.0 : 0.0
@@ -38,6 +50,8 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
             Data.clearAllDataForTesting()
             Data.checkFirebaseForReset()
         }
+        
+        print(view.subviews)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -50,7 +64,7 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         
         Data.customDelegate = self
         
-        view.addSubview(watermark)
+        view.insertSubview(watermark, belowSubview: splash)
         watermark.alpha            = 0.7
         watermark.numberOfLines    = 2
         watermark.textAlignment    = .center
@@ -59,7 +73,7 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         watermark.font             = Fonts.Header.name
         watermark.text             = Constants.watermark
         
-        view.addSubview(ViewController.lastUpdate)
+        view.insertSubview(ViewController.lastUpdate, belowSubview: splash)
         ViewController.lastUpdate.alpha           = 0.7
         ViewController.lastUpdate.numberOfLines   = 2
         ViewController.lastUpdate.textAlignment   = .center
@@ -67,20 +81,22 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         ViewController.lastUpdate.lineBreakMode   = .byClipping
         ViewController.lastUpdate.font            = Fonts.Overview.title
         
-        view.addSubview(header)
+        view.insertSubview(header, belowSubview: splash)
         header.setup() {
             header.constraints()
             header.resetNameHeight()
         }
         header.customDelegate = self
-        view.addSubview(scroll)
+        
+        view.insertSubview(scroll, belowSubview: splash)
         scroll.setup() {
             scroll.constraints()
             scroll.resetContentInset()
         }
         scroll.customDelegate = self
         scroll.page1.customDelegate = self
-        view.addSubview(footer)
+        
+        view.insertSubview(footer, belowSubview: splash)
         footer.setup() {
             footer.constraints()
         }
@@ -190,6 +206,23 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         resetTimeline()
         resetConcepts()
         resetPieData()
+        UIView.animate(withDuration: 0.55, delay: 0.0,
+            // 1.0 is smooth, 0.0 is bouncy
+            usingSpringWithDamping: 0.7,
+            // 1.0 corresponds to the total animation distance traversed in one second
+            // distance/seconds, 1.0 = total animation distance traversed in one second
+            initialSpringVelocity: 1.0,
+            options: [.curveEaseInOut],
+            // [autoReverse, curveEaseIn, curveEaseOut, curveEaseInOut, curveLinear]
+            animations: {
+                //Do all animations here
+                self.splash.alpha = 0
+        }, completion: {
+               //Code to run after animating
+                (value: Bool) in
+            self.splash.removeFromSuperview()
+            }
+        )
     }
     
     func resetAppInfo() {
