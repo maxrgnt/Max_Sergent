@@ -23,14 +23,14 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     // Constraints
     // Objects
     var timelineRefresh = TimelineRefresh()
-    var lineColor:              UIColor = .black
-    var sectionBackgroundColor: UIColor = .black
-    var titleTextColor:         UIColor = .black
-    var contentTextColor:       UIColor = .black
-    var boxColor:               UIColor = .black
-    var eduColor:               UIColor = .black
-    var expColor:               UIColor = .black
-    var projColor:              UIColor = .black
+    var lineColor:              UIColor!
+    var sectionBackgroundColor: UIColor!
+    var titleTextColor:         UIColor!
+    var contentTextColor:       UIColor!
+    var boxColor:               UIColor!
+    var eduColor:               UIColor!
+    var expColor:               UIColor!
+    var projColor:              UIColor!
     
     //MARK: - Initialization
     override init (frame: CGRect, style: UITableView.Style) {

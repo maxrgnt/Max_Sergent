@@ -19,8 +19,8 @@ class Concepts: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
     // Objects
     var header = UILabel()
     weak var collection: UICollectionView!
-    var boxBackgroundColor: UIColor = .black
-    var titleTextColor:     UIColor = .black
+    var boxBackgroundColor: UIColor!
+    var titleTextColor:     UIColor!
     
     //MARK: Initialization
     init() {

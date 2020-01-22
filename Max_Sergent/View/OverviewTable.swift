@@ -22,9 +22,9 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     var customDelegate: OverviewDelegate!
     // Constraints
     // Objects
-    var titleTextColor: UIColor     = .black
-    var contentTextColor: UIColor   = .black
-    var boxBackgroundColor: UIColor = .black
+    var titleTextColor:     UIColor!
+    var contentTextColor:   UIColor!
+    var boxBackgroundColor: UIColor!
     
     //MARK: - Initialization
     override init (frame: CGRect, style: UITableView.Style) {

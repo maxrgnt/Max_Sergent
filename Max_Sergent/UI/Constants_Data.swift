@@ -73,6 +73,8 @@ extension Constants {
         static let font1            = "font1"
         static let font2            = "font2"
         static let active           = "active"
+        static let gradientStart    = "gradientStart"
+        static let gradientEnd      = "gradientEnd"
     }
     
     struct Image_Prefix {
