@@ -21,6 +21,10 @@
         <attribute name="iconName" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="Future" representedClassName="Future" syncable="YES" codeGenerationType="class">
+        <attribute name="iconName" optional="YES" attributeType="String"/>
+        <attribute name="iconURL" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Overview" representedClassName="Overview" syncable="YES" codeGenerationType="class">
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="email_body" optional="YES" attributeType="String"/>
@@ -46,10 +50,6 @@
         <attribute name="type" optional="YES" attributeType="String"/>
         <attribute name="year" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="TimelineB" representedClassName="TimelineB" syncable="YES" codeGenerationType="class">
-        <attribute name="iconName" optional="YES" attributeType="String"/>
-        <attribute name="iconURL" optional="YES" attributeType="String"/>
-    </entity>
     <elements>
         <element name="AppInfo" positionX="-45" positionY="99" width="128" height="73"/>
         <element name="ColorScheme" positionX="9" positionY="135" width="128" height="208"/>
@@ -57,6 +57,6 @@
         <element name="Overview" positionX="-54" positionY="9" width="128" height="163"/>
         <element name="PieData" positionX="-27" positionY="117" width="128" height="103"/>
         <element name="Timeline" positionX="-36" positionY="81" width="128" height="148"/>
-        <element name="TimelineB" positionX="-18" positionY="153" width="128" height="73"/>
+        <element name="Future" positionX="-18" positionY="153" width="128" height="73"/>
     </elements>
 </model>

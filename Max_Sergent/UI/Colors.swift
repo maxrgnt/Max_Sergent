@@ -40,6 +40,9 @@ extension ViewController {
         Colors.secondaryFontColor  = UIColor(hexFromString: secondaryFontColor,  alpha: 1.0)
         Colors.footerEffectStyle   = footerEffectStyle
         
+        //Splash
+        splash.title.textColor                              = Colors.primaryFontColor
+        splash.backgroundColor                              = Colors.primaryBackground
         //ViewController
         view.backgroundColor                                = Colors.primaryBackground
         watermark.textColor                                 = Colors.secondaryBackground

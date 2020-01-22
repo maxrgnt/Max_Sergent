@@ -219,33 +219,40 @@ extension Data {
         }
     }
     
-    //MARK: Firebase TimelineB
-    static func firebaseTimelineB() {
-        let ref = Database.database().reference(withPath: Constants.Firebase_Path.timelineb)
+    //MARK: Firebase Future
+    static func firebaseFuture() {
+        let ref = Database.database().reference(withPath: Constants.Firebase_Path.future)
         ref.observeSingleEvent(of: .value, with: { snapshot in
             guard let values = snapshot.value as? [String: AnyObject] else {
-                print("Error: firebaseTimeline - snapshot.value not convertible to [String: AnyObject]")
+                print("Error: firebaseFuture - snapshot.value not convertible to [String: AnyObject]")
                 return
             }
-            timelinebIconsSavedInMemory = []
-            let keys = values.keys.sorted()
+            guard let year = values[Constants.Data_Key.futureYear] as? String else
+            {
+                print("Error: firebaseFuture - value objects (1) not convertible")
+                return
+            }
+            futureYear = year
+            let keys = values.keys.sorted().dropFirst()
+            futureIconsSavedInMemory = []
+            future = []
             keys.forEach { key in
-                guard   let iconName     = values[key]![Constants.Data_Key.iconName]     as? String,
-                        let iconURL      = values[key]![Constants.Data_Key.iconURL]      as? String else
+                guard   let iconName = values[key]![Constants.Data_Key.iconName] as? String,
+                        let iconURL  = values[key]![Constants.Data_Key.iconURL]  as? String else
                 {
-                    print("Error: firebaseTimeline - value objects not convertible")
+                    print("Error: firebaseFuture - value objects not convertible")
                     return
                 }
-                timelineb.append(Constants.Image_Prefix.timelineb+iconName)
+                future.append(Constants.Image_Prefix.future+iconName)
                 let storageRef = Storage.storage().reference(forURL: iconURL)
                 storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
                     if let error = error {
                         print(error)
                     }
                     else {
-                        if UIImage(data: data!)!.saveImage(as: Constants.Image_Prefix.timelineb+iconName) {
+                        if UIImage(data: data!)!.saveImage(as: Constants.Image_Prefix.future+iconName) {
                             if key == keys.last! {
-                                firebaseCheckForTimelinebIcons()
+                                firebaseCheckForFutureIcons()
                             }
                         }
                         else {
@@ -257,7 +264,7 @@ extension Data {
         })
     }
     
-    static func firebaseCheckForTimelinebIcons() {
+    static func firebaseCheckForFutureIcons() {
         do {
             let documentsURL = try FileManager.default.url(for: .documentDirectory,
                                                            in: .userDomainMask,
@@ -266,24 +273,24 @@ extension Data {
             let docs = try FileManager.default.contentsOfDirectory(at: documentsURL,
                                                                    includingPropertiesForKeys: [],
                                                                    options:  [.skipsHiddenFiles, .skipsSubdirectoryDescendants])
-            if timelinebIconsSavedInMemory.count < timelineb.count {
+            if futureIconsSavedInMemory.count < future.count {
                 docs.forEach { doc in
                     let docString = String(describing: doc)
                     let splitFileName = docString.split(separator:"/")
                     let imageName = String(describing: splitFileName.last!)
-                    if imageName.hasPrefix(Constants.Image_Prefix.timelineb) && !timelinebIconsSavedInMemory.contains(imageName) {
-                        timelinebIconsSavedInMemory.append(imageName)
+                    if imageName.hasPrefix(Constants.Image_Prefix.future) && !futureIconsSavedInMemory.contains(imageName) {
+                        futureIconsSavedInMemory.append(imageName)
                     }
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    firebaseCheckForTimelinebIcons()
+                    firebaseCheckForFutureIcons()
                 }
             }
             else {
                 //print(conceptIconsSavedInMemory)
                 // If CoreData has been populated already, first delete what is saved before saving new data
-                deleteCoreData(forEntity: Constants.CoreData_Entity.timelineb)
-                setTimelineb()
+                deleteCoreData(forEntity: Constants.CoreData_Entity.future)
+                setFuture()
             }
         } catch {
             print(error)

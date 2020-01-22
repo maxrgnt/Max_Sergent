@@ -32,8 +32,9 @@ struct Data {
     static var timeline:                    [String: AnyObject] = [:]
     static var timelineTable:               [[String: Any]] = []
     static var timelineIconsSavedInMemory:  [String] = []
-    static var timelineb:                   [String] = []
-    static var timelinebIconsSavedInMemory: [String] = []
+    static var future:                      [String] = []
+    static var futureIconsSavedInMemory:    [String] = []
+    static var futureYear:                  String = ""
     static var pieOriginDate:               String = ""
     static var pie:                         [[String: Any]] = []
     static var concepts:                    [[String: Any]] = []
@@ -44,7 +45,7 @@ struct Data {
     static var appInfoLoaded     = false
     static var overviewLoaded    = false
     static var timelineLoaded    = false
-    static var timelinebLoaded   = false
+    static var futureLoaded      = false
     static var pieLoaded         = false
     static var conceptsLoaded    = false
     static var allDataLoaded     = false
@@ -52,13 +53,13 @@ struct Data {
     static func dataLoadTracker() {
         print("tracking..")
         var overall = false
-        for check in [colorSchemeLoaded,appInfoLoaded,overviewLoaded,timelineLoaded,timelinebLoaded,pieLoaded,conceptsLoaded] {
+        for check in [colorSchemeLoaded,appInfoLoaded,overviewLoaded,timelineLoaded,futureLoaded,pieLoaded,conceptsLoaded] {
             overall = check
             if !check {
                 break
             }
         }
-        print([colorSchemeLoaded,appInfoLoaded,overviewLoaded,timelineLoaded,timelinebLoaded,pieLoaded,conceptsLoaded])
+        print([colorSchemeLoaded,appInfoLoaded,overviewLoaded,timelineLoaded,futureLoaded,pieLoaded,conceptsLoaded])
         if !overall {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 dataLoadTracker()
@@ -78,7 +79,7 @@ struct Data {
         deleteCoreData(forEntity: Constants.CoreData_Entity.colorScheme)
         deleteCoreData(forEntity: Constants.CoreData_Entity.overview)
         deleteCoreData(forEntity: Constants.CoreData_Entity.timeline)
-        deleteCoreData(forEntity: Constants.CoreData_Entity.timelineb)
+        deleteCoreData(forEntity: Constants.CoreData_Entity.future)
         deleteCoreData(forEntity: Constants.CoreData_Entity.pie)
         deleteCoreData(forEntity: Constants.CoreData_Entity.concepts)
         // Delete onboarding/keyboard/userAgreement user default data
@@ -131,7 +132,7 @@ struct Data {
             loadColorScheme()
             loadOverview()
             loadTimeline()
-            loadTimelineb()
+            loadFuture()
             loadPieData()
             loadConcepts()
             lastUpdate = UserDefaults.standard.string(forKey: Constants.UserDefaults.lastUpdate)!
@@ -143,6 +144,7 @@ struct Data {
             appInfoLoaded     = false
             overviewLoaded    = false
             timelineLoaded    = false
+            futureLoaded      = false
             pieLoaded         = false
             conceptsLoaded    = false
             allDataLoaded     = false
@@ -166,7 +168,7 @@ struct Data {
         firebaseColorScheme()
         firebaseOverview()
         firebaseTimeline()
-        firebaseTimelineB()
+        firebaseFuture()
         firebasePieData()
         firebaseConcepts()
         completion()

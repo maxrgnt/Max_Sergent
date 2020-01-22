@@ -270,45 +270,46 @@ extension Data {
         timelineLoaded = true
     }
     
-    //MARK: TimelineB
-    static func setTimelineb() {
+    //MARK: Future
+    static func setFuture() {
         // Boiler-plate
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let managedContext = appDelegate.persistentContainer.viewContext
-        timelineb.forEach { iconName in
+        future.forEach { iconName in
             // Starts to differ here
-            let entity = NSEntityDescription.entity(forEntityName: Constants.CoreData_Entity.timelineb, in: managedContext)!
+            let entity = NSEntityDescription.entity(forEntityName: Constants.CoreData_Entity.future, in: managedContext)!
             let object = NSManagedObject(entity: entity, insertInto: managedContext)
             // Entity specific here
             object.setValue(iconName, forKeyPath: Constants.Data_Key.iconName)
         }
         do {
             try managedContext.save()
-            loadTimelineb()
+            UserDefaults.standard.set(futureYear, forKey: Constants.UserDefaults.futureYear)
+            loadFuture()
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
     }
     
-    static func loadTimelineb() {
+    static func loadFuture() {
         // Boiler-plate
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let managedContext = appDelegate.persistentContainer.viewContext
         // Starts to differ here
-        let entity = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.CoreData_Entity.timelineb)
-        let fetch  = try! managedContext.fetch(entity) as! [TimelineB]
+        let entity = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.CoreData_Entity.future)
+        let fetch  = try! managedContext.fetch(entity) as! [Future]
         // Entity specific here
-        timelineb = []
+        future = []
         fetch.forEach { object in
             guard let iconName = object.iconName else
             {
                 print("Error: loadTimeline - coreData not found")
                 return
             }
-            print(iconName)
-            timelineb.append(iconName)
+            future.append(iconName)
         }
-        timelinebLoaded = true
+        futureYear = UserDefaults.standard.string(forKey: Constants.UserDefaults.futureYear)!
+        futureLoaded = true
     }
     
     //MARK: Pie

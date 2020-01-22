@@ -31,7 +31,6 @@ struct Constants {
     }
     
     struct Timeline {
-        static let refreshTitle = "2020"
         static let cellReuseId = "TimelineCell"
     }
     

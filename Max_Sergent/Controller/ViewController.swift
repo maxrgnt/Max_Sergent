@@ -41,7 +41,7 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         print(Date())
         setup() {
             constraints()
-            //Data.clearAllDataForTesting()
+            Data.clearAllDataForTesting()
         }
     }
     
@@ -234,7 +234,7 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         resetColorScheme()
         resetOverview()
         resetTimeline()
-        resetTimelineb()
+        resetFuture()
         resetConcepts()
         resetPieData()
         UIView.animate(withDuration: 0.55, delay: 0.0,
@@ -316,9 +316,11 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         scroll.page2.reloadData()
     }
     
-    func resetTimelineb() {
-        print(Data.timelineb)
-        (scroll.page2.refreshControl?.subviews[1] as! TimelineRefresh).icons = Data.timelineb
+    func resetFuture() {
+        print(Data.futureYear)
+        print(Data.future)
+        (scroll.page2.refreshControl?.subviews[1] as! TimelineRefresh).title.text = Data.futureYear
+        (scroll.page2.refreshControl?.subviews[1] as! TimelineRefresh).icons = Data.future
     }
     
     func resetPieData() {

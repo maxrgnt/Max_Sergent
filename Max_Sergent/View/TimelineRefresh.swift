@@ -48,7 +48,6 @@ class TimelineRefresh: UIView {
         title.backgroundColor = .clear
         title.lineBreakMode   = .byWordWrapping
         title.font            = Fonts.Timeline.title
-        title.text            = Constants.Timeline.refreshTitle
         title.alpha = 0.0
         
         addSubview(icon)

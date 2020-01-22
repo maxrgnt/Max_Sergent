@@ -15,14 +15,15 @@ extension Constants {
         static let coreData         = "CoreData"
         static let lastUpdate       = "lastUpdate"
         static let pieOriginDate    = "pieOriginDate"
+        static let futureYear       = "futureYear"
     }
     
     struct Firebase_Path {
         static let reset            = "1_reset"
         static let appInfo          = "2_appInfo"
         static let overview         = "3_overview"
+        static let future           = "4_future"
         static let timeline         = "4_timeline"
-        static let timelineb        = "4_timelineb"
         static let pie              = "5_pie"
         static let concepts         = "6_concepts"
         static let colorScheme      = "7_colorScheme"
@@ -32,7 +33,7 @@ extension Constants {
         static let appInfo          = "AppInfo"
         static let overview         = "Overview"
         static let timeline         = "Timeline"
-        static let timelineb        = "TimelineB"
+        static let future           = "Future"
         static let pie              = "PieData"
         static let concepts         = "ConceptData"
         static let colorScheme      = "ColorScheme"
@@ -78,13 +79,14 @@ extension Constants {
         static let active           = "active"
         static let gradientStart    = "gradientStart"
         static let gradientEnd      = "gradientEnd"
-        static let timelineb        = "timelineb"
+        static let future           = "future"
+        static let futureYear       = "_year"
     }
     
     struct Image_Prefix {
         static let concept          = "concept_"
         static let timeline         = "timeline_"
-        static let timelineb        = "timelineb_"
+        static let future           = "future_"
     }
     
     struct Placeholder {
