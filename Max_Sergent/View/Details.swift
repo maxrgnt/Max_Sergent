@@ -46,7 +46,7 @@ class Details: UIScrollView, UIScrollViewDelegate {
     //MARK: Setup
     func setup(closure: () -> Void) {
         
-        backgroundColor = Colors.Details.background
+        backgroundColor = .clear
         
         delegate                                  = self
         isPagingEnabled                           = false
@@ -66,7 +66,6 @@ class Details: UIScrollView, UIScrollViewDelegate {
         header.lineBreakMode   = .byWordWrapping
         header.text            = Constants.Pie.header
         header.font            = Fonts.Pie.header
-        header.textColor       = Colors.Pie.header
         
         addSubview(pie)
         pie.setup {
@@ -84,7 +83,6 @@ class Details: UIScrollView, UIScrollViewDelegate {
         asOf.lineBreakMode   = .byWordWrapping
         asOf.text            = Constants.Pie.asOf
         asOf.font            = Fonts.Pie.asOf
-        asOf.textColor       = Colors.Pie.asOf
         
         addSubview(originDate)
         originDate.numberOfLines   = 3
@@ -93,7 +91,6 @@ class Details: UIScrollView, UIScrollViewDelegate {
         originDate.lineBreakMode   = .byWordWrapping
         originDate.text            = Constants.Pie.originDate
         originDate.font            = Fonts.Pie.originDate
-        originDate.textColor       = Colors.Pie.originDate
         
         addSubview(concepts)
         concepts.setup {

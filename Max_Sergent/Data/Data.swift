@@ -53,12 +53,26 @@ struct Data {
         UserDefaults.standard.removePersistentDomain(forName: domain)
         UserDefaults.standard.synchronize()
         // Delete saved images
+        deleteImages()
+    }
+    
+    static func deleteImages() {
         let fileManager = FileManager.default
         let myDocuments = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
         do {
             try fileManager.removeItem(at: myDocuments)
         } catch {
             return
+        }
+    }
+
+    func contentsOfDocumentsDirectory() {
+        do {
+            let documentsURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            let docs = try FileManager.default.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: [], options:  [.skipsHiddenFiles, .skipsSubdirectoryDescendants])
+            print(docs)
+        } catch {
+            print(error)
         }
     }
     
@@ -86,7 +100,7 @@ struct Data {
         else {
             print("Load from Firebase")
             firebaseAll {
-                //UserDefaults.standard.set(true, forKey: Constants.UserDefaults.coreData)
+                UserDefaults.standard.set(true, forKey: Constants.UserDefaults.coreData)
                 let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .none)
                 UserDefaults.standard.set(timestamp, forKey: Constants.UserDefaults.lastUpdate)
                 lastUpdate = UserDefaults.standard.string(forKey: Constants.UserDefaults.lastUpdate)!

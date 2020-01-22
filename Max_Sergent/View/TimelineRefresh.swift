@@ -35,13 +35,10 @@ class TimelineRefresh: UIView {
     //MARK: Settings
     func setup(closure: () -> Void) {
                 
-        backgroundColor = Colors.Timeline.background
+        backgroundColor = .clear
         
         addSubview(line)
-        line.backgroundColor = Colors.Timeline.line
-        
         addSubview(node)
-        node.backgroundColor = Colors.Timeline.node
         node.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: Sizing.Timeline.nodeRadius)
         node.alpha = 0.0
         
@@ -51,7 +48,6 @@ class TimelineRefresh: UIView {
         title.backgroundColor = .clear
         title.lineBreakMode   = .byWordWrapping
         title.font            = Fonts.Timeline.title
-        title.textColor       = Colors.Timeline.title
         title.text            = Constants.Timeline.refreshTitle
         title.alpha = 0.0
         

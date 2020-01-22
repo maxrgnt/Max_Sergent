@@ -39,7 +39,7 @@ class Header: UIView {
     
     //MARK: Settings
     func setup(closure: () -> Void) {
-        backgroundColor = Colors.Header.background
+        backgroundColor = .clear
         clipsToBounds   = true
         
         addSubview(photo)
@@ -58,7 +58,6 @@ class Header: UIView {
         //name.minimumScaleFactor        = 0.1
         //name.adjustsFontSizeToFitWidth = true
         name.font                      = Fonts.Header.name
-        name.textColor                 = Colors.Header.name
         name.text                      = Constants.Header.name
         
         let daniela = UIPanGestureRecognizer(target: self, action: #selector(reactToPanGesture(_:)))
@@ -74,8 +73,7 @@ class Header: UIView {
         let gradientSize   = CGSize(width: Sizing.width, height: Sizing.Header.expandedHeight + 10.0)
         gradient.frame     = CGRect(origin: gradientOrigin, size: gradientSize)
         // Set color progression for gradient, alphaComponent of zero important for color shifting to
-        gradient.colors    = [Colors.Header.gradient.withAlphaComponent(0.0).cgColor,
-                              Colors.Header.gradient.withAlphaComponent(1.0).cgColor]
+        // done in reset Colors in ViewController
         // Set locations of where gradient will transition
         gradient.locations = [Constants.Header.gradientStart,
                               Constants.Header.gradientEnd]

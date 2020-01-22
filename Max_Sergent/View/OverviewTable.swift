@@ -22,6 +22,9 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     var customDelegate: OverviewDelegate!
     // Constraints
     // Objects
+    var titleTextColor: UIColor     = .black
+    var contentTextColor: UIColor   = .black
+    var boxBackgroundColor: UIColor = .black
     
     //MARK: - Initialization
     override init (frame: CGRect, style: UITableView.Style) {
@@ -53,8 +56,10 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         let id = Constants.Overview.cellReuseId
         let cell: OverviewCell = tableView.dequeueReusableCell(withIdentifier: id) as! OverviewCell
     
+        cell.box.backgroundColor = boxBackgroundColor
         cell.setIcon(withName: Data.overviewTable[indexPath.section].boxes[indexPath.row].icon)
         cell.content.text  = Data.overviewTable[indexPath.section].boxes[indexPath.row].content
+        cell.content.textColor = contentTextColor
         
         cell.resize(forIndex: indexPath.row)
         
@@ -71,6 +76,7 @@ class OverviewTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         tempSection.setup() {
             tempSection.constraints()
         }
+        tempSection.title.textColor = titleTextColor
         tempSection.title.text = Data.overviewTable[section].title
         tempSection.titleCenterY.constant = (section == 0) ? Sizing.Overview.padding/2 : 0.0
         tempSection.resize()

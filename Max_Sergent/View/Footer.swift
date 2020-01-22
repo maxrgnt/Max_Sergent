@@ -15,8 +15,8 @@ class Footer: UIView {
     // Delegates
     // Constraints
     // Objects
-    let blur = UIVisualEffectView(effect: UIBlurEffect(style: Colors.footerEffectStyle))
-    let vibrancy = UIVisualEffectView(effect: UIVibrancyEffect(blurEffect: UIBlurEffect(style: Colors.footerEffectStyle)))
+    var blur = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    var vibrancy = UIVisualEffectView(effect: UIVibrancyEffect(blurEffect: UIBlurEffect(style: .dark)))
     let menu = Menu()
     
     //MARK: Initialization

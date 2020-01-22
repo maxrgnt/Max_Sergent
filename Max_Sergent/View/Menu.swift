@@ -49,7 +49,6 @@ class Menu: UIView {
         for (i, label) in labels.enumerated() {
             addSubview(label)
             label.textAlignment = .center
-            label.textColor     = Colors.Menu.text
             label.tag           = i
             label.alpha         = 0.5
             label.font          = Fonts.Menu.normal

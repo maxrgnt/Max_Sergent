@@ -15,6 +15,8 @@ class PieText: UIView {
     // Delegates
     // Constraints
     // Objects
+    var percentTextColor: UIColor = .black
+    var legendTextColor:  UIColor = .black
     
     //MARK: Initialization
     init() {
@@ -81,7 +83,7 @@ class PieText: UIView {
                                    context: context,
                                    radius: Sizing.Pie.textRadius,
                                    angle: angle,
-                                   colour: Colors.Pie.legend,
+                                   colour: legendTextColor,
                                    font: Fonts.Pie.legend!,
                                    clockwise: clockwise)
             oldEndAngle -= width + (2*CGFloat.pi*gap)
@@ -96,7 +98,7 @@ class PieText: UIView {
                                    context: context,
                                    radius: Sizing.Pie.circleRadius,
                                    angle: angle,
-                                   colour: Colors.Pie.percent,
+                                   colour: percentTextColor,
                                    font: Fonts.Pie.percent!,
                                    clockwise: clockwise)
             oldEndAngle -= width + (2*CGFloat.pi*gap)

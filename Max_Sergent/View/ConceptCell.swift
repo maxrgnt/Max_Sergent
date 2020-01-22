@@ -38,7 +38,6 @@ class ConceptCell: UICollectionViewCell {
         backgroundColor = .clear
 
         contentView.addSubview(box)
-        box.backgroundColor = Colors.Timeline.boxBackground
         box.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: Sizing.Concepts.boxRadius)
         
         box.addSubview(icon)
@@ -50,9 +49,8 @@ class ConceptCell: UICollectionViewCell {
         addSubview(title)
         title.numberOfLines   = 2
         title.textAlignment   = .center
-        title.backgroundColor = .clear //.red
+        title.backgroundColor = .clear
         title.font            = Fonts.Concepts.title
-        title.textColor       = Colors.Concepts.title
         
         closure()
     }

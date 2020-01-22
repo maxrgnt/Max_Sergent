@@ -47,21 +47,16 @@ class Scroll: UIScrollView, UIScrollViewDelegate {
         showsVerticalScrollIndicator              = false
         showsHorizontalScrollIndicator            = false
         automaticallyAdjustsScrollIndicatorInsets = false
-        backgroundColor                           = Colors.Scroll.background
+        backgroundColor                           = .clear
         
         let pageCount = CGFloat(pages.count)
         contentSize   = CGSize(width: Sizing.width*pageCount, height: CGFloat(0.0))
         contentInset  = UIEdgeInsets(top: 0, left: Sizing.Scroll.limit, bottom: 0, right: 0)
         
-        //roundCorners(corners: [.topLeft,.topRight], radius: Sizing.Scroll.radius)
-        
         addSubview(page1)
         page1.roundCorners(corners: [.topLeft], radius: Sizing.Scroll.radius)
-        page1.backgroundColor = .darkGray
         page1.setup()
         addSubview(page2)
-        page2.backgroundColor = .darkGray
-//        page2.roundCorners(corners: [.topLeft,.topRight], radius: Sizing.Scroll.radius)
         page2.setup()
         addSubview(page3)
         page3.roundCorners(corners: [.topRight], radius: Sizing.Scroll.radius)

@@ -27,7 +27,6 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         Sizing.padding = Sizing.padding < 22.0 ? 22.0 : Sizing.padding
         Sizing.offsetForShorterScreens = Sizing.height <= 736.0 ? -66.0 : 0.0
         
-        view.backgroundColor = Colors.ViewController.background
         setup() {
             constraints()
             Data.clearAllDataForTesting()
@@ -52,7 +51,6 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         watermark.backgroundColor  = .clear
         watermark.lineBreakMode    = .byClipping
         watermark.font             = Fonts.Header.name
-        watermark.textColor        = Colors.ViewController.watermark
         watermark.text             = Constants.watermark
         
         view.addSubview(ViewController.lastUpdate)
@@ -62,7 +60,6 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         ViewController.lastUpdate.backgroundColor = .clear
         ViewController.lastUpdate.lineBreakMode   = .byClipping
         ViewController.lastUpdate.font            = Fonts.Overview.title
-        ViewController.lastUpdate.textColor       = Colors.ViewController.watermark
         
         view.addSubview(header)
         header.setup() {
@@ -190,13 +187,6 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         header.photo.image = (Data.appInfo[Constants.Data_Key.appInfoPhoto]  as! UIImage)
     }
     
-    func resetColorScheme() {
-        scroll.page2.eduColor  = UIColor(hexFromString: Data.colorScheme[Constants.Data_Key.edu]!,  alpha: 1.0)
-        scroll.page2.expColor  = UIColor(hexFromString: Data.colorScheme[Constants.Data_Key.exp]!,  alpha: 1.0)
-        scroll.page2.projColor = UIColor(hexFromString: Data.colorScheme[Constants.Data_Key.proj]!, alpha: 1.0)
-        scroll.page2.reloadData()
-    }
-    
     func resetOverview() {
         Data.overviewTable = [(title: Constants.Overview.titles[0],
                                boxes: [(icon: "",
@@ -262,6 +252,69 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         scroll.page3.concepts.collection.reloadData()
         scroll.page3.concepts.resize()
         scroll.page3.resize()
+    }
+    
+    func resetColorScheme() {
+        print("resetColorScheme!")
+        //ViewController
+        view.backgroundColor                                = Colors.primaryBackground
+        watermark.textColor                                 = Colors.secondaryBackground
+        ViewController.lastUpdate.textColor                 = Colors.secondaryBackground
+        //Header
+        header.name.textColor                               = Colors.primaryFontColor
+        let gradientTop                                     = Colors.primaryBackground.withAlphaComponent(0.0).cgColor
+        let gradientBottom                                  = Colors.primaryBackground.withAlphaComponent(1.0).cgColor
+        header.gradient.colors                              = [gradientTop, gradientBottom]
+        //Scroll
+        scroll.pages.forEach { page in
+            page.backgroundColor                            = Colors.secondaryBackground
+        }
+        //Overview
+        scroll.page1.titleTextColor                         = Colors.primaryFontColor
+        scroll.page1.contentTextColor                       = Colors.primaryFontColor
+        scroll.page1.boxBackgroundColor                     = Colors.tertiaryBackground
+        scroll.page1.reloadData()
+        //Timeline
+        scroll.page2.timelineRefresh.title.textColor        = Colors.primaryFontColor
+        scroll.page2.timelineRefresh.line.backgroundColor   = Colors.primaryFontColor
+        scroll.page2.timelineRefresh.node.backgroundColor   = Colors.primaryFontColor
+        scroll.page2.sectionBackgroundColor                 = Colors.secondaryBackground
+        scroll.page2.lineColor                              = Colors.primaryFontColor
+        scroll.page2.titleTextColor                         = Colors.primaryFontColor
+        let edu                                             = Data.colorScheme[Constants.Data_Key.edu]!
+        let exp                                             = Data.colorScheme[Constants.Data_Key.exp]!
+        let proj                                            = Data.colorScheme[Constants.Data_Key.proj]!
+        scroll.page2.eduColor                               = UIColor(hexFromString: edu,  alpha: 1.0)
+        scroll.page2.expColor                               = UIColor(hexFromString: exp,  alpha: 1.0)
+        scroll.page2.projColor                              = UIColor(hexFromString: proj, alpha: 1.0)
+        scroll.page2.contentTextColor                       = Colors.primaryFontColor
+        scroll.page2.boxColor                               = Colors.tertiaryBackground
+        scroll.page2.reloadData()
+        //Details
+        scroll.page3.originDate.textColor                   = Colors.primaryFontColor
+        scroll.page3.asOf.textColor                         = Colors.primaryFontColor
+        scroll.page3.header.textColor                       = Colors.primaryFontColor
+        scroll.page3.pie.backgroundColor                    = Colors.tertiaryBackground
+        scroll.page3.pieText.percentTextColor               = Colors.primaryFontColor
+        scroll.page3.pieText.legendTextColor                = Colors.primaryFontColor
+        scroll.page3.pieText.setNeedsDisplay()
+        scroll.page3.concepts.boxBackgroundColor            = Colors.tertiaryBackground
+        scroll.page3.concepts.titleTextColor                = Colors.primaryFontColor
+        scroll.page3.concepts.header.textColor              = Colors.primaryFontColor
+        scroll.page3.concepts.collection.reloadData()
+        //Footer
+        let effect  = (Colors.footerEffectStyle == "dark")
+                    ? UIBlurEffect(style: .dark)
+                    : UIBlurEffect(style: .light)
+        let textColor = (Colors.footerEffectStyle == "dark")
+                      ? UIColor.white
+                      : UIColor.black
+        footer.blur.effect                                  = effect
+        footer.vibrancy.effect                              = effect
+        //Menu
+        footer.menu.labels.forEach { label in
+           label.textColor                                  = textColor
+        }
     }
     
 }

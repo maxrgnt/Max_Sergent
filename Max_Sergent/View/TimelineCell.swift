@@ -49,16 +49,13 @@ class TimelineCell: UITableViewCell {
     func setup(closure: () -> Void) {
         
         selectionStyle = .none
-        backgroundColor = Colors.Timeline.background
+        backgroundColor = .clear
         
         addSubview(line)
-        line.backgroundColor = Colors.Timeline.line
-        
         addSubview(boxHeader)
         boxHeader.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: Sizing.Timeline.boxRadius)
         
         addSubview(box)
-        box.backgroundColor = Colors.Timeline.boxBackground
         box.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: Sizing.Timeline.boxRadius)
         
         box.addSubview(icon)
@@ -71,13 +68,11 @@ class TimelineCell: UITableViewCell {
         header.textAlignment   = .left
         header.backgroundColor = .clear
         header.font            = Fonts.Timeline.boxHeader
-        header.textColor       = Colors.Timeline.boxHeader
         
         addSubview(distinction)
         distinction.numberOfLines   = 1
         distinction.textAlignment   = .center
         distinction.font            = Fonts.Timeline.boxDistinction
-        distinction.textColor       = Colors.Timeline.boxDistinctionText
         
         box.addSubview(content)
         content.numberOfLines   = 0
@@ -85,7 +80,6 @@ class TimelineCell: UITableViewCell {
         content.backgroundColor = .clear
         content.lineBreakMode   = .byWordWrapping
         content.font            = Fonts.Timeline.boxContent
-        content.textColor       = Colors.Timeline.boxContent
         
         closure()
     }

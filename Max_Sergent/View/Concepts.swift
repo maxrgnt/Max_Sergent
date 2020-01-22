@@ -19,6 +19,8 @@ class Concepts: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
     // Objects
     var header = UILabel()
     weak var collection: UICollectionView!
+    var boxBackgroundColor: UIColor = .black
+    var titleTextColor:     UIColor = .black
     
     //MARK: Initialization
     init() {
@@ -41,7 +43,6 @@ class Concepts: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
         header.lineBreakMode   = .byWordWrapping
         header.text            = Constants.Concepts.header
         header.font            = Fonts.Concepts.header
-        header.textColor       = Colors.Concepts.title
         
         closure()
     }
@@ -60,7 +61,7 @@ class Concepts: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
         layout.scrollDirection = .vertical
         collection.alwaysBounceVertical = false
         collection.alwaysBounceHorizontal = false
-        collection.backgroundColor = Colors.Details.background
+        collection.backgroundColor = .clear
         collection.showsHorizontalScrollIndicator = false
         collection.showsVerticalScrollIndicator = false
         addSubview(collection)
@@ -87,6 +88,9 @@ class Concepts: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
         let urlFromCoreData = URL(fileURLWithPath: dir.absoluteString).appendingPathComponent("\(iconName).png")
         let photo = UIImage(contentsOfFile: urlFromCoreData.path)!
 
+        cell.box.backgroundColor = boxBackgroundColor
+        cell.title.textColor     = titleTextColor
+        
         cell.icon.image = photo
         cell.title.text = (Data.concepts[indexPath.row][Constants.Data_Key.title] as! String)
         cell.resize()

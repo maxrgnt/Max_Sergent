@@ -32,8 +32,6 @@ class TimelineSection: UIView {
     
     //MARK: Settings
     func setup(closure: () -> Void) {
-                
-        backgroundColor = Colors.Timeline.background
         
         addSubview(title)
         title.numberOfLines   = 1
@@ -41,13 +39,9 @@ class TimelineSection: UIView {
         title.backgroundColor = .clear
         title.lineBreakMode   = .byWordWrapping
         title.font            = Fonts.Timeline.title
-        title.textColor       = Colors.Timeline.title
         
         addSubview(line)
-        line.backgroundColor = Colors.Timeline.line
-        
         addSubview(node)
-        node.backgroundColor = Colors.Timeline.node
         node.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: Sizing.Timeline.nodeRadius)
         
         closure()

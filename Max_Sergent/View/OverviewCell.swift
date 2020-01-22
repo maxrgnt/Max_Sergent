@@ -20,10 +20,10 @@ class OverviewCell: UITableViewCell {
     var contentHeight:  NSLayoutConstraint!
     var contentLeading: NSLayoutConstraint!
     // Objects
-    var title   = UILabel()
     var box     = UIView()
     var icon    = UIImageView()
     var content = UILabel()
+
     // Variables
     var includeIcon = false
     
@@ -46,7 +46,6 @@ class OverviewCell: UITableViewCell {
         backgroundColor = .clear
         
         addSubview(box)
-        box.backgroundColor = Colors.Overview.box
         box.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: Sizing.Overview.boxRadius)
         
         box.addSubview(icon)
@@ -60,7 +59,6 @@ class OverviewCell: UITableViewCell {
         content.backgroundColor = .clear
         content.lineBreakMode   = .byWordWrapping
         content.font            = Fonts.Overview.content
-        content.textColor       = Colors.Overview.boxContent
         
         closure()
     }

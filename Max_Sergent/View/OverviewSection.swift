@@ -37,7 +37,6 @@ class OverviewSection: UIView {
         title.backgroundColor = .clear
         title.lineBreakMode   = .byWordWrapping
         title.font            = Fonts.Overview.title
-        title.textColor       = Colors.Overview.boxTitle
         
         closure()
     }

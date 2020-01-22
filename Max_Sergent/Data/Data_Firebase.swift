@@ -244,7 +244,7 @@ extension Data {
                     let docString = String(describing: doc)
                     let splitFileName = docString.split(separator:"/")
                     let imageName = String(describing: splitFileName.last!)
-                    if imageName.hasPrefix(Constants.Image_Prefix.concept) && !conceptIconsSavedInMemory.contains(imageName) {
+                    if imageName.hasPrefix(Constants.Image_Prefix.concept) { //&& !conceptIconsSavedInMemory.contains(imageName) {
                         conceptIconsSavedInMemory.append(imageName)
                     }
                 }

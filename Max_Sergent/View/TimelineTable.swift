@@ -23,9 +23,14 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     // Constraints
     // Objects
     var timelineRefresh = TimelineRefresh()
-    var eduColor: UIColor = .black
-    var expColor: UIColor = .black
-    var projColor: UIColor = .black
+    var lineColor:              UIColor = .black
+    var sectionBackgroundColor: UIColor = .black
+    var titleTextColor:         UIColor = .black
+    var contentTextColor:       UIColor = .black
+    var boxColor:               UIColor = .black
+    var eduColor:               UIColor = .black
+    var expColor:               UIColor = .black
+    var projColor:              UIColor = .black
     
     //MARK: - Initialization
     override init (frame: CGRect, style: UITableView.Style) {
@@ -52,12 +57,12 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         showsHorizontalScrollIndicator  = false
         
         let footer = UIView(frame: CGRect(x: 0, y: 0, width: Sizing.width, height: Sizing.Menu.scrollOffset))
-        footer.backgroundColor = Colors.Timeline.background
+        footer.backgroundColor = .clear
         tableFooterView = footer
         
         refreshControl = UIRefreshControl()
-        refreshControl?.backgroundColor = Colors.Timeline.background
-        //refreshControl?.tintColor = .white
+        refreshControl?.backgroundColor = .clear
+        refreshControl?.tintColor = .clear
         //refreshControl?.attributedTitle = NSAttributedString(string: "What am I, psychic?")
         refreshControl?.addTarget(self, action: #selector(findNewJob), for: .valueChanged)
         
@@ -85,6 +90,12 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         cell.distinction.text = "+"+(data[indexPath.row][Constants.Data_Key.type] as? String)!
         cell.content.text  = data[indexPath.row][Constants.Data_Key.details] as? String
 
+        cell.content.textColor     = contentTextColor
+        cell.distinction.textColor = contentTextColor
+        cell.header.textColor      = contentTextColor
+        cell.box.backgroundColor   = boxColor
+        cell.line.backgroundColor  = lineColor
+        
         let distinction = data[indexPath.row][Constants.Data_Key.type] as? String
         cell.boxHeader.backgroundColor = (Constants.Data_Key.exp.hasSuffix(distinction!))
             ? expColor : cell.boxHeader.backgroundColor
@@ -118,6 +129,10 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         tempSection.setup() {
             tempSection.constraints()
         }
+        tempSection.backgroundColor         = sectionBackgroundColor
+        tempSection.node.backgroundColor    = lineColor
+        tempSection.line.backgroundColor    = lineColor
+        tempSection.title.textColor         = titleTextColor
         tempSection.title.text = Data.timelineTable[section][Constants.Data_Key.year] as? String
         tempSection.titleCenterY.constant = (section == 0) ? Sizing.Timeline.padding/4 : Sizing.Timeline.padding/4 // 0.0
         tempSection.resize()
