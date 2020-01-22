@@ -15,8 +15,8 @@ class PieText: UIView {
     // Delegates
     // Constraints
     // Objects
-    var percentTextColor: UIColor!
-    var legendTextColor:  UIColor!
+    var percentTextColor: UIColor! = .black
+    var legendTextColor:  UIColor! = .black
     
     //MARK: Initialization
     init() {

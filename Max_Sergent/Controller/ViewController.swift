@@ -43,6 +43,7 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
             constraints()
             //Data.clearAllDataForTesting()
         }
+        addNotificationCenterObservers()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -354,6 +355,36 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         scroll.page3.concepts.collection.reloadData()
         scroll.page3.concepts.resize()
         scroll.page3.resize()
+    }
+    
+    //MARK: Observers
+    func addNotificationCenterObservers() {
+        // did enter background for when app closed out
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.willResignActive),
+            name: UIApplication.willResignActiveNotification,
+            object: nil
+        )
+        // did enter foreground for when app opened (runs after viewDidLoad if opening cold)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.willEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
+    }
+    
+    //MARK: Life Cycle
+    @objc func willResignActive() {
+        print("BACKGROUND")
+        splash.alpha = 1.0
+        view.bringSubviewToFront(splash)
+    }
+
+    @objc func willEnterForeground() {
+        print("FOREGROUND")
+        Data.checkFirebaseForReset()
     }
     
 }
