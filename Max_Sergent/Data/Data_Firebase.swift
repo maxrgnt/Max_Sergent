@@ -42,9 +42,9 @@ extension Data {
             values.keys.forEach { key in
                 if values[key]![Constants.Data_Key.active] as! Bool == true {
                     let value = values[key]!
-                    guard   let exp         = value[Constants.Data_Key.exp]         as? String,
-                            let edu         = value[Constants.Data_Key.edu]         as? String,
-                            let proj        = value[Constants.Data_Key.proj]        as? String,
+                    guard   let exp         = value[Constants.Data_Key.experience]         as? String,
+                            let edu         = value[Constants.Data_Key.education]         as? String,
+                            let proj        = value[Constants.Data_Key.project]        as? String,
                             let background1 = value[Constants.Data_Key.background1] as? String,
                             let background2 = value[Constants.Data_Key.background2] as? String,
                             let background3 = value[Constants.Data_Key.background3] as? String,
@@ -55,9 +55,9 @@ extension Data {
                         print("Error: firebaseColorScheme - value objects not convertible")
                         return
                     }
-                    colorScheme = [Constants.Data_Key.exp:         exp,
-                                   Constants.Data_Key.edu:         edu,
-                                   Constants.Data_Key.proj:        proj,
+                    colorScheme = [Constants.Data_Key.experience:         exp,
+                                   Constants.Data_Key.education:         edu,
+                                   Constants.Data_Key.project:        proj,
                                    Constants.Data_Key.background1: background1,
                                    Constants.Data_Key.background2: background2,
                                    Constants.Data_Key.background3: background3,

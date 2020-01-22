@@ -13,9 +13,9 @@
         <attribute name="font2" optional="YES" attributeType="String"/>
         <attribute name="gradientEnd" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="gradientStart" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="timeline_edu" optional="YES" attributeType="String"/>
-        <attribute name="timeline_exp" optional="YES" attributeType="String"/>
-        <attribute name="timeline_proj" optional="YES" attributeType="String"/>
+        <attribute name="timeline_education" optional="YES" attributeType="String"/>
+        <attribute name="timeline_experience" optional="YES" attributeType="String"/>
+        <attribute name="timeline_project" optional="YES" attributeType="String"/>
     </entity>
     <entity name="ConceptData" representedClassName="ConceptData" syncable="YES" codeGenerationType="class">
         <attribute name="iconName" optional="YES" attributeType="String"/>

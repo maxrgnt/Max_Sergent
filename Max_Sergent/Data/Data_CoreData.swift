@@ -102,9 +102,9 @@ extension Data {
         let entity = NSEntityDescription.entity(forEntityName: Constants.CoreData_Entity.colorScheme, in: managedContext)!
         let object = NSManagedObject(entity: entity, insertInto: managedContext)
         // Entity specific here
-        object.setValue(colorScheme[Constants.Data_Key.edu],         forKeyPath: Constants.Data_Key.edu)
-        object.setValue(colorScheme[Constants.Data_Key.exp],         forKeyPath: Constants.Data_Key.exp)
-        object.setValue(colorScheme[Constants.Data_Key.proj],        forKeyPath: Constants.Data_Key.proj)
+        object.setValue(colorScheme[Constants.Data_Key.education],         forKeyPath: Constants.Data_Key.education)
+        object.setValue(colorScheme[Constants.Data_Key.experience],         forKeyPath: Constants.Data_Key.experience)
+        object.setValue(colorScheme[Constants.Data_Key.project],        forKeyPath: Constants.Data_Key.project)
         object.setValue(colorScheme[Constants.Data_Key.background1], forKeyPath: Constants.Data_Key.background1)
         object.setValue(colorScheme[Constants.Data_Key.background2], forKeyPath: Constants.Data_Key.background2)
         object.setValue(colorScheme[Constants.Data_Key.background3], forKeyPath: Constants.Data_Key.background3)
@@ -128,9 +128,9 @@ extension Data {
         let fetch  = try! managedContext.fetch(entity) as! [ColorScheme]
         // Entity specific here
         guard let object      = fetch.first,
-              let edu         = object.timeline_edu,
-              let exp         = object.timeline_exp,
-              let proj        = object.timeline_proj,
+              let edu         = object.timeline_education,
+              let exp         = object.timeline_experience,
+              let proj        = object.timeline_project,
               let background1 = object.background1,
               let background2 = object.background2,
               let background3 = object.background3,
@@ -141,9 +141,9 @@ extension Data {
             print("Error: loadOverview - coreData not found")
             return
         }
-        colorScheme = [Constants.Data_Key.exp:         exp,
-                       Constants.Data_Key.edu:         edu,
-                       Constants.Data_Key.proj:        proj,
+        colorScheme = [Constants.Data_Key.experience:  exp,
+                       Constants.Data_Key.education:   edu,
+                       Constants.Data_Key.project:     proj,
                        Constants.Data_Key.background1: background1,
                        Constants.Data_Key.background2: background2,
                        Constants.Data_Key.background3: background3,

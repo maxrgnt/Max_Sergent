@@ -93,10 +93,11 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         let iconName = data[indexPath.row][Constants.Data_Key.iconName] as! String
         let urlFromCoreData = URL(fileURLWithPath: dir.absoluteString).appendingPathComponent("\(iconName).png")
         let photo = UIImage(contentsOfFile: urlFromCoreData.path)!
+        let scaledPhoto = resizeImage(image: photo, newHeight: Sizing.Timeline.iconDiameter)
         
-        cell.icon.image = photo
+        cell.icon.image = scaledPhoto
         cell.header.text = data[indexPath.row][Constants.Data_Key.organization] as? String
-        cell.distinction.text = "+"+(data[indexPath.row][Constants.Data_Key.type] as? String)!
+        cell.distinction.text = data[indexPath.row][Constants.Data_Key.type] as? String
         cell.content.text  = data[indexPath.row][Constants.Data_Key.details] as? String
         
         cell.content.textColor     = contentTextColor
@@ -106,11 +107,11 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
         cell.line.backgroundColor  = lineColor
         
         let distinction = data[indexPath.row][Constants.Data_Key.type] as? String
-        cell.boxHeader.backgroundColor = (Constants.Data_Key.exp.hasSuffix(distinction!))
+        cell.boxHeader.backgroundColor = (Constants.Data_Key.experience.hasSuffix(distinction!))
             ? expColor : cell.boxHeader.backgroundColor
-        cell.boxHeader.backgroundColor = (Constants.Data_Key.edu.hasSuffix(distinction!))
+        cell.boxHeader.backgroundColor = (Constants.Data_Key.education.hasSuffix(distinction!))
             ? eduColor : cell.boxHeader.backgroundColor
-        cell.boxHeader.backgroundColor = (Constants.Data_Key.proj.hasSuffix(distinction!))
+        cell.boxHeader.backgroundColor = (Constants.Data_Key.project.hasSuffix(distinction!))
             ? projColor : cell.boxHeader.backgroundColor
         
         let maxSection = Data.timelineTable.count-1
@@ -212,6 +213,40 @@ class TimelineTable: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     func dataForRow(inSection section: Int) -> [[String: Any]] {
         return Data.timelineTable[section][Constants.Data_Key.events] as! [[String: Any]]
+    }
+    
+    
+//    func resizeImage(image: UIImage, newHeight: CGFloat) -> UIImage {
+//        let scale = newHeight / image.size.height
+//        let newWidth = image.size.width * scale
+//        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+//        image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        return newImage!
+//    }
+    
+    func resizeImage(image: UIImage, newHeight: CGFloat) -> (UIImage) {
+
+       let newRect = CGRect(x: 0, y: 0, width: newHeight, height: newHeight).integral
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: newHeight, height: newHeight), false, 0)
+       let context = UIGraphicsGetCurrentContext()
+
+       // Set the quality level to use when rescaling
+       context!.interpolationQuality = CGInterpolationQuality.default
+       let flipVertical = CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: newHeight)
+
+       context!.concatenate(flipVertical)
+       // Draw into the context; this scales the image
+       context?.draw(image.cgImage!, in: CGRect(x: 0.0,y: 0.0, width: newRect.width, height: newRect.height))
+
+       let newImageRef = context!.makeImage()! as CGImage
+       let newImage = UIImage(cgImage: newImageRef)
+
+       // Get the resized image from the context and a UIImage
+       UIGraphicsEndImageContext()
+
+       return newImage
     }
     
 }

@@ -65,9 +65,9 @@ extension ViewController {
         scroll.page2.sectionBackgroundColor                 = Colors.secondaryBackground
         scroll.page2.lineColor                              = Colors.primaryFontColor
         scroll.page2.titleTextColor                         = Colors.primaryFontColor
-        let edu                                             = Data.colorScheme[Constants.Data_Key.edu]!
-        let exp                                             = Data.colorScheme[Constants.Data_Key.exp]!
-        let proj                                            = Data.colorScheme[Constants.Data_Key.proj]!
+        let edu                                             = Data.colorScheme[Constants.Data_Key.education]!
+        let exp                                             = Data.colorScheme[Constants.Data_Key.experience]!
+        let proj                                            = Data.colorScheme[Constants.Data_Key.project]!
         scroll.page2.eduColor                               = UIColor(hexFromString: edu,  alpha: 1.0)
         scroll.page2.expColor                               = UIColor(hexFromString: exp,  alpha: 1.0)
         scroll.page2.projColor                              = UIColor(hexFromString: proj, alpha: 1.0)
