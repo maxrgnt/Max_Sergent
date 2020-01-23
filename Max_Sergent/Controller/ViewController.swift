@@ -328,8 +328,6 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     }
     
     func resetFuture() {
-        print(Data.futureYear)
-        print(Data.future)
         (scroll.page2.refreshControl?.subviews[1] as! TimelineRefresh).title.text = Data.futureYear
         (scroll.page2.refreshControl?.subviews[1] as! TimelineRefresh).icons = Data.future
     }
@@ -359,32 +357,37 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     
     //MARK: Observers
     func addNotificationCenterObservers() {
-        // did enter background for when app closed out
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.willResignActive),
             name: UIApplication.willResignActiveNotification,
             object: nil
         )
-        // did enter foreground for when app opened (runs after viewDidLoad if opening cold)
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(self.willEnterForeground),
-            name: UIApplication.willEnterForegroundNotification,
-            object: nil
-        )
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(applicationDidBecomeActive),
+            name: UIApplication.didBecomeActiveNotification, // UIApplication.didBecomeActiveNotification for swift 4.2+
+            object: nil)
     }
     
     //MARK: Life Cycle
     @objc func willResignActive() {
-        print("BACKGROUND")
         splash.alpha = 1.0
+        splash.subviews.forEach({$0.layer.removeAllAnimations()})
+        splash.layer.removeAllAnimations()
         view.bringSubviewToFront(splash)
     }
 
-    @objc func willEnterForeground() {
-        print("FOREGROUND")
-        Data.checkFirebaseForReset()
+    @objc func applicationDidBecomeActive() {
+        if Data.allDataLoaded {
+            UIView.animate(withDuration: 0.3,
+                animations: {
+                    self.splash.alpha = 0.0
+            }, completion: {
+                   //Code to run after animating
+                    (value: Bool) in
+                self.view.sendSubviewToBack(self.splash)
+            })
+        }
     }
     
 }

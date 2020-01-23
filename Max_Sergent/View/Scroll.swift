@@ -144,8 +144,6 @@ class Scroll: UIScrollView, UIScrollViewDelegate, DetailsDelegate {
                     (value: Bool) in
             })
         }
-        print("alpha: ",page3blur.alpha)
-        print("alpha: ",page3vibrancy.alpha)
     }
 
 

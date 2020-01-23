@@ -122,7 +122,7 @@ struct Data {
     static func populateData(from reset: Bool) {
         let backgroundQueue = DispatchQueue(label: "com.app.queue", qos: .background)
         backgroundQueue.async {
-             print("Run on background thread")
+             //print("Run on background thread")
              dataLoadTracker()
         }
         if !reset && coreDataPopulated() {
@@ -149,7 +149,7 @@ struct Data {
             conceptsLoaded    = false
             allDataLoaded     = false
             DispatchQueue.main.async {
-                print("This is run on the main queue, after the previous code in outer block")
+                //print("This is run on the main queue, after the previous code in outer block")
                 self.customDelegate.reloadingFirebase()
             }
             firebaseAll {
