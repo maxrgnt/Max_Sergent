@@ -302,6 +302,20 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
                                        (icon: Constants.Overview.contactIcons[2],
                                         content: Data.overview[Constants.Data_Key.linkedinWebURL]!)])]
         scroll.page1.reloadData()
+//        scroll.page1.layoutIfNeeded()
+//        let overviewWindow = Sizing.height - Sizing.Header.expandedHeight - Sizing.Footer.height - Sizing.padding*2
+//        let content = scroll.page1.contentSize.height
+//        let needed = content - overviewWindow
+//        print(overviewWindow)
+//        print(content)
+//        print(needed)
+//        if scroll.page1.contentSize.height < Sizing.Scroll.height {
+//           // Content smaller than scroll
+//           if content > overviewWindow {
+//               // content larger than overview window
+//               scroll.page1.contentSize.height = Sizing.Scroll.height + needed
+//           }
+//        }
     }
     
     func resetTimeline() {
