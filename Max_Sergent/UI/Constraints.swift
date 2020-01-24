@@ -27,11 +27,11 @@ extension ViewController {
         watermark.widthAnchor.constraint(equalToConstant: Sizing.width).isActive                                        = true
         watermark.heightAnchor.constraint(equalToConstant: Sizing.watermarkHeight*(2/3)).isActive                       = true
         
-        ViewController.lastUpdate.translatesAutoresizingMaskIntoConstraints                                             = false
-        ViewController.lastUpdate.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive                   = true
-        ViewController.lastUpdate.topAnchor.constraint(equalTo: watermark.bottomAnchor).isActive                        = true
-        ViewController.lastUpdate.widthAnchor.constraint(equalToConstant: Sizing.width).isActive                        = true
-        ViewController.lastUpdate.heightAnchor.constraint(equalToConstant: Sizing.watermarkHeight/3).isActive           = true
+        lastUpdate.translatesAutoresizingMaskIntoConstraints                                             = false
+        lastUpdate.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive                   = true
+        lastUpdate.topAnchor.constraint(equalTo: watermark.bottomAnchor).isActive                        = true
+        lastUpdate.widthAnchor.constraint(equalToConstant: Sizing.width).isActive                        = true
+        lastUpdate.heightAnchor.constraint(equalToConstant: Sizing.watermarkHeight/3).isActive           = true
         
         header.height = header.heightAnchor.constraint(equalToConstant: Sizing.Header.expandedHeight)
         header.translatesAutoresizingMaskIntoConstraints                                                                = false

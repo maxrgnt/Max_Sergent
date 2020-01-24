@@ -46,7 +46,7 @@ extension ViewController {
         //ViewController
         view.backgroundColor                                = Colors.primaryBackground
         watermark.textColor                                 = Colors.secondaryBackground
-        ViewController.lastUpdate.textColor                 = Colors.secondaryBackground
+        lastUpdate.textColor                 = Colors.secondaryBackground
         //Header
         header.name.textColor                               = Colors.primaryFontColor
         let gradientTop                                     = Colors.primaryBackground.withAlphaComponent(0.0).cgColor

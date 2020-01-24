@@ -22,14 +22,65 @@ extension Data {
                 print("Error: firebaseReset - snapshot.value not convertible to [String: AnyObject]")
                 return
             }
-            guard let reset = value[Constants.Data_Key.proceed] as? Bool else {
+            var reset = false
+            guard   let forceReset         = value[Constants.Data_Key.forceReset] as? Bool,
+                    let firebaseLastUpdate = value[Constants.Data_Key.lastUpdate] as? String else {
                 completionHandler(false)
                 print("Error: firebaseReset - [proceed] not convertible")
                 return
             }
+            if let userdefaultLastUpdate = UserDefaults.standard.string(forKey: Constants.UserDefaults.lastUpdate) {
+                lastUpdate = userdefaultLastUpdate
+                // if user default date before or equal to firebase date update user default and reload all firebase
+                if userdefaultLastUpdate < firebaseLastUpdate {
+                    reset = true
+                    lastUpdate = firebaseLastUpdate
+                }
+                else if userdefaultLastUpdate == firebaseLastUpdate && forceReset == true {
+                    reset = true
+                    lastUpdate = firebaseLastUpdate
+                }
+            }
+            else {
+                // if first run and user default is nil
+                // set userdefault to firebase value
+                lastUpdate = firebaseLastUpdate
+                reset = true
+            }
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "yy/MM/dd"
+//            let current = dateFormatter.string(from: Date())
             completionHandler(reset)
         })
     }
+    
+//    static func firebaseReset() {
+//        let ref = Database.database().reference(withPath: Constants.Firebase_Path.reset)
+//        ref.observe(.value, with: { snapshot in
+//            guard let value = snapshot.value as? [String: AnyObject] else {
+//                print("Error: firebaseReset - snapshot.value not convertible to [String: AnyObject]")
+//                return
+//            }
+//            guard let lastDatabaseUpdate = value[Constants.Data_Key.lastDatabaseUpdate] as? String else
+//            {
+//                print("Error: firebaseReset - snapshot.value not convertible to [String: AnyObject]")
+//                return
+//            }
+//            lastUpdate = lastDatabaseUpdate
+//            guard let savedLastUpdate = UserDefaults.standard.string(forKey: Constants.UserDefaults.lastUpdate) else {
+//                // if first run and user default is nil
+//
+//                // set userdefault to firebase value
+//                return
+//            }
+//            // if user default date before or equal to firebase date update user default and reload all firebase
+//
+//            // else reload from coredata
+//
+//
+//            //UserDefaults.standard.set(true, forKey: Constants.UserDefaults.coreData)
+//        })
+//    }
     
     //MARK: Firebase ColorScheme
     static func firebaseColorScheme() {

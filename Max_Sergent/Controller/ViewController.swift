@@ -15,7 +15,7 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     
     let splash = Splash()
     let watermark = UILabel()
-    static let lastUpdate = UILabel()
+    let lastUpdate = UILabel()
     let header = Header()
     let scroll = Scroll()
     let footer = Footer()
@@ -62,13 +62,13 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         watermark.lineBreakMode    = .byClipping
         watermark.font             = Fonts.Header.name
         
-        view.insertSubview(ViewController.lastUpdate, belowSubview: splash)
-        ViewController.lastUpdate.alpha           = 1.0
-        ViewController.lastUpdate.numberOfLines   = 2
-        ViewController.lastUpdate.textAlignment   = .center
-        ViewController.lastUpdate.backgroundColor = .clear
-        ViewController.lastUpdate.lineBreakMode   = .byClipping
-        ViewController.lastUpdate.font            = Fonts.Overview.title
+        view.insertSubview(lastUpdate, belowSubview: splash)
+        lastUpdate.alpha           = 1.0
+        lastUpdate.numberOfLines   = 2
+        lastUpdate.textAlignment   = .center
+        lastUpdate.backgroundColor = .clear
+        lastUpdate.lineBreakMode   = .byClipping
+        lastUpdate.font            = Fonts.Overview.title
         
         view.insertSubview(header, belowSubview: splash)
         header.setup() {
@@ -187,6 +187,10 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
     }
     
     //MARK: Data Logic
+    func updateSplash(firebase: Bool) {
+        splash.title.text = (firebase == true) ? Constants.Splash.firebase : Constants.Splash.coredata
+    }
+    
     func reloadingFirebase() {
         self.view.bringSubviewToFront(self.splash)
         UIView.animate(withDuration: 0.55, delay: 0.0,
@@ -260,6 +264,7 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         )
     }
     
+    //MARK: Reset with Data
     func resetAppInfo() {
         let watermarkList  = (Data.appInfo[Constants.Data_Key.watermark] as! String).split(separator: " ")
         let watermarkStr   = "\(watermarkList[0])\n\(watermarkList[1])"
@@ -269,6 +274,10 @@ class ViewController: UIViewController, DataDelegate, HeaderDelegate, ScrollDele
         header.name.text   = userName
         header.photo.image = (Data.appInfo[Constants.Data_Key.appInfoPhoto]  as! UIImage)
         header.resetNameHeight()
+        
+        let lastUpdateList = Data.lastUpdate.split(separator: "/")
+        let lastUpdateForLabel = "\(lastUpdateList[1])/\(lastUpdateList[2])/20\(lastUpdateList[0])"
+        lastUpdate.text = "\(Constants.watermarkLastSync)\n\(lastUpdateForLabel)"
         
         guard let dir = try?
             FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else

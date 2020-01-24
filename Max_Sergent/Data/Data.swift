@@ -13,6 +13,7 @@ import Firebase
 import FirebaseStorage
 
 protocol DataDelegate {
+    func updateSplash(firebase: Bool)
     func reloadingFirebase()
     func checkIfAllDataLoaded()
 }
@@ -120,6 +121,7 @@ struct Data {
     }
 
     static func populateData(from reset: Bool) {
+        self.customDelegate.updateSplash(firebase: reset)
         let backgroundQueue = DispatchQueue(label: "com.app.queue", qos: .background)
         backgroundQueue.async {
              //print("Run on background thread")
@@ -136,7 +138,6 @@ struct Data {
             loadPieData()
             loadConcepts()
             lastUpdate = UserDefaults.standard.string(forKey: Constants.UserDefaults.lastUpdate)!
-            ViewController.lastUpdate.text = "\(Constants.watermarkLastSync)\n\(lastUpdate)"
         }
         else {
             print("Load from Firebase")
@@ -154,10 +155,7 @@ struct Data {
             }
             firebaseAll {
                 UserDefaults.standard.set(true, forKey: Constants.UserDefaults.coreData)
-                let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .none)
-                UserDefaults.standard.set(timestamp, forKey: Constants.UserDefaults.lastUpdate)
-                lastUpdate = UserDefaults.standard.string(forKey: Constants.UserDefaults.lastUpdate)!
-                ViewController.lastUpdate.text = "\(Constants.watermarkLastSync)\n\(lastUpdate)"
+                UserDefaults.standard.set(lastUpdate, forKey: Constants.UserDefaults.lastUpdate)
             }
         }
     }

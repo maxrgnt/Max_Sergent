@@ -46,7 +46,7 @@ extension Data {
                                                 in: .userDomainMask,
                                                 appropriateFor: nil,
                                                 create: false)
-                    let docs = try
+                    _ = try
                         FileManager.default.contentsOfDirectory(at: documentsURL,
                                                                 includingPropertiesForKeys: [],
                                                                 options:  [.skipsHiddenFiles, .skipsSubdirectoryDescendants])

@@ -82,6 +82,8 @@ extension Constants {
         static let future           = "future"
         static let futureYear       = "_year"
         static let splashURL        = "splashURL"
+        static let lastUpdate       = "lastUpdate"
+        static let forceReset       = "forceReset"
     }
     
     struct Image_Prefix {

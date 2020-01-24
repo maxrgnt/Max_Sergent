@@ -12,13 +12,18 @@ import UIKit
 struct Constants {
         
     static let splashIcon  = "maxrgnt"
-    static let splashTitle = "syncing with database"
+    static let splashTitle = "syncing"
     static let watermarkLastSync = "last update sent:"
     static let placeholder = "The quick brown foxy"
     
     static let splashSmall: CGFloat = 0.6
     static let splashNormal: CGFloat = 0.7
     static let splashLarge: CGFloat = 0.75
+    
+    struct Splash {
+        static let firebase = "sycncing with firebase"
+        static let coredata  = "syncing with coredata"
+    }
     
     struct Header {
         static let gradientStart: NSNumber = 0.40
